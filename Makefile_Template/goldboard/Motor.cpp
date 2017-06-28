@@ -33,6 +33,7 @@ void Motor::init(uint8_t directionPinFirst, uint8_t directionPinSecond, uint8_t 
 	_directionPinFirst = directionPinFirst;
 	_directionPinSecond = directionPinSecond;
 	_pcf8574 = pcf8574;
+	directionTimeout = 0;
 	
 	// public
 	speed = gbSpeed;
@@ -72,6 +73,15 @@ void Motor::rotate(int16_t sp)
 		
 	
 	*speed = (uint8_t) sp;
+
+	if((*speed>0 && sp < 0 ) || (*speed<0 && sp >0))
+	{
+		directionTimeout=DIRECTIONTIMOUT;
+		sollspeed = *speed;
+		*speed = 0;
+	}
+
+
 }
 
 void Motor::stop(bool bremsen)
@@ -90,3 +100,5 @@ void Motor::stop(bool bremsen)
 	}
 	_pcf8574->write();
 }
+
+

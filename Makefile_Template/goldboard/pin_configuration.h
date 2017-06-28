@@ -119,12 +119,12 @@ static const uint8_t PARRAY[] = {P0, P1};
 
 // I2C
 /*
-Defined in i2c
+//Defined in i2c
 #define SDA_PORT PORTC
 #define SDA_PIN 1
 #define SCL_PORT PORTC
-#define SCL_PIN 0*/
-
+#define SCL_PIN 0
+*/
 // UART
 #define RXD 13
 #define TXD 14

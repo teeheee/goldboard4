@@ -22,7 +22,7 @@ SoftwareSerial::SoftwareSerial()
 {
 } //Serial
 
-void SoftwareSerial::begin(unsigned int baud)
+void SoftwareSerial::begin(unsigned long baud)
 {
 	uart_init(UART_BAUD_SELECT(baud,F_CPU) );
 }

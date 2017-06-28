@@ -20,6 +20,8 @@
 #include "global.h"
 #include "PCF8574A.h"
 
+#define DIRECTIONTIMOUT 10//percent per second
+
 class Motor
 {
 	public:
@@ -28,9 +30,13 @@ class Motor
 		void init(uint8_t directionPinFirst, uint8_t directionPinSecond, uint8_t speedPin, PCF8574A*, uint8_t*);
 		void rotate(int16_t speed);
 		void stop(bool bremsen);
+
+		void accelerationHandler();
 		
 		uint8_t* speed;
 	private:
+		uint8_t sollspeed;
+		uint8_t directionTimeout;
 		PCF8574A* _pcf8574;
 		uint8_t _directionPinFirst;
 		uint8_t _directionPinSecond;

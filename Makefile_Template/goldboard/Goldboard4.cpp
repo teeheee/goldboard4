@@ -19,16 +19,104 @@
 // function prototype for motorISR
 void motorISR();
 
+#ifdef FAST_IRDETECTOR
+	void pulseISR();
+#endif
+
+#ifdef ISR_TIMER
+	static uint8_t isr_time = 0;
+
+	int Goldboard4::getISRtime()
+	{
+		return (isr_time*100)/256;	
+	}
+#endif
+
 // Global interrupt
 ISR(TIMER0_OVF_vect)
 {
-	wiringISR();
-	motorISR();
+	#ifdef FAST_IRDETECTOR
+		static uint8_t toggle = 0;
+		if(toggle)
+		{
+			motorISR();
+			toggle=0;
+		}
+		else
+		{
+			pulseISR();
+			toggle=1;
+		}
+	#else
+		wiringISR();
+		motorISR();
+
+	#endif
+	#ifdef ISR_TIMER
+		isr_time=TCNT0;
+	#endif
 }
+
+
+
+/*
+
+
+// digital sensors
+#define DCOUNT 4
+#define D0 4 PB0
+#define D1 5 PB1
+#define D2 6 PB2
+#define D3 7 PB3
+static const uint8_t DARRAY[] = {D0, D1, D2, D3};
+
+// pwm sensors
+#define PWMCOUNT 8
+#define PWM0 28 PA3
+#define PWM1 27 PA4
+#define PWM2 26 PA5
+#define PWM3 25 PA6
+#define PWM4 17 PC1
+#define PWM5 18 PC2
+#define PWM6 19 PC3
+#define PWM7 20 PC4
+static const uint8_t PWMARRAY[] = {PWM0, PWM1, PWM2, PWM3, PWM4, PWM5, PWM6, PWM7};
+
+
+*/
+
+#ifdef FAST_IRDETECTOR
+	#define PULSE_PRESCALER 3
+	#define PULSE_BUFFER_SIZE 10
+
+	static uint8_t prescaler_counter = 0;
+	static uint8_t pwmBuffer[PULSE_BUFFER_SIZE];
+	static uint8_t pwmBufferIndex = 0;
+
+
+	void pulseISR() 
+	{
+		if(prescaler_counter>PULSE_PRESCALER) //10,416 kHz
+		{
+			pwmBuffer[pwmBufferIndex] = (( PINA >> 3) & 0x0f) | ((PINC << 3) & 0xf0);
+			pwmBufferIndex++;
+			if(pwmBufferIndex>PULSE_BUFFER_SIZE)
+				pwmBufferIndex=0;
+			prescaler_counter=0;
+		}	
+		prescaler_counter++;
+	}
+#endif
+
 
 static uint8_t motorOffset = 0;
 static uint16_t motorCounter = 255 + motorOffset;
 static uint8_t motorSpeeds[4];
+
+#ifdef POWER_PWM
+	static uint8_t powerPortPower[2];
+#endif
+
 
 /** controls the motor speeds
 */
@@ -62,15 +150,37 @@ void motorISR()
 	else
 		cbi(PORTB, 3);
 	
+
+#ifdef POWER_PWM
+	if (powerPortPower[0] == 0)
+		cbi(PORTC,PC0);					//digitalWrite(PARRAY[0], LOW); 
+	else if (((uint16_t) powerPortPower[0] + motorOffset)  >= motorCounter)
+		sbi(PORTC,PC0);					//digitalWrite(PARRAY[0], HIGH);
+	else
+		cbi(PORTC,PC0);					//digitalWrite(PARRAY[0], LOW);
+
+
+	if (powerPortPower[1] == 0)
+		cbi(PORTD,PD7);					//digitalWrite(PARRAY[1], LOW); PD7
+	else if (((uint16_t) powerPortPower[1] + motorOffset)  >= motorCounter)
+		sbi(PORTD,PD7);					//digitalWrite(PARRAY[1], HIGH);
+	else
+		cbi(PORTD,PD7);					//digitalWrite(PARRAY[1], LOW); PD7
+#endif
+
 	if (motorCounter == 0)
 		motorCounter = 255 + motorOffset;
 	else
 		motorCounter--;
 }
 
+
+
+
 // default constructor
 Goldboard4::Goldboard4()
 {
+	
 #ifdef DEBUG
 	serial.begin(UART_BAUD_RATE); // initializes the uart interface
 #warning Debug ist aktiviert. Bitte schalte Debug aus, um das Programm zu beschleunigen.
@@ -160,7 +270,15 @@ void Goldboard4::setLed(uint8_t i, bool state)
 		return;
 	
 	if (!_isLED[i])
-		return;
+	{
+		#ifdef LED_BUTTON
+			pinMode(BTLEDARRAY[i],OUTPUT);
+			_isLED[i] = true;
+		#else
+			return;
+		#endif
+	}
+
 		
 	digitalWrite(BTLEDARRAY[i], !state);
 }
@@ -175,6 +293,15 @@ void Goldboard4::setPower(uint8_t i, bool state)
 	digitalWrite(PARRAY[i], state);
 }
 
+#ifdef POWER_PWM
+	void Goldboard4::setPowerPWM(uint8_t i, uint8_t state)
+	{
+		if (i >= PCOUNT)
+			return;
+		
+		powerPortPower[i]=state;
+	}
+#endif
 /** Checks the state of button i. If it is pressed, true is returned,
 *  else false.
 */
@@ -183,6 +310,17 @@ bool Goldboard4::getButton(uint8_t i)
 	if (i >= BTLEDCOUNT)
 		return false;
 	
+	if (_isLED[i])
+	{
+		
+		#ifdef LED_BUTTON
+			digitalWrite(BTLEDARRAY[i], HIGH);
+			pinMode(BTLEDARRAY[i],INPUT);
+			_isLED[i] = false;
+		#else
+			return false;
+		#endif
+	}	
 	// low is true
 	return !digitalRead(BTLEDARRAY[i]);
 }
@@ -258,6 +396,23 @@ bool Goldboard4::getPWM(uint8_t i)
 
 /** returns the registered pulse length of the digital port i. 0 <= value <= 255
 */
+#ifdef FAST_IRDETECTOR
+	uint8_t Goldboard4::getPWMPulsedLight(uint8_t i)
+	{
+		if (i >= DCOUNT)
+			return 0;
+		uint8_t val = 0;
+		for(uint8_t c = 0;c<PULSE_BUFFER_SIZE;c++)
+		{
+			if(pwmBuffer[c] & (1 << i))
+				val++;
+		}	
+
+		return val;
+	}
+
+#else
+
 uint8_t Goldboard4::getDigitalPulsedLight(uint8_t i)
 {
 	if (i >= DCOUNT)
@@ -277,6 +432,11 @@ uint8_t Goldboard4::getPWMPulsedLight(uint8_t i)
 	unsigned long duration = pulseIn(PWMARRAY[i],LOW,1500);
 	return calcPulsedValue(&duration);
 }
+
+#endif
+
+
+
 
 uint8_t Goldboard4::calcPulsedValue(unsigned long* val)
 {

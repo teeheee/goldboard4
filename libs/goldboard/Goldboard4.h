@@ -23,6 +23,9 @@
 #include "Serial.h"
 #include "SRF08.h"
 #include "CMPS03.h"
+#include "PixyI2C.h"
+#include "HC05.h"
+
 
 class Goldboard4
 {
@@ -33,6 +36,7 @@ Motor motor[4];
 SoftwareSerial serial;
 CMPS03 compass;
 SRF08 sonar[4];
+PixyI2C pixy;
 
 protected:
 private:
@@ -46,6 +50,9 @@ private:
 public:
 	Goldboard4();
 	
+	/** returns the used Processing time of the ISR routine in percent
+	*/
+	int getISRtime();
 	/** Puts off all motors.
 	*/
 	void setMotorsOff();
@@ -66,6 +73,9 @@ public:
 	*/
 	void setPower(uint8_t i, bool state);
 
+	/** Puts the power i in PWM mode. state is a value from 0 - 255.
+	*/
+	void setPowerPWM(uint8_t i, uint8_t state);
 	/** Checks the state of button i. If it is pressed, true is returned,
 	*  else false.
 	*/
@@ -86,6 +96,8 @@ public:
 	/** returns true if the digital port is logical high, else false.
 	*/
 	bool getDigital(uint8_t i);
+
+	void setDigital(uint8_t i,bool state);
 
 	/** returns pwm value
 	*/

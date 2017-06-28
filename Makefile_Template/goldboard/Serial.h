@@ -17,6 +17,8 @@
 #ifndef __SERIAL_H__
 #define __SERIAL_H__
 
+#define DEBUG
+
 #ifdef DEBUG
 #define SERIAL_PRINTLN(t) gb.serial.println(t)
 #define SERIAL_PRINT(t) gb.serial.print(t)
@@ -40,7 +42,7 @@ private:
 public:
 	SoftwareSerial();
 	~SoftwareSerial();
-	void begin(unsigned int);
+	void begin(unsigned long);
 	virtual size_t write(uint8_t);
 protected:
 private:

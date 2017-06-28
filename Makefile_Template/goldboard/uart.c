@@ -40,6 +40,34 @@ LICENSE:
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
 #include "uart.h"
+#include "config.h"
+
+#ifdef BOOTLOADER
+  #define HC05_uart_hook(x) uart_interrupt_hook(x)
+
+  typedef void (*do_reboot_t)(void);
+  const do_reboot_t do_reboot = (do_reboot_t)((FLASHEND-511)>>1);
+
+  void uart_interrupt_hook(uint8_t data)
+  {
+    static int count = 0;
+    if(data==0x30 && count%2==0)
+      count++;
+    else if(data==0x20 && count%2==1)
+      count++;
+    else
+      count = 0;
+
+    if(count == 2)
+    {
+      cli();
+      UCSRB=0;
+      do_reboot();
+    }
+  }
+#else
+  #define HC05_uart_hook(x)
+#endif
 
 
 /*
@@ -256,7 +284,6 @@ static volatile unsigned char UART1_LastRxError;
 #endif
 
 
-
 ISR (UART0_RECEIVE_INTERRUPT)	
 /*************************************************************************
 Function: UART Receive Complete interrupt
@@ -272,7 +299,10 @@ Purpose:  called when the UART has received a character
     /* read UART status register and UART data register */ 
     usr  = UART0_STATUS;
     data = UART0_DATA;
-    
+
+    #ifdef HC05_uart_hook
+      HC05_uart_hook(data);  //HC05 UART HOOK
+    #endif
     /* */
 #if defined( AT90_UART )
     lastRxError = (usr & (_BV(FE)|_BV(DOR)) );

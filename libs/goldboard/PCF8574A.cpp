@@ -16,7 +16,7 @@
 
 #include "PCF8574A.h"
 
-#define PCF8574A_ADDRESS 0b01110000 
+#define PCF8574A_ADDRESS 0b01110000
 
 
 // default constructor

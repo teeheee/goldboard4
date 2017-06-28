@@ -22,8 +22,15 @@
 #endif
 
 /* 9600 baud */
-#define UART_BAUD_RATE      57600
+#define UART_BAUD_RATE      115200UL  //if changed optiboot bootloader needs to be recompiled
 
 #define I2C_SPEED   100   // kHz
+
+//#define BOOTLOADER
+#define POWER_PWM
+//#define FAST_IRDETECTOR
+//#define ISR_TIMER
+//#define LED_BUTTON
+
 
 #endif /* CONFIG_H_ */

@@ -153,6 +153,7 @@ int analogRead(uint8_t);
 void wiringISR(void);
 unsigned long millis(void);
 void delay(unsigned long);
+void delayMicroseconds(unsigned int);
 unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout);
 
 // Get the bit location within the hardware port of the given virtual pin.
