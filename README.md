@@ -7,9 +7,11 @@
 ## /AS7_Template (Ateml Studio 7 Template)
 
 File->Import->Project Template...
+
 Select a project template [...] -> "<current Path>/AS7_Template/goldboard4_V1.0.zip" -> OK
 
 File->New->Project...
+
 goldboard4_V1.0->OK
 
 ## /Makefile_Template (for Linux users and/or Visual Studio haters)
