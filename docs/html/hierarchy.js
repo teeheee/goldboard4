@@ -1,10 +1,8 @@
 var hierarchy =
 [
     [ "Block", "struct_block.html", null ],
-    [ "BNO055", "class_b_n_o055.html", null ],
     [ "CMPS03", "class_c_m_p_s03.html", null ],
     [ "Goldboard4", "class_goldboard4.html", null ],
-    [ "HC05", "class_h_c05.html", null ],
     [ "LinkI2C", "class_link_i2_c.html", null ],
     [ "LinkUART", "class_link_u_a_r_t.html", null ],
     [ "Motor", "class_motor.html", null ],

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['linki2c',['LinkI2C',['../class_link_i2_c.html',1,'']]],
-  ['linkuart',['LinkUART',['../class_link_u_a_r_t.html',1,'']]]
+  ['motor',['Motor',['../class_motor.html',1,'']]],
+  ['multitarget',['MultiTarget',['../struct_stream_1_1_multi_target.html',1,'Stream']]]
 ];

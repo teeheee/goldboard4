@@ -13,8 +13,6 @@ Collaboration diagram for Goldboard4\+:
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \hyperlink{class_goldboard4_a65123cecbcc73fecadf6c11f888743af}{get\+I\+S\+Rtime} ()
-\item 
 void \hyperlink{class_goldboard4_a78c077cd2b846533cf1134f23dd2db79}{set\+Motors\+Off} ()
 \item 
 void \hyperlink{class_goldboard4_ac782bb10887e4cd6e58fcbe7b7d65623}{set\+Motors\+Offset} (int16\+\_\+t value)
@@ -37,12 +35,19 @@ bool \hyperlink{class_goldboard4_a72afec46aecbca276d29e714ac5ab1b7}{get\+P\+WM} 
 \item 
 bool \hyperlink{class_goldboard4_a4fa6316d58b1e6b5b8174ee748b41216}{get\+Digital} (uint8\+\_\+t i)
 \item 
+void \hyperlink{class_goldboard4_a43c453224e2b6c04dbf040e82b419c50}{set\+P\+W\+M\+Servo} (uint8\+\_\+t value, uint8\+\_\+t pin)
+\item 
+void \hyperlink{class_goldboard4_afa78c637a7b8db1eae0eb8b3792f71e4}{reset\+P\+W\+M\+Servo} (uint8\+\_\+t pin)
+\item 
 void {\bfseries set\+Digital} (uint8\+\_\+t i, bool state)\hypertarget{class_goldboard4_a15872524d69b69fec2b00c63a90e5221}{}\label{class_goldboard4_a15872524d69b69fec2b00c63a90e5221}
 
 \item 
 uint8\+\_\+t \hyperlink{class_goldboard4_ac4f9d6eb4d800c68bffc065913427c73}{get\+Digital\+Pulsed\+Light} (uint8\+\_\+t i)
 \item 
 uint8\+\_\+t \hyperlink{class_goldboard4_abaedef75924a199b7779ce37028f11f8}{get\+P\+W\+M\+Pulsed\+Light} (uint8\+\_\+t i)
+\item 
+void {\bfseries scan\+I2C} ()\hypertarget{class_goldboard4_a7bb4ac08dc90ad14adb519a529519048}{}\label{class_goldboard4_a7bb4ac08dc90ad14adb519a529519048}
+
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
@@ -60,6 +65,15 @@ uint8\+\_\+t \hyperlink{class_goldboard4_abaedef75924a199b7779ce37028f11f8}{get\
 
 \item 
 \hyperlink{class_t_pixy}{Pixy\+I2C} {\bfseries pixy}\hypertarget{class_goldboard4_ad12ee511eff45283e6920cd8c82c7cc4}{}\label{class_goldboard4_ad12ee511eff45283e6920cd8c82c7cc4}
+
+\item 
+\hyperlink{classusring}{usring} {\bfseries bodensensor}\hypertarget{class_goldboard4_a13f2f620c8cdbc211e5651a114ddc912}{}\label{class_goldboard4_a13f2f620c8cdbc211e5651a114ddc912}
+
+\item 
+\hyperlink{class_v_l53_l0_x}{V\+L53\+L0X} {\bfseries Laser\+Sensor} \mbox{[}4\mbox{]}\hypertarget{class_goldboard4_a203effa1c5b0637b01c9d0e8685573dd}{}\label{class_goldboard4_a203effa1c5b0637b01c9d0e8685573dd}
+
+\item 
+\hyperlink{class_p_c_f8574_a}{P\+C\+F8574A} {\bfseries digital}\hypertarget{class_goldboard4_a01f0aa53885e0c2b59bbf5a424ec7588}{}\label{class_goldboard4_a01f0aa53885e0c2b59bbf5a424ec7588}
 
 \end{DoxyCompactItemize}
 
@@ -93,16 +107,7 @@ returns true if the digital port is logical high, else false. \index{Goldboard4@
 \item[{uint8\+\_\+t}]{i}
 \end{DoxyParamCaption}
 )}\hypertarget{class_goldboard4_ac4f9d6eb4d800c68bffc065913427c73}{}\label{class_goldboard4_ac4f9d6eb4d800c68bffc065913427c73}
-returns pwm valuereturns the registered pulse length of the digital port i. 0 $<$= value $<$= 255
-
-P\+WM for Ball Sensor S\+FH 5110returns the registered pulse length of the analog port i. 0 $<$= value $<$= 255returns the registered pulse length of the digital port i. 0 $<$= value $<$= 255 \index{Goldboard4@{Goldboard4}!get\+I\+S\+Rtime@{get\+I\+S\+Rtime}}
-\index{get\+I\+S\+Rtime@{get\+I\+S\+Rtime}!Goldboard4@{Goldboard4}}
-\subsubsection[{\texorpdfstring{get\+I\+S\+Rtime()}{getISRtime()}}]{\setlength{\rightskip}{0pt plus 5cm}int Goldboard4\+::get\+I\+S\+Rtime (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{class_goldboard4_a65123cecbcc73fecadf6c11f888743af}{}\label{class_goldboard4_a65123cecbcc73fecadf6c11f888743af}
-returns the used Processing time of the I\+SR routine in percent \index{Goldboard4@{Goldboard4}!get\+P\+WM@{get\+P\+WM}}
+returns the registered pulse length of the digital port i. 0 $<$= value $<$= 255 \index{Goldboard4@{Goldboard4}!get\+P\+WM@{get\+P\+WM}}
 \index{get\+P\+WM@{get\+P\+WM}!Goldboard4@{Goldboard4}}
 \subsubsection[{\texorpdfstring{get\+P\+W\+M(uint8\+\_\+t i)}{getPWM(uint8_t i)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Goldboard4\+::get\+P\+WM (
 \begin{DoxyParamCaption}
@@ -116,14 +121,25 @@ returns true if the pwm port is logical high, else false. \index{Goldboard4@{Gol
 \item[{uint8\+\_\+t}]{i}
 \end{DoxyParamCaption}
 )}\hypertarget{class_goldboard4_abaedef75924a199b7779ce37028f11f8}{}\label{class_goldboard4_abaedef75924a199b7779ce37028f11f8}
-returns the registered pulse length of the pwm port i. 0 $<$= value $<$= 255 \index{Goldboard4@{Goldboard4}!init\+L\+ED@{init\+L\+ED}}
+returns the registered pulse length of the pwm port i. 0 $<$= value $<$= 255
+
+returns the registered pulse length of the digital port i. 0 $<$= value $<$= 255 \index{Goldboard4@{Goldboard4}!init\+L\+ED@{init\+L\+ED}}
 \index{init\+L\+ED@{init\+L\+ED}!Goldboard4@{Goldboard4}}
 \subsubsection[{\texorpdfstring{init\+L\+E\+D(uint8\+\_\+t i)}{initLED(uint8_t i)}}]{\setlength{\rightskip}{0pt plus 5cm}void Goldboard4\+::init\+L\+ED (
 \begin{DoxyParamCaption}
 \item[{uint8\+\_\+t}]{i}
 \end{DoxyParamCaption}
 )}\hypertarget{class_goldboard4_a0c3134553d7136d32d46ea4641079c93}{}\label{class_goldboard4_a0c3134553d7136d32d46ea4641079c93}
-sets the given led id as led (N\+O\+TE\+: Then this pin cannot be used as button anymore) \index{Goldboard4@{Goldboard4}!set\+Led@{set\+Led}}
+sets the given led id as led (N\+O\+TE\+: Then this pin cannot be used as button anymore) \index{Goldboard4@{Goldboard4}!reset\+P\+W\+M\+Servo@{reset\+P\+W\+M\+Servo}}
+\index{reset\+P\+W\+M\+Servo@{reset\+P\+W\+M\+Servo}!Goldboard4@{Goldboard4}}
+\subsubsection[{\texorpdfstring{reset\+P\+W\+M\+Servo(uint8\+\_\+t pin)}{resetPWMServo(uint8_t pin)}}]{\setlength{\rightskip}{0pt plus 5cm}void Goldboard4\+::reset\+P\+W\+M\+Servo (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+)}\hypertarget{class_goldboard4_afa78c637a7b8db1eae0eb8b3792f71e4}{}\label{class_goldboard4_afa78c637a7b8db1eae0eb8b3792f71e4}
+don\textquotesingle{}t use this function to stop your brushless motor. Use set\+P\+W\+M\+Servo(i,0) instead
+
+stops the P\+WM pulse. Dont use this, if you want to stop a brushless motor. Use set\+P\+W\+M\+Servo(0,0) instead. \index{Goldboard4@{Goldboard4}!set\+Led@{set\+Led}}
 \index{set\+Led@{set\+Led}!Goldboard4@{Goldboard4}}
 \subsubsection[{\texorpdfstring{set\+Led(uint8\+\_\+t i, bool state)}{setLed(uint8_t i, bool state)}}]{\setlength{\rightskip}{0pt plus 5cm}void Goldboard4\+::set\+Led (
 \begin{DoxyParamCaption}
@@ -161,7 +177,17 @@ Puts the power output i on if state is true, else off \index{Goldboard4@{Goldboa
 \item[{uint8\+\_\+t}]{state}
 \end{DoxyParamCaption}
 )}\hypertarget{class_goldboard4_a7fce81b6d0c23129da6e361badaefdf4}{}\label{class_goldboard4_a7fce81b6d0c23129da6e361badaefdf4}
-Puts the power i in P\+WM mode. state is a value from 0 -\/ 255. \index{Goldboard4@{Goldboard4}!wait\+For\+Button@{wait\+For\+Button}}
+Puts the power i in P\+WM mode. state is a value from 0 -\/ 255. \index{Goldboard4@{Goldboard4}!set\+P\+W\+M\+Servo@{set\+P\+W\+M\+Servo}}
+\index{set\+P\+W\+M\+Servo@{set\+P\+W\+M\+Servo}!Goldboard4@{Goldboard4}}
+\subsubsection[{\texorpdfstring{set\+P\+W\+M\+Servo(uint8\+\_\+t value, uint8\+\_\+t pin)}{setPWMServo(uint8_t value, uint8_t pin)}}]{\setlength{\rightskip}{0pt plus 5cm}void Goldboard4\+::set\+P\+W\+M\+Servo (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{value, }
+\item[{uint8\+\_\+t}]{pin}
+\end{DoxyParamCaption}
+)}\hypertarget{class_goldboard4_a43c453224e2b6c04dbf040e82b419c50}{}\label{class_goldboard4_a43c453224e2b6c04dbf040e82b419c50}
+sets the P\+WM pin (0-\/7) as Servo Output and sends a certain value (0-\/255) every 20 ms
+
+sets the P\+WM pin (0-\/7) as Servo Output and sends a certain value (0-\/255 $\sim$ 0.\+8-\/2.\+8ms pulse) every 20 ms \index{Goldboard4@{Goldboard4}!wait\+For\+Button@{wait\+For\+Button}}
 \index{wait\+For\+Button@{wait\+For\+Button}!Goldboard4@{Goldboard4}}
 \subsubsection[{\texorpdfstring{wait\+For\+Button(uint8\+\_\+t i)}{waitForButton(uint8_t i)}}]{\setlength{\rightskip}{0pt plus 5cm}void Goldboard4\+::wait\+For\+Button (
 \begin{DoxyParamCaption}
@@ -172,5 +198,5 @@ Waits until button i is pressed and released again.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/alex/workspace/goldboard4/goldboard/Goldboard4.\+h\item 
-/home/alex/workspace/goldboard4/goldboard/Goldboard4.\+cpp\end{DoxyCompactItemize}
+/home/alex/workspace/goldboard4/libs/goldboard4/Goldboard4.\+h\item 
+/home/alex/workspace/goldboard4/libs/goldboard4/Goldboard4.\+cpp\end{DoxyCompactItemize}

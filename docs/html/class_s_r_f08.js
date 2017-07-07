@@ -9,6 +9,7 @@ var class_s_r_f08 =
     ] ],
     [ "SRF08", "class_s_r_f08.html#aaf2403cfe6dd914861cfe8e5717f9b12", null ],
     [ "changeAddress", "class_s_r_f08.html#a3b94c05d2c9aa0bbdde496f637875a4c", null ],
+    [ "checkAck", "class_s_r_f08.html#a5b96dc2b670aee3c86917b5dae2c5f7e", null ],
     [ "getValueCM", "class_s_r_f08.html#abe78d5649f8bade345a5e42cd6bc84ce", null ],
     [ "init", "class_s_r_f08.html#a2f2920aeafb6916589c1a9a7f2443dc6", null ],
     [ "isInitialized", "class_s_r_f08.html#a0e0d9a2064498f8c5c862c1c8f0c35f6", null ],

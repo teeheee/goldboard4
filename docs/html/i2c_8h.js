@@ -2,6 +2,7 @@ var i2c_8h =
 [
     [ "I2C_ON_ERROR_FATAL", "i2c_8h.html#ad8c710658fa32f2f8974d6d357dcd9c5", null ],
     [ "TW_TIMEOUT_ERROR", "i2c_8h.html#a5cc0a1876a3d4815d6a9a69bce653c04", null ],
+    [ "i2cCheckAck", "i2c_8h.html#aaac167b570f1dc5c40e5987a3813af79", null ],
     [ "i2cClose", "i2c_8h.html#a51b2aeb913a9c0512f9ddccf5fa38ea9", null ],
     [ "i2cGetLastError", "i2c_8h.html#a1091488ad34f5e8990091aa6b01fb8c9", null ],
     [ "i2cInit", "i2c_8h.html#af41a62505fd4ca300eeed25ac1de911c", null ],

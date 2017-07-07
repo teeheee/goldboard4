@@ -1,10 +1,8 @@
 var annotated_dup =
 [
     [ "Block", "struct_block.html", "struct_block" ],
-    [ "BNO055", "class_b_n_o055.html", "class_b_n_o055" ],
     [ "CMPS03", "class_c_m_p_s03.html", "class_c_m_p_s03" ],
     [ "Goldboard4", "class_goldboard4.html", "class_goldboard4" ],
-    [ "HC05", "class_h_c05.html", "class_h_c05" ],
     [ "LinkI2C", "class_link_i2_c.html", "class_link_i2_c" ],
     [ "LinkUART", "class_link_u_a_r_t.html", "class_link_u_a_r_t" ],
     [ "Motor", "class_motor.html", "class_motor" ],

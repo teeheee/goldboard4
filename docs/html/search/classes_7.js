@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['softwareserial',['SoftwareSerial',['../class_software_serial.html',1,'']]],
-  ['srf08',['SRF08',['../class_s_r_f08.html',1,'']]],
-  ['stream',['Stream',['../class_stream.html',1,'']]]
+  ['tpixy',['TPixy',['../class_t_pixy.html',1,'']]],
+  ['tpixy_3c_20linki2c_20_3e',['TPixy&lt; LinkI2C &gt;',['../class_t_pixy.html',1,'']]],
+  ['twowire',['TwoWire',['../class_two_wire.html',1,'']]]
 ];
