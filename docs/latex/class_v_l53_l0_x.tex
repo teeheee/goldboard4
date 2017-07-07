@@ -1,0 +1,173 @@
+\hypertarget{class_v_l53_l0_x}{}\section{V\+L53\+L0X Class Reference}
+\label{class_v_l53_l0_x}\index{V\+L53\+L0X@{V\+L53\+L0X}}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries reg\+Addr} \{ \\*
+{\bfseries S\+Y\+S\+R\+A\+N\+G\+E\+\_\+\+S\+T\+A\+RT} = 0x00, 
+{\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+T\+H\+R\+E\+S\+H\+\_\+\+H\+I\+GH} = 0x0C, 
+{\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+T\+H\+R\+E\+S\+H\+\_\+\+L\+OW} = 0x0E, 
+{\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+S\+E\+Q\+U\+E\+N\+C\+E\+\_\+\+C\+O\+N\+F\+IG} = 0x01, 
+\\*
+{\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+IG} = 0x09, 
+{\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+I\+N\+T\+E\+R\+M\+E\+A\+S\+U\+R\+E\+M\+E\+N\+T\+\_\+\+P\+E\+R\+I\+OD} = 0x04, 
+{\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+I\+N\+T\+E\+R\+R\+U\+P\+T\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+G\+P\+IO} = 0x0A, 
+{\bfseries G\+P\+I\+O\+\_\+\+H\+V\+\_\+\+M\+U\+X\+\_\+\+A\+C\+T\+I\+V\+E\+\_\+\+H\+I\+GH} = 0x84, 
+\\*
+{\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+I\+N\+T\+E\+R\+R\+U\+P\+T\+\_\+\+C\+L\+E\+AR} = 0x0B, 
+{\bfseries R\+E\+S\+U\+L\+T\+\_\+\+I\+N\+T\+E\+R\+R\+U\+P\+T\+\_\+\+S\+T\+A\+T\+US} = 0x13, 
+{\bfseries R\+E\+S\+U\+L\+T\+\_\+\+R\+A\+N\+G\+E\+\_\+\+S\+T\+A\+T\+US} = 0x14, 
+{\bfseries R\+E\+S\+U\+L\+T\+\_\+\+C\+O\+R\+E\+\_\+\+A\+M\+B\+I\+E\+N\+T\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+E\+V\+E\+N\+T\+S\+\_\+\+R\+TN} = 0x\+BC, 
+\\*
+{\bfseries R\+E\+S\+U\+L\+T\+\_\+\+C\+O\+R\+E\+\_\+\+R\+A\+N\+G\+I\+N\+G\+\_\+\+T\+O\+T\+A\+L\+\_\+\+E\+V\+E\+N\+T\+S\+\_\+\+R\+TN} = 0x\+C0, 
+{\bfseries R\+E\+S\+U\+L\+T\+\_\+\+C\+O\+R\+E\+\_\+\+A\+M\+B\+I\+E\+N\+T\+\_\+\+W\+I\+N\+D\+O\+W\+\_\+\+E\+V\+E\+N\+T\+S\+\_\+\+R\+EF} = 0x\+D0, 
+{\bfseries R\+E\+S\+U\+L\+T\+\_\+\+C\+O\+R\+E\+\_\+\+R\+A\+N\+G\+I\+N\+G\+\_\+\+T\+O\+T\+A\+L\+\_\+\+E\+V\+E\+N\+T\+S\+\_\+\+R\+EF} = 0x\+D4, 
+{\bfseries R\+E\+S\+U\+L\+T\+\_\+\+P\+E\+A\+K\+\_\+\+S\+I\+G\+N\+A\+L\+\_\+\+R\+A\+T\+E\+\_\+\+R\+EF} = 0x\+B6, 
+\\*
+{\bfseries A\+L\+G\+O\+\_\+\+P\+A\+R\+T\+\_\+\+T\+O\+\_\+\+P\+A\+R\+T\+\_\+\+R\+A\+N\+G\+E\+\_\+\+O\+F\+F\+S\+E\+T\+\_\+\+MM} = 0x28, 
+{\bfseries I2\+C\+\_\+\+S\+L\+A\+V\+E\+\_\+\+D\+E\+V\+I\+C\+E\+\_\+\+A\+D\+D\+R\+E\+SS} = 0x8A, 
+{\bfseries M\+S\+R\+C\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+C\+O\+N\+T\+R\+OL} = 0x60, 
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+I\+N\+\_\+\+S\+NR} = 0x27, 
+\\*
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+V\+A\+L\+I\+D\+\_\+\+P\+H\+A\+S\+E\+\_\+\+L\+OW} = 0x56, 
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+V\+A\+L\+I\+D\+\_\+\+P\+H\+A\+S\+E\+\_\+\+H\+I\+GH} = 0x57, 
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+M\+I\+N\+\_\+\+C\+O\+U\+N\+T\+\_\+\+R\+A\+T\+E\+\_\+\+R\+T\+N\+\_\+\+L\+I\+M\+IT} = 0x64, 
+{\bfseries F\+I\+N\+A\+L\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+I\+N\+\_\+\+S\+NR} = 0x67, 
+\\*
+{\bfseries F\+I\+N\+A\+L\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+V\+A\+L\+I\+D\+\_\+\+P\+H\+A\+S\+E\+\_\+\+L\+OW} = 0x47, 
+{\bfseries F\+I\+N\+A\+L\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+V\+A\+L\+I\+D\+\_\+\+P\+H\+A\+S\+E\+\_\+\+H\+I\+GH} = 0x48, 
+{\bfseries F\+I\+N\+A\+L\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+M\+I\+N\+\_\+\+C\+O\+U\+N\+T\+\_\+\+R\+A\+T\+E\+\_\+\+R\+T\+N\+\_\+\+L\+I\+M\+IT} = 0x44, 
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+S\+I\+G\+M\+A\+\_\+\+T\+H\+R\+E\+S\+H\+\_\+\+HI} = 0x61, 
+\\*
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+S\+I\+G\+M\+A\+\_\+\+T\+H\+R\+E\+S\+H\+\_\+\+LO} = 0x62, 
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+V\+C\+S\+E\+L\+\_\+\+P\+E\+R\+I\+OD} = 0x50, 
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+A\+C\+R\+O\+P\+\_\+\+HI} = 0x51, 
+{\bfseries P\+R\+E\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+A\+C\+R\+O\+P\+\_\+\+LO} = 0x52, 
+\\*
+{\bfseries S\+Y\+S\+T\+E\+M\+\_\+\+H\+I\+S\+T\+O\+G\+R\+A\+M\+\_\+\+B\+IN} = 0x81, 
+{\bfseries H\+I\+S\+T\+O\+G\+R\+A\+M\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+I\+N\+I\+T\+I\+A\+L\+\_\+\+P\+H\+A\+S\+E\+\_\+\+S\+E\+L\+E\+CT} = 0x33, 
+{\bfseries H\+I\+S\+T\+O\+G\+R\+A\+M\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+A\+D\+O\+U\+T\+\_\+\+C\+T\+RL} = 0x55, 
+{\bfseries F\+I\+N\+A\+L\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+V\+C\+S\+E\+L\+\_\+\+P\+E\+R\+I\+OD} = 0x70, 
+\\*
+{\bfseries F\+I\+N\+A\+L\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+A\+C\+R\+O\+P\+\_\+\+HI} = 0x71, 
+{\bfseries F\+I\+N\+A\+L\+\_\+\+R\+A\+N\+G\+E\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+A\+C\+R\+O\+P\+\_\+\+LO} = 0x72, 
+{\bfseries C\+R\+O\+S\+S\+T\+A\+L\+K\+\_\+\+C\+O\+M\+P\+E\+N\+S\+A\+T\+I\+O\+N\+\_\+\+P\+E\+A\+K\+\_\+\+R\+A\+T\+E\+\_\+\+M\+C\+PS} = 0x20, 
+{\bfseries M\+S\+R\+C\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+M\+A\+C\+R\+OP} = 0x46, 
+\\*
+{\bfseries S\+O\+F\+T\+\_\+\+R\+E\+S\+E\+T\+\_\+\+G\+O2\+\_\+\+S\+O\+F\+T\+\_\+\+R\+E\+S\+E\+T\+\_\+N} = 0x\+BF, 
+{\bfseries I\+D\+E\+N\+T\+I\+F\+I\+C\+A\+T\+I\+O\+N\+\_\+\+M\+O\+D\+E\+L\+\_\+\+ID} = 0x\+C0, 
+{\bfseries I\+D\+E\+N\+T\+I\+F\+I\+C\+A\+T\+I\+O\+N\+\_\+\+R\+E\+V\+I\+S\+I\+O\+N\+\_\+\+ID} = 0x\+C2, 
+{\bfseries O\+S\+C\+\_\+\+C\+A\+L\+I\+B\+R\+A\+T\+E\+\_\+\+V\+AL} = 0x\+F8, 
+\\*
+{\bfseries G\+L\+O\+B\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+V\+C\+S\+E\+L\+\_\+\+W\+I\+D\+TH} = 0x32, 
+{\bfseries G\+L\+O\+B\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+S\+P\+A\+D\+\_\+\+E\+N\+A\+B\+L\+E\+S\+\_\+\+R\+E\+F\+\_\+0} = 0x\+B0, 
+{\bfseries G\+L\+O\+B\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+S\+P\+A\+D\+\_\+\+E\+N\+A\+B\+L\+E\+S\+\_\+\+R\+E\+F\+\_\+1} = 0x\+B1, 
+{\bfseries G\+L\+O\+B\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+S\+P\+A\+D\+\_\+\+E\+N\+A\+B\+L\+E\+S\+\_\+\+R\+E\+F\+\_\+2} = 0x\+B2, 
+\\*
+{\bfseries G\+L\+O\+B\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+S\+P\+A\+D\+\_\+\+E\+N\+A\+B\+L\+E\+S\+\_\+\+R\+E\+F\+\_\+3} = 0x\+B3, 
+{\bfseries G\+L\+O\+B\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+S\+P\+A\+D\+\_\+\+E\+N\+A\+B\+L\+E\+S\+\_\+\+R\+E\+F\+\_\+4} = 0x\+B4, 
+{\bfseries G\+L\+O\+B\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+S\+P\+A\+D\+\_\+\+E\+N\+A\+B\+L\+E\+S\+\_\+\+R\+E\+F\+\_\+5} = 0x\+B5, 
+{\bfseries G\+L\+O\+B\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+R\+E\+F\+\_\+\+E\+N\+\_\+\+S\+T\+A\+R\+T\+\_\+\+S\+E\+L\+E\+CT} = 0x\+B6, 
+\\*
+{\bfseries D\+Y\+N\+A\+M\+I\+C\+\_\+\+S\+P\+A\+D\+\_\+\+N\+U\+M\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+E\+D\+\_\+\+R\+E\+F\+\_\+\+S\+P\+AD} = 0x4E, 
+{\bfseries D\+Y\+N\+A\+M\+I\+C\+\_\+\+S\+P\+A\+D\+\_\+\+R\+E\+F\+\_\+\+E\+N\+\_\+\+S\+T\+A\+R\+T\+\_\+\+O\+F\+F\+S\+ET} = 0x4F, 
+{\bfseries P\+O\+W\+E\+R\+\_\+\+M\+A\+N\+A\+G\+E\+M\+E\+N\+T\+\_\+\+G\+O1\+\_\+\+P\+O\+W\+E\+R\+\_\+\+F\+O\+R\+CE} = 0x80, 
+{\bfseries V\+H\+V\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+P\+A\+D\+\_\+\+S\+C\+L\+\_\+\+S\+D\+A\+\_\+\+\_\+\+E\+X\+T\+S\+U\+P\+\_\+\+HV} = 0x89, 
+\\*
+{\bfseries A\+L\+G\+O\+\_\+\+P\+H\+A\+S\+E\+C\+A\+L\+\_\+\+L\+IM} = 0x30, 
+{\bfseries A\+L\+G\+O\+\_\+\+P\+H\+A\+S\+E\+C\+A\+L\+\_\+\+C\+O\+N\+F\+I\+G\+\_\+\+T\+I\+M\+E\+O\+UT} = 0x30
+ \}\hypertarget{class_v_l53_l0_x_ae9d956d60961a009db8621edde00bfea}{}\label{class_v_l53_l0_x_ae9d956d60961a009db8621edde00bfea}
+
+\item 
+enum {\bfseries vcsel\+Period\+Type} \{ {\bfseries Vcsel\+Period\+Pre\+Range}, 
+{\bfseries Vcsel\+Period\+Final\+Range}
+ \}\hypertarget{class_v_l53_l0_x_a536b605b1242dd5355f49273450f8c83}{}\label{class_v_l53_l0_x_a536b605b1242dd5355f49273450f8c83}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries set\+Address} (uint8\+\_\+t new\+\_\+addr)\hypertarget{class_v_l53_l0_x_a5fafb26368ff871653f4b56e060606fa}{}\label{class_v_l53_l0_x_a5fafb26368ff871653f4b56e060606fa}
+
+\item 
+uint8\+\_\+t {\bfseries get\+Address} (void)\hypertarget{class_v_l53_l0_x_a4bc871502a5635943e3bc5ce06599105}{}\label{class_v_l53_l0_x_a4bc871502a5635943e3bc5ce06599105}
+
+\item 
+bool {\bfseries init} (bool io\+\_\+2v8=true)\hypertarget{class_v_l53_l0_x_a2bd7f966631ee954fd1c4119f901b240}{}\label{class_v_l53_l0_x_a2bd7f966631ee954fd1c4119f901b240}
+
+\item 
+void {\bfseries write\+Reg} (uint8\+\_\+t reg, uint8\+\_\+t value)\hypertarget{class_v_l53_l0_x_a607bdb2d634b1ec3878dbaee6d83402e}{}\label{class_v_l53_l0_x_a607bdb2d634b1ec3878dbaee6d83402e}
+
+\item 
+void {\bfseries write\+Reg16\+Bit} (uint8\+\_\+t reg, uint16\+\_\+t value)\hypertarget{class_v_l53_l0_x_ade0f7181294f755fedd269253a3c4bb4}{}\label{class_v_l53_l0_x_ade0f7181294f755fedd269253a3c4bb4}
+
+\item 
+void {\bfseries write\+Reg32\+Bit} (uint8\+\_\+t reg, uint32\+\_\+t value)\hypertarget{class_v_l53_l0_x_aa67924fc9b90b086d667a92bd3195921}{}\label{class_v_l53_l0_x_aa67924fc9b90b086d667a92bd3195921}
+
+\item 
+uint8\+\_\+t {\bfseries read\+Reg} (uint8\+\_\+t reg)\hypertarget{class_v_l53_l0_x_a44cad5c80035df82bdc1c28894ac714e}{}\label{class_v_l53_l0_x_a44cad5c80035df82bdc1c28894ac714e}
+
+\item 
+uint16\+\_\+t {\bfseries read\+Reg16\+Bit} (uint8\+\_\+t reg)\hypertarget{class_v_l53_l0_x_afa23131ef0c5edc982a3d9ab843fefc8}{}\label{class_v_l53_l0_x_afa23131ef0c5edc982a3d9ab843fefc8}
+
+\item 
+uint32\+\_\+t {\bfseries read\+Reg32\+Bit} (uint8\+\_\+t reg)\hypertarget{class_v_l53_l0_x_a8e6edc19a09bff41ac070d22204ce5db}{}\label{class_v_l53_l0_x_a8e6edc19a09bff41ac070d22204ce5db}
+
+\item 
+void {\bfseries write\+Multi} (uint8\+\_\+t reg, uint8\+\_\+t const $\ast$src, uint8\+\_\+t count)\hypertarget{class_v_l53_l0_x_a22b4ca7c4e0562ddcb74cc939024deb2}{}\label{class_v_l53_l0_x_a22b4ca7c4e0562ddcb74cc939024deb2}
+
+\item 
+void {\bfseries read\+Multi} (uint8\+\_\+t reg, uint8\+\_\+t $\ast$dst, uint8\+\_\+t count)\hypertarget{class_v_l53_l0_x_a9decb4846fd2cc6d9c15b29ff2edc275}{}\label{class_v_l53_l0_x_a9decb4846fd2cc6d9c15b29ff2edc275}
+
+\item 
+bool {\bfseries set\+Signal\+Rate\+Limit} (float limit\+\_\+\+Mcps)\hypertarget{class_v_l53_l0_x_a32ea0f8c88d634abcf36850ced40e9eb}{}\label{class_v_l53_l0_x_a32ea0f8c88d634abcf36850ced40e9eb}
+
+\item 
+float {\bfseries get\+Signal\+Rate\+Limit} (void)\hypertarget{class_v_l53_l0_x_a5fdac59ab355cc57f27462823cc576d4}{}\label{class_v_l53_l0_x_a5fdac59ab355cc57f27462823cc576d4}
+
+\item 
+bool {\bfseries set\+Measurement\+Timing\+Budget} (uint32\+\_\+t budget\+\_\+us)\hypertarget{class_v_l53_l0_x_a74e836308c2062c7871a37fe11c026ca}{}\label{class_v_l53_l0_x_a74e836308c2062c7871a37fe11c026ca}
+
+\item 
+uint32\+\_\+t {\bfseries get\+Measurement\+Timing\+Budget} (void)\hypertarget{class_v_l53_l0_x_a9c9cb975a20876bae3d7716c698b72eb}{}\label{class_v_l53_l0_x_a9c9cb975a20876bae3d7716c698b72eb}
+
+\item 
+bool {\bfseries set\+Vcsel\+Pulse\+Period} (vcsel\+Period\+Type type, uint8\+\_\+t period\+\_\+pclks)\hypertarget{class_v_l53_l0_x_a2234b48a180b7eb630b7a82cfa4c3b44}{}\label{class_v_l53_l0_x_a2234b48a180b7eb630b7a82cfa4c3b44}
+
+\item 
+uint8\+\_\+t {\bfseries get\+Vcsel\+Pulse\+Period} (vcsel\+Period\+Type type)\hypertarget{class_v_l53_l0_x_a1a5b6c572a2be57ae5503ae81fea0f87}{}\label{class_v_l53_l0_x_a1a5b6c572a2be57ae5503ae81fea0f87}
+
+\item 
+void {\bfseries start\+Continuous} (uint32\+\_\+t period\+\_\+ms=0)\hypertarget{class_v_l53_l0_x_a502070924e6c6fa39a7a003bdf1c8663}{}\label{class_v_l53_l0_x_a502070924e6c6fa39a7a003bdf1c8663}
+
+\item 
+void {\bfseries stop\+Continuous} (void)\hypertarget{class_v_l53_l0_x_aaa035aea7642fbf97e7946a1159ca5a5}{}\label{class_v_l53_l0_x_aaa035aea7642fbf97e7946a1159ca5a5}
+
+\item 
+uint16\+\_\+t {\bfseries read\+Range\+Continuous\+Millimeters} (void)\hypertarget{class_v_l53_l0_x_a198b2629c8d805ce23b2b2dd3c3cf7cf}{}\label{class_v_l53_l0_x_a198b2629c8d805ce23b2b2dd3c3cf7cf}
+
+\item 
+uint16\+\_\+t {\bfseries read\+Range\+Single\+Millimeters} (void)\hypertarget{class_v_l53_l0_x_a49e5ed380d53cbcedad7b96ec1eadb44}{}\label{class_v_l53_l0_x_a49e5ed380d53cbcedad7b96ec1eadb44}
+
+\item 
+void {\bfseries set\+Timeout} (uint16\+\_\+t timeout)\hypertarget{class_v_l53_l0_x_a421ae3c8aaad208e7e8c07c6f88cf486}{}\label{class_v_l53_l0_x_a421ae3c8aaad208e7e8c07c6f88cf486}
+
+\item 
+uint16\+\_\+t {\bfseries get\+Timeout} (void)\hypertarget{class_v_l53_l0_x_ac33d634573c44958b28ca42db5df0814}{}\label{class_v_l53_l0_x_ac33d634573c44958b28ca42db5df0814}
+
+\item 
+bool {\bfseries timeout\+Occurred} (void)\hypertarget{class_v_l53_l0_x_a7356434e330aa7c4243d75ec5349db5d}{}\label{class_v_l53_l0_x_a7356434e330aa7c4243d75ec5349db5d}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t {\bfseries last\+\_\+status}\hypertarget{class_v_l53_l0_x_af33d12ec0d1eb8630bb3473c07c2b853}{}\label{class_v_l53_l0_x_af33d12ec0d1eb8630bb3473c07c2b853}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/alex/workspace/goldboard4/goldboard/V\+L53\+L0\+X.\+h\item 
+/home/alex/workspace/goldboard4/goldboard/V\+L53\+L0\+X.\+cpp\end{DoxyCompactItemize}

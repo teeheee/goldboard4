@@ -1,0 +1,9 @@
+<map id="Goldboard4" name="Goldboard4">
+<area shape="rect" id="node2" href="$class_motor.html" title="Motor" alt="" coords="5,95,60,121"/>
+<area shape="rect" id="node3" href="$class_t_pixy.html" title="TPixy\&lt; LinkI2C \&gt;" alt="" coords="85,95,210,121"/>
+<area shape="rect" id="node4" href="$struct_block.html" title="Block" alt="" coords="120,5,175,32"/>
+<area shape="rect" id="node5" href="$class_software_serial.html" title="SoftwareSerial" alt="" coords="234,95,341,121"/>
+<area shape="rect" id="node6" href="$class_print.html" title="Print" alt="" coords="263,5,312,32"/>
+<area shape="rect" id="node7" href="$class_s_r_f08.html" title="SRF08" alt="" coords="365,95,428,121"/>
+<area shape="rect" id="node8" href="$class_c_m_p_s03.html" title="CMPS03" alt="" coords="453,95,527,121"/>
+</map>
