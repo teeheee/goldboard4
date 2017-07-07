@@ -3,9 +3,9 @@
 #C_SOURCES = uart.c  wiring_pulse.c i2c.c wiring_analog.c i2c.h wiring.c wiring_digital.c
 #CPP_SOURCES = CMPS03.cpp main.cpp Print.cpp WString.cpp Goldboard4.cpp Motor.cpp Serial.cpp new.cpp PCF8574A.cpp SRF08.cpp
 
-INC = -I. -Igoldboard
+INC = -I. -Igoldboard4
 
-#VPATH = goldboard
+#VPATH = goldboard4
 
 MCU     = atmega32
 OSC     = 16000000UL
@@ -110,34 +110,12 @@ config:
 show-mcu:
 	$(G++) --help=target
 
-bootloader:
-	make -C optiboot
-
-
-program-bootloader:
-	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xde:m -B22 
-	avrdude -pm32 -Pusb -cavrispmkII -u -U flash:w:optiboot/optiboot_atmega32.hex  -B1
-
-
-reset:
-	bash reset.sh
-
-
-program-bt:
-	bash reset.sh
-	avrdude -c arduino  -p m32 -P /dev/rfcomm2 -U flash:w:$(PROJECT).hex
-
 program:
 	echo "warning, no bootloader will be uploaded!!!!"
 	avrdude -pm32 -Pusb -cavrispmkII -u -U flash:w:$(PROJECT).hex  -B1
 
-
 fuse:
 	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xC1:m -B100
-
-fuse-bootloader:
-	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xde:m 
-
 
 
 
