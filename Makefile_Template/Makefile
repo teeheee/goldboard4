@@ -1,11 +1,7 @@
 
 
-#C_SOURCES = uart.c  wiring_pulse.c i2c.c wiring_analog.c i2c.h wiring.c wiring_digital.c
-#CPP_SOURCES = CMPS03.cpp main.cpp Print.cpp WString.cpp Goldboard4.cpp Motor.cpp Serial.cpp new.cpp PCF8574A.cpp SRF08.cpp
-
 INC = -I. -Igoldboard4
 
-#VPATH = goldboard4
 
 MCU     = atmega32
 OSC     = 16000000UL
@@ -30,27 +26,28 @@ OBJECTS = \
 	$(patsubst %.$(EXT_C),%.o,$(wildcard *.$(EXT_C))) \
 	$(patsubst %.$(EXT_C++),%.o,$(wildcard *.$(EXT_C++))) \
 	$(patsubst %.$(EXT_ASM),%.o,$(wildcard *.$(EXT_ASM))) \
-	$(patsubst %.$(EXT_C),%.o,$(wildcard goldboard/*.$(EXT_C))) \
-	$(patsubst %.$(EXT_C++),%.o,$(wildcard goldboard/*.$(EXT_C++))) \
-	$(patsubst %.$(EXT_ASM),%.o,$(wildcard goldboard/*.$(EXT_ASM))) \
+	$(patsubst %.$(EXT_C),%.o,$(wildcard goldboard4/*.$(EXT_C))) \
+	$(patsubst %.$(EXT_C++),%.o,$(wildcard goldboard4/*.$(EXT_C++))) \
+	$(patsubst %.$(EXT_ASM),%.o,$(wildcard goldboard4/*.$(EXT_ASM))) \
 
 
 CFLAGS = $(INC)
-CFLAGS += -Os -std=gnu99 
+#CFLAGS += -O1 
+CFLAGS += -std=gnu99 
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
-CFLAGS += -DF_OSC=$(OSC)
+CFLAGS += -DF_CPU=$(OSC)
 CFLAGS += -mmcu=$(MCU)
 
 C++FLAGS = $(INC)
-C++FLAGS += -Os
+#C++FLAGS += -O1
 C++FLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 C++FLAGS += -Wall
 C++FLAGS += -DF_OSC=$(OSC)
 C++FLAGS += -mmcu=$(MCU)
 
 ASMFLAGS = $(INC)
-ASMFLAGS += -Os
+#ASMFLAGS += -O1
 ASMFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 ASMFLAGS += -Wall -Wstrict-prototypes
 ASMFLAGS += -DF_OSC=$(OSC)
@@ -61,6 +58,7 @@ ASMFLAGS += -mmcu=$(MCU)
 
 default: $(PROJECT).elf
 	avr-objcopy -j .text -j .data -O ihex $(PROJECT).elf $(PROJECT).hex 
+	avr-size -C main.elf
 
 %.elf: $(OBJECTS)
 	$(GCC) $(CFLAGS) $(OBJECTS) --output $@ $(LDFLAGS)
@@ -88,6 +86,9 @@ help:
 	@echo "  config    Shows the current configuration"
 	@echo "  help      Shows this help"
 	@echo "  show-mcu  Show list of all possible MCUs"
+	@echo "  program   Uploads the current hexfile"
+	@echo "  fuse      Sets the Fuse bits"
+	@echo "  check     Checks Programmer connection"
 
 config:
 	@echo "configuration:"
@@ -111,11 +112,12 @@ show-mcu:
 	$(G++) --help=target
 
 program:
-	echo "warning, no bootloader will be uploaded!!!!"
 	avrdude -pm32 -Pusb -cavrispmkII -u -U flash:w:$(PROJECT).hex  -B1
 
 fuse:
 	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xC1:m -B100
 
+check:
+	avrdude -pm32 -Pusb -cavrispmkII
 
 

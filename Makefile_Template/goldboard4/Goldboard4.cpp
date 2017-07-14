@@ -237,7 +237,8 @@ Goldboard4::Goldboard4()
 {
 	
 	#ifdef DEBUG
-	serial.begin(UART_BAUD_RATE); // initializes the uart interface
+	#warning Bluetooth version deaktiviert SERIAL_PRINTLN...
+	//serial.begin(UART_BAUD_RATE); // initializes the uart interface
 	#warning Debug ist aktiviert. Bitte schalte Debug aus, um das Programm zu beschleunigen.
 	#endif
 

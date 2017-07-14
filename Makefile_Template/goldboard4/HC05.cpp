@@ -22,351 +22,318 @@
 
 
 
-/***Construktor****/
+#define RESPONSES_LENGTH 9 //darf nicht mit gleichem Buchstaben anfangen!!!!
 
-HC05::HC05() 
+const char* responses[RESPONSES_LENGTH] = {
+	"?\r\n", //0
+	"AOK\r\n", //1
+	"ERR\r\n", //2
+	"Reboot!\r\n", //3
+	"1,0,0\r\n", //4
+	"0,0,0\r\n", //5
+	"END\r\n", //6
+	"KILL\r\n", //7
+	"CMD\r\n"}; //8
+
+#define HC05_QM 0
+#define HC05_AOK 1
+#define HC05_ERR 2
+#define HC05_REBOOT 3
+#define HC05_100 4
+#define HC05_000 5
+#define HC05_END 6
+#define HC05_KILL 7
+#define HC05_CMD 8
+
+//private functions
+
+uint8_t HC05::cmdMode(uint8_t onoff)
 {
-	lib_state = AT_STATE_UNINITALIZED;
-	uart_init(UART_BAUD_SELECT(38400UL,F_CPU));	
-}
-
-
-
-/** configuration***/
-
-uint8_t HC05::setPairingPassword(const char* Password) //TODO: check if changes were made
-{
-	sendSerial(AT_PASSWORD);
-	sendSerial("=");
-	sendSerial(Password);
-	sendSerial("\r\n");
-	return getResponse();
-}
-
-
-uint8_t HC05::setDeviceName(const char* deviceName) //TODO: check if changes were made
-{
-	sendSerial(AT_NAME);
-	sendSerial("=");
-	sendSerial(deviceName);
-	sendSerial("\r\n");
-	return getResponse();
-}
-
-
-/*** establish connection***/
-
-
-uint8_t HC05::inquierPairing()
-{
-	int ret = setMode(SLAVE_ROLE);
-	if(ret)
-		return ret;
-	sendSerial(ATINQUIER);
-	sendSerial("\r\n");
-	ret = getResponse();
-	if(ret)
-		return ret;
-	lib_state = HC05_STATE_CONNECTING;
-	return 0;
-}
-
-
-
-uint8_t HC05::pairWith(const char* deviceName,const char* Password)
-{
-
-	//TODO
-	return 0;
-}
-
-bool HC05::isConnected()
-{
-	if(lib_state==HC05_STATE_CONNECTED)
-		return true;
-	if(lib_state==HC05_STATE_CONNECTING)
-		if(getResponse()==HC05_OK)
-		{	
-			lib_state = HC05_STATE_CONNECTED;
-			return true;
-		}
-	if(lib_state==HC05_STATE_DISCONNECTED)
+	flushInput();
+	if(onoff && isCommandMode==0)
 	{
-		if(getResponse()==HC05_OK)
-		{	
-			lib_state = HC05_STATE_CONNECTING;
-			return false;
-		}	
+		uart_puts("$$$");
+		isCommandMode = 1;
 	}
-	return false;
-}
-
-/*** communicate***/
-
-bool HC05::sendByte(uint8_t byte)
-{
-	if(isConnected())
+	else if(!onoff && isCommandMode==1)
 	{
-		char buffer[2] = {byte, 0};
-		sendSerial(buffer);
-		return true;
+		uart_puts("---\r\n");
+		isCommandMode = 0;
 	}
 	else
-		return false;
-}
-
-bool HC05::sendString(const char* data)
-{
-	if(isConnected())
+		return 0;
+	uint8_t resp = getResponse();
+	if(resp==HC05_CMD || resp==HC05_END)
 	{
-		sendSerial(data);
-		return true;
+		return 0;
 	}
-	else
-		return false;
+	//uart_putc(resp);
+	return 1;
 }
 
-
-int HC05::getLine(char* buffer, int buffersize) //TODO: needs to catch everything AT related stuff
+uint8_t HC05::reboot()
 {
-	int length = getSerial(buffer,buffersize);
+	if(cmdMode(1))
+		return 1;
 
-
-
-	if(length > 1)
-	{
-		if(buffer[0]=='+')
-		{
-			if(strstr(buffer,"+DISC"))
-			{
-				lib_state = HC05_STATE_DISCONNECTED;
-			}
-			return 0;
-		}
-	}
-
-	return length;
+	uart_puts("R,1\r\n");
+	isCommandMode = 0;
+	delay(1000);
+	if(getResponse()==HC05_REBOOT)
+		return 0;
+	return 1;
 }
 
-/*** maintaining ****/
-
-
-uint8_t HC05::resetDevice() //TODO: not realy good...
+uint8_t HC05::set(uint8_t reg, const char* value) //S,?\r\n -> AOK or ERR
 {
-	sendSerial(AT_RESET);
-	sendSerial("\r\n");
-	delay(800); // give the module some time... 
-	return getResponse();
+	if(cmdMode(1))
+		return 1;
+
+	uart_putc('S');
+	uart_putc(reg);
+	uart_putc(',');
+	uart_puts(value);
+	uart_puts("\r\n");
+
+	if(getResponse()==HC05_AOK)
+		return 0;
+	return 1;
 }
 
-
-uint8_t HC05::factoryResetDevice() //TODO: not realy good...
+void HC05::flushInput()
 {
-	sendSerial(AT_DEFAULT);
-	sendSerial("\r\n");
-	delay(1000); // give the module some time... 
-	return getResponse();
-}
-
-
-uint8_t HC05::getlastError()
-{
-	uint8_t tmp = last_lib_error;
-	last_lib_error = 0;
-	return tmp;
-}
-
-uint8_t HC05::getStatus()
-{
-	return lib_state;
-}
-
-uint8_t HC05::getATStatus() //TODO: is it realy needed? lot of memory...
-{
-	char buffer[100];
-
-	sendSerial(AT_STATE);
-	sendSerial("?");
-	sendSerial("\r\n");
-
-	int ret = getResponse(buffer,100);
-
-	if(ret==HC05_OK)
-	{
-		if(strstr(buffer,"INITIALIZED"))
-			at_state = AT_STATE_INITIALIZED;
-		if(strstr(buffer,"UNINITIALIZED"))
-			at_state = AT_STATE_UNINITALIZED;
-		if(strstr(buffer,"READY"))
-			at_state = AT_STATE_READY;
-		if(strstr(buffer,"PAIRABLE"))
-			at_state = AT_STATE_PAIRABLE;
-		if(strstr(buffer,"PAIRED"))
-			at_state = AT_STATE_PAIRED;
-		if(strstr(buffer,"INQUIRING"))
-			at_state = AT_STATE_INQUIRING;
-		if(strstr(buffer,"CONNECTING"))
-			at_state = AT_STATE_CONNECTING;
-		if(strstr(buffer,"CONNECTED"))
-			at_state = AT_STATE_CONNECTED;
-		if(strstr(buffer,"DISCONNECTED"))
-			at_state = AT_STATE_DISCONNECTED;
-	}
-	else
-		at_state = AT_STATE_ERROR;
-	return at_state;
-}
-
-
-bool HC05::init() //TODO:  autobaud
-{
-	sendSerial(AT_INIT);
-	sendSerial("\r\n");
-
-	int ret = getResponse();
-
-	if(ret==HC05_OK || ret==HC05_ERROR_RESP_CODE(17))
-	{
-			lib_state = HC05_STATE_INIT;
-			last_lib_error = 0;
-			return true;
-	}
-	else
-	{
-			lib_state = HC05_STATE_ERROR;
-			last_lib_error = ret;
-			return false;		
-	}
-}
-
-
-
-
-
-uint8_t HC05::setMode(const char* mode) //TODO: check if mode is correct
-{
-
-	sendSerial(AT_ROLE);
-	sendSerial("=");
-	sendSerial(mode);
-	sendSerial("\r\n");
-	return getResponse();
-}
-
-
-
-
-
-
-
-
-
-/**** PRIVATE FUNKTIONS*****/
-
-void HC05::sendSerial(const char*  data)
-{
-	uart_puts(data);
-}
-
-uint8_t HC05::getSerialByte()
-{
-
-		int x = uart_getc();
-		uint8_t c = x&0xff;
-		uint8_t error = x>>8;
-		if(error!=(UART_NO_DATA>>8) && error) //serialbus error
-		{
-			last_lib_error = HC05_ERROR_SERIAL;
-			return 0;
-		}
-		if(error!=(UART_NO_DATA>>8)) // only when data available
-			return c;
-		else
-			return 0; //no data available
-}
-
-
-int HC05::getSerial(char* buffer, int buffersize)
-{
-	uint32_t currentTime = millis();
-	int index = 0;
-
 	while(1)
 	{
-		uint8_t c = getSerialByte();
-		if(millis()-currentTime>500)	//timeout 500ms
-		{
-			last_lib_error = HC05_ERROR_TIMEOUT;
-			return -1;
-		}
-		if(index == buffersize-1)		//bufferoverflow protection (there needs to be room for zero byte)
-		{
-			last_lib_error = HC05_ERROR_LIB;
-			return -1;
-		}
-		if(c) //poll only when data available
-		{
-			buffer[index] = (char)c;
-			index++;
-			if(c == '\n')
-			{
-				buffer[index]=0;
-				return index;
-			}
-		}
+		int data = uart_getc();
+		uint8_t error = data>>8;
+		if(error != 0) //no character recived
+			return;
 	}
 }
-
-
-
-
-
-uint8_t HC05::getResponse(char* responseBuffer, int bufferSize)
-{
-	char buffer[AT_BUFFERSIZE];
-	
-
-	while(1)
-	{
-		int length = getSerial(buffer,AT_BUFFERSIZE);
-		if(length < 0) //check for serial errors
-			return last_lib_error;
-
-		//check for OK
-		if(strstr(buffer,AT_OK))
-			return HC05_OK;
-
-		//check for ERROR
-		char* pos = strstr(buffer,AT_ERROR);
-		if(pos)
-		{
-			//return error code in format HC05_ERROR_RESP_CODE
-			char* errorcode = pos+7; 
-			return HC05_ERROR_RESP_CODE(atoi(errorcode));
-		}
-
-		//check for FAIL
-		if(strstr(buffer,AT_FAIL))
-		{
-			return HC05_ERROR_LIB;
-		}
-
-		//check if response Buffer is big enough
-		if(bufferSize > length)
-			return HC05_ERROR_LIB;
-
-		strncpy(responseBuffer,buffer,length);
-		responseBuffer+=length;
-		
-	}
-}
-
-
-
-
-
+/*
 uint8_t HC05::getResponse()
 {
-	return getResponse(0,0);
+	int index = 0;
+	int respnummer = 0;
+	long cur_time = millis();
+	while(1)
+	{
+		int data = uart_getc();
+		uint8_t error = data & 0xff00;
+		uint8_t character = (uint8_t)data;
+		if(error == 0) //character recived
+		{
+			if(character=='\n')
+				return respnummer;//match
+			respnummer=-1;
+			for(int i = 0; i < RESPONSES_LENGTH; i++)
+			{
+				if(character == responses[i][index])
+				{
+					index++;
+					cur_time = millis();
+					respnummer = i;		
+				}
+			}
+			if(character != 0 && respnummer==-1)//no match
+			{	
+				uart_putc('|');
+				uart_putc(character);
+				uart_putc('|');
+				for(int i = 0; i < RESPONSES_LENGTH; i++)
+					uart_putc(responses[i][index]);
+				uart_putc('|');
+				flushInput();
+				return 0xff-3;
+			}
+		}
+		else if(error != UART_NO_DATA)//uart error
+		{
+			return 0xff-2; 
+		}
+		if(millis()-cur_time > HC05_TIMEOUT)//timeout
+		{
+			return 0xff-1; 
+		}
+	}
+	return 0xff;
+}*/
+uint8_t HC05::getResponse()
+{
+	int index = 0;
+	volatile uint32_t timeout = 0;
+	while(1)
+	{
+		int data = uart_getc();
+		uint8_t error = data & 0xff00;
+		uint8_t character = (uint8_t)data;
+		if(error == 0) //character recived
+		{
+			buffer[index]=character;
+			index++;
+			if(character=='\n')
+			{
+				buffer[index]=0;
+				break;
+			}
+		}
+		else if(error != UART_NO_DATA)//uart error
+		{
+			uart_puts("uart error\r\n");
+			return 0xff-2; 
+		}
+		if(timeout > HC05_TIMEOUT)//timeout
+		{
+			uart_puts("timeout\r\n");
+			return 0xff-1; 
+		}	
+		timeout++;
+	}
+
+	uart_puts("HEUREKA\r\n");
+
+	int respons;
+	for(int c = 0; c < index; c++)
+	{
+		respons = -1;
+		for(int i = 0; i < RESPONSES_LENGTH; i++)
+		{
+			if(buffer[c] == responses[i][c])
+			{
+				respons = i;
+				break;
+			}
+		}
+		if(respons == -1)//no match
+			return 0xff;
+	}
+	return respons;
 }
+
+//public functions
+
+HC05::HC05()
+{
+
+}
+
+
+uint8_t HC05::init()
+{
+	isCommandMode=1;
+	uart_init(UART_BAUD_SELECT(115200,F_CPU));
+	cmdMode(0);
+	delay(100);
+	if(cmdMode(1))
+		return 1;
+	delay(100);
+	if(set('F',"1")) //factory reset
+		return 1;
+	if(reboot())
+		return 1;
+	if(set('~',"3")) //Serial Port to PC
+		return 1;
+	if(set('T',"253")) //Continous configuration enabled
+		return 1;
+	if(reboot())
+		return 1;
+	return 0;
+}
+
+uint8_t* HC05::getDeviceMac() //TODO getDeviceMac() 
+{
+	//uart_puts("GB\r\n");
+	return 0;
+}
+
+uint8_t HC05::isActive(uint8_t* device) //TODO isActive(uint8_t* device) 
+{
+	return 0;
+}
+
+uint8_t HC05::isConnected()
+{
+	if(cmdMode(1))
+		return 1;
+	uart_puts("GK\r\n");
+	if(getResponse()==HC05_100)
+		return 1;
+	return 0;
+}
+
+
+uint8_t HC05::connectTo(uint8_t* device) //TODO connectTo(uint8_t* device)
+{
+	return 0;
+}
+
+uint8_t HC05::waitforConnection()
+{
+	while(!isConnected())
+			delay(100);
+	return 1;
+}
+
+uint8_t HC05::disconnect()
+{
+	if(cmdMode(1))
+		return 1;
+	uart_puts("K,\r\n");
+	if(getResponse()==HC05_KILL)
+		return 0;
+	return 1;
+}
+
+
+uint8_t* HC05::getLine()//TODO  getLine()
+{
+	cmdMode(0);
+	return 0;
+}
+
+uint8_t HC05::getChar()//TODO  getChar()
+{
+	cmdMode(0);
+	return 0;
+}
+
+int HC05::getInt()//TODO  getInt()
+{
+	cmdMode(0);
+	return 0;
+}
+
+uint8_t HC05::getData(uint8_t* data, int datalength)//TODO getData(uint8_t* data, int datalength)
+{
+	cmdMode(0);
+	return 0;
+}
+
+
+uint8_t HC05::sendLine(const char* data)
+{
+	cmdMode(0);
+	uart_puts((const char*)data);
+	return 1;
+}
+
+uint8_t HC05::sendChar(uint8_t data)
+{
+	cmdMode(0);
+	uart_putc(data);
+	return 1;
+}
+
+uint8_t HC05::sendInt(int data) //TODO sendInt(int data)
+{
+	cmdMode(0);
+	return 0;
+}
+
+uint8_t HC05::sendData(uint8_t* data, int datalength) //TODO sendData(uint8_t* data, int datalength)
+{
+	cmdMode(0);
+	return 1;
+}
+
 

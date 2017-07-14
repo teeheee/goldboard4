@@ -20,125 +20,53 @@
 #include "uart.h"
 #include "config.h"
 
-/** AT COMMANDS*****/
 
-#define AT_RESET 	"AT+RESET"
-#define AT_DEFAULT 	"AT+ORGL"
-#define AT_NAME		"AT+NAME"
-#define AT_PASSWORD	"AT+PSWD"
-#define AT_ROLE		"AT+ROLE"
-	#define SLAVE_ROLE 	"0"
-	#define MASTER_ROLE "1"
-#define ATINQUIER 	"AT+INQ"
-#define AT_INIT 	"AT+INIT"
-#define AT_STATE 	"AT+STATE"
+#define HC05_BUFFERSIZE		100
+#define HC05_TIMEOUT		100000UL
 
 
-/*** AT RESPONSE*****/
-
-#define AT_OK    "OK\r\n"
-#define AT_ERROR "ERROR" //\r\n fehlt hier da ERROR das format
-#define AT_FAIL  "FAIL\r\n"
-
-/*** AT STATES*****/
-
-#define AT_STATE_UNINITALIZED		0
-#define AT_STATE_INITIALIZED		1
-#define AT_STATE_READY				2
-#define AT_STATE_PAIRABLE			3
-#define AT_STATE_PAIRED				4
-#define AT_STATE_INQUIRING			5
-#define AT_STATE_CONNECTING			6
-#define AT_STATE_CONNECTED 			7
-#define AT_STATE_DISCONNECTED 		8
-#define AT_STATE_ERROR	 			9
 
 
-/*** LIB STATES ****/
-
-#define HC05_STATE_PREINIT    1
-#define HC05_STATE_INIT       2
-#define HC05_STATE_CONNECTING 3
-#define HC05_STATE_CONNECTED	4
-#define HC05_STATE_DISCONNECTED	4
-#define HC05_STATE_ERROR	 5
-
-
-/*** LIB ERRORS ****/
-
-#define HC05_NO_ERROR		0
-#define HC05_OK				0
-#define HC05_ERROR_SERIAL	1
-#define HC05_ERROR_DEVICE	2
-#define HC05_ERROR_LIB		3
-#define HC05_ERROR_TIMEOUT	4
-#define HC05_ERROR_RESP		5
-#define HC05_ERROR_RESP_CODE(x) (x+(1<<7))
-
-
-#define AT_BUFFERSIZE		200
-
-
-class HC05 
+class HC05
 {
 //variables
 public:
 
 private:
-	const char* deviceName;
-	const char* pairingPassword;
-
-	uint8_t lib_state;
-	uint8_t last_lib_error;
-
-	uint8_t at_state;
-	uint8_t last_at_error;
+	uint8_t buffer[HC05_BUFFERSIZE];
+	uint8_t isCommandMode;
 
 //functions
 public:
 	HC05();
-	HC05(const char* deviceName,const char* Password);
 
-	/** configuration***/
+	uint8_t init();
 
-	uint8_t setPairingPassword(const char* Password);
-	uint8_t setDeviceName(const char* deviceName);
-	
-	/*** establish connection***/
+	uint8_t* getDeviceMac();
+	uint8_t isActive(uint8_t* device);
+	uint8_t isConnected();
 
-	uint8_t pairWith(const char* deviceName,const char* Password);
-	uint8_t inquierPairing();
-	uint8_t inquierPairing(int timeout);
+	uint8_t connectTo(uint8_t* device);
+	uint8_t waitforConnection();
+	uint8_t disconnect();
 
-	bool isConnected();
+	uint8_t* getLine();
+	uint8_t getChar();
+	int getInt();
+	uint8_t getData(uint8_t* data,int datalength);
 
-	/*** communicate***/ //ADD a better communication protokoll
-
-
-
-	bool sendByte(uint8_t byte);
-	bool sendString(const char* data);
-
-	int 	getLine(char* buffer, int buffersize);
-
-
-	/*** maintaining ****/
-
-	uint8_t factoryResetDevice();
-	uint8_t resetDevice();
-	uint8_t getStatus();
-	bool init();
-	uint8_t getlastError();
-	uint8_t setMode(const char* mode);
-
+	uint8_t sendLine(const char* data);
+	uint8_t sendChar(uint8_t data);
+	uint8_t sendInt(int data);
+	uint8_t sendData(uint8_t* data,int datalength);
 
 private:
-	uint8_t getATStatus();
-	int 	getSerial(char* buffer,int buffersize);
-	uint8_t getSerialByte();
-	void 	sendSerial(const char*  data);
-	uint8_t getResponse();
-	uint8_t getResponse(char* responseBuffer,int size);
+	void flushInput();
+	uint8_t cmdMode(uint8_t onoff);
+	uint8_t reboot();
+	uint8_t set(uint8_t reg, const char* value);
+	uint8_t getResponse(); //checks for resp string
+
 }; //HC05
 
 #endif //__HC05_H__
