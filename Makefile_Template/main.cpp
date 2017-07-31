@@ -3,6 +3,7 @@
 
 #include "Goldboard4.h"
 #include "HC05.h"
+#include "uart.h"
 
 Goldboard4 gb;
 HC05 bt;
@@ -10,9 +11,11 @@ HC05 bt;
 
 int main(void)
 {	
+	gb.initLED(1);
+	gb.setLed(1,true);
 	while(1)
 	{
-		bt.init();
+		uart_puts("asasdfasdf");
 		delay(100);
 	}
 	gb.initLED(1);

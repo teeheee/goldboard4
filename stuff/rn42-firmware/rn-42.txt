@@ -1,0 +1,4 @@
+Recognized AMD-compatible device on BC4-EXT (cyt), ManID=0x1 DevID=0x225B
+
+The chip reports version 6705 (0x1a31): 
+  "cyt_8unified_fl_bt3.0_23i_1002111152_native_encr56 2010-02-11"

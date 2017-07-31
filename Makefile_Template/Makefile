@@ -32,7 +32,7 @@ OBJECTS = \
 
 
 CFLAGS = $(INC)
-#CFLAGS += -O1 
+CFLAGS += -O1 
 CFLAGS += -std=gnu99 
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
@@ -40,14 +40,14 @@ CFLAGS += -DF_CPU=$(OSC)
 CFLAGS += -mmcu=$(MCU)
 
 C++FLAGS = $(INC)
-#C++FLAGS += -O1
+C++FLAGS += -O1
 C++FLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 C++FLAGS += -Wall
 C++FLAGS += -DF_OSC=$(OSC)
 C++FLAGS += -mmcu=$(MCU)
 
 ASMFLAGS = $(INC)
-#ASMFLAGS += -O1
+ASMFLAGS += -O1
 ASMFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 ASMFLAGS += -Wall -Wstrict-prototypes
 ASMFLAGS += -DF_OSC=$(OSC)

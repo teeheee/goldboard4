@@ -110,7 +110,7 @@ void HC05::flushInput()
 			return;
 	}
 }
-/*
+
 uint8_t HC05::getResponse()
 {
 	int index = 0;
@@ -157,7 +157,7 @@ uint8_t HC05::getResponse()
 		}
 	}
 	return 0xff;
-}*/
+}/*
 uint8_t HC05::getResponse()
 {
 	int index = 0;
@@ -209,7 +209,7 @@ uint8_t HC05::getResponse()
 	}
 	return respons;
 }
-
+*/
 //public functions
 
 HC05::HC05()
@@ -225,18 +225,18 @@ uint8_t HC05::init()
 	cmdMode(0);
 	delay(100);
 	if(cmdMode(1))
-		return 1;
+		;//return 1;
 	delay(100);
 	if(set('F',"1")) //factory reset
-		return 1;
+		;//return 1;
 	if(reboot())
-		return 1;
+		;//return 1;
 	if(set('~',"3")) //Serial Port to PC
-		return 1;
+		;//return 1;
 	if(set('T',"253")) //Continous configuration enabled
-		return 1;
+		;//return 1;
 	if(reboot())
-		return 1;
+		;//return 1;
 	return 0;
 }
 
