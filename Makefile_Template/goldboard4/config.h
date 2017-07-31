@@ -30,7 +30,7 @@
 #define I2C_SPEED   100   // kHz
 
 #define FAST_IRDETECTOR
-#define ACCELERATION
+//#define ACCELERATION
 #define SERVO_OUTPUT
 
 #define PCF8574A_MOTOR_ADDRESS 0x70

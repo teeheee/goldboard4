@@ -22,8 +22,15 @@
 
 
 #define HC05_BUFFERSIZE		100
-#define HC05_TIMEOUT		100000UL
+#define HC05_TIMEOUT		5000UL
 
+
+#define HC05_ERROR_NO_ERROR 			0
+#define HC05_ERROR_RESPONSE_TIMEOUT		1
+#define HC05_ERROR_NO_MATCH				2
+#define HC05_ERROR_UART_ERROR		    3
+#define HC05_ERROR_WRONG_RESPONSE		4
+#define HC05_ERROR_REALY_STRANGE_ERROR	0xff
 
 
 
@@ -60,7 +67,11 @@ public:
 	uint8_t sendInt(int data);
 	uint8_t sendData(uint8_t* data,int datalength);
 
+	uint8_t getLastError();
+
 private:
+	uint8_t error_code;
+
 	void flushInput();
 	uint8_t cmdMode(uint8_t onoff);
 	uint8_t reboot();
