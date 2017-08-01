@@ -25,7 +25,7 @@
 #endif
 
 /* 9600 baud */
-#define UART_BAUD_RATE      57600UL  
+#define UART_BAUD_RATE      115200UL   //this is fixed for bluetooth!!!
 
 #define I2C_SPEED   100   // kHz
 

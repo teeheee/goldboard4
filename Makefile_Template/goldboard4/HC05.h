@@ -21,7 +21,6 @@
 #include "config.h"
 
 
-#define HC05_BUFFERSIZE		100
 #define HC05_TIMEOUT		5000UL
 
 
@@ -32,6 +31,8 @@
 #define HC05_ERROR_WRONG_RESPONSE		4
 #define HC05_ERROR_REALY_STRANGE_ERROR	0xff
 
+#define HC05_MODE_MASTER	1
+#define HC05_MODE_SLAVE		2
 
 
 class HC05
@@ -40,20 +41,23 @@ class HC05
 public:
 
 private:
-	uint8_t buffer[HC05_BUFFERSIZE];
-	uint8_t isCommandMode;
+	uint8_t mode;
+	int8_t isCommandMode;
+	int8_t connectionState;
+	const char* name;
+	const char* pin;
 
 //functions
 public:
 	HC05();
 
-	uint8_t init();
+	uint8_t init(const char* name, const char* pin, uint8_t mode);
 
 	uint8_t* getDeviceMac();
 	uint8_t isActive(uint8_t* device);
 	uint8_t isConnected();
 
-	uint8_t connectTo(uint8_t* device);
+	uint8_t connectTo(const char* device);
 	uint8_t waitforConnection();
 	uint8_t disconnect();
 
@@ -68,6 +72,7 @@ public:
 	uint8_t sendData(uint8_t* data,int datalength);
 
 	uint8_t getLastError();
+	uint8_t factoryReset();
 
 private:
 	uint8_t error_code;

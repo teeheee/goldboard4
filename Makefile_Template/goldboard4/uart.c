@@ -42,32 +42,23 @@ LICENSE:
 #include "uart.h"
 #include "config.h"
 
-#ifdef BOOTLOADER
-  #define HC05_uart_hook(x) uart_interrupt_hook(x)
 
-  typedef void (*do_reboot_t)(void);
-  const do_reboot_t do_reboot = (do_reboot_t)((FLASHEND-511)>>1);
+#define HC05_uart_hook(x) uart_interrupt_hook(x)
 
-  void uart_interrupt_hook(uint8_t data)
-  {
-    static int count = 0;
-    if(data==0x30 && count%2==0)
-      count++;
-    else if(data==0x20 && count%2==1)
-      count++;
-    else
-      count = 0;
+uint8_t (*uartRecvHook)(uint8_t) = 0;
+//const do_reboot_t do_reboot = (do_reboot_t)((FLASHEND-511)>>1); //reboot pointer
 
-    if(count == 2)
-    {
-      cli();
-      UCSRB=0;
-      do_reboot();
-    }
-  }
-#else
-  #define HC05_uart_hook(x)
-#endif
+uint8_t uart_interrupt_hook(uint8_t data)
+{
+    if(uartRecvHook)
+      return uartRecvHook(data);
+    return 1;
+}
+
+void addRecvHandler(uint8_t (*functionHandle)(uint8_t))
+{
+      uartRecvHook = functionHandle;
+}
 
 
 /*
@@ -301,7 +292,8 @@ Purpose:  called when the UART has received a character
     data = UART0_DATA;
 
     #ifdef HC05_uart_hook
-      HC05_uart_hook(data);  //HC05 UART HOOK
+      if(HC05_uart_hook(data))  //HC05 UART HOOK
+        return;
     #endif
     /* */
 #if defined( AT90_UART )

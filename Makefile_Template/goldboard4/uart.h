@@ -107,6 +107,9 @@ extern "C" {
 */
 extern void uart_init(unsigned int baudrate);
 
+/* adds a handle function to preparse recived data and toggle events */
+extern void addRecvHandler(uint8_t (*functionHandle)(uint8_t));
+
 
 /**
  *  @brief   Get received byte from ringbuffer

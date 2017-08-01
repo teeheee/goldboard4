@@ -20,9 +20,25 @@
 #include "wiring_private.h"
 #include "Serial.h"
 
+/***** SPECIAL RESPONSES DATA*****/
+
+uint8_t recvHook(uint8_t data);
+
+#define STATUS_MESSAGES_LENGTH 2
+
+uint8_t escape_sequence_status = 0;
+const char* status_messages[STATUS_MESSAGES_LENGTH] = {
+	"###CONNECT\0", //1
+	"###DISCONNECT\0", //2
+};
+
+#define ESCAPE_STATUS_CONNECT 1
+#define ESCAPE_STATUS_DISCONNECT 2
 
 
-#define RESPONSES_LENGTH 10 //darf nicht mit gleichem Buchstaben anfangen!!!!
+/*******NORMAL RESPONSES DATA*********/
+
+#define RESPONSES_LENGTH 12 //darf nicht mit gleichem Buchstaben anfangen!!!!
 
 const char* responses[RESPONSES_LENGTH] = {
 	"?\r\0", //0
@@ -35,6 +51,8 @@ const char* responses[RESPONSES_LENGTH] = {
 	"KILL\r\0", //7
 	"CMD\r\0",   //8
 	"4,0,0\r\0",   //9
+	"TRYING\r\0",  //10
+	"CONNECT failed\r\0",  //11
 	}; 
 
 #define HC05_QM 0
@@ -47,6 +65,10 @@ const char* responses[RESPONSES_LENGTH] = {
 #define HC05_KILL 7
 #define HC05_CMD 8
 #define HC05_400 9
+#define HC05_TRYING 10
+#define HC05_CONNECT_FAILED 11
+
+ 
 
 //private functions
 
@@ -57,7 +79,7 @@ uint8_t HC05::cmdMode(uint8_t onoff)
 {
 	delay(10); //this is necessary for the device to detect commands
 	flushInput();
-	if(onoff && isCommandMode!=1) //check if already in command mode
+	if(onoff  && isCommandMode!=1) //check if already in command mode
 	{
 		uart_puts("$$$");
 		isCommandMode = 1;
@@ -87,13 +109,15 @@ uint8_t HC05::reboot()
 {
 	if(cmdMode(1))
 		return 0xff;
-
-	delay(100);
 	uart_puts("R,1\r");
 	isCommandMode = 0;
-	delay(2000);
+	delay(2000); //give it some time to reboot (normaly 500ms)
 	if(getResponse()==HC05_REBOOT)
+	{
+		if(cmdMode(1))
+			return 0xff;
 		return 0;
+	}
 	else //error handling
 	{
 		if(error_code==0)
@@ -106,7 +130,7 @@ uint8_t HC05::set(uint8_t reg, const char* value) //S,?\r -> AOK or ERR
 {
 	if(cmdMode(1))
 		return 0xff;
-
+	flushInput();
 	uart_putc('S');
 	uart_putc(reg);
 	uart_putc(',');
@@ -198,6 +222,25 @@ uint8_t HC05::getResponse()
 	return 0xff;
 }
 
+uint8_t recvHook(uint8_t data)
+{
+	static uint8_t match_counters[STATUS_MESSAGES_LENGTH] = {0,0};
+	for(uint8_t i = 0; i < STATUS_MESSAGES_LENGTH; i++)
+	{
+		if(status_messages[i][match_counters[i]] == data)
+		{
+			match_counters[i]++;
+			if(status_messages[i][match_counters[i]]==0)
+				escape_sequence_status=i+1;
+		}
+		else
+			match_counters[i]=0;
+	}
+	return 0;
+}
+
+
+
 //public functions
 
 HC05::HC05()
@@ -205,29 +248,50 @@ HC05::HC05()
 
 }
 
-
-uint8_t HC05::init()
+uint8_t HC05::factoryReset()
 {
-	isCommandMode=-1;
-	uart_init(UART_BAUD_SELECT(115200,F_CPU));
-	delay(100);
-	cmdMode(0);
-	delay(100);
 	if(cmdMode(1))
 		return 0xff;
-	delay(100);
 	if(set('F',"1")) //factory reset
 		return 0xff-1;
 	if(reboot())
 		return 0xff-2;
-	if(set('~',"3")) //Serial Port to PC
+	return 0;
+}
+
+uint8_t HC05::init(const char* _name, const char* _pin, uint8_t _mode)
+{
+	isCommandMode=-1;
+	connectionState=-1;
+	name = _name;
+	pin = _pin;
+	mode = _mode;
+	uart_init(UART_BAUD_SELECT(115200,F_CPU));
+	addRecvHandler(recvHook);
+	cmdMode(0);
+	if(cmdMode(1))
+		return 0xff;
+	//factoryReset();
+	if(set('~',"3")) //serial port to PC
 		return 0xff-3;
-	if(set('T',"255")) //Continous configuration enabled
+	if(set('T',"253")) //continous configuration enabled
 		return 0xff-4;
-	if(set('N',"Robot")) //Serial Port to PC
-		return 0xff-3;
-	if(reboot())
+	if(set('N',name)) //name
 		return 0xff-5;
+	if(set('A',"0")) // authentification mode
+		return 0xff-6;
+	if(set('P',pin)) //authentification pin
+		return 0xff-7;
+	if(mode == HC05_MODE_MASTER)
+		if(set('M',"1")) // master mode
+			return 0xff-8;
+	if(mode == HC05_MODE_SLAVE)
+		if(set('M',"0")) // slave mode
+			return 0xff-8;
+	if(set('O',"###")) // escape sequence
+		return 0xff-8;
+	if(reboot())
+		return 0xff-9;
 	return 0;
 }
 
@@ -244,36 +308,72 @@ uint8_t HC05::isActive(uint8_t* device) //TODO isActive(uint8_t* device)
 
 uint8_t HC05::isConnected()
 {
-	if(cmdMode(1))
-		return 0xff-1;
-	flushInput();
-	uart_puts("GK\r");
-	uint8_t resp = getResponse();
-	if(resp == HC05_100 || resp == HC05_400) // connected
+	if(connectionState==-1) //unknown status
 	{
-		//isCommandMode=-1; // not sure if there is a state change???
-		if(cmdMode(0))
+		if(cmdMode(1))
 			return 0xff-1;
-		return 1;
+		flushInput();
+		uart_puts("GK\r");
+		uint8_t resp = getResponse();
+		if(resp == HC05_100 || resp == HC05_400) // connected
+		{
+			//isCommandMode=-1; // not sure if there is a state change???
+			if(cmdMode(0))
+				return 0xff-1;
+			connectionState = 1;
+			return 1;
+		}
+		else if(resp == HC05_000) //not connected
+		{	
+			if(cmdMode(0))
+				return 0xff-1;
+			connectionState = 0;
+			return 0;
+		}
+		else // error handling
+		{
+			if(error_code==0)
+				error_code = HC05_ERROR_WRONG_RESPONSE;
+			return 0xff;
+		}
 	}
-	else if(resp == HC05_000) //not connected
-	{	
-		if(cmdMode(0))
-			return 0xff-1;
-		return 0;
-	}
-	else // error handling
+	else if(escape_sequence_status != 0) //status changed
 	{
-		if(error_code==0)
-			error_code = HC05_ERROR_WRONG_RESPONSE;
-		return 0xff;
+		if(escape_sequence_status == ESCAPE_STATUS_CONNECT)
+			connectionState = 1;
+		else
+			connectionState = 0;
+		escape_sequence_status = 0;
+		flushInput();
 	}
+	return connectionState;
 }
 
 
-uint8_t HC05::connectTo(uint8_t* device) //TODO connectTo(uint8_t* device)
+uint8_t HC05::connectTo(const char* device) //TODO connectTo(uint8_t* device)
 {
-	return 0;
+	if(cmdMode(1))
+		return 0xff-1;
+	flushInput();
+	uart_puts("C,");
+	uart_puts(device);
+	uart_putc('\r');
+	uint8_t resp = getResponse();
+	if(resp == HC05_TRYING)
+	{
+		uint8_t resp = getResponse();
+		if(resp == HC05_CONNECT_FAILED)
+		{
+			flushInput();
+			return 0;
+		}
+		if(escape_sequence_status == ESCAPE_STATUS_CONNECT)
+		{
+			flushInput();
+			return 1;
+		}
+	}
+	return 0xff;
 }
 
 uint8_t HC05::waitforConnection()
@@ -282,7 +382,7 @@ uint8_t HC05::waitforConnection()
 	{
 			uint8_t resp = isConnected();
 			if(resp == 1)
-				return 1;
+				return 0;
 			else if(resp != 0)
 				return resp;
 			delay(500);
@@ -295,8 +395,13 @@ uint8_t HC05::disconnect()
 		return 0xff-1; //error
 	flushInput();
 	uart_puts("K,\r");
-	if(getResponse()==HC05_KILL)
+	if(getResponse()==HC05_KILL || escape_sequence_status==ESCAPE_STATUS_DISCONNECT)
+	{
+		escape_sequence_status=0;
+		if(cmdMode(0))
+			return 0xff-2;
 		return 0;
+	}
 	else // error handling
 	{
 		if(error_code==0)

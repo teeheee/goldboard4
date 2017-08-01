@@ -21,7 +21,7 @@ void setState(int state)
 {
 	switch(state)
 	{
-		case STATE_CONNECTED:
+		case STATE_IDLE:
 			gb.setLed(0,true);
 			gb.setLed(1,false);
 			break;
@@ -36,7 +36,7 @@ void setState(int state)
 			gb.setLed(1,true);
 			break;
 
-		case STATE_IDLE:
+		case STATE_CONNECTED:
 			gb.setLed(0,true);
 			gb.setLed(1,true);
 			break;
@@ -64,7 +64,7 @@ void setState(int state)
 			break;
 
 		case STATE_FINISHED:
-			while(1)
+			for(int i = 0; i < 20; i++)
 			{
 				gb.setLed(0,true);
 				gb.setLed(1,false);
@@ -77,20 +77,41 @@ void setState(int state)
 	}
 }
 
+#define MASTER
+//#define SLAVE
 
 int main(void)
 {	
 	int disconnect_counter = 0;
+	int resp;
 	gb.initLED(0);
 	gb.initLED(1);
 	setState(STATE_POWERON);
-	int resp = bt.init();
+
+	#ifdef MASTER
+		resp = bt.init("Robot2","1111",HC05_MODE_MASTER);
+	#endif
+
+	#ifdef SLAVE
+		resp = bt.init("Robot1","1111",HC05_MODE_MASTER);
+	#endif
+
 	if(resp)
 	{
 		error = bt.getLastError();
 		setState(STATE_ERROR);
 	}
-	resp = bt.waitforConnection();
+
+	#ifdef SLAVE
+		resp = bt.waitforConnection();
+	#endif
+	#ifdef MASTER
+		do
+		{
+			resp = bt.connectTo("00066672703E");
+		}while(resp == 0);
+	#endif
+
 	if(resp>1)
 	{
 		error = bt.getLastError();
@@ -100,33 +121,46 @@ int main(void)
 	while(1)
 	{
 		delay(50);
-		int i = bt.isConnected();
-		if(i == 1)
+		resp = bt.isConnected();
+		if(resp == 1)
 		{
 			setState(STATE_SENDING);
-			bt.sendLine("Slave: hello world\r\n");
+			#ifdef SLAVE
+				bt.sendLine("Slave: hello world\r\n");
+			#endif
+			#ifdef MASTER
+				bt.sendLine("Master: hello world\r\n");
+			#endif
+
 			setState(STATE_CONNECTED);
 			disconnect_counter++;
 		}
-		else if(i == 0)
+		else if(resp == 0)
 		{
 			setState(STATE_IDLE);
 		}
 		else
 		{
 			error = bt.getLastError();
-			setState(STATE_ERROR); // STATE_ERROR
+			setState(STATE_ERROR); 
 		}
-		if(disconnect_counter==20)
-		{
-			if(bt.disconnect()==0)
-				setState(STATE_FINISHED);
-			else
+
+
+		#ifdef SLAVE
+			if(disconnect_counter==20) //disconnect after 20 send
 			{
-				error = bt.getLastError();
-				setState(STATE_ERROR);
+				if(bt.disconnect()==0)
+				{
+					setState(STATE_FINISHED);
+					disconnect_counter=0;
+				}
+				else
+				{
+					error = bt.getLastError();
+					setState(STATE_ERROR);
+				}
 			}
-		}
+		#endif
 	}
 }
 
