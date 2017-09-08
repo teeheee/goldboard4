@@ -30,9 +30,9 @@ OBJECTS = \
 	$(patsubst %.$(EXT_C),%.o,$(wildcard *.$(EXT_C))) \
 	$(patsubst %.$(EXT_C++),%.o,$(wildcard *.$(EXT_C++))) \
 	$(patsubst %.$(EXT_ASM),%.o,$(wildcard *.$(EXT_ASM))) \
-	$(patsubst %.$(EXT_C),%.o,$(wildcard goldboard/*.$(EXT_C))) \
-	$(patsubst %.$(EXT_C++),%.o,$(wildcard goldboard/*.$(EXT_C++))) \
-	$(patsubst %.$(EXT_ASM),%.o,$(wildcard goldboard/*.$(EXT_ASM))) \
+	$(patsubst %.$(EXT_C),%.o,$(wildcard goldboard4/*.$(EXT_C))) \
+	$(patsubst %.$(EXT_C++),%.o,$(wildcard goldboard4/*.$(EXT_C++))) \
+	$(patsubst %.$(EXT_ASM),%.o,$(wildcard goldboard4/*.$(EXT_ASM))) \
 
 
 CFLAGS = $(INC)
