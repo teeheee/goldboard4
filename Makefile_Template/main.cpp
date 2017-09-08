@@ -14,6 +14,7 @@ int main(void)
 	//lcd_puts("hello world");
 	while(1)
 	{
+		gb.scanI2C();
 		gb.motor[1].rotate(100);
 		delay(100);
 		gb.setLed(1,0);
