@@ -30,30 +30,30 @@ OBJECTS = \
 	$(patsubst %.$(EXT_C),%.o,$(wildcard *.$(EXT_C))) \
 	$(patsubst %.$(EXT_C++),%.o,$(wildcard *.$(EXT_C++))) \
 	$(patsubst %.$(EXT_ASM),%.o,$(wildcard *.$(EXT_ASM))) \
-	$(patsubst %.$(EXT_C),%.o,$(wildcard goldboard/*.$(EXT_C))) \
-	$(patsubst %.$(EXT_C++),%.o,$(wildcard goldboard/*.$(EXT_C++))) \
-	$(patsubst %.$(EXT_ASM),%.o,$(wildcard goldboard/*.$(EXT_ASM))) \
+	$(patsubst %.$(EXT_C),%.o,$(wildcard goldboard4/*.$(EXT_C))) \
+	$(patsubst %.$(EXT_C++),%.o,$(wildcard goldboard4/*.$(EXT_C++))) \
+	$(patsubst %.$(EXT_ASM),%.o,$(wildcard goldboard4/*.$(EXT_ASM))) \
 
 
 CFLAGS = $(INC)
 CFLAGS += -Os -std=gnu99 
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
-CFLAGS += -DF_OSC=$(OSC)
+CFLAGS += -DF_CPU=$(OSC)
 CFLAGS += -mmcu=$(MCU)
 
 C++FLAGS = $(INC)
 C++FLAGS += -Os
 C++FLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 C++FLAGS += -Wall
-C++FLAGS += -DF_OSC=$(OSC)
+C++FLAGS += -DF_CPU=$(OSC)
 C++FLAGS += -mmcu=$(MCU)
 
 ASMFLAGS = $(INC)
 ASMFLAGS += -Os
 ASMFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 ASMFLAGS += -Wall -Wstrict-prototypes
-ASMFLAGS += -DF_OSC=$(OSC)
+ASMFLAGS += -DF_CPU=$(OSC)
 ASMFLAGS += -x assembler-with-cpp
 ASMFLAGS += -mmcu=$(MCU)
 
