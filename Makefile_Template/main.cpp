@@ -81,7 +81,7 @@ void setState(int state)
 //#define SLAVE
 
 int main(void)
-{	
+{
 	int disconnect_counter = 0;
 	int resp;
 	gb.initLED(0);

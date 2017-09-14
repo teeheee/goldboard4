@@ -1,0 +1,66 @@
+\hypertarget{class_s_r_f08}{}\section{S\+R\+F08 Class Reference}
+\label{class_s_r_f08}\index{S\+R\+F08@{S\+R\+F08}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries init} (uint8\+\_\+t address)\hypertarget{class_s_r_f08_a2f2920aeafb6916589c1a9a7f2443dc6}{}\label{class_s_r_f08_a2f2920aeafb6916589c1a9a7f2443dc6}
+
+\item 
+void {\bfseries change\+Address} (uint8\+\_\+t new\+Address)\hypertarget{class_s_r_f08_a3b94c05d2c9aa0bbdde496f637875a4c}{}\label{class_s_r_f08_a3b94c05d2c9aa0bbdde496f637875a4c}
+
+\item 
+int {\bfseries get\+Value\+CM} ()\hypertarget{class_s_r_f08_abe78d5649f8bade345a5e42cd6bc84ce}{}\label{class_s_r_f08_abe78d5649f8bade345a5e42cd6bc84ce}
+
+\item 
+bool {\bfseries is\+Initialized} ()\hypertarget{class_s_r_f08_a0e0d9a2064498f8c5c862c1c8f0c35f6}{}\label{class_s_r_f08_a0e0d9a2064498f8c5c862c1c8f0c35f6}
+
+\item 
+bool {\bfseries check\+Ack} ()\hypertarget{class_s_r_f08_a5b96dc2b670aee3c86917b5dae2c5f7e}{}\label{class_s_r_f08_a5b96dc2b670aee3c86917b5dae2c5f7e}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries sonicstate\+\_\+s} \{ {\bfseries S\+T\+A\+T\+E\+\_\+\+S\+T\+A\+RT}, 
+{\bfseries S\+T\+A\+T\+E\+\_\+\+C\+M\+\_\+\+S\+E\+NT}, 
+{\bfseries S\+T\+A\+T\+E\+\_\+\+R\+E\+S\+U\+L\+T\+\_\+\+R\+E\+Q\+U\+E\+S\+T\+\_\+\+S\+E\+NT}, 
+{\bfseries S\+T\+A\+T\+E\+\_\+\+R\+E\+S\+U\+L\+T\+\_\+\+R\+E\+C\+E\+I\+V\+ED}
+ \}\hypertarget{class_s_r_f08_ae6342593f4cbbabb7d31e4b0ba4051ce}{}\label{class_s_r_f08_ae6342593f4cbbabb7d31e4b0ba4051ce}
+
+\item 
+typedef enum S\+R\+F08\+::sonicstate\+\_\+s {\bfseries sonicstate\+\_\+t}\hypertarget{class_s_r_f08_a9de77ac90d87a1bc48f36e6aa961ebc0}{}\label{class_s_r_f08_a9de77ac90d87a1bc48f36e6aa961ebc0}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries set\+Range} (uint16\+\_\+t millimeters)\hypertarget{class_s_r_f08_a4317b5ec7dffe3c83542961a77a59e74}{}\label{class_s_r_f08_a4317b5ec7dffe3c83542961a77a59e74}
+
+\item 
+void {\bfseries set\+Gain} (uint8\+\_\+t gain)\hypertarget{class_s_r_f08_ac02024ad486ef18868493afa8836c2a4}{}\label{class_s_r_f08_ac02024ad486ef18868493afa8836c2a4}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries \+\_\+initialized}\hypertarget{class_s_r_f08_a296319571e91e872433fbadc5dd6c84b}{}\label{class_s_r_f08_a296319571e91e872433fbadc5dd6c84b}
+
+\item 
+int {\bfseries \+\_\+address}\hypertarget{class_s_r_f08_a853a1be73c9fc3d473dd34ee57110a6d}{}\label{class_s_r_f08_a853a1be73c9fc3d473dd34ee57110a6d}
+
+\item 
+unsigned int {\bfseries \+\_\+last\+Value}\hypertarget{class_s_r_f08_a70ed30ace7bde29bfcbf85a48ac12f43}{}\label{class_s_r_f08_a70ed30ace7bde29bfcbf85a48ac12f43}
+
+\item 
+uint16\+\_\+t {\bfseries \+\_\+max\+Value}\hypertarget{class_s_r_f08_a489d8f367d124aca63894c23c30aa4ea}{}\label{class_s_r_f08_a489d8f367d124aca63894c23c30aa4ea}
+
+\item 
+sonicstate\+\_\+t {\bfseries \+\_\+state}\hypertarget{class_s_r_f08_a4397ea316e60ffa169ee8de39b445a49}{}\label{class_s_r_f08_a4397ea316e60ffa169ee8de39b445a49}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/alex/workspace/goldboard4/libs/goldboard4/S\+R\+F08.\+h\item 
+/home/alex/workspace/goldboard4/libs/goldboard4/S\+R\+F08.\+cpp\end{DoxyCompactItemize}

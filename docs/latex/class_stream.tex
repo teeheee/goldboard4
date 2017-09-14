@@ -1,0 +1,133 @@
+\hypertarget{class_stream}{}\section{Stream Class Reference}
+\label{class_stream}\index{Stream@{Stream}}
+
+
+Inheritance diagram for Stream\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=136pt]{class_stream__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Stream\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=128pt]{class_stream__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_stream_1_1_multi_target}{Multi\+Target}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual int {\bfseries available} ()=0\hypertarget{class_stream_a9c98a763395005c08ce95afb2f06c7b1}{}\label{class_stream_a9c98a763395005c08ce95afb2f06c7b1}
+
+\item 
+virtual int {\bfseries read} ()=0\hypertarget{class_stream_aea5dee9fcb038148515b7c9212d38dc0}{}\label{class_stream_aea5dee9fcb038148515b7c9212d38dc0}
+
+\item 
+virtual int {\bfseries peek} ()=0\hypertarget{class_stream_a30c3c212ec6ea67277a708c5ea2501a5}{}\label{class_stream_a30c3c212ec6ea67277a708c5ea2501a5}
+
+\item 
+virtual void {\bfseries flush} ()=0\hypertarget{class_stream_aa3ef2c34f152a0b2ea8de9139b9461da}{}\label{class_stream_aa3ef2c34f152a0b2ea8de9139b9461da}
+
+\item 
+void {\bfseries set\+Timeout} (unsigned long timeout)\hypertarget{class_stream_a851dd6dc74d52389de04f99648478db5}{}\label{class_stream_a851dd6dc74d52389de04f99648478db5}
+
+\item 
+unsigned long {\bfseries get\+Timeout} (void)\hypertarget{class_stream_abc982d9972a4c7fdabcf7ba9ab325ed1}{}\label{class_stream_abc982d9972a4c7fdabcf7ba9ab325ed1}
+
+\item 
+bool {\bfseries find} (char $\ast$target)\hypertarget{class_stream_a4bab30ccd324efd461dee46a2339f673}{}\label{class_stream_a4bab30ccd324efd461dee46a2339f673}
+
+\item 
+bool {\bfseries find} (uint8\+\_\+t $\ast$target)\hypertarget{class_stream_a250f5e805979bad3efb0ef33038de457}{}\label{class_stream_a250f5e805979bad3efb0ef33038de457}
+
+\item 
+bool {\bfseries find} (char $\ast$target, size\+\_\+t length)\hypertarget{class_stream_ad851401f2318cdb1de05707e021b81d9}{}\label{class_stream_ad851401f2318cdb1de05707e021b81d9}
+
+\item 
+bool {\bfseries find} (uint8\+\_\+t $\ast$target, size\+\_\+t length)\hypertarget{class_stream_abe254745b98af8037d10fef6126e42df}{}\label{class_stream_abe254745b98af8037d10fef6126e42df}
+
+\item 
+bool {\bfseries find} (char target)\hypertarget{class_stream_a4f529a9d7309aedf535fb1a6757a5675}{}\label{class_stream_a4f529a9d7309aedf535fb1a6757a5675}
+
+\item 
+bool {\bfseries find\+Until} (char $\ast$target, char $\ast$terminator)\hypertarget{class_stream_ad1f5f6600832396fb38a897baf4de35b}{}\label{class_stream_ad1f5f6600832396fb38a897baf4de35b}
+
+\item 
+bool {\bfseries find\+Until} (uint8\+\_\+t $\ast$target, char $\ast$terminator)\hypertarget{class_stream_a167c5236fd76df40d4894aa48e99aa98}{}\label{class_stream_a167c5236fd76df40d4894aa48e99aa98}
+
+\item 
+bool {\bfseries find\+Until} (char $\ast$target, size\+\_\+t target\+Len, char $\ast$terminate, size\+\_\+t term\+Len)\hypertarget{class_stream_a3a9497de614792103ab8cb4759e01a69}{}\label{class_stream_a3a9497de614792103ab8cb4759e01a69}
+
+\item 
+bool {\bfseries find\+Until} (uint8\+\_\+t $\ast$target, size\+\_\+t target\+Len, char $\ast$terminate, size\+\_\+t term\+Len)\hypertarget{class_stream_ae644144154e17da36a1b89123847b5b1}{}\label{class_stream_ae644144154e17da36a1b89123847b5b1}
+
+\item 
+long {\bfseries parse\+Int} (Lookahead\+Mode lookahead=S\+K\+I\+P\+\_\+\+A\+LL, char ignore=N\+O\+\_\+\+I\+G\+N\+O\+R\+E\+\_\+\+C\+H\+AR)\hypertarget{class_stream_a8875d87ed4db36c36990b2fb22ca48da}{}\label{class_stream_a8875d87ed4db36c36990b2fb22ca48da}
+
+\item 
+float {\bfseries parse\+Float} (Lookahead\+Mode lookahead=S\+K\+I\+P\+\_\+\+A\+LL, char ignore=N\+O\+\_\+\+I\+G\+N\+O\+R\+E\+\_\+\+C\+H\+AR)\hypertarget{class_stream_a685133574afc1c35223e31703543a0a7}{}\label{class_stream_a685133574afc1c35223e31703543a0a7}
+
+\item 
+size\+\_\+t {\bfseries read\+Bytes} (char $\ast$buffer, size\+\_\+t length)\hypertarget{class_stream_a45fd1336a323ea83b16e8507055f44ea}{}\label{class_stream_a45fd1336a323ea83b16e8507055f44ea}
+
+\item 
+size\+\_\+t {\bfseries read\+Bytes} (uint8\+\_\+t $\ast$buffer, size\+\_\+t length)\hypertarget{class_stream_a23dd7428e78e86ff41fce45bd618e214}{}\label{class_stream_a23dd7428e78e86ff41fce45bd618e214}
+
+\item 
+size\+\_\+t {\bfseries read\+Bytes\+Until} (char terminator, char $\ast$buffer, size\+\_\+t length)\hypertarget{class_stream_af84672a4fb2620466958d3118d4fea00}{}\label{class_stream_af84672a4fb2620466958d3118d4fea00}
+
+\item 
+size\+\_\+t {\bfseries read\+Bytes\+Until} (char terminator, uint8\+\_\+t $\ast$buffer, size\+\_\+t length)\hypertarget{class_stream_a432e1b8520b03a845264789fcb9c1a10}{}\label{class_stream_a432e1b8520b03a845264789fcb9c1a10}
+
+\item 
+String {\bfseries read\+String} ()\hypertarget{class_stream_a1c60bdda2b65d78e5a1362d51b856c5a}{}\label{class_stream_a1c60bdda2b65d78e5a1362d51b856c5a}
+
+\item 
+String {\bfseries read\+String\+Until} (char terminator)\hypertarget{class_stream_a6a409da87c552909260d8cc428c5ca70}{}\label{class_stream_a6a409da87c552909260d8cc428c5ca70}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries timed\+Read} ()\hypertarget{class_stream_a416a0ada5ed3c9d27f1e72c7d73f0aa1}{}\label{class_stream_a416a0ada5ed3c9d27f1e72c7d73f0aa1}
+
+\item 
+int {\bfseries timed\+Peek} ()\hypertarget{class_stream_ae326bf60a3c5276836526710871046fe}{}\label{class_stream_ae326bf60a3c5276836526710871046fe}
+
+\item 
+int {\bfseries peek\+Next\+Digit} (Lookahead\+Mode lookahead, bool detect\+Decimal)\hypertarget{class_stream_a3dbc4937689c81b76f4ab16e253e85e0}{}\label{class_stream_a3dbc4937689c81b76f4ab16e253e85e0}
+
+\item 
+long {\bfseries parse\+Int} (char ignore)\hypertarget{class_stream_ae37760d5dbfe38e9b9ab403d304c51d8}{}\label{class_stream_ae37760d5dbfe38e9b9ab403d304c51d8}
+
+\item 
+float {\bfseries parse\+Float} (char ignore)\hypertarget{class_stream_a5dcf499b28028a5c76f5f9cfe1b73785}{}\label{class_stream_a5dcf499b28028a5c76f5f9cfe1b73785}
+
+\item 
+int {\bfseries find\+Multi} (struct \hyperlink{struct_stream_1_1_multi_target}{Multi\+Target} $\ast$targets, int t\+Count)\hypertarget{class_stream_a5fb669d95dbf5b7b8a8e900c53d62a1e}{}\label{class_stream_a5fb669d95dbf5b7b8a8e900c53d62a1e}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+unsigned long {\bfseries \+\_\+timeout}\hypertarget{class_stream_aae48f1a926d2e82a452f2c75af0c6a29}{}\label{class_stream_aae48f1a926d2e82a452f2c75af0c6a29}
+
+\item 
+unsigned long {\bfseries \+\_\+start\+Millis}\hypertarget{class_stream_abf61d2006d28d18f2e028285a323fe5a}{}\label{class_stream_abf61d2006d28d18f2e028285a323fe5a}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/alex/workspace/goldboard4/libs/goldboard4/Stream.\+h\item 
+/home/alex/workspace/goldboard4/libs/goldboard4/Stream.\+cpp\end{DoxyCompactItemize}

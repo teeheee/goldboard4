@@ -43,14 +43,14 @@ C++FLAGS = $(INC)
 C++FLAGS += -O1
 C++FLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 C++FLAGS += -Wall
-C++FLAGS += -DF_OSC=$(OSC)
+C++FLAGS += -DF_CPU=$(OSC)
 C++FLAGS += -mmcu=$(MCU)
 
 ASMFLAGS = $(INC)
 ASMFLAGS += -O1
 ASMFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 ASMFLAGS += -Wall -Wstrict-prototypes
-ASMFLAGS += -DF_OSC=$(OSC)
+ASMFLAGS += -DF_CPU=$(OSC)
 ASMFLAGS += -x assembler-with-cpp
 ASMFLAGS += -mmcu=$(MCU)
 
@@ -115,9 +115,12 @@ program:
 	avrdude -pm32 -Pusb -cavrispmkII -u -U flash:w:$(PROJECT).hex  -B1
 
 fuse:
-	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xC1:m -B100
+	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0x3F:m -U hfuse:w:0xC9:m -B100
 
 check:
 	avrdude -pm32 -Pusb -cavrispmkII
+
+check-size:
+	avr-size -C --mcu=atmega32 main.elf
 
 
