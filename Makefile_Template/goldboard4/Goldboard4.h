@@ -26,9 +26,6 @@
 #include "Serial.h"
 #include "SRF08.h"
 #include "CMPS03.h"
-#include "PixyI2C.h"
-#include "usring.h"
-#include "VL53L0X.h"
 
 
 class Goldboard4
@@ -40,9 +37,6 @@ Motor motor[4];
 SoftwareSerial serial;
 CMPS03 compass;
 SRF08 sonar[4];
-PixyI2C pixy;
-usring bodensensor;
-VL53L0X LaserSensor[4];
 PCF8574A digital;
 
 protected:

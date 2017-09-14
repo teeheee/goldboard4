@@ -117,5 +117,7 @@ program:
 fuse:
 	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0x3F:m -U hfuse:w:0xC9:m -B100
 
+check-size:
+	avr-size -C --mcu=atmega32 main.elf
 
 
