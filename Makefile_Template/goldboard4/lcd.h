@@ -56,23 +56,6 @@
 
 /**@{*/
 
-/*
- * LCD and target specific definitions below can be defined in a separate include file with name lcd_definitions.h instead modifying this file 
- * by adding -D_LCD_DEFINITIONS_FILE to the CDEFS section in the Makefile
- * All definitions added to the file lcd_definitions.h will override the default definitions from lcd.h
- */
-#ifdef _LCD_DEFINITIONS_FILE
-#include "lcd_definitions.h"
-#endif
-
-
-/**
- * @name  Definition for LCD controller type
- * Use 0 for HD44780 controller, change to 1 for displays with KS0073 controller.
- */
-#ifndef LCD_CONTROLLER_KS0073 
-#define LCD_CONTROLLER_KS0073 0  /**< Use 0 for HD44780 controller, 1 for KS0073 controller */
-#endif
 
 /** 
  * @name  Definitions for Display Size 
@@ -127,9 +110,7 @@
  * All definitions added to the file lcd_definitions.h will override the default definitions from lcd.h
  *  
  */
-#define LCD_IO_MODE      1            /**< 0: memory mapped mode, 1: IO port mode */
 
-#if LCD_IO_MODE
 
 #ifndef LCD_PORT
 #define LCD_PORT         0 /*PORTA*/        /**< port for the LCD lines   */
@@ -147,50 +128,36 @@
 #define LCD_DATA3_PORT   LCD_PORT     /**< port for 4bit data bit 3 */
 #endif
 #ifndef LCD_DATA0_PIN
-#define LCD_DATA0_PIN    3            /**< pin for 4bit data bit 0  */
+#define LCD_DATA0_PIN    7            /**< pin for 4bit data bit 0  */
 #endif
 #ifndef LCD_DATA1_PIN
-#define LCD_DATA1_PIN    2            /**< pin for 4bit data bit 1  */
+#define LCD_DATA1_PIN    6            /**< pin for 4bit data bit 1  */
 #endif
 #ifndef LCD_DATA2_PIN
-#define LCD_DATA2_PIN    1            /**< pin for 4bit data bit 2  */
+#define LCD_DATA2_PIN    5            /**< pin for 4bit data bit 2  */
 #endif
 #ifndef LCD_DATA3_PIN
-#define LCD_DATA3_PIN    0            /**< pin for 4bit data bit 3  */
+#define LCD_DATA3_PIN    4            /**< pin for 4bit data bit 3  */
 #endif
 #ifndef LCD_RS_PORT
 #define LCD_RS_PORT      LCD_PORT     /**< port for RS line         */
 #endif
 #ifndef LCD_RS_PIN
-#define LCD_RS_PIN       6            /**< pin  for RS line         */
+#define LCD_RS_PIN       2            /**< pin  for RS line         */
 #endif
 #ifndef LCD_RW_PORT
 #define LCD_RW_PORT      LCD_PORT     /**< port for RW line         */
 #endif
 #ifndef LCD_RW_PIN
-#define LCD_RW_PIN       5            /**< pin  for RW line         */
+#define LCD_RW_PIN       1            /**< pin  for RW line         */
 #endif
 #ifndef LCD_E_PORT
 #define LCD_E_PORT       LCD_PORT     /**< port for Enable line     */
 #endif
 #ifndef LCD_E_PIN
-#define LCD_E_PIN        4            /**< pin  for Enable line     */
+#define LCD_E_PIN        0            /**< pin  for Enable line     */
 #endif
 
-#elif defined(__AVR_AT90S4414__) || defined(__AVR_AT90S8515__) || defined(__AVR_ATmega64__) || \
-      defined(__AVR_ATmega8515__)|| defined(__AVR_ATmega103__) || defined(__AVR_ATmega128__) || \
-      defined(__AVR_ATmega161__) || defined(__AVR_ATmega162__)
-/*
- * memory mapped mode is only supported when the device has an external data memory interface
- */
-#define LCD_IO_DATA      0xC000    /* A15=E=1, A14=RS=1                 */
-#define LCD_IO_FUNCTION  0x8000    /* A15=E=1, A14=RS=0                 */
-#define LCD_IO_READ      0x0100    /* A8 =R/W=1 (R/W: 1=Read, 0=Write   */
-
-#else
-#error "external data memory interface not available for this device, use 4-bit IO port mode"
-
-#endif
 
 
 /**
@@ -221,7 +188,9 @@
 #ifndef LCD_DELAY_ENABLE_PULSE
 #define LCD_DELAY_ENABLE_PULSE 1      /**< enable signal pulse width in micro seconds */
 #endif
-
+#ifndef LCD_DELAY_WRITE
+#define LCD_DELAY_WRITE 400      /**< enable signal pulse width in micro seconds */
+#endif
 
 /**
  * @name Definitions for LCD command instructions
@@ -277,7 +246,6 @@
 
 
 #define LCD_MODE_DEFAULT     ((1<<LCD_ENTRY_MODE) | (1<<LCD_ENTRY_INC) )
-
 
 
 /** 

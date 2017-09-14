@@ -34,7 +34,6 @@
 PCF8574A* lcd_pcf;
 
 
-#if LCD_IO_MODE
 #define lcd_e_delay()   _delay_us(LCD_DELAY_ENABLE_PULSE)
 #define lcd_e_high()    lcd_pcf->setPin(LCD_E_PIN,1) // LCD_E_PORT  |=  _BV(LCD_E_PIN);
 #define lcd_e_low()     lcd_pcf->setPin(LCD_E_PIN,0) // LCD_E_PORT  &= ~_BV(LCD_E_PIN);
@@ -55,38 +54,18 @@ PCF8574A* lcd_pcf;
 
 #define lcd_data_update() lcd_pcf->write()
 
-#endif
 
-#if LCD_IO_MODE
 #if LCD_LINES==1
 #define LCD_FUNCTION_DEFAULT    LCD_FUNCTION_4BIT_1LINE 
 #else
 #define LCD_FUNCTION_DEFAULT    LCD_FUNCTION_4BIT_2LINES 
 #endif
-#else
-#if LCD_LINES==1
-#define LCD_FUNCTION_DEFAULT    LCD_FUNCTION_8BIT_1LINE
-#else
-#define LCD_FUNCTION_DEFAULT    LCD_FUNCTION_8BIT_2LINES
-#endif
-#endif
 
-#if LCD_CONTROLLER_KS0073
-#if LCD_LINES==4
-
-#define KS0073_EXTENDED_FUNCTION_REGISTER_ON  0x2C   /* |0|010|1100 4-bit mode, extension-bit RE = 1 */
-#define KS0073_EXTENDED_FUNCTION_REGISTER_OFF 0x28   /* |0|010|1000 4-bit mode, extension-bit RE = 0 */
-#define KS0073_4LINES_MODE                    0x09   /* |0|000|1001 4 lines mode */
-
-#endif
-#endif
 
 /* 
 ** function prototypes 
 */
-#if LCD_IO_MODE
 static void toggle_e(void);
-#endif
 
 /*
 ** local functions
@@ -100,7 +79,6 @@ the number of loops is calculated at compile-time from MCU clock frequency
 #define delay(us)  _delay_us(us) 
 
 
-#if LCD_IO_MODE
 /* toggle Enable Pin to initiate write */
 static void toggle_e(void)
 {
@@ -110,7 +88,6 @@ static void toggle_e(void)
     lcd_e_low();
     lcd_data_update();
 }
-#endif
 
 
 /*************************************************************************
@@ -120,17 +97,15 @@ Input:    data   byte to write to LCD
                  0: write instruction
 Returns:  none
 *************************************************************************/
-#if LCD_IO_MODE
+
 static void lcd_write(uint8_t data,uint8_t rs) 
 {
-
+    delay(LCD_DELAY_WRITE);
     if (rs) {        /* write data        (RS=1, RW=0) */
        lcd_rs_high();
     } else {         /* write instruction (RS=0, RW=0) */
        lcd_rs_low();
     }
-    lcd_data_update();
-    lcd_rw_low();    /* RW=0  write mode      */
     lcd_data_update();
 
     
@@ -167,32 +142,8 @@ static void lcd_write(uint8_t data,uint8_t rs)
         lcd_d3_high();
         lcd_data_update();
 }
-#else
-#define lcd_write(d,rs) if (rs) *(volatile uint8_t*)(LCD_IO_DATA) = d; else *(volatile uint8_t*)(LCD_IO_FUNCTION) = d;
-/* rs==0 -> write instruction to LCD_IO_FUNCTION */
-/* rs==1 -> write data to LCD_IO_DATA */
-#endif
 
 
-
-/*************************************************************************
-loops while lcd is busy, returns address counter
-*************************************************************************/
-static uint8_t lcd_waitbusy(void)
-
-{
-    register uint8_t c;
-    
-    /* wait until busy flag is cleared */
-  //LCD_DATA0_PORT  while ( (c=lcd_read(0)) & (1<<LCD_BUSY)) {}
-    
-    /* the address counter is updated 4us after the busy flag is cleared */
-    delay(LCD_DELAY_BUSY_FLAG);
-
-    /* now read the address counter */
-    return 0;//(lcd_read(0));  // return address counter
-    
-}/* lcd_waitbusy */
 
 
 /*************************************************************************
@@ -214,16 +165,7 @@ static inline void lcd_newline(uint8_t pos)
         addressCounter = LCD_START_LINE1;
 #endif
 #if LCD_LINES==4
-#if KS0073_4LINES_MODE
-    if ( pos < LCD_START_LINE2 )
-        addressCounter = LCD_START_LINE2;
-    else if ( (pos >= LCD_START_LINE2) && (pos < LCD_START_LINE3) )
-        addressCounter = LCD_START_LINE3;
-    else if ( (pos >= LCD_START_LINE3) && (pos < LCD_START_LINE4) )
-        addressCounter = LCD_START_LINE4;
-    else 
-        addressCounter = LCD_START_LINE1;
-#else
+
     if ( pos < LCD_START_LINE3 )
         addressCounter = LCD_START_LINE2;
     else if ( (pos >= LCD_START_LINE2) && (pos < LCD_START_LINE4) )
@@ -232,7 +174,6 @@ static inline void lcd_newline(uint8_t pos)
         addressCounter = LCD_START_LINE4;
     else 
         addressCounter = LCD_START_LINE1;
-#endif
 #endif
     lcd_command((1<<LCD_DDRAM)+addressCounter);
 
@@ -250,7 +191,6 @@ Returns: none
 *************************************************************************/
 void lcd_command(uint8_t cmd)
 {
-    lcd_waitbusy();
     lcd_write(cmd,0);
 }
 
@@ -262,7 +202,6 @@ Returns: none
 *************************************************************************/
 void lcd_data(uint8_t data)
 {
-    lcd_waitbusy();
     lcd_write(data,1);
 }
 
@@ -299,13 +238,6 @@ void lcd_gotoxy(uint8_t x, uint8_t y)
 }/* lcd_gotoxy */
 
 
-/*************************************************************************
-*************************************************************************/
-int lcd_getxy(void)
-{
-    return lcd_waitbusy();
-}
-
 
 /*************************************************************************
 Clear display and set cursor to home position
@@ -332,16 +264,6 @@ Returns:  none
 *************************************************************************/
 void lcd_putc(char c)
 {
-    uint8_t pos;
-
-
-    pos = lcd_waitbusy();   // read busy-flag and address counter
-    if (c=='\n')
-    {
-        lcd_newline(pos);
-    }
-    else
-    {
 #if LCD_WRAP_LINES==1
 #if LCD_LINES==1
         if ( pos == LCD_START_LINE1+LCD_DISP_LENGTH ) {
@@ -364,11 +286,8 @@ void lcd_putc(char c)
             lcd_write((1<<LCD_DDRAM)+LCD_START_LINE1,0);
         }
 #endif
-        lcd_waitbusy();
 #endif
-        lcd_write(c, 1);
-    }
-
+    lcd_write(c, 1);
 }/* lcd_putc */
 
 
@@ -420,6 +339,14 @@ void lcd_init(uint8_t dispAttr, PCF8574A* _pcf)
     /*
      *  Initialize LCD to 4 bit I/O mode
      */
+    lcd_d3_low();    
+    lcd_d2_low(); 
+    lcd_d1_low();    
+    lcd_d0_low(); 
+    lcd_rs_low();
+    lcd_e_low();
+    lcd_rw_low();     
+    lcd_data_update();
     delay(LCD_DELAY_BOOTUP);             /* wait 16ms or more after power-on       */
     
     /* initial write to lcd is 8bit */

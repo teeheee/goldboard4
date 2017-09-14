@@ -115,7 +115,7 @@ program:
 	avrdude -pm32 -Pusb -cavrispmkII -u -U flash:w:$(PROJECT).hex  -B1
 
 fuse:
-	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xC1:m -B100
+	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0x3F:m -U hfuse:w:0xC9:m -B100
 
 
 
