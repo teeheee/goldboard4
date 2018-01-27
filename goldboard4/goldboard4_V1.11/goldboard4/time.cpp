@@ -7,7 +7,7 @@
 
 #include "time.h"
 #include <avr/io.h>
-#include "motor.h"
+#include "Motor.h"
 #include "infrared_pulse.h"
 
 volatile uint32_t time_in_ms;

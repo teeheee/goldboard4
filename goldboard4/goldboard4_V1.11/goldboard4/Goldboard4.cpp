@@ -141,7 +141,7 @@ void Goldboard4::setPowerPWM(uint8_t i, uint8_t state)
 void Goldboard4::setPWMServo(uint8_t value, uint8_t pin)
 {
 	pinMode(PWMARRAY[pin],OUTPUT);
-	value = value*(40.0d/255.0d); //Wertebereich anpassen ...
+	value = value*(40.0f/255.0f); //Wertebereich anpassen ...
 	if(value>40)
 	value = 40;
 }

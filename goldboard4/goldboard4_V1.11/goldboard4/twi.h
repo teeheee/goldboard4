@@ -1,6 +1,8 @@
 /*
  * twi.h
  *
+ * This library is buffered. Thats hopefully better ;-)
+ *
  * Created: 15.11.2017 17:02:51
  *  Author:  scttnlsn 
  * https://github.com/scttnlsn/avr-twi
