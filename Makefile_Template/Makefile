@@ -110,33 +110,15 @@ config:
 show-mcu:
 	$(G++) --help=target
 
-bootloader:
-	make -C optiboot
-
-
-program-bootloader:
-	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xde:m -B22 
-	avrdude -pm32 -Pusb -cavrispmkII -u -U flash:w:optiboot/optiboot_atmega32.hex  -B1
-
-
 reset:
 	bash reset.sh
 
-
-program-bt:
-	bash reset.sh
-	avrdude -c arduino  -p m32 -P /dev/rfcomm2 -U flash:w:$(PROJECT).hex
-
 program:
-	echo "warning, no bootloader will be uploaded!!!!"
 	avrdude -pm32 -Pusb -cavrispmkII -u -U flash:w:$(PROJECT).hex  -B1
-
 
 fuse:
 	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xC1:m -B100
 
-fuse-bootloader:
-	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xde:m 
 
 
 
