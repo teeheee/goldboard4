@@ -1,5 +1,5 @@
-# Goldboard4 multiTimerModel
+# Goldboard4 Version 2.0
 
-this is a totaly new base for the firmware.
-It could be Version 2.0
+TODO do full test 
+TODO make a clean doxygen
 
