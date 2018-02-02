@@ -4,8 +4,8 @@
    * motors
    * servos
    * pwmpins 
-   * digitalpins check
-   * analogpins check
+   * ~~digitalpins~~
+   * ~~analogpins~~
    * buttons
    * leds
    * robot->bluetooth->pc
