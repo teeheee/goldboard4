@@ -5,7 +5,7 @@
 #include "Goldboard4.h"
 #include "PCF8574A.h"
 
-uint8_t acceleration = 50;
+uint8_t acceleration = ACCELERATION;
 
 PCF8574A* directionPortexpander;
 
@@ -32,12 +32,12 @@ void initMotors(PCF8574A* portexpander)
 	}
 }
 
-#ifdef MOTOR_ACCELERATION
-
 void setAcceleration(uint8_t percent_per_ms)
 {
 	acceleration = percent_per_ms;
 }
+
+#ifdef MOTOR_ACCELERATION
 
 void setMotorSpeed(uint8_t id, int speed)
 {
@@ -60,14 +60,20 @@ inline void accelerationHandle(uint8_t id)
 			istNeu = soll;
 		if (istNeu < 0)
 		{
-			directionPortexpander->setPin(id, true);
-			directionPortexpander->setPin(id + 1, false);
+			directionPortexpander->setPin(id*2, true);
+			directionPortexpander->setPin(id*2 + 1, false);
 			setPwm(id, uint8_t(-istNeu));
+		}
+		else if(istNeu > 0)
+		{
+			directionPortexpander->setPin(id*2, false);
+			directionPortexpander->setPin(id*2 + 1, true);
+			setPwm(id, uint8_t(istNeu));
 		}
 		else
 		{
-			directionPortexpander->setPin(id, false);
-			directionPortexpander->setPin(id + 1, true);
+			directionPortexpander->setPin(id*2, false);
+			directionPortexpander->setPin(id*2 + 1, false);
 			setPwm(id, uint8_t(istNeu));
 		}
 		ist_motor_speed[id] = istNeu;
@@ -77,7 +83,6 @@ inline void accelerationHandle(uint8_t id)
 
 void motor_isr() //100hz
 {
-	sei();
 	accelerationHandle(0);
 	accelerationHandle(1);
 	accelerationHandle(2);
@@ -88,7 +93,6 @@ void motor_isr() //100hz
 		directionPortexpander->write();
 		pwm_change_flag = 0;
 	}
-	cli();
 }
 
 #else
@@ -97,15 +101,25 @@ void setMotorSpeed(uint8_t id, int speed)
 {
 	if (speed < 0)
 	{
-		directionPortexpander->setPin(id, true);
-		directionPortexpander->setPin(id + 1, false);
+		directionPortexpander->setPin(id*2, true);
+		directionPortexpander->setPin(id*2 + 1, false);
+		directionPortexpander->write();
 		setPwm(id, uint8_t(-speed));
+	}
+	else if(speed > 0)
+	{
+		directionPortexpander->setPin(id*2, false);
+		directionPortexpander->setPin(id*2 + 1, true);
+		directionPortexpander->write();
+		setPwm(id, uint8_t(speed));
 	}
 	else
 	{
-		directionPortexpander->setPin(id, false);
-		directionPortexpander->setPin(id + 1, true);
-		setPwm(id, uint8_t(speed));
+
+		directionPortexpander->setPin(id*2, false);
+		directionPortexpander->setPin(id*2 + 1, false);
+		directionPortexpander->write();
+		setPwm(id, 0);
 	}
 	updatePwm();
 }

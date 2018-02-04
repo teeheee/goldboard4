@@ -1,3 +1,6 @@
+
+#include "pin_configuration.h"
+
 #include "Goldboard4.h"
 #include "SonarSRF08.h"
 #include "CMPS11.h"
@@ -27,18 +30,27 @@ Goldboard4 gb;
 
 int main(void)
 {
+	SERIAL_PRINTLN("Buttontest");
+	gb.waitForButton(0);
+	SERIAL_PRINTLN("Button0");
+	gb.waitForButton(1);
+	SERIAL_PRINTLN("Button1");
 	#ifdef TEST_GB
+SERIAL_PRINTLN("-------------internal TEST--------------");
 		gb.speedTest();
 		gb.testTime();
+SERIAL_PRINTLN("-------------Aktoren TEST--------------");
 		gb.testPWM();
 		gb.testPowerpins();
 		gb.testMotors();
 		gb.testServos();
+		gb.testServos();
+SERIAL_PRINTLN("-------------INPUT TEST--------------");
 		gb.testPulse();
 		gb.testDigital();
-		gb.scanI2C();
 		gb.testAnalog();
-		gb.testServos();
+SERIAL_PRINTLN("-------------I2C TEST--------------");
+		gb.scanI2C();
 	#endif
 	#ifdef TEST_SRF08
 		SERIAL_PRINTLN("start srf08 test");

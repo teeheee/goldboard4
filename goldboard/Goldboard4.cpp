@@ -2,6 +2,7 @@
 
 #include "Goldboard4.h"
 #include "config.h"
+#include "Motor.h"
 
 //Hardware interfaces
 
@@ -40,7 +41,8 @@ Goldboard4::Goldboard4() {
 		motor[count].init(count, &_pcf8574);
 
 	// Buttons (DEFAULT)
-	BTLED_DDR &= ~(1 << BTLED_PIN0) | (1 << BTLED_PIN1);
+	BTLED_DDR |= (1 << BTLED_PIN0) | (1 << BTLED_PIN1);
+	BTLED_PORT |= ((1 << BTLED_PIN0) | (1 << BTLED_PIN1));
 
 	// Analog
 	ADC_DDR &= ~((1 << ADC_PIN0) | (1 << ADC_PIN1) | (1 << ADC_PIN2)
@@ -305,23 +307,28 @@ void Goldboard4::testPowerpins()
 	SERIAL_PRINTLN(("finished Power pin test"));
 }
 
+
 void Goldboard4::testMotors()
 {
 	SERIAL_PRINTLN("start Motor test");
 	for(int i = 0; i < 4; i++)
 	{
-		for(int speed = -0; speed < 200; speed++)
+		SERIAL_PRINT("Rotate Motor");
+		SERIAL_PRINT(i);
+		SERIAL_PRINTLN("");
+		for(int speed = 0; speed < 200; speed++)
 		{
 			motor[i].rotate(speed-100);
-			delay(5);
+			delay(20);
 		}
 		motor[i].rotate(0);
 	}
 	setMotorsOff();
 	delay(10);
+	SERIAL_PRINTLN("Rotate all Motors");
 	for(int i = 0; i < 10; i++)
 	{
-		for(int speed = -0; speed < 200; speed++)
+		for(int speed = 0; speed < 200; speed++)
 		{
 			motor[0].rotate(speed-100);
 			motor[1].rotate((speed+30)%200-100);

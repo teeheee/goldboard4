@@ -3,6 +3,9 @@
 #include "PCF8574A.h"
 #include "Wire.h"
 
+#include <avr/io.h>
+#include "pin_configuration.h"//delete me
+
 // default constructor
 PCF8574A::PCF8574A()
 {
@@ -47,6 +50,5 @@ void PCF8574A::write()
 	Wire.beginTransmission(_address);
 	Wire.write(&_pcfdata, 1);
 	Wire.endTransmission();
-	//twi_writeTo(_address,&_pcfdata,1,1,1);
 	_writeNeeded = false;
 }

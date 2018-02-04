@@ -8,21 +8,28 @@
 #include <avr/interrupt.h>
 
 volatile uint32_t time_in_ms;
+volatile uint8_t is_running;
 
 ISR(TIMER0_COMP_vect) //1khz
 {
+
+
 	time_in_ms++;
 #ifdef MOTOR_ACCELERATION
-	if (time_in_ms % 10 == 0)
+	static uint8_t cc = 0;
+	if (cc == 10)
 	{
-		static uint8_t is_running = 0;
 		if (is_running == 0)
 		{
 			is_running = 1;
+			sei();
 			motor_isr();
+			cli();
 			is_running = 0;
 		}
+		cc=0;
 	}
+	cc++;
 #endif
 #ifdef PULSE_SENSOR_INPUT
 	pulse_isr();
@@ -34,6 +41,8 @@ void init_timer()
 	TCCR0 |= (1 << CS00) | (1 << CS01) | (1 << WGM01);
 	TIMSK |= (1 << OCIE0);
 	OCR0 = 250;
+	time_in_ms = 0;
+	is_running = 0;
 	sei();
 }
 

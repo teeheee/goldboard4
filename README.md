@@ -1,7 +1,7 @@
 # Goldboard4 Version 2.0
 ## TODO
 * do full test 
-   * motors
+   * ~~motors~~
    * servos
    * pwmpins 
    * ~~digitalpins~~

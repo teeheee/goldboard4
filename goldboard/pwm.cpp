@@ -41,8 +41,7 @@ ISR(TIMER2_COMP_vect) // ca 50 Takte
 		{
 			doCopyData();
 			pwm_sync = 0;
-			uint8_t maske = workingMask[pwm_index];
-			clearBits(maske); // irgendwie glitcht das noch ein bisschen :-(
+			clearBits(0b111111); // irgendwie glitcht das noch ein bisschen :-(
 		}
 		uint8_t maske = workingMask[pwm_index];
 		setBits(maske);
@@ -89,6 +88,8 @@ void setPwm(uint8_t id, uint8_t duty)
 
 void updatePwm() //1393 Takte
 {
+	while (pwm_sync)
+		;
 	sortData(); //637 Takte
 	calculateOCR(); //527 Takte
 	copyData(); // copy with syncing.
@@ -137,7 +138,7 @@ void calculateOCR()
 	{
 		uint8_t pin = sortingPointer[pin_index];
 		uint8_t dutyCicle = dutyCicles[pin];
-		if (dutyCicle > 0)
+		if (dutyCicle > MINIMAL_OCR_OFFSET) //because the interrupt is to slow there is only the option for zero offset or MINIMAL_OCR_OFFSET
 		{
 			loadingMask[0] |= (1 << pin); //rising edge aktivieren
 			int nextOCR = dutyCicle - time;
@@ -190,7 +191,6 @@ void testPwm()
 	clearBits(0xff);
 	_delay_ms(10);
 	sei();
-
 	for (int i = 0; i < NUMBER_OF_TESTCASES; i++)
 	{
 		for (int p = 0; p < PWM_PIN_COUNT; p++)
@@ -203,6 +203,18 @@ void testPwm()
 			setPwm(p, Testcase[0][p]);
 		updatePwm();
 		_delay_ms(5);
+	}
+
+	for (int i = 0; i < 255; i++)
+	{
+		setPwm(0, i);
+		setPwm(1, (i+10)%255);
+		setPwm(2, (i+20)%255);
+		setPwm(3, (i+30)%255);
+		setPwm(4, (i+40)%255);
+		setPwm(5, (i+50)%255);
+		updatePwm();
+		_delay_ms(10);
 	}
 }
 #endif
