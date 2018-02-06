@@ -3,14 +3,14 @@
 * do full test 
    * ~~motors~~
    * servos
-   * pwmpins 
+   * ~~pwmpins~~ 
    * ~~digitalpins~~
    * ~~analogpins~~
-   * buttons
-   * leds
+   * ~~buttons~~
+   * ~~leds~~
    * robot->bluetooth->pc
    * robot->bluetooth->robot
-   * power pins
+   * ~~power pins~~
    * ~~CMPS11~~
    * CMPS03
    * SRF08

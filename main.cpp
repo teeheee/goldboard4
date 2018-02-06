@@ -18,12 +18,12 @@ Goldboard4 gb;
 #ifndef MINIMAL
 //#define TEST_GB
 //#define TEST_SRF08
-#define TEST_CMPS11
+//#define TEST_CMPS11
 //#define TEST_CMPS03
 //#define TEST_usring
 //#define TEST_VL53L0X
 //#define TEST_HC05Master
-//#define TEST_HC05SLAVE
+#define TEST_HC05SLAVE
 //#define TEST_PIXY
 //#define TEST_LCD
 #endif
@@ -33,9 +33,16 @@ int main(void)
 	SERIAL_PRINTLN("Buttontest");
 	gb.waitForButton(0);
 	SERIAL_PRINTLN("Button0");
+	delay(500);
+	gb.setLed(1,true);
+	delay(200);
+	gb.setLed(1,false);
+	delay(200);
+	gb.setLed(0,true);
+	delay(200);
+	gb.setLed(0,false);
 	gb.waitForButton(1);
 	SERIAL_PRINTLN("Button1");
-
 	gb.scanI2C();
 	while(1)
 	{
@@ -48,7 +55,6 @@ SERIAL_PRINTLN("-------------Aktoren TEST--------------");
 		gb.testPowerpins();
 		gb.testMotors();
 		gb.testServos();
-		gb.testServos();
 SERIAL_PRINTLN("-------------INPUT TEST--------------");
 		gb.testPulse();
 		gb.testDigital();
@@ -58,9 +64,9 @@ SERIAL_PRINTLN("-------------I2C TEST--------------");
 	#endif
 	#ifdef TEST_SRF08
 		SERIAL_PRINTLN("start srf08 test");
-		SonarSRF08 sonar(224);
-		SERIAL_PRINTLN("set address to 224");
-		sonar.writeAddress(224);
+		SonarSRF08 sonar(113);
+		SERIAL_PRINTLN("set address to 112");
+		//sonar.writeAddress(112);
 		SERIAL_PRINTLN("measure test");
 	    for(int x = 0; x < 10; x++)
 		{
@@ -88,7 +94,12 @@ SERIAL_PRINTLN("-------------I2C TEST--------------");
 		SERIAL_PRINTLN("measure test");
 		for(int x = 0; x < 20; x++)
 		{
-			SERIAL_PRINTLN(compass.getValue());
+			SERIAL_PRINT("compass=");
+			SERIAL_PRINT(compass.getValue());
+			SERIAL_PRINT(", acc_y=");
+			SERIAL_PRINT(compass.getAccelerometerX());
+			SERIAL_PRINT(", acc_x=");
+			SERIAL_PRINTLN(compass.getAccelerometerY());
 			delay(500);
 		}
 		SERIAL_PRINTLN("end cmps11 test");	
@@ -155,7 +166,7 @@ SERIAL_PRINTLN("-------------I2C TEST--------------");
 	#elif defined(TEST_HC05SLAVE)
 		SERIAL_PRINTLN("start HC05 Slave test");
 		HC05 bluetooth;
-		bluetooth.init(HC05_MASTER,"macadresse");
+		bluetooth.init(HC05_SLAVE,"none");
 		int x;
 		for(int i = 0; i < 10; i++)
 		{

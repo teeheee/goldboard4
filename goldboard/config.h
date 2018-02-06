@@ -26,7 +26,7 @@
 #define F_CPU 16000000L
 #endif
 
-#define UART_BAUD_RATE     9600UL //baud
+#define UART_BAUD_RATE     115200UL //baud
 
 #define I2C_SPEED   100   // kHz
 

@@ -26,8 +26,10 @@ Goldboard4::Goldboard4() {
 	// pwm generation
 	initPwm();
 
+#ifdef PULSE_SENSOR_INPUT
 	// pulsed light
 	pulse_init();
+#endif
 
 	// i2c
 	Wire.begin();
@@ -70,7 +72,7 @@ void Goldboard4::setMotorsOff() {
 void Goldboard4::setLed(uint8_t i, bool state) {
 	if (i >= BTLEDCOUNT)
 		return;
-	if (state)
+	if (!state)
 		BTLED_PORT |= (1 << (BTLED_PIN0 + i));
 	else
 		BTLED_PORT &= ~(1 << (BTLED_PIN0 + i));
@@ -221,9 +223,13 @@ void Goldboard4::setDigital(uint8_t i, bool state) {
 /** returns the registered pulse length of the digital port i. 0 <= value <= 255
  */
 uint8_t Goldboard4::getPWMPulsedLight(uint8_t i) {
+#ifdef PULSE_SENSOR_INPUT
 	if (i >= PULSECOUNT)
 		return 0;
 	return get_pulse_width(i);
+#else
+	return 0;
+#endif
 }
 
 
@@ -237,7 +243,18 @@ void Goldboard4::scanI2C()
 
 		if (error == 0)
 		 {
-			 SERIAL_PRINTLN((int)address);
+			 SERIAL_PRINT((int)address);
+			 if(address >= 0xC0>>1 && address <= 0xCE>>1)
+				 SERIAL_PRINTLN(" Kompass");
+			 else if(address >= 0xE0>>1 && address <= 0xFE>>1)
+				 SERIAL_PRINTLN(" Ultraschall");
+			 else if(address == 0x29)
+				 SERIAL_PRINTLN(" Laser");
+			 else if(address >= 0x38 && address <= 0x63)
+				 SERIAL_PRINTLN(" I2C Portexpander");
+			 else
+				 SERIAL_PRINTLN(" unkown");
+
 		 }
 	}
 	SERIAL_PRINTLN(("end Scan"));
@@ -286,23 +303,23 @@ void Goldboard4::testPowerpins()
 	for(int i = 0; i < 5; i++)
 	{
 		setPower(0,true);
-		delay(10);
+		delay(20);
 		setPower(0,false);
-		delay(10);
+		delay(1000);
 	}
 	SERIAL_PRINTLN(("PIN1 toggle"));
 	for(int i = 0; i < 5; i++)
 	{
 		setPower(1,true);
-		delay(10);
+		delay(20);
 		setPower(1,false);
-		delay(10);
+		delay(1000);
 	}
 	SERIAL_PRINTLN(("Wrong PIN test"));
 	for(int i = 2; i < 100; i+=10)
 	{
 		setPower(i,true);
-		delay(10);
+		delay(100);
 	}
 	SERIAL_PRINTLN(("finished Power pin test"));
 }
@@ -400,9 +417,9 @@ void Goldboard4::testAnalog()
 void Goldboard4::testPulse()
 {
 	SERIAL_PRINTLN("start Pulse Test");
-	for(int i = 0; i < DIGITALCOUNT + 8 + PULSECOUNT + ADCCOUNT; i++)
+	for(int i = 0; i < PULSECOUNT; i++)
 	{
-		while(getPWMPulsedLight(i));
+		while(!getPWMPulsedLight(i));
 		SERIAL_PRINT("PULSE");
 		SERIAL_PRINTLN(i);
 	}

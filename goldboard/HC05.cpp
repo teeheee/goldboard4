@@ -9,6 +9,7 @@ HC05::HC05()
 	_masterslave = HC05_SLAVE;
 }
 
+
 void HC05::init(uint8_t MasterSlave, const char* remoteMAC)
 {
 	_masterslave = MasterSlave;
@@ -17,6 +18,8 @@ void HC05::init(uint8_t MasterSlave, const char* remoteMAC)
 		uart_puts("$$$");//Internen Bereich betreten
 		delay(50);
 		uart_puts("GB\r\n");//Adresse ausgeben
+		delay(50);
+		uart_puts("S~,3\r\n");//Serial Modus
 		delay(50);
 		uart_puts("SM,1\r\n");//Mastermode einschalten
 		delay(50);
@@ -31,6 +34,8 @@ void HC05::init(uint8_t MasterSlave, const char* remoteMAC)
 		uart_puts("$$$");//Internen Bereich betreten
 		delay(50);
 		uart_puts("GB\r\n");//Adresse ausgeben
+		delay(50);
+		uart_puts("S~,3\r\n");//Serial Modus
 		delay(50);
 		uart_puts("SM,0\r\n");//Slavemode einschalten
 		delay(50);

@@ -20,7 +20,7 @@
 #include <avr/io.h>
 #include "pin_configuration.h"
 
-#define PULSE_BUFFER_SIZE 20
+#define PULSE_BUFFER_SIZE 255
 
 #define ALL_PULSE1_PINS ((1<<PULSE1_PIN3) | (1<<PULSE1_PIN2) | (1<<PULSE1_PIN1) | (1<<PULSE1_PIN0))
 #define ALL_PULSE2_PINS ((1<<PULSE2_PIN3) | (1<<PULSE2_PIN2) | (1<<PULSE2_PIN1) | (1<<PULSE2_PIN0))

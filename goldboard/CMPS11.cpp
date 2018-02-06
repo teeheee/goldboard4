@@ -34,13 +34,9 @@ uint8_t CMPS11::getValue()
 	  if(Wire.endTransmission()!=0)
 		  return -1;
 
-
-	  // Request 5 bytes from the CMPS11
-	  // this will give us the 8 bit bearing,
-	  // both bytes of the 16 bit bearing, pitch and roll
 	  Wire.requestFrom(CMPS11_I2C_ADDR, 1);
-	  while(Wire.available() < 1);        // Wait for all bytes to come back
-	  val = Wire.read();               // Read back the 5 bytes
+	  while(Wire.available() < 1);
+	  val = Wire.read();
 
 	if (_128DegreeEnabled)
 	{
@@ -52,6 +48,39 @@ uint8_t CMPS11::getValue()
 	}
 	
 	return (uint8_t) val;
+}
+
+
+int CMPS11::getAccelerometerX()
+{
+	if (!_initialized)
+		return 0;
+	int val = 0;
+	Wire.beginTransmission(CMPS11_I2C_ADDR);  //starts communication with CMPS11
+	Wire.write(CMPS11_ACCELERATION_X_REG);           //Sends the register we wish to start reading from
+	if(Wire.endTransmission()!=0)
+		 return -1;
+	  Wire.requestFrom(CMPS11_I2C_ADDR, 2);
+	  while(Wire.available() < 2);        // Wait for all bytes to come back
+	  val = Wire.read();               // Read back the 5 bytes
+	  val = Wire.read() + (val << 8);
+	  return val;
+}
+
+int CMPS11::getAccelerometerY()
+{
+	if (!_initialized)
+		return 0;
+	int val = 0;
+	Wire.beginTransmission(CMPS11_I2C_ADDR);  //starts communication with CMPS11
+	Wire.write(CMPS11_ACCELERATION_Y_REG);           //Sends the register we wish to start reading from
+	if(Wire.endTransmission()!=0)
+		 return -1;
+	  Wire.requestFrom(CMPS11_I2C_ADDR, 2);
+	  while(Wire.available() < 2);        // Wait for all bytes to come back
+	  val = Wire.read();               // Read back the 5 bytes
+	  val = Wire.read() + (val << 8);
+	  return val;
 }
 
 void CMPS11::setAs128Degree()
