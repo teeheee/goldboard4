@@ -21,4 +21,5 @@
    * lcd
 * make clean doxygen comments
 * add BNO055 Sensor
+* optimize memory usage
 
