@@ -118,11 +118,11 @@ bool Goldboard4::getButton(uint8_t i) {
 	if (i >= BTLEDCOUNT)
 		return false;
 	uint8_t lastState = BTLED_PORT;
-	BTLED_DDR &= ~(1 << (BTLED_PIN0 + 1));
-	BTLED_PORT |= (1 << (BTLED_PIN0 + 1));
-	bool ret = BTLED_PIN & (1 << (BTLED_PIN0 + 1));
+	BTLED_DDR &= ~(1 << (BTLED_PIN0 + i));
+	BTLED_PORT |= (1 << (BTLED_PIN0 + i));
+	bool ret = BTLED_PIN & (1 << (BTLED_PIN0 + i));
 	BTLED_PORT = lastState;
-	BTLED_DDR |= (1 << (BTLED_PIN0 + 1));
+	BTLED_DDR |= (1 << (BTLED_PIN0 + i));
 	return ret;
 }
 

@@ -3,6 +3,7 @@
 #include "CMPS11.h"
 #include "Goldboard4.h"
 #include "Wire.h"
+#include "time.h"
 
 
 
@@ -30,7 +31,9 @@ uint8_t CMPS11::getValue()
 
 	  Wire.beginTransmission(CMPS11_I2C_ADDR);  //starts communication with CMPS11
 	  Wire.write(CMPS11_ANGLE_8_REG);           //Sends the register we wish to start reading from
-	  Wire.endTransmission();
+	  if(Wire.endTransmission()!=0)
+		  return -1;
+
 
 	  // Request 5 bytes from the CMPS11
 	  // this will give us the 8 bit bearing,
@@ -80,4 +83,27 @@ void CMPS11::setAs128Degree()
 bool CMPS11::isInitialized()
 {
 	return _initialized;
+}
+
+void CMPS11::cmd(uint8_t byte)
+{
+	  Wire.beginTransmission(CMPS11_I2C_ADDR);
+	  Wire.write(0);
+	  Wire.write(byte);
+	  Wire.endTransmission();
+	  delay(50);
+}
+
+void CMPS11::startCalibration()
+{
+	  uint8_t buffer[3] = CMPS11_CALIBRATION_SEQUENCE;
+	  cmd(buffer[0]);
+	  cmd(buffer[1]);
+	  cmd(buffer[2]);
+}
+
+void CMPS11::exitCalibration()
+{
+	  cmd(0xF8);
+	  delay(50);
 }

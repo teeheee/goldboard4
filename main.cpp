@@ -16,16 +16,16 @@ Goldboard4 gb;
 //#define MINIMAL
 
 #ifndef MINIMAL
-#define TEST_GB
-#define TEST_SRF08
+//#define TEST_GB
+//#define TEST_SRF08
 #define TEST_CMPS11
-#define TEST_CMPS03
-#define TEST_usring
-#define TEST_VL53L0X
-#define TEST_HC05Master
-#define TEST_HC05SLAVE
-#define TEST_PIXY
-#define TEST_LCD
+//#define TEST_CMPS03
+//#define TEST_usring
+//#define TEST_VL53L0X
+//#define TEST_HC05Master
+//#define TEST_HC05SLAVE
+//#define TEST_PIXY
+//#define TEST_LCD
 #endif
 
 int main(void)
@@ -35,6 +35,10 @@ int main(void)
 	SERIAL_PRINTLN("Button0");
 	gb.waitForButton(1);
 	SERIAL_PRINTLN("Button1");
+
+	gb.scanI2C();
+	while(1)
+	{
 	#ifdef TEST_GB
 SERIAL_PRINTLN("-------------internal TEST--------------");
 		gb.speedTest();
@@ -50,7 +54,7 @@ SERIAL_PRINTLN("-------------INPUT TEST--------------");
 		gb.testDigital();
 		gb.testAnalog();
 SERIAL_PRINTLN("-------------I2C TEST--------------");
-		gb.scanI2C();
+
 	#endif
 	#ifdef TEST_SRF08
 		SERIAL_PRINTLN("start srf08 test");
@@ -67,10 +71,22 @@ SERIAL_PRINTLN("-------------I2C TEST--------------");
 	#endif
 	#ifdef TEST_CMPS11
 		SERIAL_PRINTLN("start cmps11 test");
+		static uint8_t calibrated = 0;
 		CMPS11 compass;
-		compass.init();
+		if(calibrated == 0)
+		{
+			SERIAL_PRINTLN("start cmps11 calibration");
+			compass.init();
+			compass.startCalibration();
+			gb.waitForButton(0);
+			compass.exitCalibration();
+			delay(30);
+			SERIAL_PRINTLN("end cmps11 calibration");
+			calibrated = 1;
+		}
+		compass.setAs128Degree();
 		SERIAL_PRINTLN("measure test");
-		for(int x = 0; x < 10; x++)
+		for(int x = 0; x < 20; x++)
 		{
 			SERIAL_PRINTLN(compass.getValue());
 			delay(500);
@@ -111,12 +127,13 @@ SERIAL_PRINTLN("-------------I2C TEST--------------");
 		VL53L0X laser;
 		laser.init();
 		laser.setTimeout(500);
+		laser.startContinuous();
 		SERIAL_PRINTLN("measure test");
-		for(int x = 0; x < 10; x++)
+		for(int x = 0; x < 1000; x++)
 		{
 			SERIAL_PRINTLN(laser.readRangeContinuousMillimeters());	
 			if (laser.timeoutOccurred()) { SERIAL_PRINTLN(" TIMEOUT"); }
-			delay(500);
+			delay(10);
 		}
 		SERIAL_PRINTLN("end vl53l0x test");
 	#endif
@@ -174,7 +191,6 @@ SERIAL_PRINTLN("-------------I2C TEST--------------");
 		lcd_init(LCD_DISP_ON_CURSOR_BLINK,&gb.digital);
 		lcd_puts("hallo Welt");
 	#endif
-	while (1)
-		;
+	}
 }
 
