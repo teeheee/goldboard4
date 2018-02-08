@@ -30,6 +30,12 @@
 #define CENTIMETERS       0x51
 #define MICROSECONDS      0x52
 
+/*!
+@class SonarSRF
+@brief Ultraschall library für SRF08 (SonarSRF08 Klasse), SRF02 (SonarSRF02 Klasse) und SRF10 (SonarSRF10 Klasse)
+@ingroup zf
+@addtogroup zf
+*/
 class SonarSRF
 {
 private:

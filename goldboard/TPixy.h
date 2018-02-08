@@ -47,6 +47,11 @@ enum BlockType
 	NORMAL_BLOCK, CC_BLOCK
 };
 
+/*!
+@stuct Block
+@ingroup PixyI2C
+@addtogroup PixyI2C
+*/
 struct Block
 {
 	uint16_t signature;
@@ -57,18 +62,37 @@ struct Block
 	uint16_t angle;
 };
 
+/*!
+@class TPixy
+@ingroup PixyI2C
+@addtogroup PixyI2C
+*/
 template<class LinkType> class TPixy
 {
 public:
 	TPixy(uint16_t arg = PIXY_DEFAULT_ARGVAL);
 	~TPixy();
 
+	/** gibt die Anzahl der empfangen Blöcke zurück. 
+	*	Wenn die Funkion öfter als alle 20 ms abgefragt wird gibt sie 0 zurück.
+	*/
 	uint16_t getBlocks(uint16_t maxBlocks = 1000);
+
+	/** steuert den Servo Ausgang der Pixy.
+	*/
 	int8_t setServos(uint16_t s0, uint16_t s1);
+
+	/** Ändert die Helligkeit der Kamera
+	*/
 	int8_t setBrightness(uint8_t brightness);
+
+	/** schaltet die RGB Led der Pixy auf den r,g,b Wert.
+	*/
 	int8_t setLED(uint8_t r, uint8_t g, uint8_t b);
 	void init();
 
+	/** in diesem Array steht die Information über die erkannten Objekte drin
+	*/
 	Block *blocks;
 
 private:
@@ -81,6 +105,7 @@ private:
 	uint16_t blockCount;
 	uint16_t blockArraySize;
 };
+
 
 template<class LinkType> TPixy<LinkType>::TPixy(uint16_t arg)
 {

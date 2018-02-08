@@ -1,10 +1,7 @@
 
 
 #include "PCF8574A.h"
-#include "Wire.h"
 
-#include <avr/io.h>
-#include "pin_configuration.h"//delete me
 
 // default constructor
 PCF8574A::PCF8574A()

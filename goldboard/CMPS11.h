@@ -33,7 +33,12 @@
 
 #define CMPS11_CALIBRATION_SEQUENCE {0xF0,0xF5,0xF7}
 
-
+/*!
+@class CMPS11
+@brief CMPS11 sensor Klasse. Es kann nur ein Sensor (ein Objekt) pro Roboter verwendet werden.
+@ingroup zf
+@addtogroup zf
+*/
 class CMPS11
 {
 	public:

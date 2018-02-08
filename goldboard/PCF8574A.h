@@ -24,8 +24,14 @@
 #ifndef PCF8574A_H_
 #define PCF8574A_H_
 
-#include "twi.h"
-
+#include "Wire.h"
+/*!
+@class PCF8574A
+@brief Für diese Klasse muss kein Objekt erstellt werden. Es ist Teil der Goldboard4 Klasse und kann über das gb Objekt angesprochen werden.
+		Typische Verwendung hat die Form gb.motors[2].rotate(20);
+@ingroup zf
+@addtogroup zf
+*/
 class PCF8574A
 {
 	//variables

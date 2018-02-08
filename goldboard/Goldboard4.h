@@ -1,4 +1,5 @@
-/*! \mainpage Goldboard4
+/*! 
+ * \mainpage Goldboard4
  *
  * \author Christoph Rothermel und Alexander Ulbrich
  *
@@ -15,6 +16,7 @@
  * \subsection step2 Schritt : 
  * 	goldboard4 auswählen, Projektname und Speicherort festlegen. Mit OK bestätigen.
  *
+ * @defgroup zf  Zusammenfassung
  * @defgroup external Externe Komponenten
  * @defgroup hal 	  Hardwareabstraktionsschicht
  * @defgroup gb4 	  Interne Komponenten
@@ -55,29 +57,43 @@
 #include "Arduino.h"
 #include "config.h"
 
-
-
-/** gibt die Daten x (int, unsigned int, float, "text") über usb aus und hängt einen Zeilenumbruch daran.
+/*!
+@def SERIAL_PRINTLN(x)
+@brief gibt die Daten x (int, unsigned int, float, "text") über usb aus und hängt einen Zeilenumbruch daran.
+@ingroup zf
+@addtogroup zf
 */
 #define SERIAL_PRINTLN(x) serial.println(x)
 
-/** gibt die Daten x (int, unsigned int, float, "text") über usb aus.
+/*!
+@def SERIAL_PRINT(x)
+@brief gibt die Daten x (int, unsigned int, float, "text") über usb aus.
+@ingroup zf
+@addtogroup zf
 */
 #define SERIAL_PRINT(x) serial.print(x)
 
-/** GB4 
+
+
+/*!
+@class Goldboard4
+@brief Von dieser Klasse darf nur ein Objekt (gb) erstellt werden. Es bietet sich an dies global zu definieren.
+@ingroup zf
+@addtogroup zf
 */
 class Goldboard4
 {
 //variables
 public:
 
-/** Motor attribute Array. siehe Motor für die Benutzung
+/*! Motor attribut Array. siehe Motor für die Benutzung
 */
 	Motor motor[4];
-/** PCF8574A attribute 
+
+/*! PCF8574A attribute für Digital Pin 4 bis 11. Siehe PCF8574A für die Benutzung
+*	Digital Pin 4 bis 11 können aber auch über getDigital und setDigital abgefragt werden.
 */
-	PCF8574A digital; // Digital Portexpander für Digital Pin 4 bis 11
+	PCF8574A digital; 
 
 //functions
 public:
@@ -140,7 +156,8 @@ public:
 	void scanI2C();
 
 #ifdef TEST
-	/** verschiedene Testfunktionen zum Testen der unterschiedlichen Hardware Kompontenten
+	/** 
+	#@code
 	 */
 	void testPWM();
 	void testTime();
@@ -151,6 +168,9 @@ public:
 	void testAnalog();
 	void testPulse();
 	void speedTest();
+	/**
+	#@endcode
+	*/
 #endif
 
 protected:

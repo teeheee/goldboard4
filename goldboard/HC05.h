@@ -27,6 +27,12 @@
 
 #define HC05_TIMEOUT 10 //ms
 
+/*!
+@class HC05
+@brief Bluetooth libs
+@ingroup zf
+@addtogroup zf
+*/
 class HC05{
 private:
     uint8_t _masterslave;

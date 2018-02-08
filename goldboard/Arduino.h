@@ -1,5 +1,5 @@
-/**********************************************************************
- @file       Arduino.h
+/*!
+ @file
 
  @brief      was golbal.h before but name was changed for better Arduino compatibility.
  TODO needs some cleanup.
@@ -16,8 +16,11 @@
  1.00 28.01.2015 First working version
  1.1  30.01.2018 renaming
 
- @end
- ***********************************************************************/
+@end
+@ingroup gb4
+@addtogroup gb4
+*/
+
 #ifndef GOLDBOARD4_ARDUINO_H_
 #define GOLDBOARD4_ARDUINO_H_
 

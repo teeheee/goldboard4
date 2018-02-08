@@ -1,0 +1,4 @@
+<map id="goldboard/pin_configuration.h" name="goldboard/pin_configuration.h">
+<area shape="rect" id="node2" href="$infrared__pulse_8h.html" title="This is a faster and better implementation of the pulsed ball sensor driver. " alt="" coords="5,80,131,121"/>
+<area shape="rect" id="node3" href="$pwm_8h.html" title="Intelligent PWM generation with adaptive interrupt timing. TODO still some minor glitches in the puls..." alt="" coords="155,87,277,114"/>
+</map>

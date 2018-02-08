@@ -204,7 +204,12 @@ struct EEPtr
  It wraps the functionality of EEPtr and EERef into a basic interface.
  This class is also 100% backwards compatible with earlier Arduino core releases.
  ***/
-
+/*!
+@class EEPROMClass
+@brief Arduino EEPROM library. Siehe https://www.arduino.cc/en/Reference/EEPROM für genaue Informationen
+@ingroup zf
+@addtogroup zf
+*/
 struct EEPROMClass
 {
 

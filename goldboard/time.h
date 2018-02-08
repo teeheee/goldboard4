@@ -27,9 +27,31 @@
 
 #include <avr/io.h>
 
+/*!
+@fn delay(uint32_t ms)
+@brief Wartet um Millisekunden.
+@ingroup zf
+@addtogroup zf
+*/
 void delay(uint32_t ms);
-void init_timer();
+
+/*!
+@fn millis()
+@brief Gibt die aktuelle Zeit in Millisekunden seit der Roboter Strom hat zurück.
+@ingroup zf
+@addtogroup zf
+*/
 uint32_t millis();
+
+/*!
+@fn delayMicroseconds(unsigned int)
+@brief Wartet um Microsekunden. Achtung: maximal 65535 us ~ 65 ms. Sehr ungenau bei großen Zeiten.
+@ingroup zf
+@addtogroup zf
+*/
 void delayMicroseconds(unsigned int);
+
+
+void init_timer();
 
 #endif /* TIME_H_ */

@@ -1,0 +1,6 @@
+<map id="goldboard/CMPS11.h" name="goldboard/CMPS11.h">
+<area shape="rect" id="node2" href="$Wire_8h.html" title="TWI/I2C library for Wiring &amp; Arduino. " alt="" coords="111,80,171,107"/>
+<area shape="rect" id="node5" href="$Arduino_8h.html" title="was golbal.h before but name was changed for better Arduino compatibility. TODO needs some cleanup..." alt="" coords="393,80,470,107"/>
+<area shape="rect" id="node11" href="$config_8h_source.html" title="config.h" alt="" coords="691,155,759,181"/>
+<area shape="rect" id="node12" href="$time_8h.html" title="System clock generation with parallel process handling. Triggers motor_isr and pulse_isr. " alt="" coords="783,155,842,181"/>
+</map>

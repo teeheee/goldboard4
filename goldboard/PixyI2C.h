@@ -42,7 +42,20 @@
 
 #define PIXY_I2C_DEFAULT_ADDR           0x54  
 
+/*!
+@defgroup PixyI2C
+@brief Für die verwendung muss ein Objekt der Klasse PixyI2C erstellt werden. 
+Als Parameter nimmt das Objekt die I2C Adresse. 
+Weiter Information über alle wichtigen Funktionen sind in der TPixy Klasse zu finden.
+@ingroup zf
+@addtogroup zf
+*/
 
+/*!
+@class LinkI2C
+@ingroup PixyI2C
+@addtogroup PixyI2C
+*/
 class LinkI2C
 {
 public:
@@ -85,6 +98,7 @@ public:
 private:
   uint8_t addr;
 };
+
 
 typedef TPixy<LinkI2C> PixyI2C;
 

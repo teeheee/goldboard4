@@ -1,0 +1,9 @@
+<map id="goldboard/Wire.h" name="goldboard/Wire.h">
+<area shape="rect" id="node2" href="$CMPS03_8h.html" title="Treiber für das CMPS03 Kompass Modul. " alt="" coords="5,80,152,107"/>
+<area shape="rect" id="node3" href="$CMPS11_8h.html" title="Driver for the CMPS11 compass module. " alt="" coords="176,80,323,107"/>
+<area shape="rect" id="node4" href="$PCF8574A_8h.html" title="Driver for the PCF8574A Remote 8&#45;Bit I/O expander. " alt="" coords="347,80,504,107"/>
+<area shape="rect" id="node8" href="$PixyI2C_8h.html" title="Driver for the PixyI2C module. " alt="" coords="529,80,669,107"/>
+<area shape="rect" id="node5" href="$Motor_8h.html" title="Driver for motors on Goldboard4. " alt="" coords="261,155,387,181"/>
+<area shape="rect" id="node6" href="$Goldboard4_8h.html" title="Driver for Goldboard4 (w. Atmega32). " alt="" coords="295,229,454,256"/>
+<area shape="rect" id="node7" href="$lcd_8h.html" title="Basic routines for interfacing a HD44780U&#45;based character LCD display. It was slightly modified to us..." alt="" coords="463,155,574,181"/>
+</map>
