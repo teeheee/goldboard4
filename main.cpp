@@ -11,6 +11,7 @@
 #include "lcd.h"
 #include "PixyI2C.h"
 
+
 Goldboard4 gb;
 
 #define MINIMAL

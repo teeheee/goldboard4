@@ -114,14 +114,11 @@ A7template:
 	rm goldboard4-2.0-AS7-template.zip
 	zip goldboard4-2.0-AS7-template.zip MyTemplate.vstemplate __TemplateIcon.ico goldboard4.cppproj main.cpp goldboard
 
-reset:
-	bash reset.sh
-
-program:
-	avrdude -pm32 -Pusb -cavrispmkII -u -U flash:w:main.hex  -B1
+program: all
+	AVRDUDE -pm32 -Pusb -cavrispmkII -u -U flash:w:main.hex  -B1
 
 fuse:
-	avrdude -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xd9:m -B100
+	AVRDUDE -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xd9:m -B100
 
 doc:
 	rm -r doc
