@@ -3,6 +3,7 @@
 #include "Goldboard4.h"
 #include "config.h"
 #include "Motor.h"
+#include "error.h"
 
 //Hardware interfaces
 
@@ -30,6 +31,9 @@ Goldboard4::Goldboard4() {
 	// pulsed light
 	pulse_init();
 #endif
+
+
+
 
 	// i2c
 	Wire.begin();
@@ -228,6 +232,7 @@ uint8_t Goldboard4::getPWMPulsedLight(uint8_t i) {
 		return 0;
 	return get_pulse_width(i);
 #else
+	ERROR_MESSAGE("PULSE_SENSOR_INPUT wurde nicht aktiviert!");
 	return 0;
 #endif
 }
@@ -235,7 +240,7 @@ uint8_t Goldboard4::getPWMPulsedLight(uint8_t i) {
 
 void Goldboard4::scanI2C()
 {
-	SERIAL_PRINTLN(("start Scan"));
+	uart_puts_P("start Scan\r\n");
 	for(uint8_t address = 1; address < 127; address++ )
 	{
 		Wire.beginTransmission(address);
@@ -245,19 +250,19 @@ void Goldboard4::scanI2C()
 		 {
 			 SERIAL_PRINT((int)address);
 			 if(address >= 0xC0>>1 && address <= 0xCE>>1)
-				 SERIAL_PRINTLN(" Kompass");
+				 uart_puts_P(" Kompass\r\n");
 			 else if(address >= 0xE0>>1 && address <= 0xFE>>1)
-				 SERIAL_PRINTLN(" Ultraschall");
+				 uart_puts_P(" Ultraschall\r\n");
 			 else if(address == 0x29)
-				 SERIAL_PRINTLN(" Laser");
+				 uart_puts_P(" Laser\r\n");
 			 else if(address >= 0x38 && address <= 0x63)
-				 SERIAL_PRINTLN(" I2C Portexpander");
+				 uart_puts_P(" I2C Portexpander\r\n");
 			 else
-				 SERIAL_PRINTLN(" unkown");
+				 uart_puts_P(" unkown\r\n");
 
 		 }
 	}
-	SERIAL_PRINTLN(("end Scan"));
+	uart_puts_P("end Scan\r\n");
 }
 
 #ifdef TEST

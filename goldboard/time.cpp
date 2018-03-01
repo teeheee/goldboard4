@@ -8,17 +8,17 @@
 #include <avr/interrupt.h>
 
 volatile uint32_t time_in_ms;
-volatile uint8_t is_running;
+
 
 ISR(TIMER0_COMP_vect) //1khz
 {
-
 
 	time_in_ms++;
 #ifdef MOTOR_ACCELERATION
 	static uint8_t cc = 0;
 	if (cc == 10)
 	{
+		static uint8_t is_running = 0;
 		if (is_running == 0)
 		{
 			is_running = 1;
@@ -42,7 +42,6 @@ void init_timer()
 	TIMSK |= (1 << OCIE0);
 	OCR0 = 250;
 	time_in_ms = 0;
-	is_running = 0;
 	sei();
 }
 

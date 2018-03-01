@@ -36,12 +36,13 @@
 //this will make your code a little bit faster and shorter
 #define PULSE_SENSOR_INPUT
 #define MOTOR_ACCELERATION
+#define SERVO_PWM
 
 //goldboard intern i2c Adressen
 
 #define PCF8574A_MOTOR_ADRESS 56 // 0x38
 #define PCF8574A_DIGITAL_ADRESS 63 // 0x3F
 
-#define TEST
+//#define TEST
 
 #endif /* CONFIG_H_ */

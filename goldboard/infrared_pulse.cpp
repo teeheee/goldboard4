@@ -32,6 +32,7 @@ void pulse_init()
 		pulseBuffer[i] = 0;
 }
 
+
 uint8_t get_pulse_width(uint8_t pinNumber)
 {
 	if(pinNumber < 4)

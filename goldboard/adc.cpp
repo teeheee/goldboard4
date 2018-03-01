@@ -3,7 +3,10 @@
 #include "adc.h"
 
 void (*_adc_handler)(uint8_t pin, uint16_t);
+
+#ifdef ENABLE_ADC_INT
 volatile uint8_t _adc_pin_qty;
+#endif
 
 uint16_t adc_read(uint8_t prescaler, uint8_t vref, uint8_t pin)
 {
@@ -33,7 +36,11 @@ void adc_start(uint8_t prescaler, uint8_t vref, uint8_t pin_qty,
 		void (*handler)(uint8_t, uint16_t))
 {
 	_adc_handler = handler;
+
+#ifdef ENABLE_ADC_INT
 	_adc_pin_qty = pin_qty;
+#endif
+
 	ADMUX = vref;
 #ifdef MUX5
 	ADCSRB &= ~(_BV(MUX5));

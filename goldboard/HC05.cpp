@@ -15,31 +15,31 @@ void HC05::init(uint8_t MasterSlave, const char* remoteMAC)
 	_masterslave = MasterSlave;
 	if(_masterslave == HC05_MASTER)
 	{
-		uart_puts("$$$");//Internen Bereich betreten
+		uart_puts_P("$$$");//Internen Bereich betreten
 		delay(50);
-		uart_puts("GB\r\n");//Adresse ausgeben
+		uart_puts_P("GB\r\n");//Adresse ausgeben
 		delay(50);
-		uart_puts("S~,3\r\n");//Serial Modus
+		uart_puts_P("S~,3\r\n");//Serial Modus
 		delay(50);
-		uart_puts("SM,1\r\n");//Mastermode einschalten
+		uart_puts_P("SM,1\r\n");//Mastermode einschalten
 		delay(50);
-		uart_puts("C,");//connect to Slave
+		uart_puts_P("C,");//connect to Slave
 		uart_puts(remoteMAC);
-		uart_puts("\r\n");
+		uart_puts_P("\r\n");
 		delay(50);
-		uart_puts("---\r\n");//Internen Bereich verlassen
+		uart_puts_P("---\r\n");//Internen Bereich verlassen
 	}
 	else
 	{
-		uart_puts("$$$");//Internen Bereich betreten
+		uart_puts_P("$$$");//Internen Bereich betreten
 		delay(50);
-		uart_puts("GB\r\n");//Adresse ausgeben
+		uart_puts_P("GB\r\n");//Adresse ausgeben
 		delay(50);
-		uart_puts("S~,3\r\n");//Serial Modus
+		uart_puts_P("S~,3\r\n");//Serial Modus
 		delay(50);
-		uart_puts("SM,0\r\n");//Slavemode einschalten
+		uart_puts_P("SM,0\r\n");//Slavemode einschalten
 		delay(50);
-		uart_puts("---\r\n");//Internen Bereich verlassen
+		uart_puts_P("---\r\n");//Internen Bereich verlassen
 	}
 	while((uart_getc()>>8)!=UART_NO_DATA);
 }

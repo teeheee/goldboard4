@@ -1,10 +1,12 @@
 
 
 #include "servopwm.h"
+#include "config.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include "error.h"
 
-
+#ifdef SERVO_PWM
 void init_servo_timer();
 
 volatile uint8_t* servo_port_reg;
@@ -43,9 +45,11 @@ void init_servo_timer()
 
 	is_initialized = 1;
 }
+#endif
 
 uint8_t init_servo(volatile uint8_t* port_reg,volatile uint8_t* ddr_reg,uint8_t pin)
 {
+#ifdef SERVO_PWM
 	servo_port_reg = port_reg;
 	servo_ddr_reg = ddr_reg;
 	servo_pin = pin;
@@ -54,11 +58,18 @@ uint8_t init_servo(volatile uint8_t* port_reg,volatile uint8_t* ddr_reg,uint8_t 
 	*servo_ddr_reg |= (1<<servo_pin);
 	init_servo_timer();
 	return 1;
+#else
+	ERROR_MESSAGE("SERVO_PWM ist nicht aktiv!");
+	return 0;
+#endif
 }
 
 void set_servo(uint8_t handle, uint8_t value)
 {
+#ifdef SERVO_PWM
 	servo_value = value;
+#else
+	ERROR_MESSAGE("SERVO_PWM ist nicht aktiv!");
+#endif
 }
-
 

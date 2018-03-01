@@ -13,7 +13,7 @@
 
 Goldboard4 gb;
 
-//#define MINIMAL
+#define MINIMAL
 
 #ifndef MINIMAL
 //#define TEST_GB
@@ -30,20 +30,6 @@ Goldboard4 gb;
 
 int main(void)
 {
-	SERIAL_PRINTLN("Buttontest");
-	gb.waitForButton(0);
-	SERIAL_PRINTLN("Button0");
-	delay(500);
-	gb.setLed(1,true);
-	delay(200);
-	gb.setLed(1,false);
-	delay(200);
-	gb.setLed(0,true);
-	delay(200);
-	gb.setLed(0,false);
-	gb.waitForButton(1);
-	SERIAL_PRINTLN("Button1");
-	gb.scanI2C();
 	while(1)
 	{
 	#ifdef TEST_GB
