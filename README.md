@@ -53,18 +53,18 @@
 minimal Build
 
 ```
-Program:   16548 bytes (50.5% Full)
+Program:    4246 bytes (13.0% Full)
 (.text + .data + .bootloader)
 
-Data:        370 bytes (18.1% Full)
+Data:        262 bytes (12.8% Full)
 (.data + .bss + .noinit)
 ```
-everything enabled Build
+PULSE_SENSOR_INPUT, MOTOR_ACCELERATION and SERVO_PWM enabled Build
 
 ```
-Program:   17042 bytes (52.0% Full)
+Program:    6850 bytes (20.9% Full)
 (.text + .data + .bootloader)
 
-Data:        636 bytes (31.1% Full)
+Data:        576 bytes (28.1% Full)
 (.data + .bss + .noinit)
 ```

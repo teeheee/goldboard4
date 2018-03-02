@@ -1,7 +1,15 @@
 
-#include "pin_configuration.h"
 
 #include "Goldboard4.h"
+
+Goldboard4 gb;
+
+#define MINIMAL
+
+#ifndef MINIMAL
+
+
+#include "pin_configuration.h"
 #include "SonarSRF08.h"
 #include "CMPS11.h"
 #include "CMPS03.h"
@@ -11,12 +19,6 @@
 #include "lcd.h"
 #include "PixyI2C.h"
 
-
-Goldboard4 gb;
-
-#define MINIMAL
-
-#ifndef MINIMAL
 //#define TEST_GB
 //#define TEST_SRF08
 //#define TEST_CMPS11
