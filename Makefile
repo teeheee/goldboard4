@@ -76,8 +76,11 @@ all: $(PROJECT).elf
 	$(G++) $< $(ASMFLAGS) -c -o $@
 
 
-clean:
+clean: template
 	$(RM) $(PROJECT).elf $(OBJECTS) $(PROJECT).hex 
+	rm -r -f doc
+	rm -r -f Debug
+	rm -r -f Release
 
 help:
 	@echo "usage:"
@@ -110,9 +113,15 @@ config:
 show-mcu:
 	$(G++) --help=target
 
+template: A7template EclipseTemplate
+
 A7template:
-	rm goldboard4-2.0-AS7-template.zip
-	zip goldboard4-2.0-AS7-template.zip MyTemplate.vstemplate __TemplateIcon.ico goldboard4.cppproj main.cpp goldboard
+	rm -f goldboard4-2.0-AS7-template.zip
+	zip goldboard4-2.0-AS7-template.zip MyTemplate.vstemplate __TemplateIcon.ico goldboard4.cppproj main.cpp goldboard/*
+
+EclipseTemplate:
+	rm -f eclipse-cpp-avr-eclipse-plugin.zip
+	zip eclipse-cpp-avr-eclipse-plugin.zip .settings/* .cproject .project main.cpp goldboard/*
 
 program: all
 	AVRDUDE -pm32 -Pusb -cavrispmkII -u -U flash:w:main.hex  -B1
@@ -121,7 +130,7 @@ fuse:
 	AVRDUDE -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xd9:m -B100
 
 doc:
-	rm -r doc
+	rm -r -f doc
 	doxygen
 
 
