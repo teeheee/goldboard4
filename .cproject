@@ -127,6 +127,8 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="fuse"/>
+		<configuration configurationName="compile"/>
 		<configuration configurationName="program">
 			<resource resourceType="PROJECT" workspacePath="/goldboard4"/>
 		</configuration>
