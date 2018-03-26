@@ -184,6 +184,9 @@
     <Compile Include="goldboard\EEPROM.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="goldboard\error.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="goldboard\Goldboard4.cpp">
       <SubType>compile</SubType>
     </Compile>
@@ -220,16 +223,16 @@
     <Compile Include="goldboard\PCF8574A.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="goldboard\pint.cpp">
+    <Compile Include="goldboard\print.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="goldboard\print.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="goldboard\pin_configuration.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="goldboard\PixyI2C.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="goldboard\print.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="goldboard\pwm.cpp">

@@ -26,6 +26,7 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="CMPS11.h">CMPS11.h</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="config.h">config.h</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="EEPROM.h">EEPROM.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="error.h">error.h</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="Goldboard4.cpp">Goldboard4.cpp</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="Goldboard4.h">Goldboard4.h</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="HC05.cpp">HC05.cpp</ProjectItem>
@@ -39,7 +40,7 @@
         <ProjectItem ReplaceParameters="true" TargetFileName="PCF8574A.cpp">PCF8574A.cpp</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="PCF8574A.h">PCF8574A.h</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="pin_configuration.h">pin_configuration.h</ProjectItem>
-        <ProjectItem ReplaceParameters="true" TargetFileName="pint.cpp">pint.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="print.cpp">print.cpp</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="PixyI2C.h">PixyI2C.h</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="print.h">print.h</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="pwm.cpp">pwm.cpp</ProjectItem>
