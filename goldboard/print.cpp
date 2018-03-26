@@ -75,4 +75,9 @@ void SerialPrint::println(float floatnumber)
 	uart_puts(LINEEND);
 }
 
+void SerialPrint::println()
+{
+	uart_puts(LINEEND);
+}
+
 SerialPrint serial;

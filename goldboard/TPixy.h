@@ -21,6 +21,7 @@
 #define _TPIXY_H
 
 #include "Arduino.h"
+#include "error.h"
 
 // Communication/misc parameters
 #define PIXY_INITIAL_ARRAYSIZE      30
@@ -131,13 +132,14 @@ template<class LinkType> boolean TPixy<LinkType>::getStart()
 	uint16_t w, lastw;
 
 	lastw = 0xffff;
-
+	int timeout = 0;
 	while (true)
 	{
 		w = link.getWord();
 		if (w == 0 && lastw == 0)
 		{
 			delayMicroseconds(10);
+			//SERIAL_PRINTLN("nothing to be read");
 			return false;
 		}
 		else if (w == PIXY_START_WORD && lastw == PIXY_START_WORD)
@@ -152,10 +154,16 @@ template<class LinkType> boolean TPixy<LinkType>::getStart()
 		}
 		else if (w == PIXY_START_WORDX)
 		{
-			//Serial.println("reorder");
+			//SERIAL_PRINT("reorder");
 			link.getByte(); // resync
 		}
 		lastw = w;
+		timeout++;
+		if(timeout>1000)
+		{
+			ERROR_MESSAGE("Pixy: pixy responds but sends garbage. Check your I2C");
+			return false;
+		}
 	}
 }
 
@@ -187,7 +195,7 @@ template<class LinkType> uint16_t TPixy<LinkType>::getBlocks(uint16_t maxBlocks)
 		{
 			skipStart = true;
 			blockType = NORMAL_BLOCK;
-			//Serial.println("skip");
+			//SERIAL_PRINTLN("skip");
 			return blockCount;
 		}
 		else if (checksum == PIXY_START_WORD_CC)
@@ -204,6 +212,7 @@ template<class LinkType> uint16_t TPixy<LinkType>::getBlocks(uint16_t maxBlocks)
 
 		block = blocks + blockCount;
 
+
 		for (i = 0, sum = 0; i < sizeof(Block) / sizeof(uint16_t); i++)
 		{
 			if (blockType == NORMAL_BLOCK && i >= 5) // skip
@@ -218,9 +227,9 @@ template<class LinkType> uint16_t TPixy<LinkType>::getBlocks(uint16_t maxBlocks)
 
 		if (checksum == sum)
 			blockCount++;
-		//else
-		//Serial.println("cs error");
-
+		else{
+		  //SERIAL_PRINT("cs error ");
+		}
 		w = link.getWord();
 		if (w == PIXY_START_WORD)
 			blockType = NORMAL_BLOCK;

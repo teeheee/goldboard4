@@ -22,7 +22,7 @@
 #include "time.h"
 #include "Wire.h"
 
-#define CMPS03_I2C_ADDR   		0xC0  /* I2C-Address of the module */
+#define CMPS03_I2C_ADDR   		96  /* I2C-Address of the module */
 #define CMPS03_LORES_REG		1     /* Register for 8 bit measurement (0-255) */
 #define CMPS03_HIRES_REG		2     /* Register for 16 bit measurement (0-3599 (0-359,9�)) */
 
@@ -53,6 +53,10 @@ class CMPS03
 		/*! Verschiebt den aktuellen Wert von getValue() auf 128.
 		*/ 
 		void setAs128Degree();
+
+		/*! gibt true zurueck wenn der Sensor angeschlossen ist und funktioniert
+		 */
+		bool checkACK();
 
 	private:
 		

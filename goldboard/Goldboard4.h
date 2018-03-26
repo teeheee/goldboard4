@@ -155,6 +155,10 @@ public:
 	 */
 	void scanI2C();
 
+	/** Test all functions of the Goldboard when nothing is connected. Connected Sensors can cause error reports.
+	 */
+	void selftest();
+
 #ifdef TEST
 	/** 
 	#@code

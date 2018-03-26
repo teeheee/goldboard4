@@ -32,9 +32,6 @@ Goldboard4::Goldboard4() {
 	pulse_init();
 #endif
 
-
-
-
 	// i2c
 	Wire.begin();
 
@@ -62,6 +59,7 @@ Goldboard4::Goldboard4() {
 
 	init_timer();
 
+	selftest();
 } //Goldboard4
 
 /** Puts off all motors.
@@ -129,7 +127,7 @@ bool Goldboard4::getButton(uint8_t i) {
 	bool ret = BTLED_PIN & (1 << (BTLED_PIN0 + i));
 	BTLED_PORT = lastState;
 	BTLED_DDR |= (1 << (BTLED_PIN0 + i));
-	return ret;
+	return ret?false:true;
 }
 
 /** Waits until button i is pressed and released again.
@@ -240,7 +238,7 @@ uint8_t Goldboard4::getPWMPulsedLight(uint8_t i) {
 
 void Goldboard4::scanI2C()
 {
-	uart_puts_P("start Scan\r\n");
+	uart_puts_P("start i2c scan [7 bit address in decimal]\r\n");
 	for(uint8_t address = 1; address < 127; address++ )
 	{
 		Wire.beginTransmission(address);
@@ -248,9 +246,14 @@ void Goldboard4::scanI2C()
 
 		if (error == 0)
 		 {
+			uart_puts_P("   ");
 			 SERIAL_PRINT((int)address);
-			 if(address >= 0xC0>>1 && address <= 0xCE>>1)
+			 if(address == 0x68>>1)
+				 uart_puts_P(" Usring\r\n");
+			 else if(address == 0xC0>>1)
 				 uart_puts_P(" Kompass\r\n");
+			 else if(address == 0x54)
+				 uart_puts_P(" Pixy\r\n");
 			 else if(address >= 0xE0>>1 && address <= 0xFE>>1)
 				 uart_puts_P(" Ultraschall\r\n");
 			 else if(address == 0x29)
@@ -262,7 +265,17 @@ void Goldboard4::scanI2C()
 
 		 }
 	}
-	uart_puts_P("end Scan\r\n");
+	uart_puts_P("end i2c scan\r\n");
+}
+
+void Goldboard4::selftest(){
+	//check portexpanders
+	Wire.beginTransmission(56);
+	uint8_t error = Wire.endTransmission();
+	Wire.beginTransmission(63);
+	error += Wire.endTransmission();
+	if(error > 0)
+		ERROR_MESSAGE("Goldboard: i2c problem with portexpander");
 }
 
 #ifdef TEST

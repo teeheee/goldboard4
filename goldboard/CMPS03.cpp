@@ -1,4 +1,5 @@
 #include "CMPS03.h"
+#include "error.h"
 
 
 CMPS03::CMPS03()
@@ -9,6 +10,11 @@ CMPS03::CMPS03()
 
 void CMPS03::init()
 {
+	if(!checkACK())
+	{
+		ERROR_MESSAGE("CMPS03 connection problem");
+		return;
+	}
 	_value = 0;
 	_128DegreeValue = 0;
 	_initialized = true;
@@ -18,7 +24,10 @@ void CMPS03::init()
 uint8_t CMPS03::getValue()
 {
 	if (!_initialized)
-		return 0;
+	{
+			ERROR_MESSAGE("CMPS03 not initialized");
+			return 0;
+	}
 
 	Wire.beginTransmission(CMPS03_I2C_ADDR);
 	Wire.write((uint8_t) CMPS03_LORES_REG);
@@ -44,8 +53,10 @@ uint8_t CMPS03::getValue()
 void CMPS03::setAs128Degree()
 {
 	if (!_initialized)
+	{
+		ERROR_MESSAGE("CMPS03 not initialized");
 		return;
-		
+	}
 	uint8_t errorCounter = 0;
 
 	_128DegreeValue = 0;
@@ -60,6 +71,7 @@ void CMPS03::setAs128Degree()
 		// error... infinity loop
 		if (errorCounter > CMPS03_ERROR_TIMEOUT)
 		{
+			ERROR_MESSAGE("CMPS03 setAs128Degree error");
 			return;
 		}
 	}
@@ -71,4 +83,12 @@ void CMPS03::setAs128Degree()
 bool CMPS03::isInitialized()
 {
 	return _initialized;
+}
+
+bool CMPS03::checkACK(){
+	Wire.beginTransmission(CMPS03_I2C_ADDR);
+	uint8_t error = Wire.endTransmission();
+	if (error == 0)
+		return true;
+	return false;
 }

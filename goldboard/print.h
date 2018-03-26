@@ -33,6 +33,7 @@ public:
 	void println(int number);
 	void println(unsigned int number);
 	void println(float floatnumber);
+	void println();
 };
 
 extern SerialPrint serial;

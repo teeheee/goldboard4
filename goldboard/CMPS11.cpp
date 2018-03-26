@@ -1,12 +1,7 @@
-
-
 #include "CMPS11.h"
 #include "Goldboard4.h"
 #include "Wire.h"
 #include "time.h"
-
-
-
 
 CMPS11::CMPS11()
 {
