@@ -124,10 +124,10 @@ EclipseTemplate:
 	zip eclipse-cpp-avr-eclipse-plugin.zip .settings/* .cproject .project main.cpp goldboard/*
 
 program: all
-	AVRDUDE -pm32 -Pusb -cavrispmkII -u -U flash:w:main.hex  -B1
+	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U flash:w:main.hex  -B1
 
 fuse:
-	AVRDUDE -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xd9:m -B100
+	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xd9:m -B100
 
 doc:
 	rm -r -f doc

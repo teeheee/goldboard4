@@ -12,11 +12,11 @@
    * robot->bluetooth->robot
    * ~~power pins~~
    * ~~CMPS11~~
-   * CMPS03
+   * ~~CMPS03~~
    * SRF08
    * SRF10
    * ~~VL53L0X~~
-   * pixy
+   * ~~pixy~~
    * usring
    * lcd
 * make clean doxygen comments
