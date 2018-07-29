@@ -276,6 +276,23 @@ void Goldboard4::selftest(){
 	error += Wire.endTransmission();
 	if(error > 0)
 		ERROR_MESSAGE("Goldboard: i2c problem with portexpander");
+	for(int i = 0; i < DIGITALCOUNT + 8 + PULSECOUNT + ADCCOUNT; i++)
+	{
+		int counter = 0;
+		for(; counter < 1000 || getDigital(i);counter++)
+			setDigital(i,false);
+		for(; counter < 1000 || !getDigital(i);counter++)
+			setDigital(i,true);
+		for(; counter < 1000 || getDigital(i);counter++)
+			setDigital(i,false);
+		for(; counter < 1000 || !getDigital(i);counter++)
+			setDigital(i,true);
+		if(counter == 1000)	
+		{
+			uart_puts_P("Goldboard: Something on Pin ");
+			SERIAL_PRINTLN(i);
+		}
+	}
 }
 
 #ifdef TEST
