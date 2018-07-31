@@ -43,6 +43,29 @@
 #define PCF8574A_MOTOR_ADRESS 56 // 0x38
 #define PCF8574A_DIGITAL_ADRESS 63 // 0x3F
 
+
+/* LCD Config */
+
+#define LCD_LINES           4     /* Anzahl der Zeilen*/
+#define LCD_DISP_LENGTH    16     /* Anzahl der Zeichen pro Zeile*/
+
+/*
+ * Die verwendeten Pins müssen von einem PCF8574 Portexpander kommen.
+ * Es kann der auf dem Goldboard verbaute, als auch ein externer verwendet werden.
+ * Die definierte Zahl ist die Pinnummer des verwendeten Portexpanders.
+ * */
+
+#define LCD_DATA0_PIN    7            /*LCD-Pin DATA4 */
+#define LCD_DATA1_PIN    6            /*LCD-Pin DATA5  */
+#define LCD_DATA2_PIN    5            /*LCD-Pin DATA6  */
+#define LCD_DATA3_PIN    4            /*LCD-Pin DATA7 */
+#define LCD_RS_PIN       2            /*LCD-Pin RS       */
+#define LCD_RW_PIN       1            /*LCD-Pin RW       */
+#define LCD_E_PIN        0            /*LCD-Pin E     */
+
+// Auskommentieren um Goldboardtest Funktionen zu aktivieren
 //#define TEST
+
+
 
 #endif /* CONFIG_H_ */

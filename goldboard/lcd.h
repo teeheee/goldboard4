@@ -40,7 +40,7 @@ It was slightly modified to use i2c Portexpander as data pins.
 */
 
 #include "PCF8574A.h"
-
+#include "config.h"
 
 
 #include <inttypes.h>
@@ -53,20 +53,22 @@ It was slightly modified to use i2c Portexpander as data pins.
 
 
 
-/** 
- * @name  Definitions for Display Size 
+/**
+ * @name  Definitions for Display Size
  * Change these definitions to adapt setting to your display
  *
- * These definitions can be defined in a separate include file \b lcd_definitions.h instead modifying this file by 
+ * These definitions can be defined in a separate include file \b lcd_definitions.h instead modifying this file by
  * adding -D_LCD_DEFINITIONS_FILE to the CDEFS section in the Makefile.
  * All definitions added to the file lcd_definitions.h will override the default definitions from lcd.h
  *
  */
+#if 0
 #ifndef LCD_LINES
-#define LCD_LINES           2     /**< number of visible lines of the display */
+#define LCD_LINES           4     /**< number of visible lines of the display */
 #endif
 #ifndef LCD_DISP_LENGTH
 #define LCD_DISP_LENGTH    16     /**< visibles characters per line of the display */
+#endif
 #endif
 #ifndef LCD_LINE_LENGTH
 #define LCD_LINE_LENGTH  0x40     /**< internal line length of the display    */
@@ -78,10 +80,10 @@ It was slightly modified to use i2c Portexpander as data pins.
 #define LCD_START_LINE2  0x40     /**< DDRAM address of first char of line 2 */
 #endif
 #ifndef LCD_START_LINE3
-#define LCD_START_LINE3  0x14     /**< DDRAM address of first char of line 3 */
+#define LCD_START_LINE3  0x10     /**< DDRAM address of first char of line 3 */
 #endif
 #ifndef LCD_START_LINE4
-#define LCD_START_LINE4  0x54     /**< DDRAM address of first char of line 4 */
+#define LCD_START_LINE4  0x50     /**< DDRAM address of first char of line 4 */
 #endif
 #ifndef LCD_WRAP_LINES
 #define LCD_WRAP_LINES      0     /**< 0: no wrap, 1: wrap at end of visibile line */
@@ -92,22 +94,23 @@ It was slightly modified to use i2c Portexpander as data pins.
 /**
  * @name Definitions for 4-bit IO mode
  *
- * The four LCD data lines and the three control lines RS, RW, E can be on the 
- * same port or on different ports. 
+ * The four LCD data lines and the three control lines RS, RW, E can be on the
+ * same port or on different ports.
  * Change LCD_RS_PORT, LCD_RW_PORT, LCD_E_PORT if you want the control lines on
- * different ports. 
+ * different ports.
  *
  * Normally the four data lines should be mapped to bit 0..3 on one port, but it
  * is possible to connect these data lines in different order or even on different
  * ports by adapting the LCD_DATAx_PORT and LCD_DATAx_PIN definitions.
  *
- * Adjust these definitions to your target.\n 
- * These definitions can be defined in a separate include file \b lcd_definitions.h instead modifying this file by 
+ * Adjust these definitions to your target.\n
+ * These definitions can be defined in a separate include file \b lcd_definitions.h instead modifying this file by
  * adding \b -D_LCD_DEFINITIONS_FILE to the \b CDEFS section in the Makefile.
  * All definitions added to the file lcd_definitions.h will override the default definitions from lcd.h
- *  
+ *
  */
 
+#if 0
 #ifndef LCD_PORT
 #define LCD_PORT         0 /*PORTA*/        /**< port for the LCD lines   */
 #endif
@@ -124,16 +127,16 @@ It was slightly modified to use i2c Portexpander as data pins.
 #define LCD_DATA3_PORT   LCD_PORT     /**< port for 4bit data bit 3 */
 #endif
 #ifndef LCD_DATA0_PIN
-#define LCD_DATA0_PIN    7            /**< pin for 4bit data bit 0  */
+#define LCD_DATA0_PIN    4            /**< pin for 4bit data bit 0  */
 #endif
 #ifndef LCD_DATA1_PIN
-#define LCD_DATA1_PIN    6            /**< pin for 4bit data bit 1  */
+#define LCD_DATA1_PIN    5          /**< pin for 4bit data bit 1  */
 #endif
 #ifndef LCD_DATA2_PIN
-#define LCD_DATA2_PIN    5            /**< pin for 4bit data bit 2  */
+#define LCD_DATA2_PIN    6            /**< pin for 4bit data bit 2  */
 #endif
 #ifndef LCD_DATA3_PIN
-#define LCD_DATA3_PIN    4            /**< pin for 4bit data bit 3  */
+#define LCD_DATA3_PIN    7            /**< pin for 4bit data bit 3  */
 #endif
 #ifndef LCD_RS_PORT
 #define LCD_RS_PORT      LCD_PORT     /**< port for RS line         */
@@ -154,7 +157,7 @@ It was slightly modified to use i2c Portexpander as data pins.
 #define LCD_E_PIN        0            /**< pin  for Enable line     */
 #endif
 
-
+#endif
 
 /**
  * @name Definitions of delays
@@ -300,6 +303,28 @@ extern void lcd_putc(char c);
 */
 extern void lcd_puts(const char *s);
 
+
+/**
+ @brief    Display integer without auto linefeed
+ @param    Wert integer to be displayed
+ @return   none
+*/
+extern void lcd_put_int(int Wert);
+
+/**
+ @brief    Display float without auto linefeed
+ @param    Wert float to be displayed
+ @return   none
+*/
+extern void lcd_put_float(float Wert);
+
+/**
+ @brief    Display int in Binary without auto linefeed
+ @param    Wert int to be displayed
+ @param    bitAnzahl number of shown bits (with padding)
+ @return   none
+*/
+extern void lcd_put_binary(int Wert,int bitAnzahl);
 
 /**
  @brief    Display string from program memory without auto linefeed

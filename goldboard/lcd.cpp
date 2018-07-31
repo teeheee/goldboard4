@@ -26,9 +26,11 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include <util/delay.h>
+#include <string.h>
 #include "lcd.h"
 
 
+#include "config.h"
 
 
 PCF8574A* lcd_pcf;
@@ -306,6 +308,48 @@ void lcd_puts(const char *s)
     }
 
 }/* lcd_puts */
+
+
+
+void lcd_put_int(int Wert)
+{
+	char buffer[16];
+	lcd_puts(itoa(Wert, buffer, 10));
+}
+
+void lcd_put_float(float Wert) //todo needs testing
+{
+	char buffer[16];
+	char* pointer = buffer;
+	float num = 2.55f;
+	int m = log10(num);
+	int digit;
+
+	while (num > 0 + 4)
+	{
+	    float weight = pow(10.0f, m);
+	    digit = floor(num / weight);
+	    num -= (digit*weight);
+	    *(pointer++)= '0' + digit;
+	    if (m == 0)
+	        *(pointer++) = '.';
+	    m--;
+	}
+	*(pointer) = '\0';
+	lcd_puts(pointer);
+}
+
+void lcd_put_binary(int Wert,int bitAnzahl)
+{
+	char buffer[16];
+	itoa(Wert, buffer, 2);
+	int x = strlen(buffer);
+	for(int i = 0; i < bitAnzahl-x; i++)
+	{
+		lcd_puts("0");
+	}
+	lcd_puts(buffer);
+}
 
 
 /*************************************************************************
