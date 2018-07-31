@@ -195,7 +195,6 @@ void testSensors() {
 			updateSensorValue();
 			if (millis() - time > 1000) {
 				lcd_clrscr();
-				char buffer[16];
 
 				lcd_gotoxy(0, 0);
 				lcd_put_int(UltraschallWert[0]);
@@ -234,7 +233,6 @@ void testSensors() {
 			break;
 		case 1:
 			lcd_clrscr();
-			char buffer[10];
 			for (int i = 0; i < 16; i++) {
 				lcd_gotoxy((i * 4) % 16, i / 4);
 				lcd_put_int(ring.getanalogValue(i));
@@ -357,7 +355,6 @@ void run() {
 	lcd_puts("running");
 	long loop_time = millis();
 	int printcounter = 0;
-	char buffer[10];
 	while (!BUTTON0) {
 		if(printcounter==0)
 		{

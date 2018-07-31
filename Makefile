@@ -36,14 +36,14 @@ OBJECTS = \
 
 
 CFLAGS = $(INC)
-CFLAGS += -Os -std=gnu99 
+CFLAGS += -Os -std=gnu11 
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -DF_CPU=$(OSC)
 CFLAGS += -mmcu=$(MCU)
 
 C++FLAGS = $(INC)
-C++FLAGS += -Os
+C++FLAGS += -Os -std=gnu++11
 C++FLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 C++FLAGS += -Wall
 C++FLAGS += -DF_CPU=$(OSC)
@@ -63,7 +63,7 @@ all: $(PROJECT).elf
 	avr-size --mcu=atmega32 -C main.elf
 
 %.elf: $(OBJECTS)
-	$(GCC) $(CFLAGS) $(OBJECTS) --output $@ $(LDFLAGS)
+	$(G++) $(C++FLAGS) $(OBJECTS) --output $@ $(LDFLAGS)
 	
 
 %.o : %.$(EXT_C)

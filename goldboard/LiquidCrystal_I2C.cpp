@@ -2,7 +2,6 @@
 
 #include "LiquidCrystal_I2C.h"
 #include <inttypes.h>
-#if defined(ARDUINO) && ARDUINO >= 100
 
 #include "Arduino.h"
 
@@ -12,15 +11,7 @@ inline size_t LiquidCrystal_I2C::write(uint8_t value) {
 	return 1;
 }
 
-#else
-#include "WProgram.h"
 
-#define printIIC(args)	Wire.send(args)
-inline void LiquidCrystal_I2C::write(uint8_t value) {
-	send(value, Rs);
-}
-
-#endif
 #include "Wire.h"
 
 
