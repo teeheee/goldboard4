@@ -1,5 +1,5 @@
 #include "Goldboard4.h"
-#include "lcd.h"
+#include "LiquidCrystal_I2C.h"
 #include "SonarSRF08.h"
 #include "CMPS03.h"
 #include "PixyI2C.h"
@@ -10,6 +10,7 @@ SonarSRF08 US[4] = { SonarSRF08(112),SonarSRF08(114),SonarSRF08(122),SonarSRF08(
 CMPS03 kompass;
 usring ring;
 PixyI2C pixy;
+LiquidCrystal_I2C lcd(63,16,4);
 
 #define BUTTON0 !gb.getDigital(18)
 #define BUTTON1 !gb.getDigital(19)
@@ -57,7 +58,8 @@ int Pixy_TorWert[2];
 int KompassWert;
 
 void init() {
-	lcd_init(LCD_DISP_ON_CURSOR_BLINK, &gb.digital);
+	lcd.begin(16, 4);
+	lcd.blink_on();
 	for(int i = 0; i < 4; i++)
 		US[i].begin();
 	kompass.init();
@@ -138,17 +140,18 @@ void config();
 
 void Menu() {
 	int auswahl = 0;
-	lcd_clrscr();
+
+	lcd.clear();
 	gb.setMotorsOff();
-	lcd_puts("Start");
-	lcd_gotoxy(0, 1);
-	lcd_puts("Test Sensors");
-	lcd_gotoxy(0, 2);
-	lcd_puts("Config");
-	lcd_gotoxy(0, 3);
-	lcd_puts("Test Functions");
+	lcd.print("Start");
+	lcd.setCursor(0, 1);
+	lcd.print("Test Sensors");
+	lcd.setCursor(0, 2);
+	lcd.print("Config");
+	lcd.setCursor(0, 3);
+	lcd.print("Test Functions");
 	while (1) {
-		lcd_gotoxy(15, auswahl);
+		lcd.setCursor(15, auswahl);
 		delay(10);
 		if (BUTTON0) {
 			auswahl++;
@@ -162,7 +165,7 @@ void Menu() {
 		delay(500);
 	}
 
-	lcd_clrscr();
+	lcd.clear();
 	switch (auswahl) {
 	case 0:
 		run();
@@ -187,61 +190,61 @@ void testSensors() {
 		if (BUTTON2) {
 			mode++;
 			delay(500);
-			lcd_clrscr();
-			lcd_puts("next Mode");
+			lcd.clear();
+			lcd.print("next Mode");
 		}
 		switch (mode) {
 		case 0:
 			updateSensorValue();
 			if (millis() - time > 1000) {
-				lcd_clrscr();
+				lcd.clear();
 
-				lcd_gotoxy(0, 0);
-				lcd_put_int(UltraschallWert[0]);
-				lcd_gotoxy(4, 0);
-				lcd_put_int(UltraschallWert[1]);
-				lcd_gotoxy(8, 0);
-				lcd_put_int(UltraschallWert[2]);
-				lcd_gotoxy(12, 0);
-				lcd_put_int(UltraschallWert[3]);
+				lcd.setCursor(0, 0);
+				lcd.print(UltraschallWert[0]);
+				lcd.setCursor(4, 0);
+				lcd.print(UltraschallWert[1]);
+				lcd.setCursor(8, 0);
+				lcd.print(UltraschallWert[2]);
+				lcd.setCursor(12, 0);
+				lcd.print(UltraschallWert[3]);
 
-				lcd_gotoxy(0, 1);
-				lcd_put_int(KompassWert);
-				lcd_gotoxy(4, 1);
-				lcd_put_int(Pixy_BlockCount);
+				lcd.setCursor(0, 1);
+				lcd.print(KompassWert);
+				lcd.setCursor(4, 1);
+				lcd.print(Pixy_BlockCount);
 				if(Pixy_BlockCount > 0){
-					lcd_gotoxy(8, 1);
-					lcd_put_int(Pixy_BallWert[0]);
-					lcd_gotoxy(12, 1);
-					lcd_put_int(Pixy_BallWert[1]);
+					lcd.setCursor(8, 1);
+					lcd.print(Pixy_BallWert[0]);
+					lcd.setCursor(12, 1);
+					lcd.print(Pixy_BallWert[1]);
 				}
 
-				lcd_gotoxy(0, 2);
-				lcd_put_binary(BodenWert,16);
+				lcd.setCursor(0, 2);
+				lcd.print(BodenWert,BIN);
 
-				lcd_gotoxy(0, 3);
-				lcd_put_int(IRWert[0]);
-				lcd_gotoxy(4, 3);
-				lcd_put_int(IRWert[1]);
-				lcd_gotoxy(8, 3);
-				lcd_put_int(IRWert[2]);
-				lcd_gotoxy(12, 3);
-				lcd_put_int(IRWert[3]);
+				lcd.setCursor(0, 3);
+				lcd.print(IRWert[0]);
+				lcd.setCursor(4, 3);
+				lcd.print(IRWert[1]);
+				lcd.setCursor(8, 3);
+				lcd.print(IRWert[2]);
+				lcd.setCursor(12, 3);
+				lcd.print(IRWert[3]);
 
 				time = millis();
 			}
 			break;
 		case 1:
-			lcd_clrscr();
+			lcd.clear();
 			for (int i = 0; i < 16; i++) {
-				lcd_gotoxy((i * 4) % 16, i / 4);
-				lcd_put_int(ring.getanalogValue(i));
+				lcd.setCursor((i * 4) % 16, i / 4);
+				lcd.print(ring.getanalogValue(i));
 			}
 			delay(1000);
 			break;
 		case 2:
-			lcd_clrscr();
-			lcd_puts("Motor Test");
+			lcd.clear();
+			lcd.print("Motor Test");
 			gb.motor[MOTOR0].rotate(MOTOR0_DIR * 100);
 			delay(500);
 			gb.motor[MOTOR0].rotate(MOTOR0_DIR * -100);
@@ -351,38 +354,38 @@ void bounceLine(){
 }
 
 void run() {
-	lcd_clrscr();
-	lcd_puts("running");
+	lcd.clear();
+	lcd.print("running");
 	long loop_time = millis();
 	int printcounter = 0;
 	while (!BUTTON0) {
 		if(printcounter==0)
 		{
-			lcd_clrscr();
-			lcd_puts("LoopTime: ");
-			lcd_put_int((int)(millis()-loop_time));
+			lcd.clear();
+			lcd.print("LoopTime: ");
+			lcd.print((int)(millis()-loop_time));
 		}
 		loop_time = millis();
 		if(printcounter==0)
-			lcd_gotoxy(0, 1);
+			lcd.setCursor(0, 1);
 
 		updateSensorValue();
 		if(BodenWert > 0) //linie
 		{
 			if(printcounter==0)
-				lcd_puts("Linie");
+				lcd.print("Linie");
 			bounceLine();
 		}
 		else if(Pixy_BlockCount>0)//sieht ball
 		{
 			if(printcounter==0)
-				lcd_puts("Ball");
+				lcd.print("Ball");
 			followBall();
 		}
 		else //sieht ball nicht
 		{
 			if(printcounter==0)
-				lcd_puts("Suchen");
+				lcd.print("Suchen");
 			searchBall();
 		}
 		printcounter = (printcounter +1)%500;
@@ -391,7 +394,7 @@ void run() {
 }
 
 void config() {
-	lcd_puts("configing");
+	lcd.print("configing");
 	while (!BUTTON0) {
 
 	}
@@ -399,22 +402,22 @@ void config() {
 
 
 void testFunctions(){
-	lcd_puts("testing Functions");
+	lcd.print("testing Functions");
 	int mode = 1;
 	while (!BUTTON0) {
-		lcd_clrscr();
+		lcd.clear();
 		if (BUTTON2) {
 			gb.setMotorsOff();
 			mode++;
-			lcd_puts("next Mode");
+			lcd.print("next Mode");
 			delay(1000);
-			lcd_clrscr();
-			lcd_puts("starting in 2 sec");
+			lcd.clear();
+			lcd.print("starting in 2 sec");
 			delay(2000);
 		}
 		switch (mode) {
 		case 0: //ball search
-			lcd_puts("Suchen");
+			lcd.print("Suchen");
 			updateSensorValue();
 			if(Pixy_BlockCount==0)
 				searchBall();
@@ -422,7 +425,7 @@ void testFunctions(){
 				gb.setMotorsOff();
 			break;
 		case 1: // ball verfolgen
-			lcd_puts("Follow");
+			lcd.print("Follow");
 			updateSensorValue();
 			if(Pixy_BlockCount>0)
 				followBall();
@@ -430,7 +433,7 @@ void testFunctions(){
 				gb.setMotorsOff();
 			break;
 		case 2:
-			lcd_puts("Linie");
+			lcd.print("Linie");
 			updateSensorValue();
 			if(BodenWert > 0)
 				bounceLine();
