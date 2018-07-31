@@ -52,10 +52,10 @@
 
 #include "Motor.h"
 #include "time.h"
-#include "print.h"
 #include "PCF8574A.h"
 #include "Arduino.h"
 #include "config.h"
+#include "SerialPrint.h"
 
 /*!
 @def SERIAL_PRINTLN(x)
