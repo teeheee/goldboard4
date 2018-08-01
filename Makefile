@@ -36,18 +36,18 @@ OBJECTS = \
 
 
 CFLAGS = $(INC)
-CFLAGS += -Os -std=gnu11 
+CFLAGS += -Os -std=gnu11 -ffunction-sections -fdata-sections
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -DF_CPU=$(OSC)
-CFLAGS += -mmcu=$(MCU)
+CFLAGS += -mmcu=$(MCU) 
 
 C++FLAGS = $(INC)
-C++FLAGS += -Os -std=gnu++11
+C++FLAGS += -Os -std=gnu++11 -ffunction-sections -fdata-sections
 C++FLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 C++FLAGS += -Wall
 C++FLAGS += -DF_CPU=$(OSC)
-C++FLAGS += -mmcu=$(MCU)
+C++FLAGS += -mmcu=$(MCU) 
 
 ASMFLAGS = $(INC)
 ASMFLAGS += -Os
@@ -55,8 +55,9 @@ ASMFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 ASMFLAGS += -Wall -Wstrict-prototypes
 ASMFLAGS += -DF_CPU=$(OSC)
 ASMFLAGS += -x assembler-with-cpp
-ASMFLAGS += -mmcu=$(MCU)
+ASMFLAGS += -mmcu=$(MCU) 
 
+LDFLAGS = -Wl,-gc-sections
 
 all: $(PROJECT).elf
 	avr-objcopy -j .text -j .data -O ihex $(PROJECT).elf main.hex 
