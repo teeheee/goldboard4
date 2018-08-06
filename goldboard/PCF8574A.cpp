@@ -1,6 +1,7 @@
 
 
 #include "PCF8574A.h"
+#include "error.h"
 
 
 // default constructor
@@ -33,7 +34,11 @@ uint8_t PCF8574A::read()
 	Wire.beginTransmission(_address);
 	Wire.requestFrom(_address, (uint8_t) 1);
 	_pcfdata = Wire.read();
-	Wire.endTransmission();
+	if(Wire.endTransmission()!=0)
+	{
+		 ERROR_MESSAGE("Portexpander connection error");
+		 return 0;
+	}
 	return _pcfdata;
 }
 
@@ -46,6 +51,9 @@ void PCF8574A::write()
 		return;
 	Wire.beginTransmission(_address);
 	Wire.write(&_pcfdata, 1);
-	Wire.endTransmission();
+	if(Wire.endTransmission()!=0)
+	{
+		 ERROR_MESSAGE("Portexpander connection error");
+	}
 	_writeNeeded = false;
 }

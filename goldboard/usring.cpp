@@ -3,6 +3,7 @@
 #include "usring.h"
 #include "Arduino.h"
 #include "Wire.h"
+#include "error.h"
 
 usring::usring()
 {

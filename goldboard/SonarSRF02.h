@@ -22,7 +22,7 @@ public:
 	{
 	}
 	;
-	void waitForCompletion(void);
+	uint8_t waitForCompletion(void);
 };
 
 #endif // SONARSRF02_H

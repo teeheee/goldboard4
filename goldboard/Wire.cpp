@@ -106,7 +106,10 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity,
 		// write internal register address - most significant byte first
 		while (isize-- > 0)
 			write((uint8_t) (iaddress >> (isize * 8)));
-		endTransmission(false);
+		if( endTransmission(false) != 0)
+		{
+			return 0;
+		}
 	}
 
 	// clamp to buffer length
@@ -352,6 +355,15 @@ uint8_t TwoWire::isTransmitting()
 	return transmitting;
 }
 
+uint8_t TwoWire::selfTest()
+{
+	return twi_self_test();
+}
+
+void TwoWire::resuscitateBus()
+{
+	twi_resuscitate();
+}
 // Preinstantiate Objects //////////////////////////////////////////////////////
 
 TwoWire Wire = TwoWire();

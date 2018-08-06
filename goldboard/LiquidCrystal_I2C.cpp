@@ -5,7 +5,12 @@
 
 #include "Arduino.h"
 
-#define printIIC(args)	Wire.write(args)
+void printIIC(uint8_t args){
+	uint8_t data = __builtin_avr_insert_bits (0x4567f012, args, 0);
+	Wire.write(data);
+}
+
+
 inline size_t LiquidCrystal_I2C::write(uint8_t value) {
 	send(value, Rs);
 	return 1;
@@ -122,7 +127,7 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
 /********** high level commands, for the user! */
 void LiquidCrystal_I2C::clear(){
 	command(LCD_CLEARDISPLAY);// clear display, set cursor position to zero
-	delayMicroseconds(2000);  // this command takes a long time!
+	delayMicroseconds(5000);  // this command takes a long time!
   if (_oled) setCursor(0,0);
 }
 
@@ -132,7 +137,7 @@ void LiquidCrystal_I2C::home(){
 }
 
 void LiquidCrystal_I2C::setCursor(uint8_t col, uint8_t row){
-	int row_offsets[] = { 0x00, 0x40, 0x14, 0x54 };
+	int row_offsets[] = { LCD_ROW_OFFSET_1, LCD_ROW_OFFSET_2, LCD_ROW_OFFSET_3, LCD_ROW_OFFSET_4 };
 	if ( row > _numlines ) {
 		row = _numlines-1;    // we count rows starting w/0
 	}

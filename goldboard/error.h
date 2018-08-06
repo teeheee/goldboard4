@@ -13,5 +13,4 @@
 
 #define ERROR_MESSAGE(str) {uart_puts_P("ERROR: ");uart_puts_P(str);uart_puts_P("\r\n");}
 
-
 #endif /* GOLDBOARD_ERROR_H_ */

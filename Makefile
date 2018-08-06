@@ -36,14 +36,14 @@ OBJECTS = \
 
 
 CFLAGS = $(INC)
-CFLAGS += -Os -std=gnu11 -ffunction-sections -fdata-sections
+CFLAGS += -Os -std=gnu11 -ffunction-sections #-fdata-sections
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -DF_CPU=$(OSC)
 CFLAGS += -mmcu=$(MCU) 
 
 C++FLAGS = $(INC)
-C++FLAGS += -Os -std=gnu++11 -ffunction-sections -fdata-sections
+C++FLAGS += -Os -std=gnu++11 -ffunction-sections# -fdata-sections
 C++FLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 C++FLAGS += -Wall
 C++FLAGS += -DF_CPU=$(OSC)

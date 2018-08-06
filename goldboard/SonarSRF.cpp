@@ -11,6 +11,7 @@
 
 #include "SonarSRF.h"
 #include <Wire.h>
+#include "error.h"
 
 /// <summary>
 /// Setting up the sensor
@@ -51,7 +52,11 @@ void SonarSRF::write(unsigned int command, unsigned int addressRegister)
 			Wire.write(_rangeLocation); // SRF Location 2
 		}
 	}
-	Wire.endTransmission(); // End I2C transmission
+	if(Wire.endTransmission()!=0)
+	{
+	  		  ERROR_MESSAGE("SRF error");
+	}
+ // End I2C transmission
 }
 
 /// <summary>
@@ -130,7 +135,8 @@ uint16_t SonarSRF::readRange(char unit, bool andStart)
 	if (andStart)
 	{
 		writeUnit(unit);
-		waitForCompletion();
+		if(waitForCompletion())
+			return 0;
 	}
 
 	return (uint16_t) (read(RANGE_REGISTER, 2));
@@ -147,11 +153,26 @@ int8_t SonarSRF::readVersion(void)
 
 /// <summary>
 /// Wait for completion
+/// this function was corrected by U
 /// </summary>
-void SonarSRF::waitForCompletion(void)
+uint8_t SonarSRF::waitForCompletion(void)
 {
-	while (readVersion() == -1)
+	uint8_t error = 0;
+	uint8_t timeout = 0;
+	do{
+		delay(10);
+		Wire.beginTransmission(_address);
+		error = Wire.endTransmission();
+		timeout++;
+		if(timeout > 10)
+		{
+			ERROR_MESSAGE("SRF i2c error");
+			return 1;
+		}
+	}while(error > 0);
+	return 0;
+/*	while (readVersion() == -1)
 	{
 		delay(1);
-	}
+	}*/
 }

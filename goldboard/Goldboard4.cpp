@@ -1,10 +1,3 @@
-
-
-#include "Goldboard4.h"
-#include "config.h"
-#include "Motor.h"
-#include "error.h"
-
 //Hardware interfaces
 
 #include "infrared_pulse.h"
@@ -15,6 +8,11 @@
 #include "adc.h"
 #include "servopwm.h"
 
+#include "Goldboard4.h"
+#include "config.h"
+#include "Motor.h"
+#include "error.h"
+
 
 /******************* Goldboard Member Functions **********************/
 
@@ -24,25 +22,6 @@ Goldboard4::Goldboard4() {
 
 	// uart
 	uart_init(UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU));
-
-	// pwm generation
-	initPwm();
-
-#ifdef PULSE_SENSOR_INPUT
-	// pulsed light
-	pulse_init();
-#endif
-
-	// i2c
-	Wire.begin();
-
-	// Portexpanders
-	digital.init(PCF8574A_DIGITAL_ADRESS);
-	_pcf8574.init(PCF8574A_MOTOR_ADRESS);
-
-	// Motors
-	for (uint8_t count = 0; count < 4; count++)
-		motor[count].init(count, &_pcf8574);
 
 	// Buttons (DEFAULT)
 	BTLED_DDR |= (1 << BTLED_PIN0) | (1 << BTLED_PIN1);
@@ -57,6 +36,42 @@ Goldboard4::Goldboard4() {
 	// Digital
 	DIGITAL_DDR &= ~((1 << DIGITAL_PIN0) | (1 << DIGITAL_PIN1)
 			| (1 << DIGITAL_PIN2) | (1 << DIGITAL_PIN3));
+
+
+	uint8_t error = Wire.selfTest();
+	if(error > 0)
+	{
+		Wire.resuscitateBus();
+		error = Wire.selfTest();
+		if(error > 1)
+		{
+			ERROR_MESSAGE("I2C Cap");
+		}
+		else if(error == 1)
+		{
+			ERROR_MESSAGE("I2C short");
+		}
+	}
+
+
+	// i2c
+	Wire.begin();
+
+	// pwm generation
+	initPwm();
+
+#ifdef PULSE_SENSOR_INPUT
+	// pulsed light
+	pulse_init();
+#endif
+
+	// Portexpanders
+	digital.init(PCF8574A_DIGITAL_ADRESS);
+	_pcf8574.init(PCF8574A_MOTOR_ADRESS);
+
+	// Motors
+	for (uint8_t count = 0; count < 4; count++)
+		motor[count].init(count, &_pcf8574);
 
 	init_timer();
 
@@ -237,9 +252,11 @@ uint8_t Goldboard4::getPWMPulsedLight(uint8_t i) {
 }
 
 
+/** prints all i2c adresses on the Serial Interface
+ */
 void Goldboard4::scanI2C()
 {
-	uart_puts_P("start i2c scan [7 bit address in decimal]\r\n");
+	uart_puts_P("start i2c scan\r\n");
 	for(uint8_t address = 1; address < 127; address++ )
 	{
 		Wire.beginTransmission(address);
@@ -260,7 +277,7 @@ void Goldboard4::scanI2C()
 			 else if(address == 0x29)
 				 uart_puts_P(" Laser\r\n");
 			 else if(address >= 0x38 && address <= 0x63)
-				 uart_puts_P(" I2C Portexpander\r\n");
+				 uart_puts_P(" Portexpander\r\n");
 			 else
 				 uart_puts_P(" unkown\r\n");
 
@@ -269,14 +286,24 @@ void Goldboard4::scanI2C()
 	uart_puts_P("end i2c scan\r\n");
 }
 
-void Goldboard4::selftest(){
-	//check portexpanders
-	Wire.beginTransmission(56);
+/* performs self test */
+bool Goldboard4::selftest(){
+	Wire.beginTransmission(PCF8574A_MOTOR_ADRESS);
 	uint8_t error = Wire.endTransmission();
-	Wire.beginTransmission(63);
-	error += Wire.endTransmission();
 	if(error > 0)
-		ERROR_MESSAGE("Goldboard: i2c problem with portexpander");
+	{
+		ERROR_MESSAGE("Goldboard: i2c portexpander error");
+		return false;
+	}
+
+	Wire.beginTransmission(PCF8574A_DIGITAL_ADRESS);
+	error = Wire.endTransmission();
+	if(error > 0)
+	{
+		ERROR_MESSAGE("Goldboard: i2c portexpander error");
+		return false;
+	}
+	return true;
 }
 
 #ifdef TEST

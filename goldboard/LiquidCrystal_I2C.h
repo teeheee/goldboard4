@@ -46,13 +46,21 @@
 #define LCD_5x10DOTS 0x04
 #define LCD_5x8DOTS 0x00
 
+// row offset
+
+#define LCD_ROW_OFFSET_1 0x00
+#define LCD_ROW_OFFSET_2 0x40
+#define LCD_ROW_OFFSET_3 0x10
+#define LCD_ROW_OFFSET_4 0x50
+
 // flags for backlight control
 #define LCD_BACKLIGHT 0x08
 #define LCD_NOBACKLIGHT 0x00
 
 #define En 0b00000100  // Enable bit
 #define Rw 0b00000010  // Read/Write bit
-#define Rs 0b00000001  // Register select bit
+#define Rs 0b00000001 // Register select bit
+
 
 class LiquidCrystal_I2C : public Print {
 public:

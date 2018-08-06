@@ -82,11 +82,13 @@ public:
 	void flush(void);
 	void onReceive(void (*)(int));
 	void onRequest(void (*)(void));
+	inline size_t write(unsigned long n) { return write((uint8_t)n); }
+	inline size_t write(long n) { return write((uint8_t)n); }
+	inline size_t write(unsigned int n) { return write((uint8_t)n); }
+	inline size_t write(int n) { return write((uint8_t)n); }
 	uint8_t isTransmitting();
-	/*inline size_t write(unsigned long n) { return write((uint8_t)n); }
-	 inline size_t write(long n) { return write((uint8_t)n); }
-	 inline size_t write(unsigned int n) { return write((uint8_t)n); }
-	 inline size_t write(int n) { return write((uint8_t)n); }*/
+	uint8_t selfTest();
+	void resuscitateBus();
 };
 
 extern TwoWire Wire;

@@ -1,9 +1,5 @@
 #include "Goldboard4.h"
-#include "LiquidCrystal_I2C.h"
-#include "SonarSRF08.h"
-#include "CMPS03.h"
-#include "PixyI2C.h"
-#include "usring.h"
+
 
 Goldboard4 gb;
 SonarSRF08 US[4] = { SonarSRF08(112),SonarSRF08(114),SonarSRF08(122),SonarSRF08(126)};
@@ -57,18 +53,32 @@ int Pixy_BallWert[2];
 int Pixy_TorWert[2];
 int KompassWert;
 
+/* initialisiert alle Komponenten */
 void init() {
+	gb.scanI2C();
 	lcd.begin(16, 4);
 	lcd.blink_on();
+	lcd.print("init Ultraschall");
 	for(int i = 0; i < 4; i++)
 		US[i].begin();
+	lcd.clear();
+	lcd.print("init kompass");
 	kompass.init();
-	ring.init();
-	pixy.init();
 	kompass.setAs128Degree();
+	lcd.clear();
+	lcd.print("init boden");
+	ring.init();
 	ring.setThresholdValueGolbal(LINE_SCHWELLE);
+	lcd.clear();
+	lcd.print("init pixy");
+	pixy.init();
+	lcd.clear();
 }
 
+/* ueberprueft ob alle Kompontenten funktionieren */
+void selfCheck(){
+	gb.selftest();
+}
 
 /* Macht das Sensor-/Pinmapping*/
 void updateSensorValue() {
@@ -152,17 +162,18 @@ void Menu() {
 	lcd.print("Test Functions");
 	while (1) {
 		lcd.setCursor(15, auswahl);
-		delay(10);
 		if (BUTTON0) {
 			auswahl++;
 		} else if (BUTTON2) {
-			auswahl--;
+			auswahl+=3;
 		} else if (BUTTON1)
 			break;
 		else
 			continue;
-		auswahl = constrain(auswahl, 0, 4);
-		delay(500);
+		auswahl = auswahl%4;
+		delay(200);
+		while(BUTTON0 || BUTTON1 || BUTTON2);
+		delay(200);
 	}
 
 	lcd.clear();
@@ -449,7 +460,6 @@ void testFunctions(){
 }
 
 int main(void) {
-	gb.scanI2C();
 	init();
 	while (1) {
 		Menu();

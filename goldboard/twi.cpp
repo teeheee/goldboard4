@@ -69,10 +69,14 @@ void twi_init(void)
 	twi_sendStop = true;		// default value
 	twi_inRepStart = false;
 
+
 	// activate internal pullups for twi.
 
 	PORTC |= (1 << PC0);		//digitalWrite(SDA, 1);
 	PORTC |= (1 << PC1);		//digitalWrite(SCL, 1);
+
+
+	//twi_resuscitate();
 
 	// initialize twi prescaler and bit rate
 	cbi(TWSR, TWPS0);
@@ -415,6 +419,88 @@ void twi_releaseBus(void)
 	twi_state = TWI_READY;
 }
 
+
+
+#define BUSCAP 10
+uint8_t twi_self_test(void){
+	// SDA = PC0 , SCL = PC1
+	twi_disable();
+	//set scl and sda as input with pullup
+	DDRC &= ~((1 << PC0) | (1 << PC1));
+	PORTC |= (1 << PC0) | (1 << PC1);
+
+
+	// both pins should be high
+	if( (!(PINC & (1 << PC0)) || !(PINC & (1 << PC1))) )
+		return 1;
+
+	//check bus capacitance
+	uint8_t counter = 0;
+	PORTC &= ~(1 << PC0);
+	DDRC |= (1 << PC0);
+	while( (PINC & (1 << PC0)) && counter < 250)
+		counter++;
+	if(counter == 250)
+		return 1;
+	if(counter > BUSCAP)
+		return 4;
+
+
+	//check bus capacitance
+	counter = 0;
+	DDRC |= (1 << PC1);
+	PORTC &= ~(1 << PC1);
+	while( (PINC & (1 << PC1)) && counter < 250)
+		counter++;
+	if(counter == 250)
+		return 1;
+	if(counter > BUSCAP)
+		return 2;
+
+	counter = 0;
+	DDRC &= ~((1 << PC1));
+	PORTC |= (1 << PC1);
+	while( !(PINC & (1 << PC1)) && counter < 250)
+		counter++;
+	if(counter == 250)
+		return 1;
+	if(counter > BUSCAP)
+		return 3;
+
+	counter = 0;
+	DDRC &= ~((1 << PC0));
+	PORTC |= (1 << PC0);
+	while( !(PINC & (1 << PC0)) && counter < 250)
+		counter++;
+	if(counter == 250)
+		return 1;
+	if(counter > BUSCAP)
+		return 5;
+
+
+	twi_init();
+	return 0;
+}
+
+void twi_resuscitate()
+{
+	DDRC &= ~(1 << PC1);
+	PORTC |= (1 << PC1);
+	for( uint8_t i = 0; i < 100; i++)
+	{
+		PORTC &= ~(1 << PC0);
+		DDRC |= (1 << PC0);
+		delayMicroseconds(100);
+		DDRC &= ~(1 << PC0);
+		PORTC |= (1 << PC0);
+		delayMicroseconds(100);
+		if((PINC & (1 << PC1)) && i > 8)
+			break;
+	}
+	TWCR &= ~((1 << TWSTO) | (1 << TWEN));
+	TWCR |= (1 << TWEN);
+}
+
 ISR(TWI_vect)
 {
 	switch (TW_STATUS)
@@ -594,3 +680,5 @@ ISR(TWI_vect)
 		break;
 	}
 }
+
+

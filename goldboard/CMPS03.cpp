@@ -5,7 +5,9 @@
 CMPS03::CMPS03()
 {
 	_initialized = false;
-	init();
+	_value = 0;
+	_128DegreeValue = 0;
+	_128DegreeEnabled = false;
 }
 
 void CMPS03::init()
@@ -31,7 +33,11 @@ uint8_t CMPS03::getValue()
 
 	Wire.beginTransmission(CMPS03_I2C_ADDR);
 	Wire.write((uint8_t) CMPS03_LORES_REG);
-	Wire.endTransmission();
+	if( Wire.endTransmission() > 0)
+	{
+		ERROR_MESSAGE("CMPS03 error");
+		return 0;
+	}
 	Wire.requestFrom(CMPS03_I2C_ADDR, 1);
 	while(Wire.available() < 1);
 	_value = Wire.read();

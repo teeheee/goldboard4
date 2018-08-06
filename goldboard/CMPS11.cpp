@@ -27,7 +27,10 @@ uint8_t CMPS11::getValue()
 	  Wire.beginTransmission(CMPS11_I2C_ADDR);  //starts communication with CMPS11
 	  Wire.write(CMPS11_ANGLE_8_REG);           //Sends the register we wish to start reading from
 	  if(Wire.endTransmission()!=0)
-		  return -1;
+	  {
+	  		  ERROR_MESSAGE("CMPS11 error");
+	  		  return 0;
+	  }
 
 	  Wire.requestFrom(CMPS11_I2C_ADDR, 1);
 	  while(Wire.available() < 1);
@@ -53,8 +56,12 @@ int CMPS11::getAccelerometerX()
 	int val = 0;
 	Wire.beginTransmission(CMPS11_I2C_ADDR);  //starts communication with CMPS11
 	Wire.write(CMPS11_ACCELERATION_X_REG);           //Sends the register we wish to start reading from
-	if(Wire.endTransmission()!=0)
-		 return -1;
+	  if(Wire.endTransmission()!=0)
+	  {
+	  		  ERROR_MESSAGE("CMPS11 error");
+	  		  return 0;
+	  }
+
 	  Wire.requestFrom(CMPS11_I2C_ADDR, 2);
 	  while(Wire.available() < 2);        // Wait for all bytes to come back
 	  val = Wire.read();               // Read back the 5 bytes
@@ -69,8 +76,12 @@ int CMPS11::getAccelerometerY()
 	int val = 0;
 	Wire.beginTransmission(CMPS11_I2C_ADDR);  //starts communication with CMPS11
 	Wire.write(CMPS11_ACCELERATION_Y_REG);           //Sends the register we wish to start reading from
-	if(Wire.endTransmission()!=0)
-		 return -1;
+	  if(Wire.endTransmission()!=0)
+	  {
+	  		  ERROR_MESSAGE("CMPS11 error");
+	  		  return 0;
+	  }
+
 	  Wire.requestFrom(CMPS11_I2C_ADDR, 2);
 	  while(Wire.available() < 2);        // Wait for all bytes to come back
 	  val = Wire.read();               // Read back the 5 bytes
@@ -114,7 +125,10 @@ void CMPS11::cmd(uint8_t byte)
 	  Wire.beginTransmission(CMPS11_I2C_ADDR);
 	  Wire.write(0);
 	  Wire.write(byte);
-	  Wire.endTransmission();
+	  if(Wire.endTransmission()!=0)
+	  {
+	  		  ERROR_MESSAGE("CMPS11 error");
+	  }
 	  delay(50);
 }
 

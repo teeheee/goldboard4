@@ -91,7 +91,11 @@ public:
   {
     Wire.beginTransmission(addr);
     Wire.write(data, len);
-	Wire.endTransmission();
+	if(Wire.endTransmission()!=0)
+	{
+	  		  ERROR_MESSAGE("Pixy i2c error");
+	  		  return 0;
+	}
 	return len;
   }
 	

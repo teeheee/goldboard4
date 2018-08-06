@@ -56,6 +56,11 @@
 #include "Arduino.h"
 #include "config.h"
 #include "SerialPrint.h"
+#include "LiquidCrystal_I2C.h"
+#include "SonarSRF08.h"
+#include "CMPS03.h"
+#include "PixyI2C.h"
+#include "usring.h"
 
 /*!
 @def SERIAL_PRINTLN(x)
@@ -157,7 +162,7 @@ public:
 
 	/** Test all functions of the Goldboard when nothing is connected. Connected Sensors can cause error reports.
 	 */
-	void selftest();
+	bool selftest();
 
 #ifdef TEST
 	/** 

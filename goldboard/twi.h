@@ -60,6 +60,8 @@ void twi_attachSlaveTxEvent(void (*)(void));
 void twi_reply(uint8_t);
 void twi_stop(void);
 void twi_releaseBus(void);
+uint8_t twi_self_test(void);
+void twi_resuscitate(void);
 
 #endif
 

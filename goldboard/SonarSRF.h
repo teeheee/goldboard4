@@ -53,7 +53,7 @@ protected:
 			COMMAND_REGISTER);
 	void writeUnit(char unit);
 	int read(unsigned int command, unsigned int length);
-	virtual void waitForCompletion(void);
+	virtual uint8_t waitForCompletion(void);
 };
 
 #endif // SONARSRF_H
