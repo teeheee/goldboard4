@@ -161,7 +161,7 @@ template<class LinkType> boolean TPixy<LinkType>::getStart()
 		timeout++;
 		if(timeout>1000)
 		{
-			ERROR_MESSAGE("Pixy: i2c error");
+			ERROR_MESSAGE("Pixy: i2c timeout");
 			return false;
 		}
 	}

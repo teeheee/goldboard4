@@ -33,7 +33,13 @@ uint8_t CMPS11::getValue()
 	  }
 
 	  Wire.requestFrom(CMPS11_I2C_ADDR, 1);
-	  while(Wire.available() < 1);
+	  unsigned long time = millis();
+	  	while(Wire.available() < 1)
+	  		if(millis()-time > 1000)
+	  		{
+	  			ERROR_MESSAGE("CMPS11 timeout");
+	  			return false;
+	  		}
 	  val = Wire.read();
 
 	if (_128DegreeEnabled)
@@ -63,7 +69,13 @@ int CMPS11::getAccelerometerX()
 	  }
 
 	  Wire.requestFrom(CMPS11_I2C_ADDR, 2);
-	  while(Wire.available() < 2);        // Wait for all bytes to come back
+	  unsigned long time = millis();
+	  while(Wire.available() < 2)
+	  	if(millis()-time > 1000)
+	  	{
+	  			ERROR_MESSAGE("CMPS11 timeout");
+	  			return false;
+	  	}       // Wait for all bytes to come back
 	  val = Wire.read();               // Read back the 5 bytes
 	  val = Wire.read() + (val << 8);
 	  return val;
@@ -83,7 +95,13 @@ int CMPS11::getAccelerometerY()
 	  }
 
 	  Wire.requestFrom(CMPS11_I2C_ADDR, 2);
-	  while(Wire.available() < 2);        // Wait for all bytes to come back
+	  unsigned long time = millis();
+	  while(Wire.available() < 2)
+	  	  	if(millis()-time > 1000)
+	  	  	{
+	  	  			ERROR_MESSAGE("CMPS11 timeout");
+	  	  			return false;
+	  	  	}         // Wait for all bytes to come back
 	  val = Wire.read();               // Read back the 5 bytes
 	  val = Wire.read() + (val << 8);
 	  return val;

@@ -112,8 +112,14 @@ int SonarSRF::read(unsigned int command, unsigned int length)
 {
 	write(0x00, command);
 	Wire.requestFrom(_address, (uint8_t) (length)); // Request length bytes
-	while (Wire.available() < (int)length)
-		; // Wait for result while bytes available
+	unsigned long time = millis();
+	while(Wire.available() < (int)length)
+		  	if(millis()-time > 1000)
+		  	{
+		  			ERROR_MESSAGE("SRF timeout");
+		  			return false;
+		  	}
+	// Wait for result while bytes available
 	int res = 0; // Read the bytes, and combine them into one int
 	for (; length > 0; length--)
 	{

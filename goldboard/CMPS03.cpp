@@ -39,7 +39,14 @@ uint8_t CMPS03::getValue()
 		return 0;
 	}
 	Wire.requestFrom(CMPS03_I2C_ADDR, 1);
-	while(Wire.available() < 1);
+
+	unsigned long time = millis();
+	while(Wire.available() < 1)
+		if(millis()-time > 1000)
+		{
+			ERROR_MESSAGE("CMPS03 timeout");
+			return false;
+		}
 	_value = Wire.read();
 	
 	uint8_t val = _value;
