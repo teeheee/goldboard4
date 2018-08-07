@@ -20,11 +20,11 @@
    * usring
    * lcd
 * make clean doxygen comments
-* add BNO055 sensor
 * upgrade servo PWM to every pin
 * selftest
 * check race condition on interrupts
 * reduce code size
+* reorganize ERROR Messages
 
 ## Features
 
