@@ -40,6 +40,7 @@
 
 #include "config.h"
 #include "time.h"
+#include "error.h"
 
 #ifdef __cplusplus
 extern "C"

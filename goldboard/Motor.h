@@ -26,6 +26,8 @@
 
 #include "PCF8574A.h"
 
+
+#define MIN_SPEED 40
 /*!
 @class Motor
 @brief Für diese Klasse muss kein Objekt erstellt werden. Es ist Teil der Goldboard4 Klasse und kann über das gb Objekt angesprochen werden.
@@ -53,9 +55,12 @@ class Motor
 		 */
 		void setAcceleration(uint8_t percentPerHundretMs);
 		
+
+		void setMinSpeed(uint8_t minspeed);
 	private:
 		uint8_t _pwmPin;
 		PCF8574A* _directionPortexpander;
+		uint8_t _minspeed;
 		
 };
 

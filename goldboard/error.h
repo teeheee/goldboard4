@@ -11,9 +11,22 @@
 
 #include "uart.h"
 #include "config.h"
+#include <avr/pgmspace.h>
+
+
 
 #ifdef ERROR_MESSAGE_ACTIVE
-	#define ERROR_MESSAGE(str) {uart_puts_P("ERROR: ");uart_puts_P(str);uart_puts_P("\r\n");}
+	const char progmem_string_error[] PROGMEM = "ERROR: ";
+	const char progmem_string_lineend[] PROGMEM = "\r\n";
+
+	const char progmem_no_init[] PROGMEM = "no init";
+	const char progmem_no_ack[] PROGMEM = "no ack";
+	const char progmem_timeout[] PROGMEM = "timeout";
+
+	#define ERROR_MESSAGE(str) {uart_puts_p(progmem_string_error);uart_puts_P(str);uart_puts_p(progmem_string_lineend);}
+	#define ERROR_MESSAGE_PREFIX(pref,str) {uart_puts_p(progmem_string_error);uart_puts_p(pref);uart_puts_p(str);uart_puts_p(progmem_string_lineend);}
+	#define ERROR_MESSAGE_PREFIX_(pref,str) {uart_puts_p(progmem_string_error);uart_puts_p(pref);uart_puts_P(str);uart_puts_p(progmem_string_lineend);}
+
 #else
 	#define ERROR_MESSAGE(str)
 #endif

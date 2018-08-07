@@ -35,6 +35,7 @@ LiquidCrystal_I2C lcd(63,16,4);
 /**** PARAMETER ********/
 
 #define SEARCH_SPEED 50
+#define FOLLOW_SPEED 50
 
 #define LINE_SPEED 100
 #define LINE_SCHWELLE 100
@@ -321,15 +322,30 @@ void followBall(){
 	float e1 = (KompassWert-128) * FOLLOW_KOMPASS_PFACTOR;
 	float e2 = e1*FOLLOW_RADIUS;
 
-	int m0 = -x-y-e1;
-	int m1 = x-y+e2;
-	int m2 = x+y+e2;
-	int m3 = -x+y-e1;
 
-	gb.motor[MOTOR0].rotate(MOTOR0_DIR * m0);
-	gb.motor[MOTOR1].rotate(MOTOR1_DIR * m1);
-	gb.motor[MOTOR2].rotate(MOTOR2_DIR * m2);
-	gb.motor[MOTOR3].rotate(MOTOR3_DIR * m3);
+	float m[4];
+	m[0] = -x-y-e1;
+	m[1] = x-y+e2;
+	m[2] = x+y+e2;
+	m[3] = -x+y-e1;
+
+	float max_speed = 0;
+	for(int i = 0; i < 4; i++)
+	{
+		if(max_speed < m[i])
+			max_speed = m[i];
+	}
+
+	float scaler = FOLLOW_SPEED/max_speed;
+	for(int i = 0; i < 4; i++)
+	{
+		m[i] *= scaler;
+	}
+
+	gb.motor[MOTOR0].rotate(MOTOR0_DIR * m[0]);
+	gb.motor[MOTOR1].rotate(MOTOR1_DIR * m[1]);
+	gb.motor[MOTOR2].rotate(MOTOR2_DIR * m[2]);
+	gb.motor[MOTOR3].rotate(MOTOR3_DIR * m[3]);
 }
 
 void searchBall(){

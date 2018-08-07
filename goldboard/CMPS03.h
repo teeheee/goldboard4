@@ -19,14 +19,15 @@
 #ifndef _CMPS03_h
 #define _CMPS03_h
 
-#include "time.h"
+#include "Arduino.h"
 #include "Wire.h"
+
 
 #define CMPS03_I2C_ADDR   		96  /* I2C-Address of the module */
 #define CMPS03_LORES_REG		1     /* Register for 8 bit measurement (0-255) */
 #define CMPS03_HIRES_REG		2     /* Register for 16 bit measurement (0-3599 (0-359,9�)) */
 
-#define CMPS03_ERROR_TIMEOUT	10	  /* After this time, there MUST be a value */
+#define CMPS03_ERROR_TIMEOUT	100	  /* After this time, there MUST be a value */
 
 /*!
 @class CMPS03
@@ -41,10 +42,6 @@ class CMPS03
 		/*! Initialisiert die Sensorklasse. Muss einmal am Anfang aufgerufen werden.
 		*/
 		void init();
-		/*! Überprüft ob die Initialisierung geglückt ist.
-			@return true für erfolgreiche Initialisierung, sonst false. 
-		*/
-		bool isInitialized();
 		/*! Gibt den Kompasswert zurück. Es macht keinen Sinn die Methode öfter als alle 33ms abzufragen,
 			da der Wert sich nicht öfter ändert. Falls der Übergang von 255 -> 0 nicht an einem Punkt ist muss der Sensor neu kalibriert werden.
 			@return 0-255 für die Richtung des Kompasssensors.
@@ -60,10 +57,8 @@ class CMPS03
 
 	private:
 		
-		uint8_t _value;
 		int16_t _128DegreeValue;
 		bool _128DegreeEnabled;
-		bool _initialized;
 };
 
 #endif

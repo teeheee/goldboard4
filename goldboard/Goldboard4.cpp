@@ -45,14 +45,13 @@ Goldboard4::Goldboard4() {
 		error = Wire.selfTest();
 		if(error > 1)
 		{
-			ERROR_MESSAGE("I2C Cap");
+			ERROR_MESSAGE("I2C cap");
 		}
 		else if(error == 1)
 		{
 			ERROR_MESSAGE("I2C short");
 		}
 	}
-
 
 	// i2c
 	Wire.begin();
@@ -280,7 +279,7 @@ void Goldboard4::scanI2C()
 			 else if(address >= 0x38 && address <= 0x63)
 				 uart_puts_P(" Portexpander\r\n");
 			 else
-				 uart_puts_P(" unkown\r\n");
+				 uart_puts_P(" unknown\r\n");
 
 		 }
 	}
@@ -305,6 +304,23 @@ bool Goldboard4::selftest(){
 		return false;
 	}
 	return true;
+}
+
+void Goldboard4::i2cReset(){
+	uint8_t error = Wire.selfTest();
+	if(error > 0)
+	{
+		Wire.resuscitateBus();
+		error = Wire.selfTest();
+		if(error > 1)
+		{
+			ERROR_MESSAGE("I2C Cap");
+		}
+		else if(error == 1)
+		{
+			ERROR_MESSAGE("I2C short");
+		}
+	}
 }
 
 #ifdef TEST

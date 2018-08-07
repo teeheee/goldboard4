@@ -232,7 +232,7 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length,
  *          3 .. data send, NACK received
  *          4 .. other twi error (lost bus arbitration, bus error, ..)
  */
-#define MAX_TIMEOUT 0xffff
+#define MAX_TIMEOUT 0xffffff
 
 uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length,
 		uint8_t wait, uint8_t sendStop)
@@ -495,22 +495,52 @@ uint8_t twi_self_test(void){
 
 void twi_resuscitate()
 {
-	PORTC &= ~(1 << PC1);
-	DDRC |= (1 << PC1);
+	twi_disable();
+	cli();
+	//sda high
+	DDRC &= ~(1 << PC1);
+	PORTC |= (1 << PC1);
 	delayMicroseconds(100);
-	for( uint8_t i = 0; i < 16; i++)
+	for( uint8_t i = 0; i < 100; i++)
 	{
-		PORTC &= ~(1 << PC0);
-		DDRC |= (1 << PC0);
-		delayMicroseconds(100);
+		//scl high
 		DDRC &= ~(1 << PC0);
 		PORTC |= (1 << PC0);
 		delayMicroseconds(100);
+		//scl low
+		PORTC &= ~(1 << PC0);
+		DDRC |= (1 << PC0);
+		delayMicroseconds(100);
+		if((PINC & (1<<PC1)))
+		{
+			//sda Low
+			PORTC &= ~(1 << PC1);
+			DDRC |= (1 << PC1);
+			delayMicroseconds(100);
+			//first scl high
+			DDRC &= ~(1 << PC0);
+			PORTC |= (1 << PC0);
+			delayMicroseconds(100);
+			//then sda high
+			DDRC &= ~(1 << PC1);
+			PORTC |= (1 << PC1);
+			delayMicroseconds(100);
+			//scl low
+			PORTC &= ~(1 << PC0);
+			DDRC |= (1 << PC0);
+			delayMicroseconds(100);
+			if((PINC & (1<<PC1)))
+			{
+				DDRC &= ~(1 << PC0);
+				PORTC |= (1 << PC0);
+				delayMicroseconds(100);
+				break;
+			}
+		}
 	}
-	DDRC &= ~(1 << PC1);
-	PORTC |= (1 << PC1);
-	TWCR &= ~((1 << TWSTO) | (1 << TWEN));
-	TWCR |= (1 << TWEN);
+	delayMicroseconds(1000);
+	twi_init();
+	sei();
 }
 
 ISR(TWI_vect)

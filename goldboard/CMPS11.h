@@ -53,10 +53,8 @@ class CMPS11
 		void exitCalibration();
 	private:
 		void cmd(uint8_t byte);
-		uint8_t _value;
 		int16_t _128DegreeValue;
 		bool _128DegreeEnabled;
-		bool _initialized;
 };
 
 #endif

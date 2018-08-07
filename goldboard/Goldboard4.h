@@ -165,6 +165,11 @@ public:
 	 */
 	bool selftest();
 
+	/** Wenn der i2c bus sich aufhängt kann man versuchen mit dieser Funktion ihn wieder zu reseten
+	 *
+	 */
+	void i2cReset();
+
 #ifdef TEST
 	/** 
 	#@code
