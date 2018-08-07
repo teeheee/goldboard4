@@ -1,22 +1,22 @@
 # Goldboard4 Version 2.0
 ## TODO
 * do full test 
-   * ~~motors~~
+   * motors
    * servos
-   * ~~pwmpins~~ 
-   * ~~digitalpins~~
-   * ~~analogpins~~
-   * ~~buttons~~
-   * ~~leds~~
+   * pwmpins 
+   * digitalpins
+   * analogpins
+   * buttons
+   * leds
    * robot->bluetooth->pc
    * robot->bluetooth->robot
-   * ~~power pins~~
-   * ~~CMPS11~~
-   * ~~CMPS03~~
+   * power pins
+   * CMPS11
+   * CMPS03
    * SRF08
    * SRF10
-   * ~~VL53L0X~~
-   * ~~pixy~~
+   * VL53L0X
+   * pixy
    * usring
    * lcd
 * make clean doxygen comments
@@ -24,6 +24,7 @@
 * upgrade servo PWM to every pin
 * selftest
 * check race condition on interrupts
+* reduce code size
 
 ## Features
 
@@ -50,21 +51,11 @@
 
 
 ## Memory Usage
-minimal Build
 
 ```
-Program:    4246 bytes (13.0% Full)
+Program:    4246 bytes (50.0% Full)
 (.text + .data + .bootloader)
 
-Data:        262 bytes (12.8% Full)
-(.data + .bss + .noinit)
-```
-PULSE_SENSOR_INPUT, MOTOR_ACCELERATION and SERVO_PWM enabled Build
-
-```
-Program:    6850 bytes (20.9% Full)
-(.text + .data + .bootloader)
-
-Data:        576 bytes (28.1% Full)
+Data:        262 bytes (50.0% Full)
 (.data + .bss + .noinit)
 ```
