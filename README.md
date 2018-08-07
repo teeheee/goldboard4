@@ -1,4 +1,4 @@
-# Goldboard4 Version 2.0
+# Goldboard4 Version 2.1
 ## TODO
 * do full test 
    * motors
@@ -52,10 +52,22 @@
 
 ## Memory Usage
 
+### everything enabled
 ```
-Program:    4246 bytes (50.0% Full)
+Program:    4566 bytes (13.9% Full)
 (.text + .data + .bootloader)
 
-Data:        262 bytes (50.0% Full)
+Data:        635 bytes (31.0% Full)
 (.data + .bss + .noinit)
 ```
+### everything disabled
+
+```
+Program:    3372 bytes (10.3% Full)
+(.text + .data + .bootloader)
+
+Data:        369 bytes (18.0% Full)
+(.data + .bss + .noinit)
+```
+
+
