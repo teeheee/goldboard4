@@ -19,7 +19,7 @@
 
 // default constructor
 Goldboard4::Goldboard4() {
-
+	sei();
 	// uart
 	uart_init(UART_BAUD_SELECT(UART_BAUD_RATE,F_CPU));
 
@@ -76,6 +76,7 @@ Goldboard4::Goldboard4() {
 	init_timer();
 
 	selftest();
+
 } //Goldboard4
 
 /** Puts off all motors.

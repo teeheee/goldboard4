@@ -4,9 +4,10 @@
 #include <inttypes.h>
 
 #include "Arduino.h"
+#include "config.h"
 
 void printIIC(uint8_t args){
-	uint8_t data = __builtin_avr_insert_bits (0x4567f012, args, 0);
+	uint8_t data = __builtin_avr_insert_bits(LCD_PIN_MAPPING, args, 0);
 	Wire.write(data);
 }
 
@@ -127,7 +128,7 @@ void LiquidCrystal_I2C::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
 /********** high level commands, for the user! */
 void LiquidCrystal_I2C::clear(){
 	command(LCD_CLEARDISPLAY);// clear display, set cursor position to zero
-	delayMicroseconds(5000);  // this command takes a long time!
+	delayMicroseconds(2000);  // this command takes a long time!
   if (_oled) setCursor(0,0);
 }
 

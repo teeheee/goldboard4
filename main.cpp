@@ -2,7 +2,8 @@
 
 
 Goldboard4 gb;
-SonarSRF08 US[4] = { SonarSRF08(112),SonarSRF08(114),SonarSRF08(122),SonarSRF08(126)};
+//SonarSRF08 US[4] = { SonarSRF08(112),SonarSRF08(114),SonarSRF08(122),SonarSRF08(126)};
+SRF08 US[4];
 CMPS03 kompass;
 usring ring;
 PixyI2C pixy;
@@ -59,8 +60,12 @@ void init() {
 	lcd.begin(16, 4);
 	lcd.blink_on();
 	lcd.print("init Ultraschall");
-	for(int i = 0; i < 4; i++)
-		US[i].begin();
+	//for(int i = 0; i < 4; i++)
+		//US[i].begin();
+	US[0].init(0);
+	US[1].init(2);
+	US[2].init(10);
+	US[3].init(14);
 	lcd.clear();
 	lcd.print("init kompass");
 	kompass.init();
@@ -91,7 +96,7 @@ void updateSensorValue() {
 	static int counter = 0;
 
 	if (millis() - US_time > US_DELAY) {
-		switch(counter)
+		/*switch(counter)
 		{
 		case 0:
 			UltraschallWert[0] = US[US_RECHTSVORNE].readRange();
@@ -105,6 +110,21 @@ void updateSensorValue() {
 		case 3:
 			UltraschallWert[3] = US[US_LINKSVORNE].readRange();
 			break;
+		}*/
+		switch(counter)
+		{
+			case 0:
+				UltraschallWert[0] = US[US_RECHTSVORNE].getValueCMBlocking();
+				break;
+			case 1:
+				UltraschallWert[1] = US[US_RECHTSHINTEN].getValueCMBlocking();
+				break;
+			case 2:
+				UltraschallWert[2] = US[US_LINKSHINTEN].getValueCMBlocking();
+				break;
+			case 3:
+				UltraschallWert[3] = US[US_LINKSVORNE].getValueCMBlocking();
+				break;
 		}
 		counter = (counter + 1) % 4;
 		US_time = millis();

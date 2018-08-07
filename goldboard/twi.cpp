@@ -232,6 +232,8 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length,
  *          3 .. data send, NACK received
  *          4 .. other twi error (lost bus arbitration, bus error, ..)
  */
+#define MAX_TIMEOUT 0xffff
+
 uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length,
 		uint8_t wait, uint8_t sendStop)
 {
@@ -242,10 +244,15 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length,
 	{
 		return 1;
 	}
+
+	unsigned long timeout = 0;
 	// wait until twi is ready, become master transmitter
 	while (TWI_READY != twi_state)
 	{
-		continue;
+		if(timeout++ > MAX_TIMEOUT)
+		{
+			return 4;
+		}
 	}
 
 	twi_state = TWI_MTX;
@@ -289,10 +296,14 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length,
 		// send start condition
 		TWCR = _BV(TWINT) | _BV(TWEA) | _BV(TWEN) | _BV(TWIE) | _BV(TWSTA);	// enable INTs
 
+	timeout = 0;
 	// wait for write operation to complete
 	while (wait && (TWI_MTX == twi_state))
 	{
-		continue;
+		if(timeout++ > MAX_TIMEOUT)
+		{
+			return 4;
+		}
 	}
 
 	if (twi_error == 0xFF)
@@ -484,9 +495,10 @@ uint8_t twi_self_test(void){
 
 void twi_resuscitate()
 {
-	DDRC &= ~(1 << PC1);
-	PORTC |= (1 << PC1);
-	for( uint8_t i = 0; i < 100; i++)
+	PORTC &= ~(1 << PC1);
+	DDRC |= (1 << PC1);
+	delayMicroseconds(100);
+	for( uint8_t i = 0; i < 16; i++)
 	{
 		PORTC &= ~(1 << PC0);
 		DDRC |= (1 << PC0);
@@ -494,9 +506,9 @@ void twi_resuscitate()
 		DDRC &= ~(1 << PC0);
 		PORTC |= (1 << PC0);
 		delayMicroseconds(100);
-		if((PINC & (1 << PC1)) && i > 8)
-			break;
 	}
+	DDRC &= ~(1 << PC1);
+	PORTC |= (1 << PC1);
 	TWCR &= ~((1 << TWSTO) | (1 << TWEN));
 	TWCR |= (1 << TWEN);
 }

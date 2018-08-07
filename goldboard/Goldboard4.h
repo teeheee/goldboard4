@@ -61,6 +61,7 @@
 #include "CMPS03.h"
 #include "PixyI2C.h"
 #include "usring.h"
+#include "SRF08.h"
 
 /*!
 @def SERIAL_PRINTLN(x)
