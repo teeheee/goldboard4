@@ -1,0 +1,988 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Goldboard4: goldboard/lcd.h-Dateireferenz</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Goldboard4
+   &#160;<span id="projectnumber">V2.0</span>
+   </div>
+   <div id="projectbrief">Library for the Goldboard4</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Hauptseite</span></a></li>
+      <li><a href="modules.html"><span>Module</span></a></li>
+      <li><a href="annotated.html"><span>Klassen</span></a></li>
+      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
+      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_efa29dcec2bc511dcc4741916090d0cb.html">goldboard</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">lcd.h-Dateireferenz<div class="ingroups"><a class="el" href="group__external.html">Externe Komponenten</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Basic routines for interfacing a HD44780U-based character LCD display. It was slightly modified to use i2c Portexpander as data pins.  
+<a href="#details">Mehr ...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="PCF8574A_8h_source.html">PCF8574A.h</a>&quot;</code><br />
+<code>#include &lt;inttypes.h&gt;</code><br />
+<code>#include &lt;avr/pgmspace.h&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include-Abhängigkeitsdiagramm für lcd.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="lcd_8h__incl.png" border="0" usemap="#goldboard_2lcd_8h" alt=""/></div>
+<map name="goldboard_2lcd_8h" id="goldboard_2lcd_8h">
+<area shape="rect" id="node2" href="PCF8574A_8h.html" title="Driver for the PCF8574A Remote 8&#45;Bit I/O expander. " alt="" coords="5,80,103,107"/>
+<area shape="rect" id="node3" href="Wire_8h.html" title="TWI/I2C library for Wiring &amp; Arduino. " alt="" coords="24,155,84,181"/>
+</map>
+</div>
+</div>
+<p><a href="lcd_8h_source.html">gehe zum Quellcode dieser Datei</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Makrodefinitionen</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definitions for Display Size</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Change these definitions to adapt setting to your display</p>
+<p>These definitions can be defined in a separate include file <b>lcd_definitions.h</b> instead modifying this file by adding -D_LCD_DEFINITIONS_FILE to the CDEFS section in the Makefile. All definitions added to the file lcd_definitions.h will override the default definitions from <a class="el" href="lcd_8h.html" title="Basic routines for interfacing a HD44780U-based character LCD display. It was slightly modified to us...">lcd.h</a> </p>
+</div></td></tr>
+<tr class="memitem:a01212e90283511562039db786f65ba98"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a01212e90283511562039db786f65ba98">LCD_LINES</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a01212e90283511562039db786f65ba98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a684bb4392e384b7ae7c660d81dacb930"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a684bb4392e384b7ae7c660d81dacb930">LCD_DISP_LENGTH</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:a684bb4392e384b7ae7c660d81dacb930"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae59a728d9dee9f12c817b29d38746ed9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ae59a728d9dee9f12c817b29d38746ed9">LCD_LINE_LENGTH</a>&#160;&#160;&#160;0x40</td></tr>
+<tr class="separator:ae59a728d9dee9f12c817b29d38746ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd056d70a1488ea2eb1aef87e248e234"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#abd056d70a1488ea2eb1aef87e248e234">LCD_START_LINE1</a>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:abd056d70a1488ea2eb1aef87e248e234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b317b21058ef031716ba040ef75430a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a7b317b21058ef031716ba040ef75430a">LCD_START_LINE2</a>&#160;&#160;&#160;0x40</td></tr>
+<tr class="separator:a7b317b21058ef031716ba040ef75430a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7cca16353048a062baeb3a52da55249"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ae7cca16353048a062baeb3a52da55249">LCD_START_LINE3</a>&#160;&#160;&#160;0x14</td></tr>
+<tr class="separator:ae7cca16353048a062baeb3a52da55249"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b73e05bdb5cc12cdff5a1cf6c4f2a2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ab1b73e05bdb5cc12cdff5a1cf6c4f2a2">LCD_START_LINE4</a>&#160;&#160;&#160;0x54</td></tr>
+<tr class="separator:ab1b73e05bdb5cc12cdff5a1cf6c4f2a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb35ff6cb242e48ba0545ea919ffc5d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#adb35ff6cb242e48ba0545ea919ffc5d3">LCD_WRAP_LINES</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:adb35ff6cb242e48ba0545ea919ffc5d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definitions for 4-bit IO mode</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>The four LCD data lines and the three control lines RS, RW, E can be on the same port or on different ports. Change LCD_RS_PORT, LCD_RW_PORT, LCD_E_PORT if you want the control lines on different ports.</p>
+<p>Normally the four data lines should be mapped to bit 0..3 on one port, but it is possible to connect these data lines in different order or even on different ports by adapting the LCD_DATAx_PORT and LCD_DATAx_PIN definitions.</p>
+<p>Adjust these definitions to your target.<br />
+ These definitions can be defined in a separate include file <b>lcd_definitions.h</b> instead modifying this file by adding <b>-D_LCD_DEFINITIONS_FILE</b> to the <b>CDEFS</b> section in the Makefile. All definitions added to the file lcd_definitions.h will override the default definitions from <a class="el" href="lcd_8h.html" title="Basic routines for interfacing a HD44780U-based character LCD display. It was slightly modified to us...">lcd.h</a> </p>
+</div></td></tr>
+<tr class="memitem:abcf42bd88b3c36193f301ca25b033875"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a>&#160;&#160;&#160;0 /*PORTA*/</td></tr>
+<tr class="separator:abcf42bd88b3c36193f301ca25b033875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc0acd4774bcd311595732f5367e266b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#afc0acd4774bcd311595732f5367e266b">LCD_DATA0_PORT</a>&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td></tr>
+<tr class="separator:afc0acd4774bcd311595732f5367e266b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a345af0248d5739bd8896d4f585618ca2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a345af0248d5739bd8896d4f585618ca2">LCD_DATA1_PORT</a>&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td></tr>
+<tr class="separator:a345af0248d5739bd8896d4f585618ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d5c48a3f2b9426c14bbca3150834a20"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a4d5c48a3f2b9426c14bbca3150834a20">LCD_DATA2_PORT</a>&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td></tr>
+<tr class="separator:a4d5c48a3f2b9426c14bbca3150834a20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec71b6692f2af7c9de32dbe85fcb51c2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#aec71b6692f2af7c9de32dbe85fcb51c2">LCD_DATA3_PORT</a>&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td></tr>
+<tr class="separator:aec71b6692f2af7c9de32dbe85fcb51c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe54d7d886b5c56bed0cf971febbb773"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#afe54d7d886b5c56bed0cf971febbb773">LCD_DATA0_PIN</a>&#160;&#160;&#160;7</td></tr>
+<tr class="separator:afe54d7d886b5c56bed0cf971febbb773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97fb520e7b83bb047ac5c9247de57049"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a97fb520e7b83bb047ac5c9247de57049">LCD_DATA1_PIN</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:a97fb520e7b83bb047ac5c9247de57049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f3d53627337f6535cc8daa35876510a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a7f3d53627337f6535cc8daa35876510a">LCD_DATA2_PIN</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:a7f3d53627337f6535cc8daa35876510a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54032ce0050853e181f879b69fec4370"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a54032ce0050853e181f879b69fec4370">LCD_DATA3_PIN</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a54032ce0050853e181f879b69fec4370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5be2a22727fd9ca349e1c9bcbfbcd47"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ac5be2a22727fd9ca349e1c9bcbfbcd47">LCD_RS_PORT</a>&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td></tr>
+<tr class="separator:ac5be2a22727fd9ca349e1c9bcbfbcd47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5c0a0a5750f3aaea06083e3a4a31f5d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ae5c0a0a5750f3aaea06083e3a4a31f5d">LCD_RS_PIN</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:ae5c0a0a5750f3aaea06083e3a4a31f5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8772bdf31db863b81805c837bdc2da2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ae8772bdf31db863b81805c837bdc2da2">LCD_RW_PORT</a>&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td></tr>
+<tr class="separator:ae8772bdf31db863b81805c837bdc2da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ac938dd5fc02a9a232df6605b5f6aa8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a3ac938dd5fc02a9a232df6605b5f6aa8">LCD_RW_PIN</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a3ac938dd5fc02a9a232df6605b5f6aa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af97f97ff3832d1289bbcb471090ea297"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#af97f97ff3832d1289bbcb471090ea297">LCD_E_PORT</a>&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td></tr>
+<tr class="separator:af97f97ff3832d1289bbcb471090ea297"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae644d776392a8d47899d9910c2b8feb6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ae644d776392a8d47899d9910c2b8feb6">LCD_E_PIN</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ae644d776392a8d47899d9910c2b8feb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definitions of delays</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Used to calculate delay timers. Adapt the F_CPU define in the Makefile to the clock frequency in Hz of your target</p>
+<p>These delay times can be adjusted, if some displays require different delays.<br />
+ These definitions can be defined in a separate include file <b>lcd_definitions.h</b> instead modifying this file by adding <b>-D_LCD_DEFINITIONS_FILE</b> to the <b>CDEFS</b> section in the Makefile. All definitions added to the file lcd_definitions.h will override the default definitions from <a class="el" href="lcd_8h.html" title="Basic routines for interfacing a HD44780U-based character LCD display. It was slightly modified to us...">lcd.h</a> </p>
+</div></td></tr>
+<tr class="memitem:a79ca3fe83448ab158a4c566bf292c260"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a79ca3fe83448ab158a4c566bf292c260">LCD_DELAY_BOOTUP</a>&#160;&#160;&#160;16000</td></tr>
+<tr class="separator:a79ca3fe83448ab158a4c566bf292c260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ba3c8cdcf1a96b0d4c476eff8f8617"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ab6ba3c8cdcf1a96b0d4c476eff8f8617">LCD_DELAY_INIT</a>&#160;&#160;&#160;5000</td></tr>
+<tr class="separator:ab6ba3c8cdcf1a96b0d4c476eff8f8617"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ce1ac9b146b7baa7169e27f9cf3a99e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a2ce1ac9b146b7baa7169e27f9cf3a99e">LCD_DELAY_INIT_REP</a>&#160;&#160;&#160;64</td></tr>
+<tr class="separator:a2ce1ac9b146b7baa7169e27f9cf3a99e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf773dcbd0827cd15c788065c9197459"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#adf773dcbd0827cd15c788065c9197459">LCD_DELAY_INIT_4BIT</a>&#160;&#160;&#160;64</td></tr>
+<tr class="separator:adf773dcbd0827cd15c788065c9197459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73b2370827e2d350cedd45e08a9eb0b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a73b2370827e2d350cedd45e08a9eb0b2">LCD_DELAY_BUSY_FLAG</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:a73b2370827e2d350cedd45e08a9eb0b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b0632f09757ffe6f018c6ef88cc3296"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a5b0632f09757ffe6f018c6ef88cc3296">LCD_DELAY_ENABLE_PULSE</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a5b0632f09757ffe6f018c6ef88cc3296"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a412fd50d7add9264007510e6b31c0f27"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a412fd50d7add9264007510e6b31c0f27">LCD_DELAY_WRITE</a>&#160;&#160;&#160;400</td></tr>
+<tr class="separator:a412fd50d7add9264007510e6b31c0f27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definitions for LCD command instructions</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>The constants define the various LCD controller instructions which can be passed to the function <a class="el" href="lcd_8h.html#aea9d14f02df06f948cb5a56776980826" title="Send LCD controller instruction command. ">lcd_command()</a>, see HD44780 data sheet for a complete description. </p>
+</div></td></tr>
+<tr class="memitem:a459688213267d13ccfbeb2c9004988cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a459688213267d13ccfbeb2c9004988cb"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_CLR</b>&#160;&#160;&#160;0      /* DB0: clear display                  */</td></tr>
+<tr class="separator:a459688213267d13ccfbeb2c9004988cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0e309ccad89222eb3457f2da9f2bb8d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae0e309ccad89222eb3457f2da9f2bb8d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_HOME</b>&#160;&#160;&#160;1      /* DB1: return to home position        */</td></tr>
+<tr class="separator:ae0e309ccad89222eb3457f2da9f2bb8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5d757ddb6d94de8c82191b60b40e442"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae5d757ddb6d94de8c82191b60b40e442"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ENTRY_MODE</b>&#160;&#160;&#160;2      /* DB2: set entry mode                 */</td></tr>
+<tr class="separator:ae5d757ddb6d94de8c82191b60b40e442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada766266a0be0d0040fbf86e23b58aa6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada766266a0be0d0040fbf86e23b58aa6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ENTRY_INC</b>&#160;&#160;&#160;1      /*   DB1: 1=increment, 0=decrement     */</td></tr>
+<tr class="separator:ada766266a0be0d0040fbf86e23b58aa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14d0c7fda147e0dc8cdaa4a2629b3532"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a14d0c7fda147e0dc8cdaa4a2629b3532"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ENTRY_SHIFT</b>&#160;&#160;&#160;0      /*   DB2: 1=display shift on           */</td></tr>
+<tr class="separator:a14d0c7fda147e0dc8cdaa4a2629b3532"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47a809dfec086fdeca93dedc4fb83b44"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47a809dfec086fdeca93dedc4fb83b44"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ON</b>&#160;&#160;&#160;3      /* DB3: turn lcd/cursor on             */</td></tr>
+<tr class="separator:a47a809dfec086fdeca93dedc4fb83b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae84f634b0a1661c4d5bbaafd9397732a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae84f634b0a1661c4d5bbaafd9397732a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ON_DISPLAY</b>&#160;&#160;&#160;2      /*   DB2: turn display on              */</td></tr>
+<tr class="separator:ae84f634b0a1661c4d5bbaafd9397732a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47638b5ebbaec9600a0ebf9a55caf802"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a47638b5ebbaec9600a0ebf9a55caf802"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ON_CURSOR</b>&#160;&#160;&#160;1      /*   DB1: turn cursor on               */</td></tr>
+<tr class="separator:a47638b5ebbaec9600a0ebf9a55caf802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d76592a978537acee615098ce4d80f5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d76592a978537acee615098ce4d80f5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ON_BLINK</b>&#160;&#160;&#160;0      /*     DB0: blinking cursor ?          */</td></tr>
+<tr class="separator:a5d76592a978537acee615098ce4d80f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f4f758b80fcfa6c9e4db58e2515c78a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f4f758b80fcfa6c9e4db58e2515c78a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_MOVE</b>&#160;&#160;&#160;4      /* DB4: move cursor/display            */</td></tr>
+<tr class="separator:a3f4f758b80fcfa6c9e4db58e2515c78a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaddc2afa9a02bfa748950f2c1e6a204d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaddc2afa9a02bfa748950f2c1e6a204d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_MOVE_DISP</b>&#160;&#160;&#160;3      /*   DB3: move display (0-&gt; cursor) ?  */</td></tr>
+<tr class="separator:aaddc2afa9a02bfa748950f2c1e6a204d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97cdb19acf109ad52ab4994d2ad02cee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a97cdb19acf109ad52ab4994d2ad02cee"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_MOVE_RIGHT</b>&#160;&#160;&#160;2      /*   DB2: move right (0-&gt; left) ?      */</td></tr>
+<tr class="separator:a97cdb19acf109ad52ab4994d2ad02cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50de1697f1da8ab075a6b4d7aeace64e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a50de1697f1da8ab075a6b4d7aeace64e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_FUNCTION</b>&#160;&#160;&#160;5      /* DB5: function set                   */</td></tr>
+<tr class="separator:a50de1697f1da8ab075a6b4d7aeace64e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91d15d8e3008f6cb141406a8b5d0d3c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91d15d8e3008f6cb141406a8b5d0d3c0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_FUNCTION_8BIT</b>&#160;&#160;&#160;4      /*   DB4: set 8BIT mode (0-&gt;4BIT mode) */</td></tr>
+<tr class="separator:a91d15d8e3008f6cb141406a8b5d0d3c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c24806bed18d565917165caa3475463"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6c24806bed18d565917165caa3475463"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_FUNCTION_2LINES</b>&#160;&#160;&#160;3      /*   DB3: two lines (0-&gt;one line)      */</td></tr>
+<tr class="separator:a6c24806bed18d565917165caa3475463"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48de81358277fe4f2810c2b82f90397e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48de81358277fe4f2810c2b82f90397e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_FUNCTION_10DOTS</b>&#160;&#160;&#160;2      /*   DB2: 5x10 font (0-&gt;5x7 font)      */</td></tr>
+<tr class="separator:a48de81358277fe4f2810c2b82f90397e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b38de74c362be1781fef1136aa9684c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b38de74c362be1781fef1136aa9684c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_CGRAM</b>&#160;&#160;&#160;6      /* DB6: set CG RAM address             */</td></tr>
+<tr class="separator:a3b38de74c362be1781fef1136aa9684c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae54acf3ccc45b7d6be334a03627740c6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae54acf3ccc45b7d6be334a03627740c6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_DDRAM</b>&#160;&#160;&#160;7      /* DB7: set DD RAM address             */</td></tr>
+<tr class="separator:ae54acf3ccc45b7d6be334a03627740c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8dd1658e235f174d1cabae5c438943d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8dd1658e235f174d1cabae5c438943d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_BUSY</b>&#160;&#160;&#160;7      /* DB7: LCD is busy                    */</td></tr>
+<tr class="separator:ac8dd1658e235f174d1cabae5c438943d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad56f8e07634e85663f56888ae97089c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad56f8e07634e85663f56888ae97089c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ENTRY_DEC</b>&#160;&#160;&#160;0x04   /* display shift off, dec cursor move dir */</td></tr>
+<tr class="separator:aad56f8e07634e85663f56888ae97089c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c62932f252c6262cbef728add9696e4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1c62932f252c6262cbef728add9696e4"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ENTRY_DEC_SHIFT</b>&#160;&#160;&#160;0x05   /* display shift on,  dec cursor move dir */</td></tr>
+<tr class="separator:a1c62932f252c6262cbef728add9696e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad27ddc4b8d03594662c8757f946dde28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad27ddc4b8d03594662c8757f946dde28"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ENTRY_INC_</b>&#160;&#160;&#160;0x06   /* display shift off, inc cursor move dir */</td></tr>
+<tr class="separator:ad27ddc4b8d03594662c8757f946dde28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afabd0215cc6ae5539dc638dbec44a506"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afabd0215cc6ae5539dc638dbec44a506"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_ENTRY_INC_SHIFT</b>&#160;&#160;&#160;0x07   /* display shift on,  inc cursor move dir */</td></tr>
+<tr class="separator:afabd0215cc6ae5539dc638dbec44a506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2966175115943883f51e9c90478540c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2966175115943883f51e9c90478540c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_DISP_OFF</b>&#160;&#160;&#160;0x08   /* display off                            */</td></tr>
+<tr class="separator:aa2966175115943883f51e9c90478540c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5163a96b133868975c0738e180b30cb8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5163a96b133868975c0738e180b30cb8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_DISP_ON</b>&#160;&#160;&#160;0x0C   /* display on, cursor off                 */</td></tr>
+<tr class="separator:a5163a96b133868975c0738e180b30cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a470cef85de53e37356b22c66a357a764"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a470cef85de53e37356b22c66a357a764"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_DISP_ON_BLINK</b>&#160;&#160;&#160;0x0D   /* display on, cursor off, blink char     */</td></tr>
+<tr class="separator:a470cef85de53e37356b22c66a357a764"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af56b6d6bdb6fa48b26106dee5f74ae1f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af56b6d6bdb6fa48b26106dee5f74ae1f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_DISP_ON_CURSOR</b>&#160;&#160;&#160;0x0E   /* display on, cursor on                  */</td></tr>
+<tr class="separator:af56b6d6bdb6fa48b26106dee5f74ae1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1984ed0db15c6991d34c184fdca5dc6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1984ed0db15c6991d34c184fdca5dc6"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_DISP_ON_CURSOR_BLINK</b>&#160;&#160;&#160;0x0F   /* display on, cursor on, blink char      */</td></tr>
+<tr class="separator:ac1984ed0db15c6991d34c184fdca5dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2f0ddce1daaa1bf1a016270a89a264b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2f0ddce1daaa1bf1a016270a89a264b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_MOVE_CURSOR_LEFT</b>&#160;&#160;&#160;0x10   /* move cursor left  (decrement)          */</td></tr>
+<tr class="separator:ac2f0ddce1daaa1bf1a016270a89a264b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ad58e39e053e97d34527fcbe936899b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0ad58e39e053e97d34527fcbe936899b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_MOVE_CURSOR_RIGHT</b>&#160;&#160;&#160;0x14   /* move cursor right (increment)          */</td></tr>
+<tr class="separator:a0ad58e39e053e97d34527fcbe936899b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3c34ff1eee238bbe9c677215219fb8e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab3c34ff1eee238bbe9c677215219fb8e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_MOVE_DISP_LEFT</b>&#160;&#160;&#160;0x18   /* shift display left                     */</td></tr>
+<tr class="separator:ab3c34ff1eee238bbe9c677215219fb8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a90bb926f5ba59378af81fe8e246ffb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9a90bb926f5ba59378af81fe8e246ffb"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_MOVE_DISP_RIGHT</b>&#160;&#160;&#160;0x1C   /* shift display right                    */</td></tr>
+<tr class="separator:a9a90bb926f5ba59378af81fe8e246ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff4e5baa36a0322eb97557dcb18cd96e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff4e5baa36a0322eb97557dcb18cd96e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_FUNCTION_4BIT_1LINE</b>&#160;&#160;&#160;0x20   /* 4-bit interface, single line, 5x7 dots */</td></tr>
+<tr class="separator:aff4e5baa36a0322eb97557dcb18cd96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab35032ab368a8bc90798e0c547fb24c2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab35032ab368a8bc90798e0c547fb24c2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_FUNCTION_4BIT_2LINES</b>&#160;&#160;&#160;0x28   /* 4-bit interface, dual line,   5x7 dots */</td></tr>
+<tr class="separator:ab35032ab368a8bc90798e0c547fb24c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8aeee098cb4c84ec420e00d054abcce"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8aeee098cb4c84ec420e00d054abcce"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_FUNCTION_8BIT_1LINE</b>&#160;&#160;&#160;0x30   /* 8-bit interface, single line, 5x7 dots */</td></tr>
+<tr class="separator:aa8aeee098cb4c84ec420e00d054abcce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a160a214f47869f8f98ad5add3a7568db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a160a214f47869f8f98ad5add3a7568db"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_FUNCTION_8BIT_2LINES</b>&#160;&#160;&#160;0x38   /* 8-bit interface, dual line,   5x7 dots */</td></tr>
+<tr class="separator:a160a214f47869f8f98ad5add3a7568db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1849e2087d3034a3fffa67444beed109"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1849e2087d3034a3fffa67444beed109"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LCD_MODE_DEFAULT</b>&#160;&#160;&#160;((1&lt;&lt;LCD_ENTRY_MODE) | (1&lt;&lt;LCD_ENTRY_INC) )</td></tr>
+<tr class="separator:a1849e2087d3034a3fffa67444beed109"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a4f1928f1515e21422d5a33af2949f2f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f1928f1515e21422d5a33af2949f2f7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a4f1928f1515e21422d5a33af2949f2f7">lcd_puts_P</a>(__s)&#160;&#160;&#160;<a class="el" href="lcd_8h.html#a9022a24a56a9b15681f62eb6ba77e5de">lcd_puts_p</a>(PSTR(__s))</td></tr>
+<tr class="memdesc:a4f1928f1515e21422d5a33af2949f2f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">macros for automatically storing string constant in program memory <br /></td></tr>
+<tr class="separator:a4f1928f1515e21422d5a33af2949f2f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54f76c0e6e8e243a088ba296e716fb24"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a54f76c0e6e8e243a088ba296e716fb24">lcd_init</a> (uint8_t dispAttr, <a class="el" href="classPCF8574A.html">PCF8574A</a> *pcf)</td></tr>
+<tr class="memdesc:a54f76c0e6e8e243a088ba296e716fb24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize display and select type of cursor.  <a href="#a54f76c0e6e8e243a088ba296e716fb24">Mehr ...</a><br /></td></tr>
+<tr class="separator:a54f76c0e6e8e243a088ba296e716fb24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8da853dba4b9d5f2aea4e294444e14d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#af8da853dba4b9d5f2aea4e294444e14d">lcd_clrscr</a> (void)</td></tr>
+<tr class="memdesc:af8da853dba4b9d5f2aea4e294444e14d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear display and set cursor to home position.  <a href="#af8da853dba4b9d5f2aea4e294444e14d">Mehr ...</a><br /></td></tr>
+<tr class="separator:af8da853dba4b9d5f2aea4e294444e14d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aabf730aa4e0393bb5c959583c00a8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a3aabf730aa4e0393bb5c959583c00a8e">lcd_home</a> (void)</td></tr>
+<tr class="memdesc:a3aabf730aa4e0393bb5c959583c00a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set cursor to home position.  <a href="#a3aabf730aa4e0393bb5c959583c00a8e">Mehr ...</a><br /></td></tr>
+<tr class="separator:a3aabf730aa4e0393bb5c959583c00a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbf47a5efdf02367ded1ebf8f9edb5fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#adbf47a5efdf02367ded1ebf8f9edb5fe">lcd_gotoxy</a> (uint8_t x, uint8_t y)</td></tr>
+<tr class="memdesc:adbf47a5efdf02367ded1ebf8f9edb5fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set cursor to specified position.  <a href="#adbf47a5efdf02367ded1ebf8f9edb5fe">Mehr ...</a><br /></td></tr>
+<tr class="separator:adbf47a5efdf02367ded1ebf8f9edb5fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa7e36b95c43d603f510273ad077cbbe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#afa7e36b95c43d603f510273ad077cbbe">lcd_putc</a> (char c)</td></tr>
+<tr class="memdesc:afa7e36b95c43d603f510273ad077cbbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display character at current cursor position.  <a href="#afa7e36b95c43d603f510273ad077cbbe">Mehr ...</a><br /></td></tr>
+<tr class="separator:afa7e36b95c43d603f510273ad077cbbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ffdfcac7638368ff04364c14984266e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a8ffdfcac7638368ff04364c14984266e">lcd_puts</a> (const char *s)</td></tr>
+<tr class="memdesc:a8ffdfcac7638368ff04364c14984266e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display string without auto linefeed.  <a href="#a8ffdfcac7638368ff04364c14984266e">Mehr ...</a><br /></td></tr>
+<tr class="separator:a8ffdfcac7638368ff04364c14984266e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9022a24a56a9b15681f62eb6ba77e5de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#a9022a24a56a9b15681f62eb6ba77e5de">lcd_puts_p</a> (const char *progmem_s)</td></tr>
+<tr class="memdesc:a9022a24a56a9b15681f62eb6ba77e5de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display string from program memory without auto linefeed.  <a href="#a9022a24a56a9b15681f62eb6ba77e5de">Mehr ...</a><br /></td></tr>
+<tr class="separator:a9022a24a56a9b15681f62eb6ba77e5de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea9d14f02df06f948cb5a56776980826"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#aea9d14f02df06f948cb5a56776980826">lcd_command</a> (uint8_t cmd)</td></tr>
+<tr class="memdesc:aea9d14f02df06f948cb5a56776980826"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send LCD controller instruction command.  <a href="#aea9d14f02df06f948cb5a56776980826">Mehr ...</a><br /></td></tr>
+<tr class="separator:aea9d14f02df06f948cb5a56776980826"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0729d2cba627825a089ca1fff12ba29"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="lcd_8h.html#ad0729d2cba627825a089ca1fff12ba29">lcd_data</a> (uint8_t data)</td></tr>
+<tr class="memdesc:ad0729d2cba627825a089ca1fff12ba29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send data byte to LCD controller.  <a href="#ad0729d2cba627825a089ca1fff12ba29">Mehr ...</a><br /></td></tr>
+<tr class="separator:ad0729d2cba627825a089ca1fff12ba29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><p>Basic routines for interfacing a HD44780U-based character LCD display. It was slightly modified to use i2c Portexpander as data pins. </p>
+<p>LCD character displays can be found in many devices, like espresso machines, laser printers. The Hitachi HD44780 controller and its compatible controllers like Samsung KS0066U have become an industry standard for these types of displays.</p>
+<p>This library allows easy interfacing with a HD44780 compatible display and can be operated in memory mapped mode (LCD_IO_MODE defined as 0 in the include file <a class="el" href="lcd_8h.html" title="Basic routines for interfacing a HD44780U-based character LCD display. It was slightly modified to us...">lcd.h</a>.) or in 4-bit IO port mode (LCD_IO_MODE defined as 1). 8-bit IO port mode is not supported.</p>
+<p>Memory mapped mode is compatible with old Kanda STK200 starter kit, but also supports generation of R/W signal through A8 address line.</p>
+<dl class="section see"><dt>Siehe auch</dt><dd>The chapter <a href=" http://homepage.hispeed.ch/peterfleury/avr-lcd44780.html" target="_blank">Interfacing a HD44780 Based LCD to an AVR</a> on my home page, which shows example circuits how to connect an LCD to an AVR controller.</dd></dl>
+<dl class="section author"><dt>Autor</dt><dd>Peter Fleury <a href="#" onclick="location.href='mai'+'lto:'+'pfl'+'eu'+'ry@'+'gm'+'x.c'+'h'; return false;">pfleu<span style="display: none;">.nosp@m.</span>ry@g<span style="display: none;">.nosp@m.</span>mx.ch</a> <a href="http://tinyurl.com/peterfleury">http://tinyurl.com/peterfleury</a></dd></dl>
+<dl class="section version"><dt>Version</dt><dd>2.0</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>(C) 2015 Peter Fleury, GNU General Public License Version 3</dd></dl>
+</div><h2 class="groupheader">Makro-Dokumentation</h2>
+<a class="anchor" id="afe54d7d886b5c56bed0cf971febbb773"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DATA0_PIN&#160;&#160;&#160;7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pin for 4bit data bit 0 </p>
+
+</div>
+</div>
+<a class="anchor" id="afc0acd4774bcd311595732f5367e266b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DATA0_PORT&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>port for 4bit data bit 0 </p>
+
+</div>
+</div>
+<a class="anchor" id="a97fb520e7b83bb047ac5c9247de57049"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DATA1_PIN&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pin for 4bit data bit 1 </p>
+
+</div>
+</div>
+<a class="anchor" id="a345af0248d5739bd8896d4f585618ca2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DATA1_PORT&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>port for 4bit data bit 1 </p>
+
+</div>
+</div>
+<a class="anchor" id="a7f3d53627337f6535cc8daa35876510a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DATA2_PIN&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pin for 4bit data bit 2 </p>
+
+</div>
+</div>
+<a class="anchor" id="a4d5c48a3f2b9426c14bbca3150834a20"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DATA2_PORT&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>port for 4bit data bit 2 </p>
+
+</div>
+</div>
+<a class="anchor" id="a54032ce0050853e181f879b69fec4370"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DATA3_PIN&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pin for 4bit data bit 3 </p>
+
+</div>
+</div>
+<a class="anchor" id="aec71b6692f2af7c9de32dbe85fcb51c2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DATA3_PORT&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>port for 4bit data bit 3 </p>
+
+</div>
+</div>
+<a class="anchor" id="a79ca3fe83448ab158a4c566bf292c260"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DELAY_BOOTUP&#160;&#160;&#160;16000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>delay in micro seconds after power-on </p>
+
+</div>
+</div>
+<a class="anchor" id="a73b2370827e2d350cedd45e08a9eb0b2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DELAY_BUSY_FLAG&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>time in micro seconds the address counter is updated after busy flag is cleared </p>
+
+</div>
+</div>
+<a class="anchor" id="a5b0632f09757ffe6f018c6ef88cc3296"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DELAY_ENABLE_PULSE&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>enable signal pulse width in micro seconds </p>
+
+</div>
+</div>
+<a class="anchor" id="ab6ba3c8cdcf1a96b0d4c476eff8f8617"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DELAY_INIT&#160;&#160;&#160;5000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>delay in micro seconds after initialization command sent </p>
+
+</div>
+</div>
+<a class="anchor" id="adf773dcbd0827cd15c788065c9197459"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DELAY_INIT_4BIT&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>delay in micro seconds after setting 4-bit mode </p>
+
+</div>
+</div>
+<a class="anchor" id="a2ce1ac9b146b7baa7169e27f9cf3a99e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DELAY_INIT_REP&#160;&#160;&#160;64</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>delay in micro seconds after initialization command repeated </p>
+
+</div>
+</div>
+<a class="anchor" id="a412fd50d7add9264007510e6b31c0f27"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DELAY_WRITE&#160;&#160;&#160;400</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>enable signal pulse width in micro seconds </p>
+
+</div>
+</div>
+<a class="anchor" id="a684bb4392e384b7ae7c660d81dacb930"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_DISP_LENGTH&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>visibles characters per line of the display </p>
+
+</div>
+</div>
+<a class="anchor" id="ae644d776392a8d47899d9910c2b8feb6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_E_PIN&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pin for Enable line </p>
+
+</div>
+</div>
+<a class="anchor" id="af97f97ff3832d1289bbcb471090ea297"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_E_PORT&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>port for Enable line </p>
+
+</div>
+</div>
+<a class="anchor" id="ae59a728d9dee9f12c817b29d38746ed9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_LINE_LENGTH&#160;&#160;&#160;0x40</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>internal line length of the display </p>
+
+</div>
+</div>
+<a class="anchor" id="a01212e90283511562039db786f65ba98"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_LINES&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>number of visible lines of the display </p>
+
+</div>
+</div>
+<a class="anchor" id="abcf42bd88b3c36193f301ca25b033875"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_PORT&#160;&#160;&#160;0 /*PORTA*/</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>port for the LCD lines </p>
+
+</div>
+</div>
+<a class="anchor" id="ae5c0a0a5750f3aaea06083e3a4a31f5d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_RS_PIN&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pin for RS line </p>
+
+</div>
+</div>
+<a class="anchor" id="ac5be2a22727fd9ca349e1c9bcbfbcd47"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_RS_PORT&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>port for RS line </p>
+
+</div>
+</div>
+<a class="anchor" id="a3ac938dd5fc02a9a232df6605b5f6aa8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_RW_PIN&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pin for RW line </p>
+
+</div>
+</div>
+<a class="anchor" id="ae8772bdf31db863b81805c837bdc2da2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_RW_PORT&#160;&#160;&#160;<a class="el" href="lcd_8h.html#abcf42bd88b3c36193f301ca25b033875">LCD_PORT</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>port for RW line </p>
+
+</div>
+</div>
+<a class="anchor" id="abd056d70a1488ea2eb1aef87e248e234"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_START_LINE1&#160;&#160;&#160;0x00</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>DDRAM address of first char of line 1 </p>
+
+</div>
+</div>
+<a class="anchor" id="a7b317b21058ef031716ba040ef75430a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_START_LINE2&#160;&#160;&#160;0x40</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>DDRAM address of first char of line 2 </p>
+
+</div>
+</div>
+<a class="anchor" id="ae7cca16353048a062baeb3a52da55249"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_START_LINE3&#160;&#160;&#160;0x14</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>DDRAM address of first char of line 3 </p>
+
+</div>
+</div>
+<a class="anchor" id="ab1b73e05bdb5cc12cdff5a1cf6c4f2a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_START_LINE4&#160;&#160;&#160;0x54</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>DDRAM address of first char of line 4 </p>
+
+</div>
+</div>
+<a class="anchor" id="adb35ff6cb242e48ba0545ea919ffc5d3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LCD_WRAP_LINES&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>0: no wrap, 1: wrap at end of visibile line </p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentation der Funktionen</h2>
+<a class="anchor" id="af8da853dba4b9d5f2aea4e294444e14d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_clrscr </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear display and set cursor to home position. </p>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aea9d14f02df06f948cb5a56776980826"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_command </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send LCD controller instruction command. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cmd</td><td>instruction to send to LCD controller, see HD44780 data sheet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad0729d2cba627825a089ca1fff12ba29"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_data </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Send data byte to LCD controller. </p>
+<p>Similar to <a class="el" href="lcd_8h.html#afa7e36b95c43d603f510273ad077cbbe" title="Display character at current cursor position. ">lcd_putc()</a>, but without interpreting LF </p><dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>byte to send to LCD controller, see HD44780 data sheet </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="adbf47a5efdf02367ded1ebf8f9edb5fe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_gotoxy </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set cursor to specified position. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>horizontal position<br />
+ (0: left most position) </td></tr>
+    <tr><td class="paramname">y</td><td>vertical position<br />
+ (0: first line) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3aabf730aa4e0393bb5c959583c00a8e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_home </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set cursor to home position. </p>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a54f76c0e6e8e243a088ba296e716fb24"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_init </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>dispAttr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classPCF8574A.html">PCF8574A</a> *&#160;</td>
+          <td class="paramname"><em>pcf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialize display and select type of cursor. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dispAttr</td><td><b>LCD_DISP_OFF</b> display off<br />
+ <b>LCD_DISP_ON</b> display on, cursor off<br />
+ <b>LCD_DISP_ON_CURSOR</b> display on, cursor on<br />
+ <b>LCD_DISP_ON_CURSOR_BLINK</b> display on, cursor on flashing </td></tr>
+    <tr><td class="paramname">pcf</td><td><b>zeiger</b> auf <a class="el" href="classPCF8574A.html" title="Für diese Klasse muss kein Objekt erstellt werden. Es ist Teil der Goldboard4 Klasse und kann über da...">PCF8574A</a> Obejekt das das Display steuern soll </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afa7e36b95c43d603f510273ad077cbbe"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_putc </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display character at current cursor position. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>character to be displayed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8ffdfcac7638368ff04364c14984266e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_puts </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display string without auto linefeed. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>string to be displayed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9022a24a56a9b15681f62eb6ba77e5de"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lcd_puts_p </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>progmem_s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Display string from program memory without auto linefeed. </p>
+<dl class="params"><dt>Parameter</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">progmem_s</td><td>string from program memory be be displayed </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Rückgabe</dt><dd>none </dd></dl>
+<dl class="section see"><dt>Siehe auch</dt><dd><a class="el" href="lcd_8h.html#a4f1928f1515e21422d5a33af2949f2f7" title="macros for automatically storing string constant in program memory ">lcd_puts_P</a> </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>
