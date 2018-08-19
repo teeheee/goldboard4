@@ -1,4 +1,31 @@
 # Goldboard4 Version 2.1
+
+
+## Usage
+
+### Atmelstudio 7
+
+File->Import->Project Template...
+
+Select a project template [...] -> "<path>/goldboard4-2.1-AS7-template.zip" -> OK
+
+File->New->Project...
+
+goldboard4_V2.1->OK
+
+## Makefile (for Linux users and/or Visual Studio haters)
+
+### Dependencies:
+avr-libc gcc-avr make avrdude
+
+### Compile:
+make
+
+### Upload:
+make program
+
+
+
 ## TODO
 * do full test 
    * motors
@@ -42,12 +69,6 @@
 * Pixy support
 * usring support
 * VL53L0X supprt
-
-## Usage
-
-### Atmelstudio 7
-
-### Eclipse IDE for C/C++ Developers
 
 
 ## Memory Usage
