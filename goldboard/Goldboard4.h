@@ -59,6 +59,7 @@
 #include "LiquidCrystal_I2C.h"
 #include "SonarSRF08.h"
 #include "CMPS03.h"
+#include "CMPS11.h"
 #include "PixyI2C.h"
 #include "usring.h"
 #include "SRF08.h"
