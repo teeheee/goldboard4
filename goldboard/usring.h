@@ -23,7 +23,7 @@
 
 #include <avr/io.h>
 
-#define USRING_I2C_ADDR   0x69  /*!< I2C-Address of the module */
+#define USRING_I2C_ADDR   52  /*!< I2C-Address of the module */
 #define USRING_REG			0
 #define USRING_AN_REG		2
 #define USRING_TH_REG		18
@@ -43,7 +43,6 @@ public:
 	void setThresholdValueGolbal(uint8_t th);
 	bool checkAck();
 private:
-
 	bool _initialized;
 };
 
