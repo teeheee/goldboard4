@@ -37,13 +37,13 @@ LiquidCrystal_I2C lcd(63,16,4);
 #define SEARCH_SPEED 50
 #define FOLLOW_SPEED 50
 
-#define LINE_SPEED 100
-#define LINE_SCHWELLE 100
+#define LINE_SPEED 255
+#define LINE_SCHWELLE 250
 
 #define FOLLOW_X_PFACTOR 1.0 // muss FOLLOW_KOMPASS_PFACTOR aufwiegen
 #define FOLLOW_Y_PFACTOR 1.0 // darf nicht Schwingen
-#define FOLLOW_KOMPASS_PFACTOR 1.0 // je grÃ¶ÃŸer desdo eher verliert er der Ball
-#define FOLLOW_RADIUS 3.0 //je grÃ¶ÃŸer desdo kleiner der Radius
+#define FOLLOW_KOMPASS_PFACTOR 1.0 // je größer desdo eher verliert er der Ball
+#define FOLLOW_RADIUS 3.0 //je größer desdo kleiner der Radius
 
 
 /***SENSOR WERTE****/
@@ -322,7 +322,6 @@ void followBall(){
 	float e1 = (KompassWert-128) * FOLLOW_KOMPASS_PFACTOR;
 	float e2 = e1*FOLLOW_RADIUS;
 
-
 	float m[4];
 	m[0] = -x-y-e1;
 	m[1] = x-y+e2;
@@ -400,9 +399,118 @@ void bounceLine(){
 	gb.motor[MOTOR3].rotate(MOTOR3_DIR * LINE_SPEED * cos(abprallwinkel));
 }
 
+
+double sensor_vektor_x[16];
+double sensor_vektor_y[16];
+
+void boden_sensor_vektor_init(){
+	sensor_vektor_x[0] = sin(11.25*3.1415/180);
+	sensor_vektor_y[0] = cos(11.25*3.1415/180);
+	
+	for(int sensor_index = 1; sensor_index < 16; sensor_index++)
+	{
+		sensor_vektor_x[sensor_index] = sin((11.25+22.5*sensor_index)*3.1415/180);
+		sensor_vektor_y[sensor_index] = cos((11.25+22.5*sensor_index)*3.1415/180);
+	}
+}
+
+double arctan_ext(double x, double y){
+	if(x > 0)
+		return acos(y)*180/3.1415;
+	else
+		return 360-acos(y)*180/3.1415;
+}
+
+double fahr_richtung(){
+	double x = 0;
+	double y = 0;
+	for(int sensor_index = 0; sensor_index < 16; sensor_index++)
+	{
+		if(BodenWert & (1 << sensor_index))
+		{
+			x += sensor_vektor_x[sensor_index];
+			y += sensor_vektor_y[sensor_index];
+		}
+	}
+	// normieren und spiegeln
+	double vektor_norm = sqrt(x*x + y*y);
+	x = -x/vektor_norm;
+	y = -y/vektor_norm;
+	double angle = arctan_ext(x,y);
+	//angle = ((int)angle/90)*90;
+	return angle;
+}
+
+void fahren_winkel(int angle)
+{
+	gb.motor[MOTOR0].rotate(MOTOR0_DIR * LINE_SPEED * cos((angle + 315)*3.1415/180.0));
+	gb.motor[MOTOR1].rotate(MOTOR1_DIR * LINE_SPEED * cos((angle + 45)*3.1415/180.0));
+	gb.motor[MOTOR2].rotate(MOTOR2_DIR * LINE_SPEED * cos((angle + 135)*3.1415/180.0));
+	gb.motor[MOTOR3].rotate(MOTOR3_DIR * LINE_SPEED * cos((angle + 225)*3.1415/180.0));
+}
+
+void line_program()
+{
+	#define LINE_STATE_INSIDE 1
+	#define LINE_STATE_OUTSIDE 2
+	#define LINE_STATE_ONLINE 3
+	static int state = LINE_STATE_INSIDE;
+	static int first_contact_angle = 0;
+	static int richtungs_differenz = 0;
+	int contact_angle = fahr_richtung();
+	if( BodenWert != 0 )
+		richtungs_differenz = abs(first_contact_angle-contact_angle);
+	switch(state)
+	{
+		case LINE_STATE_INSIDE:
+			if( BodenWert != 0 )
+			{
+				state = LINE_STATE_ONLINE;
+				first_contact_angle = contact_angle;
+				fahren_winkel(first_contact_angle);
+			}
+			else
+			{
+				gb.setMotorsOff();
+			}
+			break;
+		case LINE_STATE_ONLINE:	
+			if( BodenWert == 0 ) // linie = false
+			{
+				if( richtungs_differenz > 90 ) // drueber = true
+				{
+					state = LINE_STATE_OUTSIDE;
+				}
+				else // drueber = false
+				{
+					state = LINE_STATE_INSIDE;
+				}
+			}
+			fahren_winkel(first_contact_angle);
+			break;
+		case LINE_STATE_OUTSIDE:
+			if( BodenWert != 0 ) // linie = true
+			{
+				state = LINE_STATE_ONLINE;
+			}
+			fahren_winkel(first_contact_angle);
+			break;
+	}
+}
+
 void run() {
 	lcd.clear();
 	lcd.print("running");
+	/**test*/
+	
+	boden_sensor_vektor_init();
+	while (!BUTTON0) {
+		updateSensorValue();
+		line_program();
+    }
+    gb.setMotorsOff();
+	return;
+	/** end test**/
 	long loop_time = millis();
 	int printcounter = 0;
 	while (!BUTTON0) {
@@ -494,6 +602,7 @@ void testFunctions(){
 	}
 	gb.setMotorsOff();
 }
+
 
 int main(void) {
 	init();
