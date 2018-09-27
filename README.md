@@ -1,5 +1,12 @@
 # Goldboard4 Version 2.1
 
+## BOOTLOADER
+
+#### Atmelstudio_config
+
+![](images/bootloader_einstellungen.png)
+
+C:\WinAVR\bin\avrdude -c arduino -p m32 -P com5 -b 115200 -U flash:w:"$(OutputDirectory)\$(OutputFileName).hex":i
 
 ## Usage
 
