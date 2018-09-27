@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+environment/project/de.innot.avreclipse.configuration.app.debug.681146311/BUILDARTIFACT/delimiter=;
+environment/project/de.innot.avreclipse.configuration.app.debug.681146311/BUILDARTIFACT/operation=replace
+environment/project/de.innot.avreclipse.configuration.app.debug.681146311/BUILDARTIFACT/value=${ProjName}.elf
+environment/project/de.innot.avreclipse.configuration.app.debug.681146311/append=true
+environment/project/de.innot.avreclipse.configuration.app.debug.681146311/appendContributed=true

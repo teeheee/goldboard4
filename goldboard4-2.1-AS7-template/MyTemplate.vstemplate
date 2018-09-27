@@ -1,0 +1,82 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>goldboard4</Name>
+    <Description>version 2.1</Description>
+    <ProjectType>CandCPP</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>goldboard4</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="goldboard4.cppproj" File="goldboard4.cppproj" ReplaceParameters="true">
+      <Folder Name="libm" TargetFolderName="libm" />
+      <Folder Name="goldboard" TargetFolderName="goldboard">
+        <ProjectItem ReplaceParameters="true" TargetFileName="abi.cpp">abi.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="adc.cpp">adc.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="adc.h">adc.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Arduino.h">Arduino.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CMPS03.cpp">CMPS03.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CMPS03.h">CMPS03.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CMPS11.cpp">CMPS11.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="CMPS11.h">CMPS11.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="config.h">config.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="EEPROM.h">EEPROM.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="error.h">error.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Goldboard4.cpp">Goldboard4.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Goldboard4.h">Goldboard4.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="HC05.cpp">HC05.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="HC05.h">HC05.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="infrared_pulse.cpp">infrared_pulse.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="infrared_pulse.h">infrared_pulse.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="LiquidCrystal_I2C.cpp">LiquidCrystal_I2C.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="LiquidCrystal_I2C.h">LiquidCrystal_I2C.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Motor.cpp">Motor.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Motor.h">Motor.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PCF8574A.cpp">PCF8574A.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PCF8574A.h">PCF8574A.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="pin_configuration.h">pin_configuration.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="PixyI2C.h">PixyI2C.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="print.cpp">print.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="print.h">print.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Printable.h">Printable.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="pwm.cpp">pwm.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="pwm.h">pwm.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SerialPrint.cpp">SerialPrint.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SerialPrint.h">SerialPrint.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="servopwm.cpp">servopwm.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="servopwm.h">servopwm.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SonarSRF.cpp">SonarSRF.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SonarSRF.h">SonarSRF.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SonarSRF02.cpp">SonarSRF02.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SonarSRF02.h">SonarSRF02.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SonarSRF08.cpp">SonarSRF08.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SonarSRF08.h">SonarSRF08.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SonarSRF10.h">SonarSRF10.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SRF08.cpp">SRF08.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="SRF08.h">SRF08.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="time.cpp">time.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="time.h">time.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="TPixy.h">TPixy.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="twi.cpp">twi.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="twi.h">twi.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="uart.c">uart.c</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="uart.h">uart.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="usring.cpp">usring.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="usring.h">usring.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="VL53L0X.cpp">VL53L0X.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="VL53L0X.h">VL53L0X.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Wire.cpp">Wire.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Wire.h">Wire.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="WString.cpp">WString.cpp</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="WString.h">WString.h</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="main.cpp">main.cpp</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
