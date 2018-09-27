@@ -33,6 +33,8 @@
 
 #define ACCELERATION 10
 
+#define BOOTLOADER
+
 //uncomment this line if you dont use a pulsed ball sensors
 //this will make your code a little bit faster and shorter
 #define PULSE_SENSOR_INPUT
