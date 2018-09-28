@@ -1,24 +1,74 @@
 # Goldboard4 Version 2.1
 
-## BOOTLOADER
+## TODO
+* full test 
+   * ~motors~
+   * servos
+   * ~pwmpins~ 
+   * ~digitalpins~
+   * ~analogpins~
+   * ~buttons~
+   * ~leds~
+   * robot->bluetooth->pc
+   * robot->bluetooth->robot
+   * ~power pins~
+   * CMPS11
+   * ~CMPS03~
+   * ~SRF08~
+   * SRF10
+   * VL53L0X
+   * ~pixy~
+   * ~usring~
+   * ~lcd~
+* make clean doxygen comments
+* upgrade servo PWM to every pin
+* check race condition on interrupts
 
-#### Atmelstudio_config
-
-![](images/bootloader_einstellungen.png)
-
-C:\WinAVR\bin\avrdude -c arduino -p m32 -P com5 -b 115200 -U flash:w:"$(OutputDirectory)\$(OutputFileName).hex":i
-
-## Usage
+## Benutzung
 
 ### Atmelstudio 7
 
+Um die Goldboardlib verwenden zu können muss zuerst das Projekt Template importiert werden.
+
+#### Template importieren
+
 File->Import->Project Template...
+![](images/projekt_template_importieren.png)
 
 Select a project template [...] -> "<path>/goldboard4-2.1-AS7-template.zip" -> OK
+![](images/projekt_template_importieren_2.png)
+
+
+#### Projekt erstellen
 
 File->New->Project...
+![](images/projekt_erstellen.png)
 
 goldboard4_V2.1->OK
+Projektname und Pfad nicht vergessen!!
+![](images/projekt_erstellen_2.png)
+
+#### Fuses setzen
+
+Tools->Device Programming
+Apply
+Fuses
+
+Low Byte: 0xFF 
+High Byte: 0xD4
+
+#### Bootloader hochladen und konfigurieren
+
+Der Bootloader muss mit einem ISP Programmer (z.B. Avr-ISP-mkII) hochgeladen werden.
+
+Tools->Device Programming
+Apply
+Memories->Flash->[...]
+bootloader_mega32_optiboot.hex auswählen
+program
+
+![](images/bootloader_einstellungen.png)
+C:\WinAVR\bin\avrdude -c arduino -p m32 -P com5 -b 115200 -U flash:w:"$(OutputDirectory)\$(OutputFileName).hex":i
 
 ## Makefile (for Linux users and/or Visual Studio haters)
 
@@ -33,69 +83,5 @@ make program
 
 
 
-## TODO
-* do full test 
-   * motors
-   * servos
-   * pwmpins 
-   * digitalpins
-   * analogpins
-   * buttons
-   * leds
-   * robot->bluetooth->pc
-   * robot->bluetooth->robot
-   * power pins
-   * CMPS11
-   * CMPS03
-   * SRF08
-   * SRF10
-   * VL53L0X
-   * pixy
-   * usring
-   * lcd
-* make clean doxygen comments
-* upgrade servo PWM to every pin
-* selftest
-* check race condition on interrupts
-* reduce code size
-* reorganize ERROR Messages
-
-## Features
-
-* motor acceleration limit
-* intelligent motor PWM generation
-* single Servo PWM output
-* i2c lcd support
-* digital read and write on every GB-Pin
-* selftest on every start cycle
-* Bluetooth support for RN42 module
-* I2C scan feature with part identification
-* full support for I2C Arduino libs
-* EEPROM support
-* fast pulsed-IR-sensor lib
-* Pixy support
-* usring support
-* VL53L0X supprt
-
-
-## Memory Usage
-
-### everything enabled
-```
-Program:    4566 bytes (13.9% Full)
-(.text + .data + .bootloader)
-
-Data:        635 bytes (31.0% Full)
-(.data + .bss + .noinit)
-```
-### everything disabled
-
-```
-Program:    3372 bytes (10.3% Full)
-(.text + .data + .bootloader)
-
-Data:        369 bytes (18.0% Full)
-(.data + .bss + .noinit)
-```
 
 
