@@ -68,6 +68,9 @@ program
 
 #### Programmer für Bootloader konfigurieren
 
+Zum hochladen über usb wird das Programm avrdude benötigt.
+http://download.savannah.gnu.org/releases/avrdude/avrdude-6.3-mingw32.zip
+
 ![](images/bootloader_einstellungen.png)
 C:\WinAVR\bin\avrdude -c arduino -p m32 -P com5 -b 115200 -U flash:w:"$(OutputDirectory)\$(OutputFileName).hex":i
 
