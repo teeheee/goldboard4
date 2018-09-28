@@ -38,7 +38,6 @@ File->Import->Project Template...
 Select a project template [...] -> "<path>/goldboard4-2.1-AS7-template.zip" -> OK
 ![](images/projekt_template_importieren_2.png)
 
-
 #### Projekt erstellen
 
 File->New->Project...
@@ -57,7 +56,7 @@ Fuses
 Low Byte: 0xFF 
 High Byte: 0xD4
 
-#### Bootloader hochladen und konfigurieren
+#### Bootloader hochladen
 
 Der Bootloader muss mit einem ISP Programmer (z.B. Avr-ISP-mkII) hochgeladen werden.
 
@@ -66,6 +65,8 @@ Apply
 Memories->Flash->[...]
 bootloader_mega32_optiboot.hex auswählen
 program
+
+#### Programmer für Bootloader konfigurieren
 
 ![](images/bootloader_einstellungen.png)
 C:\WinAVR\bin\avrdude -c arduino -p m32 -P com5 -b 115200 -U flash:w:"$(OutputDirectory)\$(OutputFileName).hex":i
