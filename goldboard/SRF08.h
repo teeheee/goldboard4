@@ -19,7 +19,7 @@
 
 #include "Arduino.h"
 #include "Wire.h"
-#include <util/delay.h>
+#include "time.h"
 
 class SRF08
 {
@@ -58,4 +58,3 @@ private:
 
 
 #endif
-

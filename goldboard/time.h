@@ -1,5 +1,5 @@
 /*!
- @file       
+ @file
 
  @brief      System clock generation with parallel process handling.
  Triggers motor_isr and pulse_isr.
@@ -21,8 +21,10 @@
 #ifndef TIME_H_
 #define TIME_H_
 
+
 #ifndef F_CPU
-#define F_CPU 16000000L
+#warning F_CPU not defined!
+#define F_CPU 16000000UL
 #endif
 
 #include <avr/io.h>
