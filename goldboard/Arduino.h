@@ -32,12 +32,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-
-#ifndef F_CPU
-#warning F_CPU not defined!
-#define F_CPU 16000000L
-#endif
-
 #include "config.h"
 #include "time.h"
 #include "error.h"
@@ -45,11 +39,6 @@
 #ifdef __cplusplus
 extern "C"
 {
-#endif
-
-#ifndef F_CPU
-#warning F_CPU not defined!
-#define F_CPU 16000000L
 #endif
 
 #define TICKS_PER_MSEC   (F_CPU / 1000) / 256

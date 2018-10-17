@@ -23,9 +23,6 @@
 #define CONFIG_H_
 
 
-#ifndef F_CPU
-#define F_CPU 16000000L
-#endif
 
 #define UART_BAUD_RATE     115200UL //baud
 

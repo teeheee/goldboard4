@@ -25,6 +25,7 @@
 #include "SRF08.h"
 #include "Goldboard4.h"
 #include "error.h"
+#include "time.h"
 
 
 
@@ -78,7 +79,7 @@ void SRF08::init(uint8_t address)
 	// amplification register to center improvement
 	setGain (0);
 	//srf08SetGain (id, 2);
-	_delay_ms (100);
+	delay (100);
 
 	// 70: range register to 3053mm (formula: range=(register*43)+43 mm)
 	// 35: range register to 1548mm (formula: range=(register*43)+43 mm)
@@ -86,14 +87,14 @@ void SRF08::init(uint8_t address)
 	// 60: 2623mm
 	//srf08SetRange (id, 1548);
 	setRange (2623);
-	_delay_ms (100);
+	delay (100);
 
 	if( ! checkACK() )
 	{
 		ERROR_MESSAGE("SRF08 init");
 		return;
 	}
-	_delay_ms (50);
+	delay (50);
 	_initialized = true;
 }
 
@@ -216,7 +217,7 @@ void SRF08::changeAddress(uint8_t newAddress)
 	for (int i = 0; i < 4; i++)
 	{
 		_i2cWriteRegister (SRF08_REG_CMD, data[i]);
-		_delay_ms (50);
+		delay(50);
 	}
 
 	// finally set address of this sonar

@@ -35,7 +35,7 @@
 //#define ATMEGA8
 
 #ifndef TWI_FREQ
-#define TWI_FREQ 100000L
+#define TWI_FREQ 100000UL
 #endif
 
 #ifndef TWI_BUFFER_LENGTH
@@ -64,4 +64,3 @@ uint8_t twi_self_test(void);
 void twi_resuscitate(void);
 
 #endif
-

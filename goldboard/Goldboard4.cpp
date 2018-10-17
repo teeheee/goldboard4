@@ -1,5 +1,7 @@
 //Hardware interfaces
 
+#include "time.h"
+#include "config.h"
 #include "infrared_pulse.h"
 #include "Wire.h"
 #include "pin_configuration.h"
@@ -7,16 +9,13 @@
 #include "uart.h"
 #include "adc.h"
 #include "servopwm.h"
-
-#include "Goldboard4.h"
-#include "config.h"
 #include "Motor.h"
 #include "error.h"
 
+#include "Goldboard4.h"
+
 
 /******************* Goldboard Member Functions **********************/
-
-
 // default constructor
 Goldboard4::Goldboard4() {
 	sei();
