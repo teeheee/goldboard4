@@ -13,7 +13,7 @@ Die Nummern stimmen mit der lib überein.
 
 #### Template importieren
 
-Das [Atmelstudio 7 Template](goldboard4-2.1-AS7-template.zip) muss als erstes heruntergeladene werden und in den Template Ordner eurer Atmelstudio installation importiert werden.
+Das [Atmelstudio 7 Template](https://github.com/teeheee/goldboard4/raw/master/goldboard4-2.1-AS7-template.zip) muss als erstes heruntergeladene werden und in den Template Ordner eurer Atmelstudio installation importiert werden.
 ![](images/atmelstudio7/projekt_template_importieren.png)
 Hier müsst ihr das heruntergeladene Template auswählen.
 ![](images/atmelstudio7/projekt_template_importieren_2.png)
