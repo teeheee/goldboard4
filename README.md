@@ -11,6 +11,8 @@ Die Nummern stimmen mit der lib überein.
 
 ### Atmelstudio 7
 
+Vorraussetzung für die folgenden Schritte ist eine erfolgreiche installation von Atmelstudio 7.
+
 #### Template importieren
 
 Das [Atmelstudio 7 Template](https://github.com/teeheee/goldboard4/raw/master/goldboard4-2.1-AS7-template.zip) muss als erstes heruntergeladene werden und in den Template Ordner eurer Atmelstudio installation importiert werden.
@@ -40,7 +42,7 @@ Zum setzen der Fuse Bits schreibt folgende Hex Zahlen in die Felder für Low Byt
 
 ![](images/atmelstudio7/fuses3.png)
 
-Um den Bootloader hochzuladen wählt die in eurem projekt enthaltene datei bootloader_mega32_optiboot.hex aus. Diese findet ihr in dem Ordner utils. Durch drücken von program ladet ihr den Bootloader hoch.
+Um den Bootloader hochzuladen wählt die in eurem projekt enthaltene datei bootloader_mega32_optiboot.hex aus. Diese findet ihr in dem Ordner utils. Durch drücken von program ladet ihr den Bootloader hoch. Wenn keine Fehler auftreten, sollte die Led am Goldboard blinken.
 
 
 ![](images/atmelstudio7/bootloader.png)
@@ -57,9 +59,41 @@ Je nachdem unter welchem COM-Port euer Goldboard erkannt wird, müsst ihr
 "com5" in z.B. "com3" ändern.
 
 
-## Atom with Platform-IO plugin
+## Atom mit Platform-IO Plugin
 
-> TODO text
+Vorraussetzung für die folgenden Schritte ist eine erfolgreiche installation der Atom-IDE.
+
+### Installation des Platform-IO Plugin
+Das Plugin wird über den internen plugin manager installiert. Eine internetverbindung ist nötig.
+![](images/platformio/install_1.png)
+![](images/platformio/install_2.png)
+![](images/platformio/install_3.png)
+Die installation von Clang ist optional.
+![](images/platformio/install_4.png)
+
+
+### Projekt erstellen
+
+Um ein neues Projekt zu erstellen muss das [Platform IO Template](https://github.com/teeheee/goldboard4/raw/master/goldboard4-AtomPio-template.zip) heruntergeladen werden und an dem bevorzugten Speicherort extrahiert werden. Es bietet sich an das Template Archiv für später zwischen zu speichern.
+Mit dem Menüpunkt Add Projekt Folder kann der Ordner geöffnet werden.
+![](images/platformio/usage_1.png)
+Die main.cpp findet ihr im src Ordner. Mit dem Haken am linken Rand könnt ihr Compilieren. Der Pfeil ist fürs übertragen. Der Stecker links unten ist für den Seriel Monitor.
+![](images/platformio/usage_2.png)
+Damit der Serialmonitor funktioniert muss die Baudrate 115200 eingestellt werden.
+![](images/platformio/usage_3.png)
+
+### Fuses und Bootloader übertragen
+
+um die fuses übertagen zu können muss in platformio.ini
+der richtige Programmer auskommentiert werden. Kommentare werden mit "#" eingeleitet.
+![](images/platformio/bootloader_fuses_1.png)
+Nun könnt ihr links unten übner das terminal symbol eine Konsole öffnen und folgenden Befehl eingeben.
+> pio run -t uploadboot
+
+![](images/platformio/bootloader_fuses_2.png)
+![](images/platformio/bootloader_fuses_3.png)
+
+Es werden nun automatisch die richtigen fuses und der bootloader übertragen. Wenn keine Fehler auftreten, sollte die Led am Goldboard blinken.
 
 ## Makefile for users without a GUI
 
