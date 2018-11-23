@@ -1,9 +1,9 @@
-
-
 #include "usring.h"
 #include "Arduino.h"
 #include "Wire.h"
 #include "error.h"
+
+const char error_prefix[] PROGMEM = "CMPS11: ";
 
 usring::usring()
 {
@@ -18,7 +18,10 @@ void usring::init()
 	data[1] = 0;
 	Wire.beginTransmission(USRING_I2C_ADDR);
 	Wire.write(data, 2);
-	Wire.endTransmission();
+	if (Wire.endTransmission() != 0) {
+		ERROR_MESSAGE_PREFIX(error_prefix, progmem_no_ack);
+		return 0;
+	}
 	delay(2000); // let the Sensor Calibrate
 	_initialized = true;
 }
@@ -32,7 +35,10 @@ uint16_t usring::getValue()
 	Wire.beginTransmission(USRING_I2C_ADDR);
 	uint8_t data = USRING_REG;
 	Wire.write(&data, 1);
-
+  	if (Wire.endTransmission() != 0) {
+		ERROR_MESSAGE_PREFIX(error_prefix, progmem_no_ack);
+		return 0;
+	}
 	Wire.requestFrom((uint8_t) USRING_I2C_ADDR, (uint8_t) 2);
 	value = Wire.read();
 	value += Wire.read() << 8;
@@ -64,6 +70,10 @@ uint8_t usring::getanalogValue(uint8_t id)
 	Wire.beginTransmission(USRING_I2C_ADDR);
 	uint8_t data = USRING_AN_REG + id;
 	Wire.write(&data, 1);
+  	if (Wire.endTransmission() != 0) {
+		ERROR_MESSAGE_PREFIX(error_prefix, progmem_no_ack);
+		return 0;
+	}
 
 	Wire.requestFrom((uint8_t) USRING_I2C_ADDR, (uint8_t) 1);
 	value = Wire.read();
