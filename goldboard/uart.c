@@ -51,19 +51,16 @@ const do_reboot_t do_reboot = (do_reboot_t)((FLASHEND-511)>>1);
 void uart_interrupt_hook(uint8_t data)
 {
 	static int count = 0;
-	if(data==0x30 && count%2==0)
-	count++;
-	else if(data==0x20 && count%2==1)
-	count++;
-	else
-	count = 0;
-
-	if(count == 2)
+	if(data==0x30 && count==0)
+		count++;
+	else if(data==0x20 && count==1)
 	{
 		cli();
 		UCSRB=0;
 		do_reboot();
 	}
+	else
+		count = 0;
 }
 #else
 #define HC05_uart_hook(x)
@@ -132,7 +129,7 @@ void uart_interrupt_hook(uint8_t data)
 #define UART0_CONTROL  UCSRB
 #define UART0_DATA     UDR
 #define UART0_UDRIE    UDRIE
-#elif defined(__AVR_ATmega162__) 
+#elif defined(__AVR_ATmega162__)
 /* ATmega with two USART */
 #define ATMEGA_USART0
 #define ATMEGA_USART1
@@ -148,7 +145,7 @@ void uart_interrupt_hook(uint8_t data)
 #define UART1_CONTROL  UCSR1B
 #define UART1_DATA     UDR1
 #define UART1_UDRIE    UDRIE1
-#elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__) 
+#elif defined(__AVR_ATmega64__) || defined(__AVR_ATmega128__)
 /* ATmega with two USART */
 #define ATMEGA_USART0
 #define ATMEGA_USART1
@@ -167,7 +164,7 @@ void uart_interrupt_hook(uint8_t data)
 #elif defined(__AVR_ATmega161__)
 /* ATmega with UART */
 #error "AVR ATmega161 currently not supported by this libaray !"
-#elif defined(__AVR_ATmega169__) 
+#elif defined(__AVR_ATmega169__)
 /* ATmega with one USART */
 #define ATMEGA_USART
 #define UART0_RECEIVE_INTERRUPT   USART0_RX_vect
@@ -186,7 +183,7 @@ void uart_interrupt_hook(uint8_t data)
 #define UART0_CONTROL  UCSR0B
 #define UART0_DATA     UDR0
 #define UART0_UDRIE    UDRIE0
-#elif defined(__AVR_ATtiny2313__) 
+#elif defined(__AVR_ATtiny2313__)
 #define ATMEGA_USART
 #define UART0_RECEIVE_INTERRUPT   USART_RX_vect
 #define UART0_TRANSMIT_INTERRUPT  USART_UDRE_vect
@@ -197,7 +194,7 @@ void uart_interrupt_hook(uint8_t data)
 #elif defined(__AVR_ATmega329__) || \
       defined(__AVR_ATmega649__) || \
       defined(__AVR_ATmega325__) || \
-      defined(__AVR_ATmega645__) 
+      defined(__AVR_ATmega645__)
 /* ATmega with one USART */
 #define ATMEGA_USART0
 #define UART0_RECEIVE_INTERRUPT   USART0_RX_vect
@@ -575,6 +572,20 @@ ISR(UART1_TRANSMIT_INTERRUPT)
  **************************************************************************/
 {
 	unsigned char tmptail;
+
+	static int overload_counter = 0;
+	if(tmphead == UART1_RxTail)
+		overload_counter++;
+	else
+		overload_counter--;
+
+	if(overload_counter > 100)
+	{
+		  overload_counter = 0;
+			UART1_TxHead = 0;
+			UART1_TxTail = 0;
+			return;
+	}
 
 	if ( UART1_TxHead != UART1_TxTail)
 	{
