@@ -1,5 +1,3 @@
-
-
 #include "usring.h"
 #include "Arduino.h"
 #include "Wire.h"
@@ -32,7 +30,7 @@ uint16_t usring::getValue()
 	Wire.beginTransmission(USRING_I2C_ADDR);
 	uint8_t data = USRING_REG;
 	Wire.write(&data, 1);
-
+  	Wire.endTransmission();
 	Wire.requestFrom((uint8_t) USRING_I2C_ADDR, (uint8_t) 2);
 	value = Wire.read();
 	value += Wire.read() << 8;
@@ -64,6 +62,7 @@ uint8_t usring::getanalogValue(uint8_t id)
 	Wire.beginTransmission(USRING_I2C_ADDR);
 	uint8_t data = USRING_AN_REG + id;
 	Wire.write(&data, 1);
+  	Wire.endTransmission();
 
 	Wire.requestFrom((uint8_t) USRING_I2C_ADDR, (uint8_t) 1);
 	value = Wire.read();
