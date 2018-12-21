@@ -60,6 +60,9 @@
  * 6 = DATA6
  * 7 = DATA7
  * die Reihenfolge gibt an welcher Pin vom LCD am jeweiligen Pin des Portexpanders angeschlossen ist.
+ * #define LCD_PIN_MAPPING 0x<D7><D6><D5><D4>f<EN><RW><RS>
+ * D7 bekommt dann die pin nummer des Portexpanders
+ * das f bedeutet, dass nichts angeschlossen ist
  * Bsp
  * EN -> PCF_0
  * RW -> PCF_1
@@ -69,6 +72,7 @@
  * DATA5 -> PCF_6
  * DATA4 -> PCF_7
  *
+ * 			   
  * #define LCD_PIN_MAPPING 0x4567f012
  * */
 
