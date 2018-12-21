@@ -190,7 +190,7 @@ class LSM303
     unsigned int getTimeout(void);
     bool timeoutOccurred(void);
 
-    float heading(void);
+    int getValue(void);
     template <typename T> float heading(vector<T> from);
 
     // vector functions

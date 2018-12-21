@@ -32,8 +32,11 @@ LSM303::LSM303(void)
 
   _device = device_auto;
 
-  io_timeout = 0;  // 0 = no timeout
+  io_timeout = 100;  // 0 = no timeout
   did_timeout = false;
+	enableDefault();
+  m_min = (LSM303::vector<int16_t>){-32767, -32767, -32767};
+  m_max = (LSM303::vector<int16_t>){+32767, +32767, +32767};
 }
 
 // Public Methods //////////////////////////////////////////////////////////////
@@ -449,15 +452,16 @@ PCB, in the direction of the top of the text on the silkscreen.
 This is the +X axis on the Pololu LSM303D carrier and the -Y axis on
 the Pololu LSM303DLHC, LSM303DLM, and LSM303DLH carriers.
 */
-float LSM303::heading(void)
+int LSM303::getValue(void)
 {
+	read();
   if (_device == device_D)
   {
-    return heading((vector<int>){1, 0, 0});
+    return (int)heading((vector<int>){1, 0, 0});
   }
   else
   {
-    return heading((vector<int>){0, -1, 0});
+    return (int)heading((vector<int>){0, -1, 0});
   }
 }
 
