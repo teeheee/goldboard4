@@ -106,6 +106,8 @@ public:
 public:
 	Goldboard4();
 
+
+	void init();
 	/** schaltet alle Motoren auf aus.
 	 */
 	void setMotorsOff();

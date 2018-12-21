@@ -424,7 +424,8 @@ void twi_stop(void)
 	unsigned long timeout = 0;
 	while (TWCR & _BV(TWSTO))
 	{
-		continue;
+		if(timeout++ > MAX_TIMEOUT)
+			return;
 	}
 
 	// update twi state
