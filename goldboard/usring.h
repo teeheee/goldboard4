@@ -24,7 +24,7 @@
 #include <avr/io.h>
 
 #define USRING_I2C_ADDR   52  /*!< I2C-Address of the module */
-#define USRING_REG			0
+#define USRING_REG		0
 #define USRING_AN_REG		2
 #define USRING_TH_REG		18
 #define USRING_ERROR_TIMEOUT	100	  /* After this time, there MUST be a value */
@@ -41,6 +41,7 @@ public:
 	uint8_t getThresholdValue(uint8_t id);
 	void setThresholdValue(uint8_t id, uint8_t th);
 	void setThresholdValueGolbal(uint8_t th);
+	void setFilterValue(uint8_t value);
 	bool checkAck();
 private:
 	bool _initialized;
