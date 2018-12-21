@@ -1,6 +1,7 @@
 #include "Goldboard4.h"
 
 
+
 Goldboard4 gb;
 //SonarSRF08 US[4] = { SonarSRF08(112),SonarSRF08(114),SonarSRF08(122),SonarSRF08(126)};
 SRF08 US[4];
@@ -32,18 +33,25 @@ LiquidCrystal_I2C lcd(63,16,4);
 #define IRWert_LINKS 2
 #define IRWert_VORNE 1
 
+
+#define US_ENABLE 0
+#define PIXY_ENABLE 1
+#define KOMPASS_ENABLE 1
+#define BODEN_ENABLE 1
+#define IR_ENABLE 0
+
 /**** PARAMETER ********/
 
-#define SEARCH_SPEED 50
-#define FOLLOW_SPEED 50
+#define SEARCH_SPEED 100
+#define FOLLOW_SPEED 100
 
-#define LINE_SPEED 255
-#define LINE_SCHWELLE 250
+#define LINE_SPEED 100
+#define LINE_SCHWELLE 240
 
 #define FOLLOW_X_PFACTOR 1.0 // muss FOLLOW_KOMPASS_PFACTOR aufwiegen
 #define FOLLOW_Y_PFACTOR 1.0 // darf nicht Schwingen
-#define FOLLOW_KOMPASS_PFACTOR 1.0 // je größer desdo eher verliert er der Ball
-#define FOLLOW_RADIUS 3.0 //je größer desdo kleiner der Radius
+#define FOLLOW_KOMPASS_PFACTOR 1.0 // je gr??er desdo eher verliert er der Ball
+#define FOLLOW_RADIUS 3.0 //je gr??er desdo kleiner der Radius
 
 
 /***SENSOR WERTE****/
@@ -96,7 +104,7 @@ void updateSensorValue() {
 	static unsigned long US_time = 0;
 	static int counter = 0;
 
-	if (millis() - US_time > US_DELAY) {
+	if (millis() - US_time > US_DELAY && US_ENABLE) {
 		/*switch(counter)
 		{
 		case 0:
@@ -132,13 +140,13 @@ void updateSensorValue() {
 	}
 
 	static unsigned long kompass_time = 0;
-	if (millis() - kompass_time > KOMPASS_DELAY) {
+	if (millis() - kompass_time > KOMPASS_DELAY && KOMPASS_ENABLE) {
 		KompassWert = kompass.getValue();
 		kompass_time = millis();
 	}
 
 	static unsigned long pixy_time = 0;
-	if (millis() - pixy_time > PIXY_DELAY) {
+	if (millis() - pixy_time > PIXY_DELAY && PIXY_ENABLE) {
 		Pixy_BlockCount = pixy.getBlocks();
 		if(Pixy_BlockCount > 0)
 		{
@@ -149,13 +157,13 @@ void updateSensorValue() {
 	}
 
 	static unsigned long boden_time = 0;
-	if (millis() - boden_time > BODEN_DELAY) {
+	if (millis() - boden_time > BODEN_DELAY && BODEN_ENABLE) {
 		BodenWert = ring.getValue();
 		boden_time = millis();
 	}
 
 	static unsigned long IRWert_time = 0;
-	if (millis() - IRWert_time > IRWert_DELAY) {
+	if (millis() - IRWert_time > IRWert_DELAY  && IR_ENABLE) {
 		IRWert[0] = gb.getPWMPulsedLight(IRWert_VORNE);
 		IRWert[1] = gb.getPWMPulsedLight(IRWert_RECHTS);
 		IRWert[2] = gb.getPWMPulsedLight(IRWert_HINTEN);
@@ -178,7 +186,7 @@ void Menu() {
 	lcd.setCursor(0, 1);
 	lcd.print("Test Sensors");
 	lcd.setCursor(0, 2);
-	lcd.print("Config");
+	lcd.print("test");
 	lcd.setCursor(0, 3);
 	lcd.print("Test Functions");
 	while (1) {
@@ -364,61 +372,25 @@ void searchBall(){
 	}
 }
 
-int Abprallrichtung(){
-	int currentBlockSize = 0;
-	int lastBlockSize = 0;
-	int ret = -1;
-	for(int i = 0; i < 32; i++){
-		int index = i%16;
-		if(BodenWert & (1<<index)){
-			if(currentBlockSize > lastBlockSize){
-				ret = (i - 1  - currentBlockSize/2)%16;
-				lastBlockSize = currentBlockSize;
-			}
-			currentBlockSize = 0;
-		}
-		else{
-			currentBlockSize++;
-		}
-	}
-	return ret;
-}
+int sensor_vektor_x[16];
+int sensor_vektor_y[16];
 
-void bounceLine(){
-	static long lastContact = 0;
-	static int abprallrichtung = 0;
-	if(millis()-lastContact > 200)
-	{
-		abprallrichtung = Abprallrichtung();
-	}
-	lastContact = millis();
-	float abprallwinkel = (2.0*3.1415/16.0)*abprallrichtung;
-	gb.motor[MOTOR0].rotate(MOTOR0_DIR * LINE_SPEED * cos(abprallwinkel));
-	gb.motor[MOTOR1].rotate(MOTOR1_DIR * LINE_SPEED * -cos(abprallwinkel));
-	gb.motor[MOTOR2].rotate(MOTOR2_DIR * LINE_SPEED * -cos(abprallwinkel));
-	gb.motor[MOTOR3].rotate(MOTOR3_DIR * LINE_SPEED * cos(abprallwinkel));
-}
-
-
-double sensor_vektor_x[16];
-double sensor_vektor_y[16];
-
+/** sin und cos ist vertauscht da y vorne ist un 0 grad hat **/
 void boden_sensor_vektor_init(){
 	sensor_vektor_x[0] = sin(11.25*3.1415/180);
 	sensor_vektor_y[0] = cos(11.25*3.1415/180);
 	
 	for(int sensor_index = 1; sensor_index < 16; sensor_index++)
 	{
-		sensor_vektor_x[sensor_index] = sin((11.25+22.5*sensor_index)*3.1415/180);
-		sensor_vektor_y[sensor_index] = cos((11.25+22.5*sensor_index)*3.1415/180);
+		sensor_vektor_x[sensor_index] = sin((11.25+22.5*sensor_index)*3.1415/180)*100;
+		sensor_vektor_y[sensor_index] = cos((11.25+22.5*sensor_index)*3.1415/180)*100;
 	}
 }
 
+
+/* TODO stimmt das wirklich??????*/
 double arctan_ext(double x, double y){
-	if(x > 0)
-		return acos(y)*180/3.1415;
-	else
-		return 360-acos(y)*180/3.1415;
+	return atan2(y,x)*180/3.1415;
 }
 
 double fahr_richtung(){
@@ -436,17 +408,22 @@ double fahr_richtung(){
 	double vektor_norm = sqrt(x*x + y*y);
 	x = -x/vektor_norm;
 	y = -y/vektor_norm;
-	double angle = arctan_ext(x,y);
+	int angle = (int)arctan_ext(x,y);
 	//angle = ((int)angle/90)*90;
-	return angle;
+	return (360+angle+90)%360;
 }
 
 void fahren_winkel(int angle)
 {
-	gb.motor[MOTOR0].rotate(MOTOR0_DIR * LINE_SPEED * cos((angle + 315)*3.1415/180.0));
-	gb.motor[MOTOR1].rotate(MOTOR1_DIR * LINE_SPEED * cos((angle + 45)*3.1415/180.0));
-	gb.motor[MOTOR2].rotate(MOTOR2_DIR * LINE_SPEED * cos((angle + 135)*3.1415/180.0));
-	gb.motor[MOTOR3].rotate(MOTOR3_DIR * LINE_SPEED * cos((angle + 225)*3.1415/180.0));
+	gb.motor[MOTOR0].rotate(MOTOR0_DIR * LINE_SPEED * cos((-angle + 315)*3.1415/180.0));
+	gb.motor[MOTOR1].rotate(MOTOR1_DIR * LINE_SPEED * cos((-angle + 45)*3.1415/180.0));
+	gb.motor[MOTOR2].rotate(MOTOR2_DIR * LINE_SPEED * cos((-angle + 135)*3.1415/180.0));
+	gb.motor[MOTOR3].rotate(MOTOR3_DIR * LINE_SPEED * cos((-angle + 225)*3.1415/180.0));	
+}
+
+void fahren_vector(int x, int y)
+{
+	fahren_winkel(arctan_ext(x,y));
 }
 
 void line_program()
@@ -467,7 +444,7 @@ void line_program()
 			{
 				state = LINE_STATE_ONLINE;
 				first_contact_angle = contact_angle;
-				fahren_winkel(first_contact_angle);
+				fahren_winkel(first_contact_angle+180);
 			}
 			else
 			{
@@ -477,7 +454,7 @@ void line_program()
 		case LINE_STATE_ONLINE:	
 			if( BodenWert == 0 ) // linie = false
 			{
-				if( richtungs_differenz > 90 ) // drueber = true
+				if( richtungs_differenz > 90 && richtungs_differenz < 270 ) // drueber = true
 				{
 					state = LINE_STATE_OUTSIDE;
 				}
@@ -486,14 +463,14 @@ void line_program()
 					state = LINE_STATE_INSIDE;
 				}
 			}
-			fahren_winkel(first_contact_angle);
+			fahren_winkel(first_contact_angle+180);
 			break;
 		case LINE_STATE_OUTSIDE:
 			if( BodenWert != 0 ) // linie = true
 			{
 				state = LINE_STATE_ONLINE;
 			}
-			fahren_winkel(first_contact_angle);
+			fahren_winkel(first_contact_angle+180);
 			break;
 	}
 }
@@ -501,58 +478,51 @@ void line_program()
 void run() {
 	lcd.clear();
 	lcd.print("running");
-	/**test*/
-	
-	boden_sensor_vektor_init();
 	while (!BUTTON0) {
-		updateSensorValue();
-		line_program();
-    }
-    gb.setMotorsOff();
-	return;
-	/** end test**/
-	long loop_time = millis();
-	int printcounter = 0;
-	while (!BUTTON0) {
-		if(printcounter==0)
-		{
-			lcd.clear();
-			lcd.print("LoopTime: ");
-			lcd.print((int)(millis()-loop_time));
-		}
-		loop_time = millis();
-		if(printcounter==0)
-			lcd.setCursor(0, 1);
-
 		updateSensorValue();
 		if(BodenWert > 0) //linie
 		{
-			if(printcounter==0)
-				lcd.print("Linie");
-			bounceLine();
+			line_program();
 		}
 		else if(Pixy_BlockCount>0)//sieht ball
 		{
-			if(printcounter==0)
-				lcd.print("Ball");
 			followBall();
 		}
 		else //sieht ball nicht
 		{
-			if(printcounter==0)
-				lcd.print("Suchen");
 			searchBall();
 		}
-		printcounter = (printcounter +1)%500;
 	}
 	gb.setMotorsOff();
 }
 
 void config() {
-	lcd.print("configing");
+	boden_sensor_vektor_init();
+	unsigned long print_time = 0;
+	unsigned long looptime = millis();
+	unsigned int looptime_min = 10000;
+	unsigned int looptime_max = 0;
 	while (!BUTTON0) {
-
+		updateSensorValue();
+		line_program();
+		unsigned int time = millis()-looptime;
+		looptime = millis();
+		if(looptime_min > time)
+			looptime_min = time;
+		if(looptime_max < time)
+			looptime_max = time;
+		if(millis()-print_time > 1000)
+		{
+			lcd.clear();
+			lcd.setCursor(0,0);
+			lcd.print("test");
+			lcd.setCursor(0,1);
+			lcd.print(looptime_min);
+			lcd.setCursor(8,1);
+			lcd.print(looptime_max);
+		}
 	}
+	gb.setMotorsOff();
 }
 
 
@@ -591,7 +561,7 @@ void testFunctions(){
 			lcd.print("Linie");
 			updateSensorValue();
 			if(BodenWert > 0)
-				bounceLine();
+				line_program();
 			else
 				gb.setMotorsOff();
 			break;
