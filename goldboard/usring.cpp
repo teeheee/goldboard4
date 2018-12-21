@@ -22,7 +22,6 @@ void usring::init()
 		ERROR_MESSAGE_PREFIX(error_prefix, progmem_no_ack);
 		return;
 	}
-	delay(2000); // let the Sensor Calibrate
 	_initialized = true;
 }
 

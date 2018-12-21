@@ -35,6 +35,8 @@
 //#include "pins_arduino.h"
 #include "twi.h"
 
+#define MAX_TIMEOUT 0xffff
+
 static volatile uint8_t twi_state;
 static volatile uint8_t twi_slarw;
 static volatile uint8_t twi_sendStop;// should the transaction end with a stop
@@ -157,11 +159,13 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length,
 	{
 		return 0;
 	}
-
+	
+	unsigned long timeout = 0;
 	// wait until twi is ready, become master receiver
 	while (TWI_READY != twi_state)
 	{
-		continue;
+		if(timeout++ > MAX_TIMEOUT)
+			return 0;
 	}
 	twi_state = TWI_MRX;
 	twi_sendStop = sendStop;
@@ -190,9 +194,13 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length,
 		// up. Also, don't enable the START interrupt. There may be one pending from the
 		// repeated start that we sent ourselves, and that would really confuse things.
 		twi_inRepStart = false;		// remember, we're dealing with an ASYNC ISR
+		
+		timeout = 0;
 		do
 		{
 			TWDR = twi_slarw;
+			if(timeout++ > MAX_TIMEOUT)
+				return 0;
 		} while (TWCR & _BV(TWWC));
 		TWCR = _BV(TWINT) | _BV(TWEA) | _BV(TWEN) | _BV(TWIE);// enable INTs, but not START
 	}
@@ -201,9 +209,12 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length,
 		TWCR = _BV(TWEN) | _BV(TWIE) | _BV(TWEA) | _BV(TWINT) | _BV(TWSTA);
 
 	// wait for read operation to complete
+	
+	timeout = 0;
 	while (TWI_MRX == twi_state)
 	{
-		continue;
+		if(timeout++ > MAX_TIMEOUT)
+			return 0;
 	}
 
 	if (twi_masterBufferIndex < length)
@@ -233,7 +244,6 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length,
  *          3 .. data send, NACK received
  *          4 .. other twi error (lost bus arbitration, bus error, ..)
  */
-#define MAX_TIMEOUT 0xffffff
 
 uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length,
 		uint8_t wait, uint8_t sendStop)
@@ -287,9 +297,12 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length,
 		// up. Also, don't enable the START interrupt. There may be one pending from the
 		// repeated start that we sent outselves, and that would really confuse things.
 		twi_inRepStart = false;		// remember, we're dealing with an ASYNC ISR
+		timeout = 0;
 		do
 		{
 			TWDR = twi_slarw;
+			if(timeout++ > MAX_TIMEOUT)
+				return 0;
 		} while (TWCR & _BV(TWWC));
 		TWCR = _BV(TWINT) | _BV(TWEA) | _BV(TWEN) | _BV(TWIE);// enable INTs, but not START
 	}
@@ -407,6 +420,8 @@ void twi_stop(void)
 
 	// wait for stop condition to be exectued on bus
 	// TWINT is not set after a stop condition!
+
+	unsigned long timeout = 0;
 	while (TWCR & _BV(TWSTO))
 	{
 		continue;
