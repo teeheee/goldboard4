@@ -1,5 +1,0 @@
-<map id="goldboard/pwm.h" name="goldboard/pwm.h">
-<area shape="rect" id="node2" href="$config_8h_source.html" title="config.h" alt="" coords="5,80,73,107"/>
-<area shape="rect" id="node5" href="$time_8h.html" title="System clock generation with parallel process handling. Triggers motor_isr and pulse_isr. " alt="" coords="277,80,335,107"/>
-<area shape="rect" id="node6" href="$pin__configuration_8h.html" title="Contains the PIN&#45;Configuration of the Goldboard4. " alt="" coords="359,80,490,107"/>
-</map>
