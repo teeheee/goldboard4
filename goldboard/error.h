@@ -8,6 +8,9 @@
 #ifndef GOLDBOARD_ERROR_H_
 #define GOLDBOARD_ERROR_H_
 
+#if __cplusplus <= 199711L
+#error "wrong C standard use -std=c++11"
+#endif
 
 #include "uart.h"
 #include "config.h"

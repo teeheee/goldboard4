@@ -28,6 +28,7 @@
 
 
 #define MIN_SPEED 40
+#define MAX_SPEED 249 // werte ueber 249 haben einen bug im pwm
 /*!
 @class Motor
 @brief Für diese Klasse muss kein Objekt erstellt werden. Es ist Teil der Goldboard4 Klasse und kann über das gb Objekt angesprochen werden.
@@ -54,22 +55,24 @@ class Motor
 						Ein Wert von 50 würde die Geschwindigkeit um maximal 50% alle 100ms erhöhen.
 		 */
 		void setAcceleration(uint8_t percentPerHundretMs);
-		
+
 
 		void setMinSpeed(uint8_t minspeed);
+		void setMaxSpeed(uint8_t maxspeed);
 	private:
 		uint8_t _pwmPin;
 		PCF8574A* _directionPortexpander;
 		uint8_t _minspeed;
-		
+		uint8_t _maxspeed;
+		float _speed_scale;
+
 };
 
-/*! Interrupt service Routine der Motor Klasse. Sie kümmert sich nur um das begrenzen 
-der Beschleunigung und ändern der Richtung (I2C). Aufgrund der verwendung von I2C müssen Interrupts 
-aktiv sein da sonst I2C nicht funktioniert. Um kritischen Wettlauf zu vermeiden darf die Funktion maximal 
-einmal zur selben Zeit ausgeführt werden. Falls sie zu oft aufgerufen wird, kann es zu seltsamen Fehlern kommen.	 
+/*! Interrupt service Routine der Motor Klasse. Sie kümmert sich nur um das begrenzen
+der Beschleunigung und ändern der Richtung (I2C). Aufgrund der verwendung von I2C müssen Interrupts
+aktiv sein da sonst I2C nicht funktioniert. Um kritischen Wettlauf zu vermeiden darf die Funktion maximal
+einmal zur selben Zeit ausgeführt werden. Falls sie zu oft aufgerufen wird, kann es zu seltsamen Fehlern kommen.
 */
 void motor_isr();
 
 #endif
-

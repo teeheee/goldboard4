@@ -138,18 +138,34 @@ void Motor::init(uint8_t pwmPin, PCF8574A* pcf8574)
 	_directionPortexpander = pcf8574;
 	_pwmPin = pwmPin;
 	_minspeed = MIN_SPEED;
+	_maxspeed = MAX_SPEED;
+	_speed_scale = (255.0-_minspeed)/_maxspeed;
 }
 
 void Motor::setMinSpeed(uint8_t minspeed)
 {
 	_minspeed = minspeed;
+	_speed_scale = (255.0-_minspeed)/_maxspeed;
 }
+
+void Motor::setMaxSpeed(uint8_t maxspeed)
+{
+	_maxspeed = maxspeed;
+	_speed_scale = (255.0-_minspeed)/_maxspeed;
+}
+
 void Motor::rotate(int16_t sp)
 {
-	if(sp > 0)
-		sp = constrain(sp,_minspeed,255);
-	if(sp < 0)
-		sp = constrain(sp,-255,-_minspeed);
+	if(sp > 0){
+		sp = _minspeed + _speed_scale*sp;
+		sp = constrain(sp,_minspeed,_maxspeed);
+	}
+	if(sp < 0){
+		sp = -_minspeed + _speed_scale*sp;
+		sp = constrain(sp,-_maxspeed,-_minspeed);
+	}
+	SERIAL_PRINT("sp: ");
+	SERIAL_PRINTLN(sp);
 	setMotorSpeed(_pwmPin, sp);
 }
 
@@ -157,4 +173,3 @@ void Motor::setAcceleration(uint8_t percentPerHundretMs)
 {
 	setAcceleration(percentPerHundretMs);
 }
-
