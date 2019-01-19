@@ -1,4 +1,4 @@
-# Goldboard4 Version 2.1
+﻿# Goldboard4 Version 2.1
 
 ## Hardware
 
@@ -84,16 +84,33 @@ Damit der Serialmonitor funktioniert muss die Baudrate 115200 eingestellt werden
 
 ### Fuses und Bootloader übertragen
 
-um die fuses übertagen zu können muss in platformio.ini
-der richtige Programmer auskommentiert werden. Kommentare werden mit "#" eingeleitet.
-![](images/platformio/bootloader_fuses_1.png)
-Nun könnt ihr links unten übner das terminal symbol eine Konsole öffnen und folgenden Befehl eingeben.
+Um die Fuses und den Bootloader übertagen zu können muss in platformio.ini ein Programmer ausgewählt werden der keinen Bootloader benötigt.
+Also entweder stk500 oder avrispmkii.
+
+![](images/platformio/bootloader_fuses_3.png)
+Nun könnt ihr links unten über das Terminal Symbol eine Konsole öffnen und folgende Befehle eingeben.
+Für den Bootloader:
+> pio run -t uploadboot
+Für die Fuses:
 > pio run -t uploadboot
 
-![](images/platformio/bootloader_fuses_2.png)
-![](images/platformio/bootloader_fuses_3.png)
+Es werden nun automatisch die richtigen Fuses oder der Bootloader übertragen. 
+Beim übertragen des Bootloaders sollte die Led am Goldboard blinken.
 
-Es werden nun automatisch die richtigen fuses und der bootloader übertragen. Wenn keine Fehler auftreten, sollte die Led am Goldboard blinken.
+
+### Andere Befehle
+
+Um die neusten Goldboardlibs herunterzuladen:
+> pio run -t update
+
+Um den simulator zu starten falls er mal irgendwann funktioniert :-D
+> pio run -t simulate
+
+Nur compilieren
+> pio run
+
+Übertragen und compilieren
+> pio run -t upload
 
 ## Makefile for users without a GUI
 
