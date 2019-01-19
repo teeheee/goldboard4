@@ -1,4 +1,4 @@
-﻿# Goldboard4 Version 2.1
+# Goldboard4 Version 2.2
 
 ## Hardware
 
@@ -90,8 +90,11 @@ Also entweder stk500 oder avrispmkii.
 ![](images/platformio/bootloader_fuses_3.png)
 Nun könnt ihr links unten über das Terminal Symbol eine Konsole öffnen und folgende Befehle eingeben.
 Für den Bootloader:
+
 > pio run -t uploadboot
+
 Für die Fuses:
+
 > pio run -t uploadboot
 
 Es werden nun automatisch die richtigen Fuses oder der Bootloader übertragen. 
