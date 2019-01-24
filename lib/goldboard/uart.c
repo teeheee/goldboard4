@@ -572,7 +572,21 @@ ISR(UART1_TRANSMIT_INTERRUPT)
  **************************************************************************/
 {
 	unsigned char tmptail;
-	
+
+	static int overload_counter = 0;
+	if(tmphead == UART1_RxTail)
+		overload_counter++;
+	else
+		overload_counter--;
+
+	if(overload_counter > 100)
+	{
+		  overload_counter = 0;
+			UART1_TxHead = 0;
+			UART1_TxTail = 0;
+			return;
+	}
+
 	if ( UART1_TxHead != UART1_TxTail)
 	{
 		/* calculate and store new buffer index */

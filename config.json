@@ -1,0 +1,14 @@
+{
+  "firmware" : ".pioenvs/main/firmware.hex",
+  "time_steps" : 100,
+  "terminal" : true,
+  "server" : true,
+  "server_port" : 3030,
+  "devices" : [{
+       "type" : "PIXY",
+    },{
+       "type" : "USRING",
+    },{
+       "type" : "CMPS11",
+    }]
+}

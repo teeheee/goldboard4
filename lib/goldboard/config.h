@@ -32,16 +32,9 @@
 
 #define BOOTLOADER
 
-// Wenn wiederholt probleme mit dem übertragen über den bootloader auftreten,
-// kann man mit dem Parameter den Seriellen Port alle halbe Sekunde deaktivieren.
-// Dadurch wird das Übertragen zuverlässger aber die Ausgabe ist nicht mehr flüssig.
-// das Programm läuft aber trotzdem flüssig!!!
-// #define SERIAL_BLOCKER
-
 //uncomment this line if you dont use a pulsed ball sensors
 //this will make your code a little bit faster and shorter
 #define PULSE_SENSOR_INPUT
-
 #define MOTOR_ACCELERATION
 #define SERVO_PWM
 
@@ -79,7 +72,7 @@
  * DATA5 -> PCF_6
  * DATA4 -> PCF_7
  *
- *
+ * 			   
  * #define LCD_PIN_MAPPING 0x4567f012
  * */
 

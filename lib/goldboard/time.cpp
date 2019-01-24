@@ -4,7 +4,6 @@
 #include "Motor.h"
 #include "infrared_pulse.h"
 #include "config.h"
-#include "uart.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
@@ -31,16 +30,6 @@ ISR(TIMER0_COMP_vect) //1khz
 		cc=0;
 	}
 	cc++;
-#ifdef SERIAL_BLOCKER
-	static int uart_counter = 0;
-	if(uart_counter == 500){
-			UCSRB |= (1<<TXEN);
-	}else if(uart_counter == 1000){
-		  UCSRB &= ~(1<<TXEN);
-			uart_counter = 0;
-	}
-	uart_counter++;
-#endif
 #endif
 #ifdef PULSE_SENSOR_INPUT
 	pulse_isr();
@@ -92,5 +81,6 @@ void delayMicroseconds(unsigned int us)
         __asm__ __volatile__ (
         "1: sbiw %0,1" "\n\t" // 2 cycles
         "brne 1b" : "=w" (us) : "0" (us) // 2 cycles
-        );
+        );	
 }
+
