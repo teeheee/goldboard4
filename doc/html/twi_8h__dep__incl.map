@@ -1,6 +1,0 @@
-<map id="goldboard/twi.h" name="goldboard/twi.h">
-<area shape="rect" id="node2" href="$PCF8574A_8h.html" title="Driver for the PCF8574A Remote 8&#45;Bit I/O expander. " alt="" coords="91,80,249,107"/>
-<area shape="rect" id="node3" href="$Motor_8h_source.html" title="goldboard/Motor.h" alt="" coords="5,155,132,181"/>
-<area shape="rect" id="node4" href="$Goldboard4_8h.html" title="Driver for Goldboard4 (w. Atmega32). " alt="" coords="40,229,199,256"/>
-<area shape="rect" id="node5" href="$lcd_8h.html" title="Basic routines for interfacing a HD44780U&#45;based character LCD display. It was slightly modified to us..." alt="" coords="208,155,319,181"/>
-</map>
