@@ -1,21 +1,4 @@
 /*!
- * \mainpage Goldboard4
- *
- * \author Christoph Rothermel und Alexander Ulbrich
- *
- * \section install_sec Installation in AS7
- *
- * \subsection step1 Schritt 1:
- *	Importiere das Projekt Template. File->Import->Project-Template
- * \subsection step2 Schritt 2:
- *	wähle die goldboard4-AS7-template.zip Datei aus und drücke ok.
- *
- * \section neues Projekt erstellen
- * \subsection step1 Schritt 1:
- * 	File->New->Project
- * \subsection step2 Schritt :
- * 	goldboard4 auswählen, Projektname und Speicherort festlegen. Mit OK bestätigen.
- *
  * @defgroup zf  Zusammenfassung
  * @defgroup external Externe Komponenten
  * @defgroup hal 	  Hardwareabstraktionsschicht

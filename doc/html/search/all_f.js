@@ -5,7 +5,7 @@ var searchData=
   ['uart1_5finit',['uart1_init',['../uart_8h.html#a4db697cb5469fd70e794fa7df73a6d6a',1,'uart.h']]],
   ['uart1_5fputc',['uart1_putc',['../uart_8h.html#ab465f689d197fadfbacc374fc9411154',1,'uart.h']]],
   ['uart1_5fputs',['uart1_puts',['../uart_8h.html#a5568f8f3913b218fd4d0346af78831b2',1,'uart.h']]],
-  ['uart1_5fputs_5fp',['uart1_puts_P',['../uart_8h.html#aabd7a5b0c15611ee9ecb2873cc9ee87a',1,'uart1_puts_P():&#160;uart.h'],['../uart_8h.html#a1e8074d0a2d5922601c5db2f9777ba79',1,'uart1_puts_p(const char *s):&#160;uart.h']]],
+  ['uart1_5fputs_5fp',['uart1_puts_p',['../uart_8h.html#a1e8074d0a2d5922601c5db2f9777ba79',1,'uart1_puts_p(const char *s):&#160;uart.h'],['../uart_8h.html#aabd7a5b0c15611ee9ecb2873cc9ee87a',1,'uart1_puts_P():&#160;uart.h']]],
   ['uart_5fbaud_5fselect',['UART_BAUD_SELECT',['../uart_8h.html#a367ff7b5de225ed936a63239ad4adb0b',1,'uart.h']]],
   ['uart_5fbaud_5fselect_5fdouble_5fspeed',['UART_BAUD_SELECT_DOUBLE_SPEED',['../uart_8h.html#a1a02d45130520cb651ab313e69039382',1,'uart.h']]],
   ['uart_5fgetc',['uart_getc',['../uart_8h.html#aefaab30a8338ec46a6be35b99b1b4f09',1,'uart.c']]],

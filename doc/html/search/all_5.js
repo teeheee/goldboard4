@@ -8,5 +8,5 @@ var searchData=
   ['getvalue',['getValue',['../classCMPS03.html#ab655cbe4fa5be60e9d9dbba7cd815865',1,'CMPS03']]],
   ['goldboard4',['Goldboard4',['../classGoldboard4.html',1,'']]],
   ['goldboard4_2eh',['Goldboard4.h',['../Goldboard4_8h.html',1,'']]],
-  ['goldboard4',['Goldboard4',['../index.html',1,'']]]
+  ['goldboard4_20version_202_2e2',['Goldboard4 Version 2.2',['../index.html',1,'']]]
 ];

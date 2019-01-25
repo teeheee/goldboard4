@@ -1,4 +1,0 @@
-<map id="goldboard/Motor.h" name="goldboard/Motor.h">
-<area shape="rect" id="node2" href="$PCF8574A_8h.html" title="Driver for the PCF8574A Remote 8&#45;Bit I/O expander. " alt="" coords="44,80,141,107"/>
-<area shape="rect" id="node3" href="$Wire_8h.html" title="TWI/I2C library for Wiring &amp; Arduino. " alt="" coords="63,155,123,181"/>
-</map>

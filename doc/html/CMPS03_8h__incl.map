@@ -1,4 +1,0 @@
-<map id="goldboard/CMPS03.h" name="goldboard/CMPS03.h">
-<area shape="rect" id="node2" href="$time_8h.html" title="System clock generation with parallel process handling. Triggers motor_isr and pulse_isr. " alt="" coords="14,80,73,107"/>
-<area shape="rect" id="node4" href="$Wire_8h.html" title="TWI/I2C library for Wiring &amp; Arduino. " alt="" coords="104,80,164,107"/>
-</map>

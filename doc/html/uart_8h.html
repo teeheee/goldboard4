@@ -3,11 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.11"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Goldboard4: goldboard/uart.h-Dateireferenz</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -24,27 +32,11 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Goldboard4
-   &#160;<span id="projectnumber">V2.0</span>
+   &#160;<span id="projectnumber">V2.2</span>
    </div>
    <div id="projectbrief">Library for the Goldboard4</div>
   </td>
- </tr>
- </tbody>
-</table>
-</div>
-<!-- end header part -->
-<!-- Erzeugt von Doxygen 1.8.11 -->
-<script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
-</script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Hauptseite</span></a></li>
-      <li><a href="modules.html"><span>Module</span></a></li>
-      <li><a href="annotated.html"><span>Klassen</span></a></li>
-      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
           <img id="MSearchSelect" src="search/mag_sel.png"
                onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,15 +50,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
           </span>
         </div>
-      </li>
-    </ul>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
-      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
-    </ul>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('uart_8h.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,11 +89,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_efa29dcec2bc511dcc4741916090d0cb.html">goldboard</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">uart.h-Dateireferenz<div class="ingroups"><a class="el" href="group__hal.html">Hardwareabstraktionsschicht</a></div></div>  </div>
@@ -95,10 +98,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 <p>Interrupt UART library using the built-in UART with transmit and receive circular buffers.  
 <a href="#details">Mehr ...</a></p>
 <div class="textblock"><code>#include &lt;avr/io.h&gt;</code><br />
+<code>#include &lt;avr/pgmspace.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include-Abhängigkeitsdiagramm für uart.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="uart_8h__incl.png" border="0" usemap="#goldboard_2uart_8h" alt=""/></div>
+<map name="goldboard_2uart_8h" id="goldboard_2uart_8h">
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Dieser Graph zeigt, welche Datei direkt oder indirekt diese Datei enthält:</div>
+<div class="dyncontent">
+<div class="center"><img src="uart_8h__dep__incl.png" border="0" usemap="#goldboard_2uart_8hdep" alt=""/></div>
+<map name="goldboard_2uart_8hdep" id="goldboard_2uart_8hdep">
+</map>
 </div>
 </div>
 <p><a href="uart_8h_source.html">gehe zum Quellcode dieser Datei</a></p>
@@ -113,26 +126,26 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 <tr class="separator:a5bdd6772c246436bb14377095de79b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05f5d709605c6317c97e4974bec3402a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8h.html#a05f5d709605c6317c97e4974bec3402a">UART_TX_BUFFER_SIZE</a>&#160;&#160;&#160;32</td></tr>
 <tr class="separator:a05f5d709605c6317c97e4974bec3402a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abcdb1041d763560cd8f8e722370dfd37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abcdb1041d763560cd8f8e722370dfd37"></a>
+<tr class="memitem:abcdb1041d763560cd8f8e722370dfd37"><td class="memItemLeft" align="right" valign="top"><a id="abcdb1041d763560cd8f8e722370dfd37"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>UART_FRAME_ERROR</b>&#160;&#160;&#160;0x1000              /* Framing Error by UART       */</td></tr>
 <tr class="separator:abcdb1041d763560cd8f8e722370dfd37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3183177e3613d8785d8cc8516931beb6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3183177e3613d8785d8cc8516931beb6"></a>
+<tr class="memitem:a3183177e3613d8785d8cc8516931beb6"><td class="memItemLeft" align="right" valign="top"><a id="a3183177e3613d8785d8cc8516931beb6"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>UART_OVERRUN_ERROR</b>&#160;&#160;&#160;0x0800              /* Overrun condition by UART   */</td></tr>
 <tr class="separator:a3183177e3613d8785d8cc8516931beb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a946e3d317937e003d2057bf19e96dd1d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a946e3d317937e003d2057bf19e96dd1d"></a>
+<tr class="memitem:a946e3d317937e003d2057bf19e96dd1d"><td class="memItemLeft" align="right" valign="top"><a id="a946e3d317937e003d2057bf19e96dd1d"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>UART_PARITY_ERROR</b>&#160;&#160;&#160;0x0400              /* Parity Error by UART        */</td></tr>
 <tr class="separator:a946e3d317937e003d2057bf19e96dd1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94758f3dad6864703b7417d3e40f11df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a94758f3dad6864703b7417d3e40f11df"></a>
+<tr class="memitem:a94758f3dad6864703b7417d3e40f11df"><td class="memItemLeft" align="right" valign="top"><a id="a94758f3dad6864703b7417d3e40f11df"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>UART_BUFFER_OVERFLOW</b>&#160;&#160;&#160;0x0200              /* receive ringbuffer overflow */</td></tr>
 <tr class="separator:a94758f3dad6864703b7417d3e40f11df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77ba544d423ff42d400220a05303f268"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77ba544d423ff42d400220a05303f268"></a>
+<tr class="memitem:a77ba544d423ff42d400220a05303f268"><td class="memItemLeft" align="right" valign="top"><a id="a77ba544d423ff42d400220a05303f268"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>UART_NO_DATA</b>&#160;&#160;&#160;0x0100              /* no receive data available   */</td></tr>
 <tr class="separator:a77ba544d423ff42d400220a05303f268"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9e143569df2285379bc55f9f5595bf9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9e143569df2285379bc55f9f5595bf9"></a>
+<tr class="memitem:ae9e143569df2285379bc55f9f5595bf9"><td class="memItemLeft" align="right" valign="top"><a id="ae9e143569df2285379bc55f9f5595bf9"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8h.html#ae9e143569df2285379bc55f9f5595bf9">uart_puts_P</a>(__s)&#160;&#160;&#160;<a class="el" href="uart_8h.html#a6d78b6744db6232f52b4616402036c2f">uart_puts_p</a>(PSTR(__s))</td></tr>
 <tr class="memdesc:ae9e143569df2285379bc55f9f5595bf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to automatically put a string constant into program memory. <br /></td></tr>
 <tr class="separator:ae9e143569df2285379bc55f9f5595bf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabd7a5b0c15611ee9ecb2873cc9ee87a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aabd7a5b0c15611ee9ecb2873cc9ee87a"></a>
+<tr class="memitem:aabd7a5b0c15611ee9ecb2873cc9ee87a"><td class="memItemLeft" align="right" valign="top"><a id="aabd7a5b0c15611ee9ecb2873cc9ee87a"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="uart_8h.html#aabd7a5b0c15611ee9ecb2873cc9ee87a">uart1_puts_P</a>(__s)&#160;&#160;&#160;<a class="el" href="uart_8h.html#a1e8074d0a2d5922601c5db2f9777ba79">uart1_puts_p</a>(PSTR(__s))</td></tr>
 <tr class="memdesc:aabd7a5b0c15611ee9ecb2873cc9ee87a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro to automatically put a string constant into program memory. <br /></td></tr>
 <tr class="separator:aabd7a5b0c15611ee9ecb2873cc9ee87a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,7 +188,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 <dl class="section note"><dt>Zu beachten</dt><dd>Based on Atmel Application Note AVR306 </dd></dl>
 <dl class="section author"><dt>Autor</dt><dd>Peter Fleury <a href="#" onclick="location.href='mai'+'lto:'+'pfl'+'eu'+'ry@'+'gm'+'x.c'+'h'; return false;">pfleu<span style="display: none;">.nosp@m.</span>ry@g<span style="display: none;">.nosp@m.</span>mx.ch</a> <a href="http://jump.to/fleury">http://jump.to/fleury</a> </dd></dl>
 </div><h2 class="groupheader">Makro-Dokumentation</h2>
-<a class="anchor" id="a367ff7b5de225ed936a63239ad4adb0b"></a>
+<a id="a367ff7b5de225ed936a63239ad4adb0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a367ff7b5de225ed936a63239ad4adb0b">&#9670;&nbsp;</a></span>UART_BAUD_SELECT</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -210,7 +225,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 
 </div>
 </div>
-<a class="anchor" id="a1a02d45130520cb651ab313e69039382"></a>
+<a id="a1a02d45130520cb651ab313e69039382"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a02d45130520cb651ab313e69039382">&#9670;&nbsp;</a></span>UART_BAUD_SELECT_DOUBLE_SPEED</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -245,7 +262,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 
 </div>
 </div>
-<a class="anchor" id="a5bdd6772c246436bb14377095de79b31"></a>
+<a id="a5bdd6772c246436bb14377095de79b31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bdd6772c246436bb14377095de79b31">&#9670;&nbsp;</a></span>UART_RX_BUFFER_SIZE</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -258,7 +277,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 
 </div>
 </div>
-<a class="anchor" id="a05f5d709605c6317c97e4974bec3402a"></a>
+<a id="a05f5d709605c6317c97e4974bec3402a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05f5d709605c6317c97e4974bec3402a">&#9670;&nbsp;</a></span>UART_TX_BUFFER_SIZE</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -272,7 +293,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 </div>
 </div>
 <h2 class="groupheader">Dokumentation der Funktionen</h2>
-<a class="anchor" id="aeb1405c641e5bc9b7224018f5e8d90de"></a>
+<a id="aeb1405c641e5bc9b7224018f5e8d90de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb1405c641e5bc9b7224018f5e8d90de">&#9670;&nbsp;</a></span>uart1_getc()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -291,7 +314,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 
 </div>
 </div>
-<a class="anchor" id="a4db697cb5469fd70e794fa7df73a6d6a"></a>
+<a id="a4db697cb5469fd70e794fa7df73a6d6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4db697cb5469fd70e794fa7df73a6d6a">&#9670;&nbsp;</a></span>uart1_init()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -310,7 +335,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 
 </div>
 </div>
-<a class="anchor" id="ab465f689d197fadfbacc374fc9411154"></a>
+<a id="ab465f689d197fadfbacc374fc9411154"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab465f689d197fadfbacc374fc9411154">&#9670;&nbsp;</a></span>uart1_putc()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -329,7 +356,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 
 </div>
 </div>
-<a class="anchor" id="a5568f8f3913b218fd4d0346af78831b2"></a>
+<a id="a5568f8f3913b218fd4d0346af78831b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5568f8f3913b218fd4d0346af78831b2">&#9670;&nbsp;</a></span>uart1_puts()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -348,7 +377,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 
 </div>
 </div>
-<a class="anchor" id="a1e8074d0a2d5922601c5db2f9777ba79"></a>
+<a id="a1e8074d0a2d5922601c5db2f9777ba79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e8074d0a2d5922601c5db2f9777ba79">&#9670;&nbsp;</a></span>uart1_puts_p()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -367,7 +398,9 @@ Include-Abhängigkeitsdiagramm für uart.h:</div>
 
 </div>
 </div>
-<a class="anchor" id="aefaab30a8338ec46a6be35b99b1b4f09"></a>
+<a id="aefaab30a8338ec46a6be35b99b1b4f09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefaab30a8338ec46a6be35b99b1b4f09">&#9670;&nbsp;</a></span>uart_getc()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -406,7 +439,9 @@ Framing Error by UART </li>
 
 </div>
 </div>
-<a class="anchor" id="ac19a76bb7d446125734a67f9f4b68991"></a>
+<a id="ac19a76bb7d446125734a67f9f4b68991"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac19a76bb7d446125734a67f9f4b68991">&#9670;&nbsp;</a></span>uart_init()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -431,7 +466,9 @@ Framing Error by UART </li>
 
 </div>
 </div>
-<a class="anchor" id="ad975221bc08b901e4c7ad69f9c9a97e2"></a>
+<a id="ad975221bc08b901e4c7ad69f9c9a97e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad975221bc08b901e4c7ad69f9c9a97e2">&#9670;&nbsp;</a></span>uart_putc()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -456,7 +493,9 @@ Framing Error by UART </li>
 
 </div>
 </div>
-<a class="anchor" id="ae52facc0a56086a365bb0018160d8d71"></a>
+<a id="ae52facc0a56086a365bb0018160d8d71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae52facc0a56086a365bb0018160d8d71">&#9670;&nbsp;</a></span>uart_puts()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -482,7 +521,9 @@ Framing Error by UART </li>
 
 </div>
 </div>
-<a class="anchor" id="a6d78b6744db6232f52b4616402036c2f"></a>
+<a id="a6d78b6744db6232f52b4616402036c2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d78b6744db6232f52b4616402036c2f">&#9670;&nbsp;</a></span>uart_puts_p()</h2>
+
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -510,11 +551,15 @@ Framing Error by UART </li>
 </div>
 </div>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.11
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_efa29dcec2bc511dcc4741916090d0cb.html">goldboard</a></li><li class="navelem"><a class="el" href="uart_8h.html">uart.h</a></li>
+    <li class="footer">Erzeugt von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>

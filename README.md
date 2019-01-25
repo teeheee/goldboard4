@@ -7,11 +7,23 @@ Die Nummern stimmen mit der lib überein.
 
 ![](images/Pinbelegung.svg.png)
 
+## software
+
+[Dokumentation](https://teeheee.github.io)
+
 ## Entwicklungsumgebung
 
-* [Atmel Studio 7 Anleitung](README_AS7.md) ([Download AS7 Template](goldboard4-V2.2-AS7-template.zip))
-* [Atom  mit PlatformIO Anleitung](README_ATOM.md) ([Download Atom Template](goldboard4-V2.2-AtomPio-template.zip))
+* [Atmel Studio 7 Anleitung](README_AS7.md) ([Download AS7 Template](https://github.com/teeheee/goldboard4/raw/master/goldboard4-V2.2-AS7-template.zip))
+* [Atom  mit PlatformIO Anleitung](README_ATOM.md) ([Download Atom Template](https://github.com/teeheee/goldboard4/raw/master/goldboard4-V2.2-AtomPio-template.zip))
 * [Makefile Anleitung](README_MAKE.md)
+
+## Windows Treiber
+
+Normalerweise sollte der in Atmelstudio mitgelieferte Treiber ausreichen.
+
+* [Atmelstudio 7](https://www.microchip.com/mplab/avr-support/atmel-studio-7)
+* [Zadig Treiber installations Tool](https://zadig.akeo.ie/)
+* [FTDI für Serialport](https://www.ftdichip.com/Drivers/VCP.htm)
 
 ## TODO
 * full test

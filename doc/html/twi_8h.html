@@ -3,11 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<meta name="generator" content="Doxygen 1.8.11"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Goldboard4: goldboard/twi.h-Dateireferenz</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -24,27 +32,11 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Goldboard4
-   &#160;<span id="projectnumber">V2.0</span>
+   &#160;<span id="projectnumber">V2.2</span>
    </div>
    <div id="projectbrief">Library for the Goldboard4</div>
   </td>
- </tr>
- </tbody>
-</table>
-</div>
-<!-- end header part -->
-<!-- Erzeugt von Doxygen 1.8.11 -->
-<script type="text/javascript">
-var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
-</script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="index.html"><span>Hauptseite</span></a></li>
-      <li><a href="modules.html"><span>Module</span></a></li>
-      <li><a href="annotated.html"><span>Klassen</span></a></li>
-      <li class="current"><a href="files.html"><span>Dateien</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
           <img id="MSearchSelect" src="search/mag_sel.png"
                onmouseover="return searchBox.OnSearchSelectShow()"
@@ -58,15 +50,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
             <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
           </span>
         </div>
-      </li>
-    </ul>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
   </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="files.html"><span>Auflistung&#160;der&#160;Dateien</span></a></li>
-      <li><a href="globals.html"><span>Datei-Elemente</span></a></li>
-    </ul>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
   </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('twi_8h.html','');});
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -81,11 +89,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_efa29dcec2bc511dcc4741916090d0cb.html">goldboard</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#define-members">Makrodefinitionen</a> &#124;
@@ -102,81 +105,93 @@ var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
 Include-Abhängigkeitsdiagramm für twi.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="twi_8h__incl.png" border="0" usemap="#goldboard_2twi_8h" alt=""/></div>
+<map name="goldboard_2twi_8h" id="goldboard_2twi_8h">
+</map>
 </div>
 </div>
 <p><a href="twi_8h_source.html">gehe zum Quellcode dieser Datei</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Makrodefinitionen</h2></td></tr>
-<tr class="memitem:a3e79c6425e8cc6a0ce853eb49a45e5b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e79c6425e8cc6a0ce853eb49a45e5b9"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>TWI_FREQ</b>&#160;&#160;&#160;100000L</td></tr>
+<tr class="memitem:a3e79c6425e8cc6a0ce853eb49a45e5b9"><td class="memItemLeft" align="right" valign="top"><a id="a3e79c6425e8cc6a0ce853eb49a45e5b9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>TWI_FREQ</b>&#160;&#160;&#160;100000UL</td></tr>
 <tr class="separator:a3e79c6425e8cc6a0ce853eb49a45e5b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18f2336f01cb5b7f479e65ee78020c76"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18f2336f01cb5b7f479e65ee78020c76"></a>
+<tr class="memitem:a18f2336f01cb5b7f479e65ee78020c76"><td class="memItemLeft" align="right" valign="top"><a id="a18f2336f01cb5b7f479e65ee78020c76"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TWI_BUFFER_LENGTH</b>&#160;&#160;&#160;32</td></tr>
 <tr class="separator:a18f2336f01cb5b7f479e65ee78020c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78f8e40420d26b512b064b1902f5d559"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a78f8e40420d26b512b064b1902f5d559"></a>
+<tr class="memitem:a78f8e40420d26b512b064b1902f5d559"><td class="memItemLeft" align="right" valign="top"><a id="a78f8e40420d26b512b064b1902f5d559"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TWI_READY</b>&#160;&#160;&#160;0</td></tr>
 <tr class="separator:a78f8e40420d26b512b064b1902f5d559"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e51cef0c946abc25dca6e7edaa1653b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4e51cef0c946abc25dca6e7edaa1653b"></a>
+<tr class="memitem:a4e51cef0c946abc25dca6e7edaa1653b"><td class="memItemLeft" align="right" valign="top"><a id="a4e51cef0c946abc25dca6e7edaa1653b"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TWI_MRX</b>&#160;&#160;&#160;1</td></tr>
 <tr class="separator:a4e51cef0c946abc25dca6e7edaa1653b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18bbad08828cae8d1e9fd9b8105e3ebc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a18bbad08828cae8d1e9fd9b8105e3ebc"></a>
+<tr class="memitem:a18bbad08828cae8d1e9fd9b8105e3ebc"><td class="memItemLeft" align="right" valign="top"><a id="a18bbad08828cae8d1e9fd9b8105e3ebc"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TWI_MTX</b>&#160;&#160;&#160;2</td></tr>
 <tr class="separator:a18bbad08828cae8d1e9fd9b8105e3ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c36c496c84490bf65979fcc79e5e1b4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c36c496c84490bf65979fcc79e5e1b4"></a>
+<tr class="memitem:a0c36c496c84490bf65979fcc79e5e1b4"><td class="memItemLeft" align="right" valign="top"><a id="a0c36c496c84490bf65979fcc79e5e1b4"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TWI_SRX</b>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:a0c36c496c84490bf65979fcc79e5e1b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa37d05db1b20f3567371ef9e7bbbc48"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa37d05db1b20f3567371ef9e7bbbc48"></a>
+<tr class="memitem:afa37d05db1b20f3567371ef9e7bbbc48"><td class="memItemLeft" align="right" valign="top"><a id="afa37d05db1b20f3567371ef9e7bbbc48"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TWI_STX</b>&#160;&#160;&#160;4</td></tr>
 <tr class="separator:afa37d05db1b20f3567371ef9e7bbbc48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Funktionen</h2></td></tr>
-<tr class="memitem:a16f0e6b2fa5a26eadbf4086ab6d54467"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16f0e6b2fa5a26eadbf4086ab6d54467"></a>
+<tr class="memitem:a16f0e6b2fa5a26eadbf4086ab6d54467"><td class="memItemLeft" align="right" valign="top"><a id="a16f0e6b2fa5a26eadbf4086ab6d54467"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_init</b> (void)</td></tr>
 <tr class="separator:a16f0e6b2fa5a26eadbf4086ab6d54467"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a730512b772605e6836d8a16b0052d3bd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a730512b772605e6836d8a16b0052d3bd"></a>
+<tr class="memitem:a730512b772605e6836d8a16b0052d3bd"><td class="memItemLeft" align="right" valign="top"><a id="a730512b772605e6836d8a16b0052d3bd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_disable</b> (void)</td></tr>
 <tr class="separator:a730512b772605e6836d8a16b0052d3bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77c13a875e935f91b58c3b8596aae88d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77c13a875e935f91b58c3b8596aae88d"></a>
+<tr class="memitem:a77c13a875e935f91b58c3b8596aae88d"><td class="memItemLeft" align="right" valign="top"><a id="a77c13a875e935f91b58c3b8596aae88d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_setAddress</b> (uint8_t)</td></tr>
 <tr class="separator:a77c13a875e935f91b58c3b8596aae88d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a417871416ce31039d42f958154a12bc1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a417871416ce31039d42f958154a12bc1"></a>
+<tr class="memitem:a417871416ce31039d42f958154a12bc1"><td class="memItemLeft" align="right" valign="top"><a id="a417871416ce31039d42f958154a12bc1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_setFrequency</b> (uint32_t)</td></tr>
 <tr class="separator:a417871416ce31039d42f958154a12bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f8b3d441d9dd1bd867b83729211b183"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8f8b3d441d9dd1bd867b83729211b183"></a>
+<tr class="memitem:a8f8b3d441d9dd1bd867b83729211b183"><td class="memItemLeft" align="right" valign="top"><a id="a8f8b3d441d9dd1bd867b83729211b183"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>twi_readFrom</b> (uint8_t, uint8_t *, uint8_t, uint8_t)</td></tr>
 <tr class="separator:a8f8b3d441d9dd1bd867b83729211b183"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a090e0c5c98f5f7255d43a349c4bb1b72"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a090e0c5c98f5f7255d43a349c4bb1b72"></a>
+<tr class="memitem:a090e0c5c98f5f7255d43a349c4bb1b72"><td class="memItemLeft" align="right" valign="top"><a id="a090e0c5c98f5f7255d43a349c4bb1b72"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>twi_writeTo</b> (uint8_t, uint8_t *, uint8_t, uint8_t, uint8_t)</td></tr>
 <tr class="separator:a090e0c5c98f5f7255d43a349c4bb1b72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4fbb74866c71979506ac52d758cfdeac"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4fbb74866c71979506ac52d758cfdeac"></a>
+<tr class="memitem:a4fbb74866c71979506ac52d758cfdeac"><td class="memItemLeft" align="right" valign="top"><a id="a4fbb74866c71979506ac52d758cfdeac"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>twi_transmit</b> (const uint8_t *, uint8_t)</td></tr>
 <tr class="separator:a4fbb74866c71979506ac52d758cfdeac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8e9aa6430dccea8d986ca33f76fe487"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8e9aa6430dccea8d986ca33f76fe487"></a>
+<tr class="memitem:ac8e9aa6430dccea8d986ca33f76fe487"><td class="memItemLeft" align="right" valign="top"><a id="ac8e9aa6430dccea8d986ca33f76fe487"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_attachSlaveRxEvent</b> (void(*)(uint8_t *, int))</td></tr>
 <tr class="separator:ac8e9aa6430dccea8d986ca33f76fe487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73cd75244e3fa0d7e288adb7bc7430e8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73cd75244e3fa0d7e288adb7bc7430e8"></a>
+<tr class="memitem:a73cd75244e3fa0d7e288adb7bc7430e8"><td class="memItemLeft" align="right" valign="top"><a id="a73cd75244e3fa0d7e288adb7bc7430e8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_attachSlaveTxEvent</b> (void(*)(void))</td></tr>
 <tr class="separator:a73cd75244e3fa0d7e288adb7bc7430e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a54e17133aa927c4c76725f1f55e37531"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a54e17133aa927c4c76725f1f55e37531"></a>
+<tr class="memitem:a54e17133aa927c4c76725f1f55e37531"><td class="memItemLeft" align="right" valign="top"><a id="a54e17133aa927c4c76725f1f55e37531"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_reply</b> (uint8_t)</td></tr>
 <tr class="separator:a54e17133aa927c4c76725f1f55e37531"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf52d6c93df110dee6d402b389e5042e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acf52d6c93df110dee6d402b389e5042e"></a>
+<tr class="memitem:acf52d6c93df110dee6d402b389e5042e"><td class="memItemLeft" align="right" valign="top"><a id="acf52d6c93df110dee6d402b389e5042e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_stop</b> (void)</td></tr>
 <tr class="separator:acf52d6c93df110dee6d402b389e5042e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f830793058786f5597ddd1d80b885ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7f830793058786f5597ddd1d80b885ae"></a>
+<tr class="memitem:a7f830793058786f5597ddd1d80b885ae"><td class="memItemLeft" align="right" valign="top"><a id="a7f830793058786f5597ddd1d80b885ae"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_releaseBus</b> (void)</td></tr>
 <tr class="separator:a7f830793058786f5597ddd1d80b885ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ab34ef8838535ae80442f96c263b4a2"><td class="memItemLeft" align="right" valign="top"><a id="a2ab34ef8838535ae80442f96c263b4a2"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>twi_self_test</b> (void)</td></tr>
+<tr class="separator:a2ab34ef8838535ae80442f96c263b4a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5fe4e85509f30f0424a5550586cbe5e4"><td class="memItemLeft" align="right" valign="top"><a id="a5fe4e85509f30f0424a5550586cbe5e4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>twi_resuscitate</b> (void)</td></tr>
+<tr class="separator:a5fe4e85509f30f0424a5550586cbe5e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Ausführliche Beschreibung</h2>
 <div class="textblock"><p>TWI/I2C library for Wiring &amp; Arduino. </p>
 </div></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Erzeugt von &#160;<a href="http://www.doxygen.org/index.html">
-<img class="footer" src="doxygen.png" alt="doxygen"/>
-</a> 1.8.11
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_efa29dcec2bc511dcc4741916090d0cb.html">goldboard</a></li><li class="navelem"><a class="el" href="twi_8h.html">twi.h</a></li>
+    <li class="footer">Erzeugt von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
 </body>
 </html>
