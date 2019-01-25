@@ -10,7 +10,7 @@ Die Nummern stimmen mit der lib überein.
 ## Entwicklungsumgebung
 
 * [Atmel Studio 7 Anleitung](README_AS7.md) ([Download AS7 Template](goldboard4-V2.2-AS7-template.zip))
-* [Atom  mit PlatformIO Anleitung](README_AS7.md) ([Download Atom Template](goldboard4-V2.2-AtomPio-template.zip))
+* [Atom  mit PlatformIO Anleitung](README_ATOM.md) ([Download Atom Template](goldboard4-V2.2-AtomPio-template.zip))
 * [Makefile Anleitung](README_MAKE.md)
 
 ## TODO
