@@ -22,7 +22,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-
+#define VERSION 22
 
 #define UART_BAUD_RATE     115200UL //baud
 
@@ -72,7 +72,7 @@
  * DATA5 -> PCF_6
  * DATA4 -> PCF_7
  *
- * 			   
+ *
  * #define LCD_PIN_MAPPING 0x4567f012
  * */
 
