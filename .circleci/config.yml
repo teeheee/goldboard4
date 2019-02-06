@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run: sudo pio upgrade
-      - run: pio run
+      - run: sudo pio run
 workflows:
   version: 2
   build_all:
