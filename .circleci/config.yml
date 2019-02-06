@@ -1,0 +1,8 @@
+version: 2.2
+jobs:
+  build:
+    docker: 
+      - image: teeheee/goldboard4-build:build
+    steps:
+      - checkout
+      - run: make

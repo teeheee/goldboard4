@@ -61,7 +61,6 @@ LDFLAGS = -Wl,-gc-sections
 
 all: $(PROJECT).elf
 	avr-objcopy -j .text -j .data -O ihex $(PROJECT).elf main.hex
-	avr-size --mcu=atmega32 -C main.elf
 
 %.elf: $(OBJECTS)
 	$(G++) $(C++FLAGS) $(OBJECTS) --output $@ $(LDFLAGS)
