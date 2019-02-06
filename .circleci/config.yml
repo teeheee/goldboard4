@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build_ATOM:
+    docker:
+      - image: eclipse/platformio
+    steps:
+      - checkout
+      - run: sudo pio upgrade
+      - run: pio run
+workflows:
+  version: 2
+  build_all:
+    jobs:
+      - build_ATOM
+
