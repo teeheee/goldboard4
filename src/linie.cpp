@@ -138,6 +138,35 @@ void line_program()
     boden_sensor_vektor_init();
 
 	int line_now = get_line();
+
+  static long display_time = 0;
+  if(millis()-display_time > 1000)
+  {
+    display_time = millis();
+    lcd.clear();
+    lcd.print("state:");
+    lcd.setCursor(0, 1);
+    lcd.print("now:");
+    lcd.setCursor(0, 2);
+    lcd.print("last:");
+
+    int offset = 7;
+    lcd.setCursor(0+offset, 1);
+    switch(state){
+        case LINE_STATE_INSIDE: lcd.print("inside"); break;
+        case LINE_STATE_OUTSIDE: lcd.print("outside"); break;
+        case LINE_STATE_ONLINE_INSIDE: lcd.print("line_in"); break;
+        case LINE_STATE_ONLINE_OUTSIDE: lcd.print("line_out"); break;
+        case LINE_STATE_ONECKE_INSIDE: lcd.print("edge_in"); break;
+        case LINE_STATE_ONECKE_OUTSIDE: lcd.print("edge_out"); break;
+    }
+    lcd.setCursor(0+offset, 1);
+    lcd.print(line_now);
+    lcd.setCursor(0+offset, 2);
+    lcd.print(line_last);
+  }
+
+
 	switch(state)
 	{
 

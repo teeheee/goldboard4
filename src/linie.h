@@ -6,6 +6,7 @@
 #include "actoren.h"
 
 extern Goldboard4 gb;
+extern LiquidCrystal_I2C lcd;
 
 extern uint16_t BodenWert;
 extern int KompassWert;

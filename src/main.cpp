@@ -214,7 +214,8 @@ void run() {
 		if(BodenWert > 0) //linie
 			line_program();
 		else
-			ball_program();
+			//ball_program();
+			gb.setMotorsOff();
 	}
 	gb.setMotorsOff();
 }
