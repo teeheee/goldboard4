@@ -20,8 +20,12 @@ jobs:
       - run: unzip goldboard4-V2.2-AtomPio-template.zip -d ATOM; cp Makefile ATOM; cp -r ATOM/goldboard4-AtomPio/lib/goldboard ATOM/goldboard; cp -r ATOM/lib/goldboard4 ATOM/goldboard4; cp -r ATOM/goldboard4-AtomPio/src/* ATOM; make -C ATOM
 workflows:
   version 2
-  build-all:
+  build_all:
     jobs:
       - build_makefile:
       - build_AS7:
+          requires:
+             - build_makefile
       - build_ATOM:
+          requires:
+             - build_makefile
