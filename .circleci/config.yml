@@ -24,8 +24,4 @@ workflows:
     jobs:
       - build_makefile
       - build_AS7
-          requires:
-             - build_makefile
       - build_ATOM
-          requires:
-             - build_makefile
