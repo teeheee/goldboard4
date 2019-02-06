@@ -1,8 +1,20 @@
 version: 2.2
 jobs:
-  build:
+  build_makefile:
     docker: 
       - image: teeheee/goldboard4-build:build
     steps:
       - checkout
       - run: make
+  build_AS7:
+    docker:
+      - image: teeheee/goldboard4-build:build
+    steps:
+      - checkout
+      - run: unzip goldboard4-V2.2-AS7-template.zip -d AS7; cp Makefile AS7; make -C AS7
+  build_ATOM:
+    docker:
+      - image: teeheee/goldboard4-build:build
+    steps:
+      - checkout
+      - run: unzip goldboard4-V2.2-AtomPio-template.zip -d ATOM; cp Makefile ATOM; cp -r ATOM/goldboard4-AtomPio/lib/goldboard ATOM/goldboard; cp -r ATOM/lib/goldboard4 ATOM/goldboard4; cp -r ATOM/goldboard4-AtomPio/src/* ATOM; make -C ATOM
