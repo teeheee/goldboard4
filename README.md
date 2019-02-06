@@ -1,5 +1,7 @@
 # Goldboard4 Version 2.2
 
+* makefile build [![CircleCI](https://circleci.com/gh/teeheee/goldboard4.svg?style=svg)](https://circleci.com/gh/teeheee/goldboard4)
+
 ## Hardware
 
 Die Pins des Atmega32 sind am Goldboard4 wie in der folgenden Grafik belegt. PAx, PBx, PCx, und PDx sind die Ports des AVR. ADCx sind die Analogpins der Goldboard lib. Dx sind die Digitalpins der Goldboard lib.
