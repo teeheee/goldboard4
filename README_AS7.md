@@ -42,7 +42,9 @@ zum Hochladen über usb müsst ihr euren Programmer wie folgt konfigurieren. Kop
 
 ![](images/atmelstudio7/bootloader_einstellungen.png)
 
->"$(MSBuildProjectDirectory)\utils\avrdude\avrdude.exe" -c arduino -p m32 -P com5 -b 115200 -U flash:w:"$(OutputDirectory)\$(OutputFileName).hex":i
+```
+"$(MSBuildProjectDirectory)\utils\avrdude\avrdude.exe" -c arduino -p m32 -P com5 -b 115200 -U flash:w:"$(OutputDirectory)\$(OutputFileName).hex":i
+```
 
 Je nachdem unter welchem COM-Port euer Goldboard erkannt wird, müsst ihr
 "com5" in z.B. "com3" ändern.
