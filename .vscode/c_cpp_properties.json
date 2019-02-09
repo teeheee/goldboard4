@@ -1,0 +1,37 @@
+{
+    "!!! WARNING !!!": "PLEASE DO NOT MODIFY THIS FILE! USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags",
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/alexander/workspace/goldboard4/lib/goldboard",
+                "/home/alexander/.platformio/packages/tool-unity",
+                "/home/alexander/workspace/goldboard4/include",
+                "/home/alexander/workspace/goldboard4/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": "${workspaceRoot}/.vscode/.browse.c_cpp.db",
+                "path": [
+                    "/home/alexander/workspace/goldboard4/lib/goldboard",
+                    "/home/alexander/.platformio/packages/tool-unity",
+                    "/home/alexander/workspace/goldboard4/include",
+                    "/home/alexander/workspace/goldboard4/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "F_CPU=16000000UL",
+                "PLATFORMIO=40000",
+                "__AVR_ATmega32__",
+                ""
+            ],
+            "intelliSenseMode": "clang-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "/home/alexander/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -mmcu=atmega32"
+        }
+    ],
+    "version": 4
+}

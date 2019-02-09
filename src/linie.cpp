@@ -118,11 +118,11 @@ int linien_aenderung(int linie1, int linie2){
   if(linie1 == KEINE_LINIE || linie2 == KEINE_LINIE)
     return 0;
   int a = abs(linie1-linie2);
-  int b = abs(8-linie1-linie2);
+  int b = abs(8-(linie1-linie2));
   return a > b ? b : a;
 }
 
-void line_program()
+int line_program()
 {
   #define LINE_STATE_INSIDE 1
   #define LINE_STATE_OUTSIDE 2
@@ -140,7 +140,7 @@ void line_program()
 	int line_now = get_line();
 
   static long display_time = 0;
-  if(millis()-display_time > 1000)
+  if(millis()-display_time > 500)
   {
     display_time = millis();
     lcd.clear();
@@ -149,9 +149,11 @@ void line_program()
     lcd.print("now:");
     lcd.setCursor(0, 2);
     lcd.print("last:");
+    lcd.setCursor(0, 3);
+    lcd.print("diff:");
 
     int offset = 7;
-    lcd.setCursor(0+offset, 1);
+    lcd.setCursor(0+offset, 0);
     switch(state){
         case LINE_STATE_INSIDE: lcd.print("inside"); break;
         case LINE_STATE_OUTSIDE: lcd.print("outside"); break;
@@ -164,63 +166,56 @@ void line_program()
     lcd.print(line_now);
     lcd.setCursor(0+offset, 2);
     lcd.print(line_last);
+    lcd.setCursor(0+offset, 3);
+    lcd.print(linien_aenderung(line_last, line_now));
   }
 
+
+  if( is_ecke(line_now) ) {                                                     // ecke
+      line_last = line_now;
+      state = LINE_STATE_ONECKE_INSIDE;
+  }
 
 	switch(state)
 	{
 
 		case LINE_STATE_INSIDE:
-			if( line_now == KEINE_LINIE ) {                                           // sieht die linie nicht
-				   fahren_stop(); //for testing
-      }
-      else if( is_ecke(line_now) ) {                                           // ecke
-          line_last = line_now;
-          state = LINE_STATE_ONECKE_INSIDE;
-          fahre_linie(line_last);
-      }
-      else {                                                                    // auf der linie
-          line_last = line_now;
-          state = LINE_STATE_ONLINE_INSIDE;
-          fahre_linie(line_last);
-      }
-			break;
+  			if( line_now == KEINE_LINIE ) {                                         // sieht die linie nicht
+  				   return 1;
+        }else {                                                                 // auf der linie
+            line_last = line_now;
+            state = LINE_STATE_ONLINE_INSIDE;
+        }
+  		  break;
+
+    case LINE_STATE_OUTSIDE:
+  			if( line_now == KEINE_LINIE ) {                                         // sieht die linie nicht
+  				   break;
+        }else {                                                                 // auf der linie
+            state = LINE_STATE_ONLINE_INSIDE;
+        }
+  			break;
 
 		case LINE_STATE_ONLINE_INSIDE:
-			if( line_now == KEINE_LINIE ) {                                           // sieht die linie nicht
-          state = LINE_STATE_INSIDE;
-      }
-      else if( is_ecke(line_now) ) {                                           // ecke
-          line_last = line_now;
-          state = LINE_STATE_ONECKE_INSIDE;
-          fahre_linie(line_last);
-      }
-      else if( linien_aenderung(line_last, line_now) < 3) {                    // um die ecke
-          line_last = line_now;
-          fahre_linie(line_last);
-			}
-			else {                                                                    // drueber
-					state = LINE_STATE_ONLINE_OUTSIDE;
-          fahre_linie(line_last);
-			}
-			break;
+  			if( line_now == KEINE_LINIE ) {                                         // sieht die linie nicht
+            state = LINE_STATE_INSIDE;
+        }else if( linien_aenderung(line_last, line_now) == 4) {                 // drueber
+            state = LINE_STATE_ONLINE_OUTSIDE;
+      	}
+        else if( linien_aenderung(line_last, line_now) == 2) {                  // um die ecke
+            line_last = line_now;
+  			}
+  			break;
 
     case LINE_STATE_ONLINE_OUTSIDE:
         if( line_now == KEINE_LINIE ){                                          // sieht die linie nicht
-            state = LINE_STATE_INSIDE;
+            state = LINE_STATE_OUTSIDE;
         }
-        else if( is_ecke(line_now) ) {                                         // ecke
-            line_last = line_now;
-            state = LINE_STATE_ONECKE_INSIDE;
-            fahre_linie(line_last);
-        }
-        else if( linien_aenderung(line_last, line_now) < 3){                   // um die ecke
-            line_last = (line_now + 4) % 8;
-            fahre_linie(line_last);
-        }
-        else {                                                                  // drueber zurueck
+        else if( linien_aenderung(line_last, line_now) == 0) {                  // drueber
             state = LINE_STATE_ONLINE_INSIDE;
-            fahre_linie(line_last);
+      	}
+        else if( linien_aenderung(line_last, line_now) == 2){                   // um die ecke
+            line_last = (line_now + 4) % 8;
         }
         break;
 
@@ -228,17 +223,17 @@ void line_program()
       if( line_now == KEINE_LINIE ) {                                           // sieht die linie nicht
           state = LINE_STATE_INSIDE;
       }
-      else if( linien_aenderung(line_last, line_now) > 2 ){                    // drueber
+      else if( linien_aenderung(line_last, line_now) > 2 ){                     // drueber
           state = LINE_STATE_ONECKE_OUTSIDE;
-          fahre_linie(line_last);
 			}
 			break;
 
     case LINE_STATE_ONECKE_OUTSIDE:
-      if( linien_aenderung(line_last, line_now) <= 2 ){                        // drueber zurueck
+      if( linien_aenderung(line_last, line_now) <= 2 ){                         // drueber zurueck
           state = LINE_STATE_ONECKE_INSIDE;
-          fahre_linie(line_last);
       }
   		break;
 	}
+  fahre_linie(line_last);
+  return 0;
 }

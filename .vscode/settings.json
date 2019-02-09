@@ -1,0 +1,6 @@
+{
+    "terminal.integrated.env.linux": {
+        "PATH": "/home/alexander/.platformio/penv/bin:/home/alexander/.platformio/penv:/home/alexander/bin:/home/alexander/.local/bin:/home/alexander/anaconda3/bin:/home/alexander/anaconda2/bin:/usr/local/cuda-9.2/bin:/home/alexander/bin:/home/alexander/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/alexander/bin",
+        "PLATFORMIO_CALLER": "vscode"
+    }
+}

@@ -25,4 +25,5 @@ extern int KompassWert;
 
 void updateSensorValue();
 
+
 #endif

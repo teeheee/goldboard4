@@ -15,6 +15,6 @@ int get_line();
 void boden_sensor_vektor_init();
 int linien_richtung();
 
-void line_program();
+int line_program();
 
 #endif

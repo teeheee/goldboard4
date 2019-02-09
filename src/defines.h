@@ -41,7 +41,7 @@
 #define FOLLOW_SPEED 100
 
 #define LINE_SPEED 100
-#define LINE_SCHWELLE 240
+#define LINE_SCHWELLE 90
 
 #define FOLLOW_X_PFACTOR 1.0 // muss FOLLOW_KOMPASS_PFACTOR aufwiegen
 #define FOLLOW_Y_PFACTOR 1.0 // darf nicht Schwingen

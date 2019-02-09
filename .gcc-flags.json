@@ -1,0 +1,8 @@
+{
+  "execPath": "/home/alexander/.platformio/packages/toolchain-atmelavr/bin/avr-g++",
+  "gccDefaultCFlags": "-fsyntax-only -std=gnu11 -fno-fat-lto-objects -Os -Wall -ffunction-sections -fdata-sections -flto -mmcu=atmega32 -DF_CPU=16000000UL -DPLATFORMIO=40000 -D__AVR_ATmega32__",
+  "gccDefaultCppFlags": "-fsyntax-only -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -Os -Wall -ffunction-sections -fdata-sections -flto -mmcu=atmega32 -DF_CPU=16000000UL -DPLATFORMIO=40000 -D__AVR_ATmega32__",
+  "gccErrorLimit": 15,
+  "gccIncludePaths": "/home/alexander/workspace/goldboard4/lib/goldboard,/home/alexander/.platformio/packages/toolchain-atmelavr/avr/include,/home/alexander/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/4.9.2/include,/home/alexander/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/4.9.2/include-fixed,/home/alexander/.platformio/packages/tool-unity,/home/alexander/workspace/goldboard4/include,/home/alexander/workspace/goldboard4/src",
+  "gccSuppressWarnings": false
+}

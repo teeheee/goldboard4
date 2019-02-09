@@ -1,0 +1,10 @@
+-I/home/alexander/workspace/goldboard4/lib/goldboard
+-I/home/alexander/.platformio/packages/toolchain-atmelavr/avr/include
+-I/home/alexander/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/4.9.2/include
+-I/home/alexander/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/4.9.2/include-fixed
+-I/home/alexander/.platformio/packages/tool-unity
+-I/home/alexander/workspace/goldboard4/include
+-I/home/alexander/workspace/goldboard4/src
+-DF_CPU=16000000UL
+-DPLATFORMIO=40000
+-D__AVR_ATmega32__

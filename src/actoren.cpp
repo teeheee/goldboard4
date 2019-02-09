@@ -17,10 +17,13 @@ void set_motors(int speed){
       		  m[i] *= scaler;
       	}
     }
-  	gb.motor[MOTOR0].rotate(MOTOR0_DIR * m[0]);
-  	gb.motor[MOTOR1].rotate(MOTOR1_DIR * m[1]);
-  	gb.motor[MOTOR2].rotate(MOTOR2_DIR * m[2]);
-  	gb.motor[MOTOR3].rotate(MOTOR3_DIR * m[3]);
+    if(gb.getButton(0))
+    {
+    	gb.motor[MOTOR0].rotate(MOTOR0_DIR * m[0]);
+    	gb.motor[MOTOR1].rotate(MOTOR1_DIR * m[1]);
+    	gb.motor[MOTOR2].rotate(MOTOR2_DIR * m[2]);
+    	gb.motor[MOTOR3].rotate(MOTOR3_DIR * m[3]);
+    }
 }
 
 void drehen(int speed){
