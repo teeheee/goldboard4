@@ -18,6 +18,8 @@ Die Nummern stimmen mit der lib überein.
 
 ## Entwicklungsumgebung
 
+Achtung! die verwendeten Templates entsprechen manchmal nicht der aktuellsten Version(Siehe Datum an den Dateien). Sollten Probleme auftreten ladet [das Repository](https://github.com/teeheee/goldboard4/archive/master.zip) herunter und bindet die Goldboard Lib manuel ein.
+
 * [Atmel Studio 7 Anleitung](README_AS7.md) ([Download AS7 Template](https://github.com/teeheee/goldboard4/raw/master/goldboard4-V2.2-AS7-template.zip))
 * [Atom  mit PlatformIO Anleitung](README_ATOM.md) ([Download Atom Template](https://github.com/teeheee/goldboard4/raw/master/goldboard4-V2.2-AtomPio-template.zip))
 * [Makefile Anleitung](README_MAKE.md)
