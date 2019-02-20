@@ -34,7 +34,7 @@ LSM303::LSM303(void)
 
   io_timeout = 100;  // 0 = no timeout
   did_timeout = false;
-	enableDefault();
+
   m_min = (LSM303::vector<int16_t>){-32767, -32767, -32767};
   m_max = (LSM303::vector<int16_t>){+32767, +32767, +32767};
 }
@@ -172,6 +172,8 @@ bool LSM303::init(deviceType device, sa0State sa0)
       break;
   }
   
+  enableDefault();
+	
   return true;
 }
 
