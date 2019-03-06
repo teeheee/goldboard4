@@ -81,7 +81,7 @@
 #define ERROR_MESSAGE_ACTIVE
 
 // Auskommentieren um Goldboardtest Funktionen zu aktivieren
-//#define TEST
+#define TEST
 
 
 
