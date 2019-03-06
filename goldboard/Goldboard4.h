@@ -142,6 +142,16 @@ public:
 	*/
 	uint8_t getPWMPulsedLight(uint8_t i);
 
+	/* setzt den Interrupt pin pin in interrupt modus.
+	*  callback ist ein funktions pointer auf die auszuführende Funktion.
+	*  mode=1 bedeutet steigende Flanke und mode=0 fallende Flanke.
+	*/
+	void setInterrupt(uint8_t pin, void (*callback)(), uint8_t mode);
+
+	/* löscht den Interrupt pin pin
+	*/
+	void removeInterrupt(uint8_t pin);
+
 	/** Schreibt alle angeschlossenen I2C Sensoradressen auf den Serialport.
 	 *  Adresse 56 und 63 sind schon für Portexpander belegt.
 	 */

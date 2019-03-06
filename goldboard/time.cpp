@@ -3,6 +3,7 @@
 #include "time.h"
 #include "Motor.h"
 #include "infrared_pulse.h"
+#include "interrupt.h"
 #include "config.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -33,6 +34,9 @@ ISR(TIMER0_COMP_vect) //1khz
 #endif
 #ifdef PULSE_SENSOR_INPUT
 	pulse_isr();
+#endif
+#ifdef EXTERNAL_INTERRUPT
+	interrupt_isr();
 #endif
 }
 
@@ -81,6 +85,5 @@ void delayMicroseconds(unsigned int us)
         __asm__ __volatile__ (
         "1: sbiw %0,1" "\n\t" // 2 cycles
         "brne 1b" : "=w" (us) : "0" (us) // 2 cycles
-        );	
+        );
 }
-

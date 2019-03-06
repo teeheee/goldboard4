@@ -11,6 +11,7 @@
 #include "servopwm.h"
 #include "Motor.h"
 #include "error.h"
+#include "interrupt.h"
 
 #include "Goldboard4.h"
 
@@ -65,6 +66,10 @@ void Goldboard4::init(){
 #ifdef PULSE_SENSOR_INPUT
 	// pulsed light
 	pulse_init();
+#endif
+
+#ifdef EXTERNAL_INTERRUPT
+	interrupt_init();
 #endif
 
 	// Portexpanders
@@ -255,6 +260,13 @@ uint8_t Goldboard4::getPWMPulsedLight(uint8_t i) {
 #endif
 }
 
+void Goldboard4::setInterrupt(uint8_t pin, void (*callback)(), uint8_t mode){
+	interrupt_attach(pin, callback, mode);
+}
+
+void Goldboard4::removeInterrupt(uint8_t pin){
+	interrupt_detach(pin);
+}
 
 /** prints all i2c adresses on the Serial Interface
  */

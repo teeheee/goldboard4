@@ -22,7 +22,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define VERSION 22
+#define VERSION 23
 
 #define UART_BAUD_RATE     115200UL //baud
 
@@ -34,9 +34,10 @@
 
 //uncomment this line if you dont use a pulsed ball sensors
 //this will make your code a little bit faster and shorter
-#define PULSE_SENSOR_INPUT
+//#define PULSE_SENSOR_INPUT
 #define MOTOR_ACCELERATION
-#define SERVO_PWM
+//#define SERVO_PWM
+#define EXTERNAL_INTERRUPT
 
 //goldboard intern i2c Adressen
 
