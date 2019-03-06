@@ -164,8 +164,6 @@ void Motor::rotate(int16_t sp)
 		sp = -_minspeed + _speed_scale*sp;
 		sp = constrain(sp,-_maxspeed,-_minspeed);
 	}
-	SERIAL_PRINT("sp: ");
-	SERIAL_PRINTLN(sp);
 	setMotorSpeed(_pwmPin, sp);
 }
 

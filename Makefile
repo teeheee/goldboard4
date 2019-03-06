@@ -114,10 +114,13 @@ show-mcu:
 	$(G++) --help=target
 
 program: all
-	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U flash:w:main.hex  -B1
+	$(AVRDUDE) -pm32 -carduino -P/dev/ttyUSB0 -u -U flash:w:main.hex  -B115200
 
 fuse:
 	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xde:m -B100
+
+bootloader:
+	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U flash:w:bootloader_mega32_optiboot.hex  -B100
 
 doc:
 	rm -r -f doc

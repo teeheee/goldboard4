@@ -105,7 +105,7 @@ void Goldboard4::setPower(uint8_t i, bool state) {
 	if (i >= POWERCOUNT)
 		return;
 	if (state)
-		setPwm(i + MOTORCOUNT, 0xff);
+		setPwm(i + MOTORCOUNT, 249);
 	else
 		setPwm(i + MOTORCOUNT, 0);
 	updatePwm();
@@ -114,8 +114,8 @@ void Goldboard4::setPower(uint8_t i, bool state) {
 void Goldboard4::setPowerPWM(uint8_t i, int state) {
 	if (i >= POWERCOUNT)
 		return;
-	if(state > 0xff)
-		state = 0xff;
+	if(state > 249)
+		state = 249;
 	setPwm(i + MOTORCOUNT, state);
 	updatePwm();
 }
@@ -166,8 +166,10 @@ uint8_t Goldboard4::getAnalog(uint8_t i) {
 	if (i >= ADCCOUNT)
 		return 0;
 
+	i = (i+1)%ADCCOUNT;
+
 	//slow
-	return adc_read(ADC_PRESCALER_4,ADC_VREF_AVCC,i)/4;
+	return adc_read(ADC_PRESCALER_32,ADC_VREF_AVCC,i)/4;
 
 
 	//fast TODO

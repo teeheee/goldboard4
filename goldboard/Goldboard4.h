@@ -121,13 +121,13 @@ public:
 	 */
 	uint8_t getAnalog(uint8_t i);
 
-	/** Gibt true zurück falls der Digital Pin mit der nummer i (0 bis 21) 5V hat und False falls er 0V hat.
+	/** Gibt true zurück falls der Digital Pin mit der nummer i (0 bis 27) 5V hat und False falls er 0V hat.
 	 * 	Achtung getDigital()==1 ist nicht das selbe wie getDigital()==true. Letzteres ist richtig.
 	 * 	Achtung Digital Pin 4 bis 11 sind langsamer da sie über i2c laufen.
 	 */
 	bool getDigital(uint8_t i);
 
-	/** Setzt denn Digital Pin mit der nummer i (0 bis 21) auf 5V wenn state=true und 0V wenn state=false.
+	/** Setzt denn Digital Pin mit der nummer i (0 bis 27) auf 5V wenn state=true und 0V wenn state=false.
 	 * 	Achtung Digital Pin 4 bis 11 sind langsamer da sie über i2c laufen.
 	 */
 	void setDigital(uint8_t i, bool state);
