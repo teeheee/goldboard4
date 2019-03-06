@@ -1,4 +1,4 @@
-# Goldboard4 Version 2.2
+# Goldboard4 Version 2.3
 
 * [![CircleCI](https://img.shields.io/badge/endpoint.svg?url=https://badge-generator-jx3x3mxc7jra.runkit.sh/?run=0)](https://circleci.com/gh/teeheee/goldboard4)
 * [![CircleCI](https://img.shields.io/badge/endpoint.svg?url=https://badge-generator-jx3x3mxc7jra.runkit.sh/?run=1)](https://circleci.com/gh/teeheee/goldboard4)
