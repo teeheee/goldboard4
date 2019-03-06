@@ -82,7 +82,7 @@ bool LSM303::init(deviceType device, sa0State sa0)
         sa0 = sa0_low;
       }
     }
-    
+
     // check for LSM303DLHC, DLM, DLH if device is still unidentified or was specified to be one of these types
     if (device == device_auto || device == device_DLHC || device == device_DLM || device == device_DLH)
     {
@@ -92,7 +92,7 @@ bool LSM303::init(deviceType device, sa0State sa0)
         // device responds to address 0011001; it's a DLHC, DLM with SA0 high, or DLH with SA0 high
         sa0 = sa0_high;
         if (device == device_auto)
-        { 
+        {
           // use magnetometer WHO_AM_I register to determine device type
           //
           // DLHC seems to respond to WHO_AM_I request the same way as DLM, even though this
@@ -115,16 +115,16 @@ bool LSM303::init(deviceType device, sa0State sa0)
         }
       }
     }
-    
+
     // make sure device and SA0 were successfully detected; otherwise, indicate failure
     if (device == device_auto || sa0 == sa0_auto)
     {
       return false;
     }
   }
-  
+
   _device = device;
-  
+
   // set device addresses and translated register addresses
   switch (device)
   {
@@ -170,10 +170,13 @@ bool LSM303::init(deviceType device, sa0State sa0)
       translated_regs[-OUT_Z_H_M] = DLH_OUT_Z_H_M;
       translated_regs[-OUT_Z_L_M] = DLH_OUT_Z_L_M;
       break;
+
+    case device_auto:
+      break;
   }
-  
+
   enableDefault();
-	
+
   return true;
 }
 
@@ -222,7 +225,7 @@ void LSM303::enableDefault(void)
   else
   {
     // Accelerometer
-    
+
     if (_device == device_DLHC)
     {
       // 0x08 = 0b00001000

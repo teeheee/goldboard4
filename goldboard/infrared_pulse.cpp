@@ -15,6 +15,7 @@ void pulse_isr()
 	uint8_t tmp = 0;
 	tmp |= (PULSE1_PIN & ALL_PULSE1_PINS); //PD7 ... PD4
 	tmp |= (PULSE2_PIN & ALL_PULSE2_PINS) >> 4; //PC7 ... PC4
+  tmp = __builtin_avr_insert_bits(0x76540123,tmp,0);
 	pulseBuffer[index] = tmp;
 	index++;
 	if (index > PULSE_BUFFER_SIZE)
