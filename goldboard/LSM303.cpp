@@ -30,13 +30,12 @@ LSM303::LSM303(void)
   m_min = (LSM303::vector<int16_t>){-32767, -32767, -32767};
   m_max = (LSM303::vector<int16_t>){+32767, +32767, +32767};
 
+	x_min=x_max=y_min=y_max=0;
+
   _device = device_auto;
 
   io_timeout = 100;  // 0 = no timeout
   did_timeout = false;
-
-  m_min = (LSM303::vector<int16_t>){-32767, -32767, -32767};
-  m_max = (LSM303::vector<int16_t>){+32767, +32767, +32767};
 }
 
 // Public Methods //////////////////////////////////////////////////////////////
@@ -206,13 +205,13 @@ void LSM303::enableDefault(void)
 
     // 0x57 = 0b01010111
     // AODR = 0101 (50 Hz ODR); AZEN = AYEN = AXEN = 1 (all axes enabled)
-    writeReg(CTRL1, 0x57);
+    writeReg(CTRL1, 0b00000111);
 
     // Magnetometer
 
     // 0x64 = 0b01100100
     // M_RES = 11 (high resolution mode); M_ODR = 001 (6.25 Hz ODR)
-    writeReg(CTRL5, 0x64);
+    writeReg(CTRL5, 0b01110100);
 
     // 0x20 = 0b00100000
     // MFS = 01 (+/- 4 gauss full scale)
@@ -459,15 +458,20 @@ the Pololu LSM303DLHC, LSM303DLM, and LSM303DLH carriers.
 */
 int LSM303::getValue(void)
 {
-	read();
-  if (_device == device_D)
-  {
-    return (int)heading((vector<int>){1, 0, 0});
-  }
-  else
-  {
-    return (int)heading((vector<int>){0, -1, 0});
-  }
+	readMag();
+	m.x -= (x_min+x_max)/2;
+	m.y -= (y_min+y_max)/2;
+	return (int)(180*atan2(m.y,m.x)/3.1415)+180;
+}
+
+
+void LSM303::calibrationStep(void)
+{
+	readMag();
+	x_max = max(x_max,m.x);
+	y_max = max(y_max,m.y);
+	x_min = min(x_min,m.x);
+	y_min = min(y_min,m.y);
 }
 
 void LSM303::vector_normalize(vector<float> *a)

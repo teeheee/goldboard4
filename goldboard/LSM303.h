@@ -191,6 +191,7 @@ class LSM303
     bool timeoutOccurred(void);
 
     int getValue(void);
+		void calibrationStep(void);
     template <typename T> float heading(vector<T> from);
 
     // vector functions
@@ -202,6 +203,9 @@ class LSM303
     deviceType _device; // chip type (D, DLHC, DLM, or DLH)
     byte acc_address;
     byte mag_address;
+
+
+		int x_min, x_max, y_min, y_max;
 
     static const int dummy_reg_count = 6;
     regAddr translated_regs[dummy_reg_count + 1]; // index 0 not used
