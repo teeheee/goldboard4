@@ -459,19 +459,30 @@ the Pololu LSM303DLHC, LSM303DLM, and LSM303DLH carriers.
 int LSM303::getValue(void)
 {
 	readMag();
-	m.x -= (x_min+x_max)/2;
-	m.y -= (y_min+y_max)/2;
 	return (int)(180*atan2(m.y,m.x)/3.1415)+180;
 }
 
 
 void LSM303::calibrationStep(void)
 {
+  writeReg(0x16,0);
+  writeReg(0x17,0);
+  writeReg(0x18,0);
+  writeReg(0x19,0);
 	readMag();
 	x_max = max(x_max,m.x);
 	y_max = max(y_max,m.y);
 	x_min = min(x_min,m.x);
 	y_min = min(y_min,m.y);
+}
+
+void LSM303::storeCalibration(){
+  int offset_x = (x_min+x_max)/2;
+  int offset_y = (y_min+y_max)/2;
+  writeReg(0x16,offset_x&0xff);
+  writeReg(0x17,offset_x>>8);
+  writeReg(0x18,offset_y&0xff);
+  writeReg(0x19,offset_y>>8);
 }
 
 void LSM303::vector_normalize(vector<float> *a)

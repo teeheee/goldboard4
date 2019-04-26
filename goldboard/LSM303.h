@@ -182,6 +182,7 @@ class LSM303
     void writeReg(byte reg, byte value);
     byte readReg(int reg);
 
+
     void readAcc(void);
     void readMag(void);
     void read(void);
@@ -192,6 +193,7 @@ class LSM303
 
     int getValue(void);
 		void calibrationStep(void);
+    void storeCalibration(void);
     template <typename T> float heading(vector<T> from);
 
     // vector functions
