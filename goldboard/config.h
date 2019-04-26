@@ -22,7 +22,7 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#define VERSION 23
+#define VERSION 241
 
 #define UART_BAUD_RATE     115200UL //baud
 
