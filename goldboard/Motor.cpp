@@ -18,7 +18,7 @@ uint8_t pwm_change_flag = 0;
 
 void initMotors(PCF8574A* portexpander);
 void setMotorSpeed(uint8_t id, int speed);
-void setAcceleration(uint8_t percent_per_ms);
+void setacceleration(uint8_t percent_per_ms);
 
 
 void initMotors(PCF8574A* portexpander)
@@ -32,7 +32,7 @@ void initMotors(PCF8574A* portexpander)
 	}
 }
 
-void setAcceleration(uint8_t percent_per_ms)
+void setacceleration(uint8_t percent_per_ms)
 {
 	acceleration = percent_per_ms;
 }
@@ -169,5 +169,5 @@ void Motor::rotate(int16_t sp)
 
 void Motor::setAcceleration(uint8_t percentPerHundretMs)
 {
-	setAcceleration(percentPerHundretMs);
+	setacceleration(percentPerHundretMs);
 }
