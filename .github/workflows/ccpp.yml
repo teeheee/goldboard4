@@ -9,6 +9,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
+    - name: install
+      run: sudo apt-get install avr-gcc libc-avr binutils-avr
     - name: make
       run: make
     - name: make check
