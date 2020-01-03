@@ -1,11 +1,4 @@
-
-
-#C_SOURCES = uart.c  wiring_pulse.c i2c.c wiring_analog.c i2c.h wiring.c wiring_digital.c
-#CPP_SOURCES = CMPS03.cpp main.cpp Print.cpp WString.cpp Goldboard4.cpp Motor.cpp Serial.cpp new.cpp PCF8574A.cpp SRF08.cpp
-
 INC = -I. -Igoldboard
-
-#VPATH = goldboard
 
 MCU     = atmega32
 OSC     = 16000000UL
@@ -40,14 +33,14 @@ CFLAGS += -Os -std=gnu11 -ffunction-sections #-fdata-sections
 CFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 CFLAGS += -Wall -Wstrict-prototypes
 CFLAGS += -DF_CPU=$(OSC)
-CFLAGS += -mmcu=$(MCU) 
+CFLAGS += -mmcu=$(MCU)
 
 C++FLAGS = $(INC)
 C++FLAGS += -Os -std=gnu++11 -ffunction-sections# -fdata-sections
 C++FLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 C++FLAGS += -Wall
 C++FLAGS += -DF_CPU=$(OSC)
-C++FLAGS += -mmcu=$(MCU) 
+C++FLAGS += -mmcu=$(MCU)
 
 ASMFLAGS = $(INC)
 ASMFLAGS += -Os
@@ -55,17 +48,16 @@ ASMFLAGS += -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums
 ASMFLAGS += -Wall -Wstrict-prototypes
 ASMFLAGS += -DF_CPU=$(OSC)
 ASMFLAGS += -x assembler-with-cpp
-ASMFLAGS += -mmcu=$(MCU) 
+ASMFLAGS += -mmcu=$(MCU)
 
 LDFLAGS = -Wl,-gc-sections
 
 all: $(PROJECT).elf
-	avr-objcopy -j .text -j .data -O ihex $(PROJECT).elf main.hex 
-	avr-size --mcu=atmega32 -C main.elf
+	avr-objcopy -j .text -j .data -O ihex $(PROJECT).elf main.hex
 
 %.elf: $(OBJECTS)
 	$(G++) $(C++FLAGS) $(OBJECTS) --output $@ $(LDFLAGS)
-	
+
 
 %.o : %.$(EXT_C)
 	$(GCC) $< $(CFLAGS) -c -o $@
@@ -77,8 +69,8 @@ all: $(PROJECT).elf
 	$(G++) $< $(ASMFLAGS) -c -o $@
 
 
-clean: template
-	$(RM) $(PROJECT).elf $(OBJECTS) $(PROJECT).hex 
+clean:
+	$(RM) $(PROJECT).elf $(OBJECTS) $(PROJECT).hex
 	rm -r -f doc
 	rm -r -f Debug
 	rm -r -f Release
@@ -114,24 +106,15 @@ config:
 show-mcu:
 	$(G++) --help=target
 
-template: A7template EclipseTemplate
-
-A7template:
-	rm -f goldboard4-2.0-AS7-template.zip
-	zip goldboard4-2.0-AS7-template.zip MyTemplate.vstemplate __TemplateIcon.ico goldboard4.cppproj main.cpp goldboard/*
-
-EclipseTemplate:
-	rm -f eclipse-cpp-avr-eclipse-plugin.zip
-	zip eclipse-cpp-avr-eclipse-plugin.zip .settings/* .cproject .project main.cpp goldboard/*
-
 program: all
-	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U flash:w:main.hex  -B1
+	$(AVRDUDE) -pm32 -carduino -P/dev/ttyUSB0 -u -U flash:w:main.hex  -B115200
 
 fuse:
-	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xd9:m -B100
+	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U lfuse:w:0xff:m -U hfuse:w:0xde:m -B100
 
-doc:
-	rm -r -f doc
-	doxygen
+bootloader:
+	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U flash:w:bootloader_mega32_optiboot.hex  -B100
 
+check:
+	echo "no test implemented"
 

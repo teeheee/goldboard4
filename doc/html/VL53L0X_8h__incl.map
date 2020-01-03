@@ -1,5 +1,0 @@
-<map id="goldboard/VL53L0X.h" name="goldboard/VL53L0X.h">
-<area shape="rect" id="node2" href="$Arduino_8h.html" title="was golbal.h before but name was changed for better Arduino compatibility. TODO needs some cleanup..." alt="" coords="336,80,413,107"/>
-<area shape="rect" id="node9" href="$config_8h_source.html" title="config.h" alt="" coords="587,155,655,181"/>
-<area shape="rect" id="node10" href="$time_8h.html" title="System clock generation with parallel process handling. Triggers motor_isr and pulse_isr. " alt="" coords="680,155,739,181"/>
-</map>

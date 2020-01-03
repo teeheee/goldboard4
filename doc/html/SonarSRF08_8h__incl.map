@@ -1,6 +1,0 @@
-<map id="goldboard/SonarSRF08.h" name="goldboard/SonarSRF08.h">
-<area shape="rect" id="node2" href="$SonarSRF_8h_source.html" title="SonarSRF.h" alt="" coords="327,80,422,107"/>
-<area shape="rect" id="node3" href="$Arduino_8h.html" title="was golbal.h before but name was changed for better Arduino compatibility. TODO needs some cleanup..." alt="" coords="336,155,413,181"/>
-<area shape="rect" id="node10" href="$config_8h_source.html" title="config.h" alt="" coords="587,229,655,256"/>
-<area shape="rect" id="node11" href="$time_8h.html" title="System clock generation with parallel process handling. Triggers motor_isr and pulse_isr. " alt="" coords="680,229,739,256"/>
-</map>
