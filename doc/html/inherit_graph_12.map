@@ -1,6 +1,0 @@
-<map id="Grafische Darstellung der Klassenhierarchie" name="Grafische Darstellung der Klassenhierarchie">
-<area shape="rect" id="node1" href="$classSonarSRF.html" title="Ultraschall library für SRF08 (SonarSRF08 Klasse), SRF02 (SonarSRF02 Klasse) und SRF10 (SonarSRF10 Kl..." alt="" coords="5,56,88,83"/>
-<area shape="rect" id="node2" href="$classSonarSRF02.html" title="SonarSRF02" alt="" coords="136,5,233,32"/>
-<area shape="rect" id="node3" href="$classSonarSRF08.html" title="SonarSRF08" alt="" coords="136,56,233,83"/>
-<area shape="rect" id="node4" href="$classSonarSRF10.html" title="SonarSRF10" alt="" coords="136,107,233,133"/>
-</map>
