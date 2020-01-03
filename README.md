@@ -1,6 +1,6 @@
 ﻿# Goldboard4 Version 2.3
 
-* [![Actions Status](https://github.com/teeheee/goldboard4/workflows/ccpp/badge.svg)](https://github.com/teeheee/goldboard4/actions)
+* [![Actions Status](https://github.com/teeheee/goldboard4/workflows/build/badge.svg)](https://github.com/teeheee/goldboard4/actions)
 
 ## Documentation
 
