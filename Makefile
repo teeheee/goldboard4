@@ -122,6 +122,6 @@ fuse:
 bootloader:
 	$(AVRDUDE) -pm32 -Pusb -cavrispmkII -u -U flash:w:bootloader_mega32_optiboot.hex  -B100
 
-check:
-	echo "no test implemented"
-
+doc:
+	rm -r -f doc
+	doxygen
