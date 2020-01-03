@@ -1,27 +1,7 @@
-# Goldboard4 libs V1.0
+﻿# Goldboard4 Version 1.00
 
-## Download
+* [![Actions Status](https://github.com/teeheee/goldboard4/workflows/build/badge.svg)](https://github.com/teeheee/goldboard4/actions)
 
-[V 1.0](https://github.com/teeheee/goldboard4/archive/release_1.zip)
+## Documentation
 
-## /AS7_Template (Ateml Studio 7 Template)
-
-File->Import->Project Template...
-
-Select a project template [...] -> "<current Path>/AS7_Template/goldboard4_V1.0.zip" -> OK
-
-File->New->Project...
-
-goldboard4_V1.0->OK
-
-## /Makefile_Template (for Linux users and/or Visual Studio haters)
-
-### Dependencies:
-avr-libc gcc-avr make avrdude
-
-### Compile:
-make
-
-### Upload:
-make program
-
+[Dokumentation](https://github.com/teeheee/goldboard4/wiki)

@@ -1,7 +1,7 @@
 /**********************************************************************
-@file       PCF8574A.h
+@file       config.h
 
-@brief      Driver for the PCF8574A Remote 8-Bit I/O expander
+@brief      Contains all configuration data for the Goldboard 4.
 
 -----------------------------------------------------------------------
 @author  2015 Christoph Rothermel
@@ -14,35 +14,18 @@
 @end
 ***********************************************************************/
 
-#ifndef PCF8574A_H_
-#define PCF8574A_H_
+#ifndef CONFIG_H_
+#define CONFIG_H_
 
-#include "i2c.h"
+#ifndef F_CPU
+#define F_CPU 16000000L
+#endif
 
+#define VERSION 100
 
-class PCF8574A
-{
-	//variables
-	public:
-	protected:
-	private:
-	uint8_t _pcfdata;
-	uint8_t _writeNeeded;
+/* 9600 baud */
+#define UART_BAUD_RATE      57600
 
-	//functions
-	public:
-	PCF8574A();
-	
-	void setPin(uint8_t, bool);
-	
-	uint8_t read();
-	void write();
-	
-	protected:
-	private:
+#define I2C_SPEED   100   // kHz
 
-}; //PCF8574Pin
-
-
-
-#endif /* PCF8574A_H_ */
+#endif /* CONFIG_H_ */
