@@ -20,7 +20,7 @@ void usring::init()
 	Wire.write(data, 2);
 	if (Wire.endTransmission() != 0) {
 		ERROR_MESSAGE_PREFIX(error_prefix, progmem_no_ack);
-		return 0;
+		return;
 	}
 	delay(2000); // let the Sensor Calibrate
 	_initialized = true;
