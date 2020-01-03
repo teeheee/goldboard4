@@ -1,11 +1,4 @@
-
-
-#C_SOURCES = uart.c  wiring_pulse.c i2c.c wiring_analog.c i2c.h wiring.c wiring_digital.c
-#CPP_SOURCES = CMPS03.cpp main.cpp Print.cpp WString.cpp Goldboard4.cpp Motor.cpp Serial.cpp new.cpp PCF8574A.cpp SRF08.cpp
-
 INC = -I. -Igoldboard
-
-#VPATH = goldboard
 
 MCU     = atmega32
 OSC     = 16000000UL
