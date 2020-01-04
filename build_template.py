@@ -316,10 +316,7 @@ def generate_cpproj_content():
 	return pretty_xml_as_string
 
 
-
-
-if __name__ == '__main__':
-
+def generate_AS7_template():
 	mytemplate_content = generate_vs_template_content()
 	with open("MyTemplate.vstemplate","w+") as  mytemplate_file:
 		mytemplate_file.write(mytemplate_content)
@@ -329,7 +326,7 @@ if __name__ == '__main__':
 	with open(DEFAULT_NAME+".cppproj","w+") as  cppproj_file:
 		cppproj_file.write(cppproj_content)
 
-	zipf = zipfile.ZipFile(TEMPLATE_NAME+'.zip', 'w', zipfile.ZIP_DEFLATED)
+	zipf = zipfile.ZipFile("AS7-"+TEMPLATE_NAME+'.zip', 'w', zipfile.ZIP_DEFLATED)
 	for root, dirs, files in os.walk("."):
 		for file in files:
 			if not check_if_file_is_excluded(file) and ".\." not in root:
@@ -337,3 +334,43 @@ if __name__ == '__main__':
 	zipf.close()
 	os.remove("MyTemplate.vstemplate")
 	os.remove(DEFAULT_NAME+".cppproj")
+
+def generate_VSC_template():
+	ini_file_content = """[env:main]
+# Uebertragen mit Bootloader
+#upload_protocol = arduino
+#upload_port = COM3
+
+# Uebertragen mit AVR ISP MKII
+upload_protocol = avrispmkii
+upload_port = usb
+
+# Uebertragen mit AVR ISP STK500
+#upload_protocol = stk500
+#upload_port = COM3
+
+platform = atmelavr
+board = ATmega32
+lib_compat_mode = off
+build_flags = -I/lib/goldboard
+board_build.f_cpu = 16000000UL
+board_bootloader.file = bootloader_mega32_optiboot.hex
+board_bootloader.low_fuses = 0xFF
+board_bootloader.high_fuses = 0xDE"""
+
+	with open("platformio.ini","w+") as ini_file:
+		ini_file.write(ini_file_content)
+	zipf = zipfile.ZipFile("VSC-"+TEMPLATE_NAME+'.zip', 'w', zipfile.ZIP_DEFLATED)
+	for _, _, files in os.walk("goldboard"):
+		for file in files:
+			zipf.write(os.path.join("goldboard", file), os.path.join("lib/goldboard", file))
+	zipf.write("main.cpp", os.path.join("src", "main.cpp"))
+	zipf.write("platformio.ini")
+	zipf.write("utils/bootloader_mega32_optiboot.hex","bootloader_mega32_optiboot.hex")
+	zipf.close()
+	os.remove("platformio.ini")
+
+
+if __name__ == '__main__':
+	generate_AS7_template()
+	generate_VSC_template()
