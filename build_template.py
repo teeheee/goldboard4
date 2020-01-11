@@ -338,12 +338,11 @@ def generate_AS7_template():
 def generate_VSC_template():
 	ini_file_content = """[env:main]
 # Uebertragen mit Bootloader
-#upload_protocol = arduino
-#upload_port = COM3
+upload_protocol = arduino
 
 # Uebertragen mit AVR ISP MKII
-upload_protocol = avrispmkii
-upload_port = usb
+#upload_protocol = avrispmkii
+#upload_port = usb
 
 # Uebertragen mit AVR ISP STK500
 #upload_protocol = stk500
@@ -355,8 +354,8 @@ lib_compat_mode = off
 build_flags = -I/lib/goldboard
 board_build.f_cpu = 16000000UL
 board_bootloader.file = bootloader_mega32_optiboot.hex
-board_bootloader.low_fuses = 0xFF
-board_bootloader.high_fuses = 0xDE"""
+board_fuses.lfuse = 0xFF
+board_fuses.hfuse = 0xDE"""
 
 	with open("platformio.ini","w+") as ini_file:
 		ini_file.write(ini_file_content)
